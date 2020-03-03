@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Laravel 6 CRUD Example from scratch - ItSolutionStuff.com</h2>
+                <h2>Facultades UCM</h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-success" href="{{ route('facultades.create') }}"> Crear Nueva Facultad</a>
@@ -38,9 +38,7 @@
             <td>{{ $facultad->Estado }}</td>
             <td>
                 <form action="{{ route('facultades.destroy',$facultad->id) }}" method="POST">
-
                     <a class="btn btn-info" href="{{ route('facultades.show',$facultad->id) }}">Show</a>
-
                     <a class="btn btn-primary" href="{{ route('facultades.edit',$facultad->id) }}">Edit</a>
 
                     @csrf
