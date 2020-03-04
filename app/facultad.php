@@ -10,4 +10,6 @@ class facultad extends Model
   protected $fillable = [
       'Nombre','DecanoNombre','DecanoAPaterno','DecanoAMaterno','Estado'
   ];
+
+  protected $primaryKey ="id";
 }

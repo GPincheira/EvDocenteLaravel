@@ -10,4 +10,5 @@ class departamento extends Model
       'Nombre','CodigoFacultad','Estado'
   ];
 
+  protected $primaryKey ="id";
 }

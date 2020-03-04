@@ -12,12 +12,19 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
     public function index()
     {
       $users = User::latest()->paginate(10);
       return view('users.index',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -38,16 +45,18 @@ class UserController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'id' => ['required', 'integer'],
-        'verificador' => ['required', 'string', 'max:1'],
-        'Nombre' => ['required', 'string', 'max:255'],
-        'ApellidoPaterno' => ['required', 'string', 'max:255'],
-        'ApellidoMaterno' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        'password' => ['required', 'string', 'min:8'],
-        'TipoUsuario' => ['required', 'string', 'max:255'],
-        'Estado' => 'Active'
+        'id' => 'required',
+        'verificador' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+        'Nombre' => 'required',
+        'ApellidoPaterno' => 'required',
+        'ApellidoMaterno' => 'required',
+        'TipoUsuario' => 'required',
+        'Estado' => 'Activo',
       ]);
+      $password=bcrypt($request['password']);
+      $request['password']= $password;
       User::create($request->all());
       return redirect()->route('users.index')
         ->with('success','Usuario creado exitosamente.');
@@ -68,7 +77,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\facultad  $user
+     * @param  \App\user  $user
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -87,13 +96,15 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'id' => ['required', 'integer'],
-        'verificador' => ['required', 'string', 'max:1'],
-        'Nombre' => ['required', 'string', 'max:255'],
-        'ApellidoPaterno' => ['required', 'string', 'max:255'],
-        'ApellidoMaterno' => ['required', 'string', 'max:255'],
-        'TipoUsuario' => ['required', 'string', 'max:255'],
-        'Estado' => ['required', 'string', 'max:255'],
+        'id' => 'required',
+        'verificador' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+        'Nombre' => 'required',
+        'ApellidoPaterno' => 'required',
+        'ApellidoMaterno' => 'required',
+        'TipoUsuario' => 'required',
+        'Estado' => 'required',
       ]);
       $user = user::find($id);
       $user->update($request->all());

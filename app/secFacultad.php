@@ -10,4 +10,7 @@ class secFacultad extends Model
   protected $fillable = [
       'CodigoFacultad'
   ];
+
+  protected $primaryKey ="id";
+  public $incrementing = false;
 }

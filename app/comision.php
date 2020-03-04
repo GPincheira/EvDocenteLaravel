@@ -11,5 +11,5 @@ class comision extends Model
       'Año','Fecha','CodigoFacultad','NombreDecano','idSecFacultad',
       'NombreSecFacultad','Nombre1','Nombre2'
   ];
-
+  protected $primaryKey ="id";
 }

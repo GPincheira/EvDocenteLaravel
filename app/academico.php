@@ -10,4 +10,5 @@ class academico extends Model
       'verificador','Nombre','ApellidoPaterno','ApellidoMaterno','TituloProfesional',
       'GradoAcademico','CodigoDpto','Categoria','HorasContrato','TipoPlanta','Estado'
   ];
+  protected $primaryKey ="id";
 }

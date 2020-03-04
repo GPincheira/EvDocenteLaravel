@@ -23,5 +23,6 @@ Route::resource('evaluaciones','EvaluacionController');
 Route::resource('facultades','FacultadController');
 Route::resource('secFacultades','SecFacultadController');
 Route::resource('users','UserController');
+Route::resource('roles','RoleController');
 
 Route::get('/home', 'HomeController@index')->name('home');
