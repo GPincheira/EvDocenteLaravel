@@ -1,14 +1,14 @@
-@extends('facultades.layout')
+@extends('departamentos.layout')
 
 @section('content')
 
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Agregar nueva Facultad</h2>
+            <h2>Agregar nuevo Departamento</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('facultades.index') }}"> Atras</a>
+            <a class="btn btn-primary" href="{{ route('departamentos.index') }}"> Atras</a>
         </div>
     </div>
 </div>
@@ -24,32 +24,20 @@
     </div>
 @endif
 
-<form action="{{ route('facultades.store') }}" method="POST">
+<form action="{{ route('departamentos.store') }}" method="POST">
     @csrf
 
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre:</strong>
-                <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre de la Facultad">
+                <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre del Departmaento">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nombre Decano:</strong>
-                <input type="text" name="DecanoNombre" class="form-control" placeholder="Ingrese el Nombre del Decano">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Apellido Paterno Decano:</strong>
-                <input type="text" name="DecanoAPaterno" class="form-control" placeholder="Ingrese Apellido Paterno del Decano">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Apellido Materno Decano:</strong>
-                <input type="text" name="DecanoAMaterno" class="form-control" placeholder="Ingrese Apellido Materno del Decano">
+                <strong>Facultad a la que pertenece:</strong>
+                <input type="text" name="CodigoFacultad" class="form-control" placeholder="Ingrese la facultad a la que pertenece">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -61,10 +49,6 @@
                 </select>
             </div>
         </div>
-
-
-
-
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
         </div>

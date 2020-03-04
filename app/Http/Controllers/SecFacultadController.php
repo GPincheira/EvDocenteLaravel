@@ -14,7 +14,9 @@ class SecFacultadController extends Controller
      */
     public function index()
     {
-        //
+      $secFacultades = SecFacultad::latest()->paginate(10);
+      return view('secFacultades.index',compact('secFacultades'))
+        ->with('i',(request()->input('page',1)-1)*5);
     }
 
     /**
@@ -24,7 +26,7 @@ class SecFacultadController extends Controller
      */
     public function create()
     {
-        //
+        return view('secFacultades.create');
     }
 
     /**
@@ -35,7 +37,12 @@ class SecFacultadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'CodigoFacultad' => 'required',
+      ]);
+      SecFacultad::create($request->all());
+      return redirect()->route('secFacultades.index')
+        ->with('success','Secretario de Facultad creado exitosamente.');
     }
 
     /**
@@ -44,9 +51,10 @@ class SecFacultadController extends Controller
      * @param  \App\secFacultad  $secFacultad
      * @return \Illuminate\Http\Response
      */
-    public function show(secFacultad $secFacultad)
+    public function show($id)
     {
-        //
+      $secFacultad = secFacultad::find($id);
+      return view('secFacultades.show',compact('secFacultad'));
     }
 
     /**
@@ -55,9 +63,10 @@ class SecFacultadController extends Controller
      * @param  \App\secFacultad  $secFacultad
      * @return \Illuminate\Http\Response
      */
-    public function edit(secFacultad $secFacultad)
+    public function edit($id)
     {
-        //
+      $secFacultad = secFacultad::find($id);
+      return view('secFacultades.edit',compact('secFacultad'));
     }
 
     /**
@@ -67,9 +76,15 @@ class SecFacultadController extends Controller
      * @param  \App\secFacultad  $secFacultad
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, secFacultad $secFacultad)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'CodigoFacultad' => 'required',
+      ]);
+      $secFacultad = secFacultad::find($id);
+      $secFacultad->update($request->all());
+      return redirect()->route('secFacultades.index')
+        ->with('success','Secretario de Facultadad Actualizado Exitosamente');
     }
 
     /**
@@ -78,8 +93,11 @@ class SecFacultadController extends Controller
      * @param  \App\secFacultad  $secFacultad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(secFacultad $secFacultad)
+    public function destroy($id)
     {
-        //
+      $secFacultad = secFacultad::find($id);
+      $secFacultad->delete();
+      return redirect()->route('secFacultades.index')
+        ->with('success','Secretario de Facultad Eliminado Exitosamente');
     }
 }

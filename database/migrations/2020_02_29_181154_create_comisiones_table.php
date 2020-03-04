@@ -19,7 +19,7 @@ class CreateComisionesTable extends Migration
           $table->date('Fecha');
           $table->unsignedInteger('CodigoFacultad');
           $table->string('NombreDecano');
-          $table->unsignedInteger('idSecFacultad');
+          $table->integer('idSecFacultad');
           $table->string('NombreSecFacultad');
           $table->string('Nombre1');
           $table->string('Nombre2');

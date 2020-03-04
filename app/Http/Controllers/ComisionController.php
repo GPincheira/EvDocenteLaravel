@@ -14,7 +14,9 @@ class ComisionController extends Controller
      */
     public function index()
     {
-        //
+      $comisiones = Comision::latest()->paginate(10);
+      return view('comisiones.index',compact('comisiones'))
+        ->with('i',(request()->input('page',1)-1)*5);
     }
 
     /**
@@ -24,7 +26,7 @@ class ComisionController extends Controller
      */
     public function create()
     {
-        //
+        return view('comisiones.create');
     }
 
     /**
@@ -35,7 +37,19 @@ class ComisionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'Año' => 'required',
+        'Fecha' => 'required',
+        'CodigoFacultad' => 'required',
+        'NombreDecano' => 'required',
+        'idSecFacultad' => 'required',
+        'NombreSecFacultad' => 'required',
+        'Nombre1' => 'required',
+        'Nombre2' => 'required',
+      ]);
+      Comision::create($request->all());
+      return redirect()->route('comisiones.index')
+        ->with('success','Comision creada exitosamente.');
     }
 
     /**
@@ -44,9 +58,10 @@ class ComisionController extends Controller
      * @param  \App\comision  $comision
      * @return \Illuminate\Http\Response
      */
-    public function show(comision $comision)
+    public function show($id)
     {
-        //
+      $comision = comision::find($id);
+      return view('comisiones.show',compact('comision'));
     }
 
     /**
@@ -55,9 +70,10 @@ class ComisionController extends Controller
      * @param  \App\comision  $comision
      * @return \Illuminate\Http\Response
      */
-    public function edit(comision $comision)
+    public function edit($id)
     {
-        //
+      $comision = comision::find($id);
+      return view('comisiones.edit',compact('comision'));
     }
 
     /**
@@ -67,9 +83,22 @@ class ComisionController extends Controller
      * @param  \App\comision  $comision
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, comision $comision)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'Año' => 'required',
+        'Fecha' => 'required',
+        'CodigoFacultad' => 'required',
+        'NombreDecano' => 'required',
+        'idSecFacultad' => 'required',
+        'NombreSecFacultad' => 'required',
+        'Nombre1' => 'required',
+        'Nombre2' => 'required',
+      ]);
+      $comision = comision::find($id);
+      $comision->update($request->all());
+      return redirect()->route('comisiones.index')
+        ->with('success','Comision Actualizada Exitosamente');
     }
 
     /**
@@ -78,8 +107,11 @@ class ComisionController extends Controller
      * @param  \App\comision  $comision
      * @return \Illuminate\Http\Response
      */
-    public function destroy(comision $comision)
+    public function destroy($id)
     {
-        //
+      $comision = comision::find($id);
+      $comision->delete();
+      return redirect()->route('comisiones.index')
+        ->with('success','Comision Eliminada Exitosamente');
     }
 }

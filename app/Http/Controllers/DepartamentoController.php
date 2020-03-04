@@ -14,7 +14,9 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        //
+      $departamentos = Departamento::latest()->paginate(10);
+      return view('departamentos.index',compact('departamentos'))
+        ->with('i',(request()->input('page',1)-1)*5);
     }
 
     /**
@@ -24,7 +26,7 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('departamentos.create');
     }
 
     /**
@@ -35,7 +37,14 @@ class DepartamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'Nombre' => 'required',
+        'CodigoFacultad' => 'required',
+        'Estado' => 'required',
+      ]);
+      Departamento::create($request->all());
+      return redirect()->route('departamentos.index')
+        ->with('success','Departamento creado exitosamente.');
     }
 
     /**
@@ -44,9 +53,10 @@ class DepartamentoController extends Controller
      * @param  \App\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function show(departamento $departamento)
+    public function show($id)
     {
-        //
+      $departamento = departamento::find($id);
+      return view('departamentos.show',compact('departamento'));
     }
 
     /**
@@ -55,9 +65,10 @@ class DepartamentoController extends Controller
      * @param  \App\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function edit(departamento $departamento)
+    public function edit($id)
     {
-        //
+      $departamento = departamento::find($id);
+      return view('departamentos.edit',compact('departamento'));
     }
 
     /**
@@ -67,9 +78,17 @@ class DepartamentoController extends Controller
      * @param  \App\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, departamento $departamento)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'Nombre' => 'required',
+        'CodigoFacultad' => 'required',
+        'Estado' => 'required',
+      ]);
+      $departamento = departamento::find($id);
+      $departamento->update($request->all());
+      return redirect()->route('departamentos.index')
+        ->with('success','Departamento Actualizado Exitosamente');
     }
 
     /**
@@ -78,8 +97,11 @@ class DepartamentoController extends Controller
      * @param  \App\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function destroy(departamento $departamento)
+    public function destroy($id)
     {
-        //
+      $departamento = departamento::find($id);
+      $departamento->delete();
+      return redirect()->route('departamentos.index')
+        ->with('success','Departamento Eliminado Exitosamente');
     }
 }

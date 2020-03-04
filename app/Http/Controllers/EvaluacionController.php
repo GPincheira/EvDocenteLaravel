@@ -14,7 +14,9 @@ class EvaluacionController extends Controller
      */
     public function index()
     {
-        //
+      $evaluaciones = Evaluacion::latest()->paginate(10);
+      return view('evaluaciones.index',compact('evaluaciones'))
+        ->with('i',(request()->input('page',1)-1)*5);
     }
 
     /**
@@ -24,7 +26,7 @@ class EvaluacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('evaluaciones.create');
     }
 
     /**
@@ -35,7 +37,25 @@ class EvaluacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'CodigoComision' => 'required',
+        'RUTAcademico' => 'required',
+        'Argumento' => 'required',
+        'n1' => 'required',
+        'n2' => 'required',
+        'n3' => 'required',
+        'n4' => 'required',
+        'n5' => 'required',
+        'p1' => 'required',
+        'p2' => 'required',
+        'p3' => 'required',
+        'p4' => 'required',
+        'p5' => 'required',
+        'NotaFinal' => 'required',
+      ]);
+      Evaluacion::create($request->all());
+      return redirect()->route('evaluaciones.index')
+        ->with('success','Evaluacion creada exitosamente.');
     }
 
     /**
@@ -44,9 +64,10 @@ class EvaluacionController extends Controller
      * @param  \App\evaluacion  $evaluacion
      * @return \Illuminate\Http\Response
      */
-    public function show(evaluacion $evaluacion)
+    public function show($id)
     {
-        //
+      $evaluacion = evaluacion::find($id);
+      return view('evaluaciones.show',compact('evaluacion'));
     }
 
     /**
@@ -55,9 +76,10 @@ class EvaluacionController extends Controller
      * @param  \App\evaluacion  $evaluacion
      * @return \Illuminate\Http\Response
      */
-    public function edit(evaluacion $evaluacion)
+    public function edit($id)
     {
-        //
+      $evaluacion = evaluacion::find($id);
+      return view('evaluaciones.edit',compact('evaluacion'));
     }
 
     /**
@@ -67,9 +89,28 @@ class EvaluacionController extends Controller
      * @param  \App\evaluacion  $evaluacion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, evaluacion $evaluacion)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'CodigoComision' => 'required',
+        'RUTAcademico' => 'required',
+        'Argumento' => 'required',
+        'n1' => 'required',
+        'n2' => 'required',
+        'n3' => 'required',
+        'n4' => 'required',
+        'n5' => 'required',
+        'p1' => 'required',
+        'p2' => 'required',
+        'p3' => 'required',
+        'p4' => 'required',
+        'p5' => 'required',
+        'NotaFinal' => 'required',
+      ]);
+      $evaluacion = evaluacion::find($id);
+      $evaluacion->update($request->all());
+      return redirect()->route('evaluaciones.index')
+        ->with('success','Evaluacion Actualizada Exitosamente');
     }
 
     /**
@@ -78,8 +119,11 @@ class EvaluacionController extends Controller
      * @param  \App\evaluacion  $evaluacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(evaluacion $evaluacion)
+    public function destroy($id)
     {
-        //
+      $evaluacion = evaluacion::find($id);
+      $evaluacion->delete();
+      return redirect()->route('evaluaciones.index')
+        ->with('success','Evaluacion Eliminada Exitosamente');
     }
 }

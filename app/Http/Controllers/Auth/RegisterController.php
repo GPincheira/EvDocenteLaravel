@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -47,20 +48,6 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'RUT' => ['required', 'integer'],
-            'verificador' => ['required', 'string', 'max:1'],
-            'Nombre' => ['required', 'string', 'max:255'],
-            'ApellidoPaterno' => ['required', 'string', 'max:255'],
-            'ApellidoMaterno' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'TipoUsuario' => ['required', 'string', 'max:255'],
-            'Estado' => ['required', 'string', 'max:255'],
-        ]);
-    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -68,18 +55,44 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+     public function create()
+     {
+         return view('users.create');
+     }
+
+     public function store(Request $request)
+     {
+       $request->validate([
+         'id' => ['required', 'integer'],
+         'verificador' => ['required', 'string', 'max:1'],
+         'Nombre' => ['required', 'string', 'max:255'],
+         'ApellidoPaterno' => ['required', 'string', 'max:255'],
+         'ApellidoMaterno' => ['required', 'string', 'max:255'],
+         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+         'password' => ['required', 'string', 'min:8'],
+         'TipoUsuario' => ['required', 'string', 'max:255'],
+         'Estado' => ['required', 'string', 'max:255'],
+       ]);
+       User::create($request->all());
+       return redirect()->route('users.index')
+         ->with('success','Usuario creado exitosamente.');
+     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        return User::create([
-            'RUT' => $data['RUT'],
-            'verificador' => $data['verificador'],
-            'Nombre' => $data['Nombre'],
-            'ApellidoPaterno' => $data['ApellidoPaterno'],
-            'ApellidoMaterno' => $data['ApellidoMaterno'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'TipoUsuario' => $data['TipoUsuario'],
-            'Estado' => $data['Estado'],
-        ]);
+      $users = User::latest()->paginate(10);
+      return view('users.index',compact('users'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
+    public function show($id)
+    {
+      $user = user::find($id);
+      return view('users.show',compact('user'));
     }
 }

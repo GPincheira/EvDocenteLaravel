@@ -12,11 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
-
-Route::resource('facultades','FacultadController');
-
 Auth::routes();
+
+Route::resource('academicos','AcademicoController');
+Route::resource('comisiones','ComisionController');
+Route::resource('departamentos','DepartamentoController');
+Route::resource('evaluaciones','EvaluacionController');
+Route::resource('facultades','FacultadController');
+Route::resource('secFacultades','SecFacultadController');
+Route::resource('users','UserController');
 
 Route::get('/home', 'HomeController@index')->name('home');

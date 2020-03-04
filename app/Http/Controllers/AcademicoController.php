@@ -14,7 +14,9 @@ class AcademicoController extends Controller
      */
     public function index()
     {
-        //
+      $academicos = Academico::latest()->paginate(10);
+      return view('academicos.index',compact('academicos'))
+        ->with('i',(request()->input('page',1)-1)*5);
     }
 
     /**
@@ -24,7 +26,7 @@ class AcademicoController extends Controller
      */
     public function create()
     {
-        //
+        return view('academicos.create');
     }
 
     /**
@@ -35,7 +37,22 @@ class AcademicoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $request->validate([
+        'verificador' => 'required',
+        'Nombre' => 'required',
+        'ApellidoPaterno' => 'required',
+        'ApellidoMaterno' => 'required',
+        'TituloProfesional' => 'required',
+        'GradoAcademico' => 'required',
+        'CodigoDpto' => 'required',
+        'Categoria' => 'required',
+        'HorasContrato' => 'required',
+        'TipoPlanta' => 'required',
+        'Estado' => 'required',
+      ]);
+      Academico::create($request->all());
+      return redirect()->route('academicos.index')
+        ->with('success','Academico creado exitosamente.');
     }
 
     /**
@@ -44,9 +61,10 @@ class AcademicoController extends Controller
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
-    public function show(academico $academico)
+    public function show($id)
     {
-        //
+      $academico = academico::find($id);
+      return view('academicos.show',compact('academico'));
     }
 
     /**
@@ -55,9 +73,10 @@ class AcademicoController extends Controller
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
-    public function edit(academico $academico)
+    public function edit($id)
     {
-        //
+      $academico = academico::find($id);
+      return view('academicos.edit',compact('academico'));
     }
 
     /**
@@ -67,9 +86,25 @@ class AcademicoController extends Controller
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, academico $academico)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'verificador' => 'required',
+        'Nombre' => 'required',
+        'ApellidoPaterno' => 'required',
+        'ApellidoMaterno' => 'required',
+        'TituloProfesional' => 'required',
+        'GradoAcademico' => 'required',
+        'CodigoDpto' => 'required',
+        'Categoria' => 'required',
+        'HorasContrato' => 'required',
+        'TipoPlanta' => 'required',
+        'Estado' => 'required',
+      ]);
+      $academico = academico::find($id);
+      $academico->update($request->all());
+      return redirect()->route('academicos.index')
+        ->with('success','Academico Actualizado Exitosamente');
     }
 
     /**
@@ -78,8 +113,11 @@ class AcademicoController extends Controller
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
-    public function destroy(academico $academico)
+    public function destroy($id)
     {
-        //
+      $academico = academico::find($id);
+      $academico->delete();
+      return redirect()->route('academicos.index')
+        ->with('success','Academico Eliminado Exitosamente');
     }
 }
