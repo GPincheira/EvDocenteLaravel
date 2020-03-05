@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -33,7 +34,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::pluck('name','name')->all();
+        return view('users.create',compact('roles'));
     }
 
     /**
@@ -54,10 +56,12 @@ class UserController extends Controller
         'ApellidoMaterno' => 'required',
         'TipoUsuario' => 'required',
         'Estado' => 'Activo',
+        'roles' => 'required',
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
-      User::create($request->all());
+      $user = User::create($request->all());
+      $user->assignRole($request->input('roles'));
       return redirect()->route('users.index')
         ->with('success','Usuario creado exitosamente.');
     }
