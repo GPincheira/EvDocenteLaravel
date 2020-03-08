@@ -42,20 +42,38 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Facultad a la que pertenece:</strong>
-                <input type="integer" name="CodigoFacultad" class="form-control" placeholder="Ingrese la facultad">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
                 <strong>Nombre del participante 1:</strong>
                 <input type="text" name="Nombre1" class="form-control" placeholder="Ingrese el nombre del primer integrante extra">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Apellido Paterno del participante 1:</strong>
+                <input type="text" name="APaterno1" class="form-control" placeholder="Ingrese el Apellido Paterno del segundo integrante extra">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Apellido Materno del participante 1:</strong>
+                <input type="text" name="AMaterno1" class="form-control" placeholder="Ingrese el Apellido Materno del primer integrante extra">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Nombre del participante 2:</strong>
                 <input type="text" name="Nombre2" class="form-control" placeholder="Ingrese el nombre del segundo integrante extra">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Apellido Paterno del participante 2:</strong>
+                <input type="text" name="APaterno2" class="form-control" placeholder="Ingrese el Apellido Paterno del segundo integrante extra">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Apellido Materno del participante 2:</strong>
+                <input type="text" name="AMaterno2" class="form-control" placeholder="Ingrese el Apellido Materno del segundo integrante extra">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

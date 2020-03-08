@@ -22,7 +22,6 @@
     <table class="table table-bordered">
         <tr>
             <th>RUT</th>
-            <th>verificador</th>
             <th>Nombre</th>
             <th>ApellidoPaterno</th>
             <th>ApellidoMaterno</th>
@@ -33,13 +32,12 @@
         </tr>
         @foreach ($users as $user)
         <tr>
-            <td>{{ $user->id }}</td>
-            <td>{{ $user->verificador }}</td>
+            <td>{{ $user->id }}-{{ $user->verificador }}</td>
             <td>{{ $user->Nombre }}</td>
             <td>{{ $user->ApellidoPaterno }}</td>
             <td>{{ $user->ApellidoMaterno }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user()->Role()}}</td>
+            <td>{{ $user->roles()->first()->name}}</td>
             <td>{{ $user->Estado }}</td>
             <td>
                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">

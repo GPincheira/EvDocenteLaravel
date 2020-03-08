@@ -22,43 +22,63 @@
         <tr>
             <th>Id</th>
             <th>Año</th>
-            <th>Fecha</th>
-            <th>Codigo de la Facultad</th>
-            <th>Nombre del Decano</th>
-            <th>RUT del Sec de Facultad</th>
-            <th>Nombre del Sec de Facultad</th>
-            <th>Nombre 1</th>
-            <th>Nombre 2</th>
-            <th>Estado</th>
+            <th>Facultad:</th>
+            <th>Decano:</th>
+            <th>Secretario de Facultad:</th>
+            <th>Integrante 3:</th>
+            <th>Integrante 4:</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($comisiones as $comision)
-        <tr>
-            <td>{{ ++$i }}</td>
-            <td>{{ $comision->id }}</td>
-            <td>{{ $comision->Año }}</td>
-            <td>{{ $comision->Fecha }}</td>
-            <td>{{ $comision->CodigoFacultad }}</td>
-            <td>{{ $comision->NombreDecano }}</td>
-            <td>{{ $comision->idSecFacultad }}</td>
-            <td>{{ $comision->NombreSecFacultad }}</td>
-            <td>{{ $comision->Nombre1 }}</td>
-            <td>{{ $comision->Nombre2 }}</td>
-            <td>{{ $comision->Estado }}</td>
-            <td>
-                <form action="{{ route('comisiones.destroy',$comision->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('comisiones.show',$comision->id) }}">Ver</a>
-                    <a class="btn btn-primary" href="{{ route('comisiones.edit',$comision->id) }}">Editar</a>
+        @if(@Auth::user()->hasRole('Administrador'))
+          @foreach ($comisiones as $comision)
+            <tr>
+              <td>{{ $comision->id }}</td>
+              <td>{{ $comision->Año }}</td>
+              <td>{{ $comision->CodigoFacultad }}</td>
+              <td>{{ $comision->NombreDecano }} {{ $comision->APaternoDecano }} {{ $comision->AMaternoDecano }}</td>
+              <td>{{ $comision->NombreSecFac }} {{ $comision->APaternoSecFac }} {{ $comision->AMaternoSecFac }}</td>
+              <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>
+              <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
+              <td>
+                  <form action="{{ route('comisiones.destroy',$comision->id) }}" method="POST">
+                      <a class="btn btn-info" href="{{ route('comisiones.show',$comision->id) }}">Ver</a>
+                      <a class="btn btn-primary" href="{{ route('comisiones.edit',$comision->id) }}">Editar</a>
 
-                    @csrf
-                    @method('DELETE')
+                      @csrf
+                      @method('DELETE')
 
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </form>
-            </td>
+                      <button type="submit" class="btn btn-danger">Eliminar</button>
+                  </form>
+              </td>
+            </tr>
+          @endforeach
+        @endif
+        @if(@Auth::user()->hasRole('SecFacultad'))
+          @foreach ($comisiones as $comision)
+            @if(@Auth::user()->id == $comision->idSecFacultad)
+              <tr>
+                <td>{{ $comision->id }}</td>
+                <td>{{ $comision->Año }}</td>
+                <td>{{ $comision->CodigoFacultad }}</td>
+                <td>{{ $comision->NombreDecano }} {{ $comision->APaternoDecano }} {{ $comision->AMaternoDecano }}</td>
+                <td>{{ $comision->NombreSecFac }} {{ $comision->APaternoSecFac }} {{ $comision->AMaternoSecFac }}</td>
+                <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>
+                <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
+                <td>
+                    <form action="{{ route('comisiones.destroy',$comision->id) }}" method="POST">
+                        <a class="btn btn-info" href="{{ route('comisiones.show',$comision->id) }}">Ver</a>
+                        <a class="btn btn-primary" href="{{ route('comisiones.edit',$comision->id) }}">Editar</a>
 
-        </tr>
-        @endforeach
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </td>
+              </tr>
+            @endif
+          @endforeach
+        @endif
     </table>
 
     {!! $comisiones->links() !!}

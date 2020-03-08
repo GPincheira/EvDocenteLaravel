@@ -18,6 +18,8 @@
                       <h2>Bienvenido Administrador</h2>
                     @endif
                     @if(@Auth::user()->hasRole('SecFacultad'))
+                      {{ @Auth::user()->CodigoFacultad }}
+                      <h2>(@Auth::user()->Nombre</h2>
                       <h2>Bienvenido Secretario de Facultad</h2>
                     @endif
                     @if(@Auth::user()->hasRole('Secretario'))

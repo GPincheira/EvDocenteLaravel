@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\academico;
+use App\departamento;
+use App\secFacultad;
 use Illuminate\Http\Request;
 
 class AcademicoController extends Controller
@@ -26,7 +28,9 @@ class AcademicoController extends Controller
      */
     public function create()
     {
-        return view('academicos.create');
+        $departamentos = Departamento::all();
+        $secFacultades = SecFacultad::all();
+        return view('academicos.create',['departamentos' => $departamentos],['secFacultades' => $secFacultades]);
     }
 
     /**

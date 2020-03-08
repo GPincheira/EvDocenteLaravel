@@ -73,8 +73,16 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Codigo Departamento que pertenece:</strong>
-                <input type="integer" name="CodigoDpto" class="form-control" placeholder="Ingrese el Codigo del dpto que pertenece">
+                <strong>Departamento al que pertenece:</strong>
+                <select name="CodigoDpto" class="form-control">
+                  @foreach($departamentos as $departamento)
+                    @foreach($secFacultades as $secFacultad)
+                    @if(@Auth::user()->id == $secFacultad->id && $secFacultad->CodigoFacultad == $departamento->CodigoFacultad)
+                      <option value='{{$departamento->id}}'>{{$departamento->id}} - {{$departamento->Nombre}}</option>
+                    @endif
+                    @endforeach
+                  @endforeach
+                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
@@ -96,7 +104,7 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>TIpo de Planta:</strong>
+                <strong>Tipo de Planta:</strong>
                 <input type="text" name="TipoPlanta" class="form-control" placeholder="Ingrese el tipo de Planta">
             </div>
         </div>

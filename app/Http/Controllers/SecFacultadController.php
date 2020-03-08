@@ -35,15 +35,15 @@ class SecFacultadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-      $request->validate([
-        'id' => 'required',
-      ]);
-      SecFacultad::create($request->all());
-      return redirect()->route('secFacultades.index')
-        ->with('success','Secretario de Facultad creado exitosamente.');
-    }
+     public function store(Request $request)
+     {
+       $request->validate([
+         'id' => 'required',
+       ]);
+       SecFacultad::create($request->all());
+       return redirect()->route('secFacultades.index')
+         ->with('success','Secretario de Facultad creado exitosamente.');
+     }
 
     /**
      * Display the specified resource.

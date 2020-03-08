@@ -18,11 +18,19 @@ class CreateComisionesTable extends Migration
           $table->year('Año');
           $table->date('Fecha');
           $table->integer('CodigoFacultad');
-          $table->string('NombreDecano');
           $table->integer('idSecFacultad');
-          $table->string('NombreSecFacultad');
+          $table->string('NombreDecano');
+          $table->string('APaternoDecano');
+          $table->string('AMaternoDecano');
+          $table->string('NombreSecFac');
+          $table->string('APaternoSecFac');
+          $table->string('AMaternoSecFac');
           $table->string('Nombre1');
+          $table->string('APaterno1');
+          $table->string('AMaterno1');
           $table->string('Nombre2');
+          $table->string('APaterno2');
+          $table->string('AMaterno2');
           $table->foreign('CodigoFacultad')
                 ->references('id')
                 ->on('facultades');

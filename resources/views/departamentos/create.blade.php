@@ -27,7 +27,6 @@
 <form action="{{ route('departamentos.store') }}" method="POST">
     @csrf
 
-     <div class="row">
        <div class="row">
          <div class="col-xs-12 col-sm-12 col-md-12">
              <div class="form-group">
@@ -44,7 +43,11 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Facultad a la que pertenece:</strong>
-                <input type="text" name="CodigoFacultad" class="form-control" placeholder="Ingrese la facultad a la que pertenece">
+                <select name="CodigoFacultad" class="form-control">
+                  @foreach($facultades as $facultad)
+                  <option value='{{$facultad->id}}'>{{$facultad->id}} - {{$facultad->Nombre}}</option>
+                  @endforeach
+                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

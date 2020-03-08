@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\comision;
+use App\facultad;
+use App\secFacultad;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 class ComisionController extends Controller
@@ -37,16 +41,26 @@ class ComisionController extends Controller
      */
     public function store(Request $request)
     {
+      $secFacultad = secFacultad::find(@Auth::user()->id);
+      $facultad = facultad::find($secFacultad->CodigoFacultad);
       $request->validate([
         'Año' => 'required',
         'Fecha' => 'required',
-        'CodigoFacultad' => 'required',
-        'NombreDecano' => 'required',
-        'idSecFacultad' => 'required',
-        'NombreSecFacultad' => 'required',
         'Nombre1' => 'required',
+        'APaterno1' => 'required',
+        'AMaterno1' => 'required',
         'Nombre2' => 'required',
+        'APaterno2' => 'required',
+        'AMaterno2' => 'required',
       ]);
+      $request['CodigoFacultad']=$facultad->id;
+      $request['NombreDecano']= $facultad->DecanoNombre;
+      $request['APaternoDecano']= $facultad->DecanoAPaterno;
+      $request['AMaternoDecano']= $facultad->DecanoAMaterno;
+      $request['idSecFacultad']= @Auth::user()->id;
+      $request['NombreSecFac']= @Auth::user()->Nombre;
+      $request['APaternoSecFac']= @Auth::user()->ApellidoPaterno;
+      $request['AMaternoSecFac']= @Auth::user()->ApellidoMaterno;
       Comision::create($request->all());
       return redirect()->route('comisiones.index')
         ->with('success','Comision creada exitosamente.');

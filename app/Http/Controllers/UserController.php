@@ -53,17 +53,16 @@ class UserController extends Controller
         'ApellidoMaterno' => 'required',
         'Estado' => 'Activo',
         'roles' => 'required',
+        'CodigoFacultad' => 'required',
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
       $user = User::create($request->all());
       $user->assignRole($request->input('roles'));
 
-      secFacultad::create(['id' => $request['id'], 'CodigoFacultad' => '123']); //mejorar ingreso del codigo
-
-
-
-
+      if ($request['roles']=='SecFacultad'){
+        secFacultad::create(['id' => $request['id'], 'CodigoFacultad' => $request['CodigoFacultad']]);
+      }
       return redirect()->route('users.index')
         ->with('success','Usuario creado exitosamente.');
     }

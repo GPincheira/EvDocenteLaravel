@@ -11,7 +11,12 @@
     </div>
 
     <div class="row">
-
+      <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <strong>Facultad:</strong>
+              {{ $comision->CodigoFacultad }}
+          </div>
+      </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Año:</strong>
@@ -20,50 +25,32 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Fecha de comision:</strong>
-                {{ $comision->Fecha }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Codigo de la Facultad:</strong>
+                <strong>Facultad:</strong>
                 {{ $comision->CodigoFacultad }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre del Decano:</strong>
-                {{ $comision->NombreDecano }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Id del Secretario de Facultad:</strong>
-                {{ $comision->idSecFacultad }}
+                {{ $comision->NombreDecano }} {{ $comision->APaternoDecano }} {{ $comision->AMaternoDecano }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre del Secretario de Facultad:</strong>
-                {{ $comision->NombreSecFacultad }}
+                {{ $comision->NombreSecFac }} {{ $comision->APaternoSecFac }} {{ $comision->AMaternoSecFac }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nombre participante 1:</strong>
-                {{ $comision->Nombre1 }}
+                <strong>Nombre Integrante 3:</strong>
+                {{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nombre participante 2:</strong>
-                {{ $comision->Nombre2 }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Estado:</strong>
-                {{ $comision->Estado }}
+                <strong>Nombre Integrante 4:</strong>
+                {{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}
             </div>
         </div>
     </div>
