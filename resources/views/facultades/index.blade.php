@@ -1,4 +1,4 @@
-@extends('facultades.layout')
+@extends('layouts.app')
 
 @section('content')
     <div class="row">
@@ -22,15 +22,15 @@
         <tr>
             <th>Id</th>
             <th>Nombre</th>
-            <th>Decano</th>
-            <th>Ap</th>
-            <th>Mat</th>
+            <th>Decano Nombre</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
             <th>Estado</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($facultades as $facultad)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{ $facultad->id }}</td>
             <td>{{ $facultad->Nombre }}</td>
             <td>{{ $facultad->DecanoNombre }}</td>
             <td>{{ $facultad->DecanoAPaterno }}</td>

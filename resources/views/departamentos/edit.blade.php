@@ -1,4 +1,4 @@
-@extends('departamentos.layout')
+@extends('layouts.app')
 
 @section('content')
     <div class="row">
@@ -27,6 +27,12 @@
         @csrf
         @method('PUT')
         <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="form-group">
+                  <strong>Codigo:</strong>
+                  <input type="integer" name="id" value="{{ $departamento->id }}" class="form-control" placeholder="Ingrese el Codigo del Departamento">
+              </div>
+          </div>
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
                    <strong>Nombre:</strong>

@@ -46,11 +46,11 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'facultades.create']);
       Permission::create(['name' => 'facultades.destroy']);
 
-      Permission::create(['name' => 'users.index']);
-      Permission::create(['name' => 'users.edit']);
-      Permission::create(['name' => 'users.show']);
-      Permission::create(['name' => 'users.create']);
-      Permission::create(['name' => 'users.destroy']);
+      Permission::create(['name' => 'Users.index']);
+      Permission::create(['name' => 'Users.edit']);
+      Permission::create(['name' => 'Users.show']);
+      Permission::create(['name' => 'Users.create']);
+      Permission::create(['name' => 'Users.destroy']);
 
       $Administrador = Role::create(['name' => 'Administrador']);
       $Administrador->givePermissionTo([
@@ -71,11 +71,11 @@ class PermissionsTableSeeder extends Seeder
           'facultades.show',
           'facultades.create',
           'facultades.destroy',
-          'users.index',
-          'users.edit',
-          'users.show',
-          'users.create',
-          'users.destroy',
+          'Users.index',
+          'Users.edit',
+          'Users.show',
+          'Users.create',
+          'Users.destroy',
       ]);
 
       $SecFacultad = Role::create(['name' => 'SecFacultad']);

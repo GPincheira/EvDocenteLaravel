@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class departamento extends Model
 {
   protected $fillable = [
-      'Nombre','CodigoFacultad','Estado'
+      'id','Nombre','CodigoFacultad','Estado'
   ];
 
   protected $primaryKey ="id";

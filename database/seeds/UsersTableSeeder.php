@@ -22,7 +22,6 @@ class UsersTableSeeder extends Seeder
           'Nombre' => 'German',
           'ApellidoPaterno' => 'Pincheira',
           'ApellidoMaterno' => 'Leiva',
-          'TipoUsuario' => 'Administrador',
           'Estado' => 'Activo'
         ]);
 

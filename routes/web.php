@@ -11,14 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+
 Auth::routes();
 
 Route::resource('secFacultades','SecFacultadController');
 Route::resource('roles','RoleController');
 
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -99,17 +98,17 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:facultades.edit');
 
     Route::post('users/store', 'UserController@store')->name('users.store')
-                                                        ->middleware('permission:users.create');
+                                                        ->middleware('permission:Users.create');
     Route::get('users', 'UserController@index')->name('users.index')
-                                                        ->middleware('permission:users.index');
+                                                        ->middleware('permission:Users.index');
     Route::get('users/create', 'UserController@create')->name('users.create')
-                                                        ->middleware('permission:users.create');
+                                                        ->middleware('permission:Users.create');
     Route::put('users/{role}', 'UserController@update')->name('users.update')
-                                                        ->middleware('permission:users.edit');
+                                                        ->middleware('permission:Users.edit');
     Route::get('users/{role}', 'UserController@show')->name('users.show')
-                                                        ->middleware('permission:users.show');
+                                                        ->middleware('permission:Users.show');
     Route::delete('users/{role}', 'UserController@destroy')->name('users.destroy')
-                                                        ->middleware('permission:users.destroy');
+                                                        ->middleware('permission:Users.destroy');
     Route::get('users/{role}/edit', 'UserController@edit')->name('users.edit')
-                                                        ->middleware('permission:users.edit');
+                                                        ->middleware('permission:Users.edit');
 });

@@ -8,7 +8,7 @@ class secFacultad extends Model
 {
   protected $table = 'secFacultades';
   protected $fillable = [
-      'CodigoFacultad'
+      'id','CodigoFacultad'
   ];
 
   protected $primaryKey ="id";

@@ -8,7 +8,7 @@ class facultad extends Model
 {
   protected $table = 'facultades';
   protected $fillable = [
-      'Nombre','DecanoNombre','DecanoAPaterno','DecanoAMaterno','Estado'
+      'id','Nombre','DecanoNombre','DecanoAPaterno','DecanoAMaterno','Estado'
   ];
 
   protected $primaryKey ="id";

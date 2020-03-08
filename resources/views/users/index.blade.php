@@ -1,6 +1,7 @@
-@extends('users.layout')
+@extends('layouts.app')
 
 @section('content')
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -26,7 +27,7 @@
             <th>ApellidoPaterno</th>
             <th>ApellidoMaterno</th>
             <th>email</th>
-            <th>TipoUsuario</th>
+            <th>Rol</th>
             <th>Estado</th>
             <th width="280px">Action</th>
         </tr>
@@ -38,7 +39,7 @@
             <td>{{ $user->ApellidoPaterno }}</td>
             <td>{{ $user->ApellidoMaterno }}</td>
             <td>{{ $user->email }}</td>
-            <td>{{ $user->TipoUsuario }}</td>
+            <td>{{ $user()->Role()}}</td>
             <td>{{ $user->Estado }}</td>
             <td>
                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">

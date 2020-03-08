@@ -14,12 +14,13 @@ class CreateFacultadesTable extends Migration
     public function up()
     {
         Schema::create('facultades', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id')->unique();
             $table->string('Nombre')->unique();
             $table->string('DecanoNombre');
             $table->string('DecanoAPaterno');
             $table->string('DecanoAMaterno');
             $table->enum('Estado', ['Activo', 'Inactivo']);
+            $table->primary('id');
             $table->timestamps();
         });
     }

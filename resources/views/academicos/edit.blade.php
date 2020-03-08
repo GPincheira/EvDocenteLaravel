@@ -1,5 +1,4 @@
-@extends('academicos.layout')
-
+@extends('layouts.app')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -73,7 +72,7 @@
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
                    <strong>Codigo Departamento que pertenece:</strong>
-                   <input type="integer" name="CodigoDPto" value="{{ $academico->CodigoDpto }}" class="form-control" placeholder="Ingrese el Codigo del dpto que pertenece">
+                   <input type="integer" name="CodigoDpto" value="{{ $academico->CodigoDpto }}" class="form-control" placeholder="Ingrese el Codigo del dpto que pertenece">
                </div>
            </div>
            <div class="col-xs-12 col-sm-12 col-md-12">

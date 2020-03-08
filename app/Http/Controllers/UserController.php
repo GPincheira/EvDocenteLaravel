@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\secFacultad;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -14,10 +15,6 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function __construct()
-    {
-        $this->middleware('guest');
-    }
 
     public function index()
     {
@@ -54,7 +51,6 @@ class UserController extends Controller
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
-        'TipoUsuario' => 'required',
         'Estado' => 'Activo',
         'roles' => 'required',
       ]);
@@ -62,6 +58,12 @@ class UserController extends Controller
       $request['password']= $password;
       $user = User::create($request->all());
       $user->assignRole($request->input('roles'));
+
+      secFacultad::create(['id' => $request['id'], 'CodigoFacultad' => '123']); //mejorar ingreso del codigo
+
+
+
+
       return redirect()->route('users.index')
         ->with('success','Usuario creado exitosamente.');
     }
@@ -100,15 +102,10 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'id' => 'required',
-        'verificador' => 'required',
         'email' => 'required',
-        'password' => 'required',
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
-        'TipoUsuario' => 'required',
-        'Estado' => 'required',
       ]);
       $user = user::find($id);
       $user->update($request->all());

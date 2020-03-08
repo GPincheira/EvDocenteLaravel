@@ -1,4 +1,4 @@
-@extends('departamentos.layout')
+@extends('layouts.app')
 
 @section('content')
     <div class="row">
@@ -28,7 +28,6 @@
         </tr>
         @foreach ($departamentos as $departamento)
         <tr>
-            <td>{{ ++$i }}</td>
             <td>{{ $departamento->id }}</td>
             <td>{{ $departamento->Nombre }}</td>
             <td>{{ $departamento->CodigoFacultad }}</td>

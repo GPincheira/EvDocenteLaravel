@@ -1,4 +1,4 @@
-@extends('comisiones.layout')
+@extends('layouts.app')
 
 @section('content')
   <h1>Codigo de la Comision: {{ $comision->id }}</h1>

@@ -1,4 +1,4 @@
-@extends('users.layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -68,16 +68,6 @@
             <div class="form-group">
                 <strong>Password:</strong>
                 <input type="password" name="password" class="form-control" placeholder="Ingrese ">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Tipo de Usuario:</strong>
-                <select name="TipoUsuario" class="form-control">
-                  <option value="Administrador">Administrador</option>
-                  <option value="SecFacultad">Secretario de Facultad</option>
-                  <option value="Secretario">Secretario</option>
-                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

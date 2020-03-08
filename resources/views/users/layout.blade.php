@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +9,13 @@
 
 <body>
 
-<div class="container">
-    @yield('content')
-</div>
+      <!-- Esta funcion include pertmite que se vea el contenido del archivo nav contenido en temples/partials, este se mostrara en foma de barra en la parte superior de las paginas  -->
+      @include('layouts.nav')
+
+
+  <div class="container">
+      @yield('content')
+  </div>
 
 </body>
 </html>

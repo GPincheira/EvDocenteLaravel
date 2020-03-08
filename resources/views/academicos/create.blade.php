@@ -1,4 +1,4 @@
-@extends('academicos.layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -74,17 +74,17 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Codigo Departamento que pertenece:</strong>
-                <input type="integer" name="CodigoDPto" class="form-control" placeholder="Ingrese el Codigo del dpto que pertenece">
+                <input type="integer" name="CodigoDpto" class="form-control" placeholder="Ingrese el Codigo del dpto que pertenece">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Categoria:</strong>
                 <select name="Categoria" class="form-control">
-                  <option value="Instructor">Activo</option>
-                  <option value="Auxiliar">Inactivo</option>
-                  <option value="Adjunto">Activo</option>
-                  <option value="Titular">Inactivo</option>
+                  <option value="Instructor">Instructor</option>
+                  <option value="Auxiliar">Auxiliar</option>
+                  <option value="Adjunto">Adjunto</option>
+                  <option value="Titular">Titular</option>
                 </select>
             </div>
         </div>
@@ -98,15 +98,6 @@
             <div class="form-group">
                 <strong>TIpo de Planta:</strong>
                 <input type="text" name="TipoPlanta" class="form-control" placeholder="Ingrese el tipo de Planta">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Estado:</strong>
-                <select name="Estado" class="form-control">
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
-                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

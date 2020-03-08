@@ -1,4 +1,4 @@
-@extends('departamentos.layout')
+@extends('layouts.app')
 
 @section('content')
   <h1>Codigo del Departamento: {{ $departamento->id }}</h1>

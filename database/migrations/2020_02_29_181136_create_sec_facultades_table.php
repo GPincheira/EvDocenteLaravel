@@ -15,7 +15,7 @@ class CreateSecFacultadesTable extends Migration
     {
         Schema::create('secFacultades', function (Blueprint $table) {
             $table->integer('id');
-            $table->unsignedInteger('CodigoFacultad')->unique();
+            $table->integer('CodigoFacultad')->unique();
             $table->primary('id');
             $table->foreign('id')
                   ->references('id')

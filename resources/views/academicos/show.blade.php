@@ -1,4 +1,4 @@
-@extends('academicos.layout')
+@extends('layouts.app')
 
 @section('content')
   <h1>RUT del Academico: {{ $academico->id }} - {{ $academico->verificador }}</h1>

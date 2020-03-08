@@ -1,4 +1,4 @@
-@extends('facultades.layout')
+@extends('layouts.app')
 
 @section('content')
   <h1>Codigo de Facultad: {{ $facultad->id }}</h1>

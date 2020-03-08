@@ -1,4 +1,4 @@
-@extends('users.layout')
+@extends('layouts.app')
 
 @section('content')
   <h1>RUT del Usuario: {{ $user->id }} - {{ $user->verificador }}</h1>
@@ -34,12 +34,6 @@
             <div class="form-group">
                 <strong>email:</strong>
                 {{ $user->email }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Tipo de Usuario:</strong>
-                {{ $user->TipoUsuario }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

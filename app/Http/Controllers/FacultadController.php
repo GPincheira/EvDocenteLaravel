@@ -19,7 +19,7 @@ class FacultadController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
-    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,11 +39,12 @@ class FacultadController extends Controller
     public function store(Request $request)
     {
       $request->validate([
+        'id' => 'required',
         'Nombre' => 'required',
         'DecanoNombre' => 'required',
         'DecanoAPaterno' => 'required',
         'DecanoAMaterno' => 'required',
-        'Estado' => 'required',
+        'Estado' => 'Activo',
       ]);
       Facultad::create($request->all());
       return redirect()->route('facultades.index')
@@ -84,6 +85,7 @@ class FacultadController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
+        'id' => 'required',
         'Nombre' => 'required',
         'DecanoNombre' => 'required',
         'DecanoAPaterno' => 'required',

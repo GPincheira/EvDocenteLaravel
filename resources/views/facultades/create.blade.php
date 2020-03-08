@@ -1,4 +1,4 @@
-@extends('facultades.layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -28,6 +28,12 @@
     @csrf
 
      <div class="row">
+       <div class="col-xs-12 col-sm-12 col-md-12">
+           <div class="form-group">
+               <strong>Codigo Facultad:</strong>
+               <input type="integer" name="id" class="form-control" placeholder="Ingrese el Codigo de la Facultad">
+           </div>
+       </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre:</strong>
@@ -52,19 +58,6 @@
                 <input type="text" name="DecanoAMaterno" class="form-control" placeholder="Ingrese Apellido Materno del Decano">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Estado:</strong>
-                <select name="Estado" class="form-control">
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
-                </select>
-            </div>
-        </div>
-
-
-
-
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
         </div>

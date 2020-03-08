@@ -14,10 +14,11 @@ class CreateDepartamentosTable extends Migration
     public function up()
     {
         Schema::create('departamentos', function (Blueprint $table) {
-          $table->increments('id');
+          $table->integer('id')->unique();
           $table->string('Nombre')->unique();
-          $table->unsignedInteger('CodigoFacultad');
+          $table->integer('CodigoFacultad');
           $table->enum('Estado', ['Activo', 'Inactivo']);
+          $table->primary('id');
           $table->foreign('CodigoFacultad')
                 ->references('id')
                 ->on('facultades');

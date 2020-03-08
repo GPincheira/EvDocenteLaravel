@@ -1,4 +1,4 @@
-@extends('facultades.layout')
+@extends('layouts.app')
 
 @section('content')
     <div class="row">
@@ -27,6 +27,12 @@
         @csrf
         @method('PUT')
          <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="form-group">
+                   <strong>Codigo Facultad:</strong>
+                   <input type="integer" name="id" value="{{ $facultad->id }}" class="form-control" placeholder="Ingrese el Codigo de la Facultad">
+               </div>
+           </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Nombre:</strong>

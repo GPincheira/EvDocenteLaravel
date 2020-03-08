@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('Nombre');
             $table->string('ApellidoPaterno');
             $table->string('ApellidoMaterno');
-            $table->enum('TipoUsuario',['Administrador','SecFacultad','Secretario']);
             $table->enum('Estado', ['Activo', 'Inactivo']);
             $table->primary('id');
             $table->rememberToken();

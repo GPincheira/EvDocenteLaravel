@@ -1,4 +1,4 @@
-@extends('departamentos.layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -28,25 +28,23 @@
     @csrf
 
      <div class="row">
+       <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+             <div class="form-group">
+                 <strong>Codigo:</strong>
+                 <input type="integer" name="id" class="form-control" placeholder="Ingrese el Codigo del Departamento">
+             </div>
+         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre:</strong>
-                <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre del Departmaento">
+                <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre del Departamento">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Facultad a la que pertenece:</strong>
                 <input type="text" name="CodigoFacultad" class="form-control" placeholder="Ingrese la facultad a la que pertenece">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Estado:</strong>
-                <select name="Estado" class="form-control">
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
-                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

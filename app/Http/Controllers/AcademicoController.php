@@ -38,6 +38,7 @@ class AcademicoController extends Controller
     public function store(Request $request)
     {
       $request->validate([
+        'id' => 'required',
         'verificador' => 'required',
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
@@ -48,7 +49,7 @@ class AcademicoController extends Controller
         'Categoria' => 'required',
         'HorasContrato' => 'required',
         'TipoPlanta' => 'required',
-        'Estado' => 'required',
+        'Estado' => 'Activo',
       ]);
       Academico::create($request->all());
       return redirect()->route('academicos.index')
@@ -89,6 +90,7 @@ class AcademicoController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
+        'id' => 'required',
         'verificador' => 'required',
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',

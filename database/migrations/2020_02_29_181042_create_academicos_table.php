@@ -21,7 +21,7 @@ class CreateAcademicosTable extends Migration
           $table->string('ApellidoMaterno');
           $table->string('TituloProfesional');
           $table->string('GradoAcademico');
-          $table->unsignedInteger('CodigoDpto');
+          $table->integer('CodigoDpto');
           $table->enum('Categoria', ['Instructor','Auxiliar','Adjunto','Titular']);
           $table->integer('HorasContrato');
           $table->string('TipoPlanta');
