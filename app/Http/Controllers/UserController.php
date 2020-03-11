@@ -23,6 +23,41 @@ class UserController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+    public function indexelim()
+    {
+      $users = User::onlyTrashed()->latest()->paginate(10);
+      return view('users.index',compact('users'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
+    public function index2()
+    {
+      $users = User::latest()->paginate(10);
+      return view('users.index2',compact('users'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
+    public function index2elim()
+    {
+      $users = User::onlyTrashed()->latest()->paginate(10);
+      return view('users.index2',compact('users'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
+    public function index3()
+    {
+      $users = User::latest()->paginate(10);
+      return view('users.index3',compact('users'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
+    public function index3elim()
+    {
+      $users = User::onlyTrashed()->latest()->paginate(10);
+      return view('users.index3',compact('users'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,6 +68,18 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name','name')->all();
         return view('users.create',compact('roles'));
+    }
+
+    public function create2()
+    {
+        $roles = Role::pluck('name','name')->all();
+        return view('users.create2',compact('roles'));
+    }
+
+    public function create3()
+    {
+        $roles = Role::pluck('name','name')->all();
+        return view('users.create3',compact('roles'));
     }
 
     /**
@@ -51,19 +98,52 @@ class UserController extends Controller
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
-        'Estado' => 'Activo',
-        'roles' => 'required',
-        'CodigoFacultad' => 'required',
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
       $user = User::create($request->all());
-      $user->assignRole($request->input('roles'));
-
-      if ($request['roles']=='SecFacultad'){
-        secFacultad::create(['id' => $request['id'], 'CodigoFacultad' => $request['CodigoFacultad']]);
-      }
+      $user->assignRole('Administrador');
       return redirect()->route('users.index')
+        ->with('success','Administrador creado exitosamente.');
+    }
+
+    public function store2(Request $request)
+    {
+      $request->validate([
+        'id' => 'required',
+        'verificador' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+        'Nombre' => 'required',
+        'ApellidoPaterno' => 'required',
+        'ApellidoMaterno' => 'required',
+        'CodigoFacultad' => 'required'
+      ]);
+      $password=bcrypt($request['password']);
+      $request['password']= $password;
+      $user = User::create($request->all());
+      $user->assignRole('SecFacultad');
+      secFacultad::create(['id' => $request['id'], 'CodigoFacultad' => $request['CodigoFacultad']]);
+      return redirect()->route('users.index2')
+        ->with('success','Usuario creado exitosamente.');
+    }
+
+    public function store3(Request $request)
+    {
+      $request->validate([
+        'id' => 'required',
+        'verificador' => 'required',
+        'email' => 'required',
+        'password' => 'required',
+        'Nombre' => 'required',
+        'ApellidoPaterno' => 'required',
+        'ApellidoMaterno' => 'required',
+      ]);
+      $password=bcrypt($request['password']);
+      $request['password']= $password;
+      $user = User::create($request->all());
+      $user->assignRole('Secretario');
+      return redirect()->route('users.index3')
         ->with('success','Usuario creado exitosamente.');
     }
 
@@ -124,5 +204,13 @@ class UserController extends Controller
       $user->delete();
       return redirect()->route('users.index')
         ->with('success','Usuario Eliminado Exitosamente');
+    }
+
+    public function reactivar($id)
+    {
+      $user = user::onlyTrashed()->find($id);
+      $user->restore();
+      return redirect()->route('users.index')
+        ->with('success','Usuario Reactivado Exitosamente');
     }
 }

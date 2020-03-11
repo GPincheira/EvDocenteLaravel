@@ -25,11 +25,12 @@ class CreateAcademicosTable extends Migration
           $table->enum('Categoria', ['Instructor','Auxiliar','Adjunto','Titular']);
           $table->integer('HorasContrato');
           $table->string('TipoPlanta');
-          $table->enum('Estado', ['Activo', 'Inactivo']);
           $table->primary('id');
           $table->foreign('CodigoDpto')
                 ->references('id')
-                ->on('departamentos');
+                ->on('departamentos')
+                ->onUpdate('cascade');
+          $table->softDeletes();
           $table->timestamps();
         });
     }

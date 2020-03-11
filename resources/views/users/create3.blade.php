@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Agregar nuevo Administrador</h2>
+            <h2>Agregar nuevo Secretario</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Atras</a>
+            <a class="btn btn-primary" href="{{ route('users.index3') }}"> Atras</a>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
     </div>
 @endif
 
-<form action="{{ route('users.store') }}" method="POST">
+<form action="{{ route('users.store3') }}" method="POST">
     @csrf
 
      <div class="row">

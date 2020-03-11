@@ -19,6 +19,13 @@ class FacultadController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+    public function indexelim()
+    {
+      $facultades = Facultad::onlyTrashed()->latest()->paginate(10);
+      return view('facultades.index',compact('facultades'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,7 +51,6 @@ class FacultadController extends Controller
         'DecanoNombre' => 'required',
         'DecanoAPaterno' => 'required',
         'DecanoAMaterno' => 'required',
-        'Estado' => 'Activo',
       ]);
       Facultad::create($request->all());
       return redirect()->route('facultades.index')
@@ -59,7 +65,7 @@ class FacultadController extends Controller
      */
     public function show($id)
     {
-        $facultad = facultad::find($id);
+        $facultad = facultad::withTrashed()->find($id);
         return view('facultades.show',compact('facultad'));
     }
 
@@ -90,7 +96,6 @@ class FacultadController extends Controller
         'DecanoNombre' => 'required',
         'DecanoAPaterno' => 'required',
         'DecanoAMaterno' => 'required',
-        'Estado' => 'required',
       ]);
       $facultad = facultad::find($id);
       $facultad->update($request->all());
@@ -110,5 +115,13 @@ class FacultadController extends Controller
       $facultad->delete();
       return redirect()->route('facultades.index')
         ->with('success','Facultad Eliminada Exitosamente');
+    }
+
+    public function reactivar($id)
+    {
+      $facultad = facultad::onlyTrashed()->find($id);
+      $facultad->restore();
+      return redirect()->route('facultades.index')
+        ->with('success','Facultad Reactivada Exitosamente');
     }
 }

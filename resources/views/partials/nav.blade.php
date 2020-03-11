@@ -26,8 +26,15 @@
                   <a class="nav-link" href="{{ route('facultades.index')}}">Facultades</a>
                 </li>
                 <li class="nav navbar-nav">
-                  <a class="nav-link" href="{{ route('users.index')}}">Usuarios</a>
+                  <a class="nav-link" href="{{ route('users.index')}}">Administradores</a>
                 </li>
+                <li class="nav navbar-nav">
+                  <a class="nav-link" href="{{ route('users.index2')}}">Secretarios de Facultad</a>
+                </li>
+                <li class="nav navbar-nav">
+                  <a class="nav-link" href="{{ route('users.index3')}}">Secretarios</a>
+                </li>
+
               @endif
               @if(@Auth::user()->hasRole('SecFacultad'))
                 <li class="nav navbar-nav">

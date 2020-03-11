@@ -26,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:academicos.create');
     Route::get('academicos', 'AcademicoController@index')->name('academicos.index')
                                                         ->middleware('permission:academicos.index');
+    Route::get('academicoselim', 'AcademicoController@indexelim')->name('academicos.indexelim')
+                                                        ->middleware('permission:academicos.index');
     Route::get('academicos/create', 'AcademicoController@create')->name('academicos.create')
                                                         ->middleware('permission:academicos.create');
     Route::put('academicos/{role}', 'AcademicoController@update')->name('academicos.update')
@@ -36,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:academicos.destroy');
     Route::get('academicos/{role}/edit', 'AcademicoController@edit')->name('academicos.edit')
                                                         ->middleware('permission:academicos.edit');
+    Route::post('academicos/{role}', 'AcademicoController@reactivar')->name('academicos.reactivar')
+                                                        ->middleware('permission:academicos.reactivar');
 
     Route::post('comisiones/store', 'ComisionController@store')->name('comisiones.store')
                                                         ->middleware('permission:comisiones.create');
@@ -56,6 +60,8 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:departamentos.create');
     Route::get('departamentos', 'DepartamentoController@index')->name('departamentos.index')
                                                         ->middleware('permission:departamentos.index');
+    Route::get('departamentoselim', 'DepartamentoController@indexelim')->name('departamentos.indexelim')
+                                                        ->middleware('permission:departamentos.index');
     Route::get('departamentos/create', 'DepartamentoController@create')->name('departamentos.create')
                                                         ->middleware('permission:departamentos.create');
     Route::put('departamentos/{role}', 'DepartamentoController@update')->name('departamentos.update')
@@ -66,6 +72,8 @@ Route::middleware(['auth'])->group(function () {
                                                          ->middleware('permission:departamentos.destroy');
     Route::get('departamentos/{role}/edit', 'DepartamentoController@edit')->name('departamentos.edit')
                                                          ->middleware('permission:departamentos.edit');
+    Route::post('departamentos/{role}', 'DepartamentoController@reactivar')->name('departamentos.reactivar')
+                                                         ->middleware('permission:departamentos.reactivar');
 
     Route::post('evaluaciones/store', 'EvaluacionController@store')->name('evaluaciones.store')
                                                         ->middleware('permission:evaluaciones.create');
@@ -86,6 +94,8 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:facultades.create');
     Route::get('facultades', 'FacultadController@index')->name('facultades.index')
                                                         ->middleware('permission:facultades.index');
+    Route::get('facultadeselim', 'FacultadController@indexelim')->name('facultades.indexelim')
+                                                        ->middleware('permission:facultades.index');
     Route::get('facultades/create', 'FacultadController@create')->name('facultades.create')
                                                         ->middleware('permission:facultades.create');
     Route::put('facultades/{role}', 'FacultadController@update')->name('facultades.update')
@@ -96,13 +106,33 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:facultades.destroy');
     Route::get('facultades/{role}/edit', 'FacultadController@edit')->name('facultades.edit')
                                                         ->middleware('permission:facultades.edit');
+    Route::post('facultades/{role}', 'FacultadController@reactivar')->name('facultades.reactivar')
+                                                        ->middleware('permission:facultades.reactivar');
 
     Route::post('users/store', 'UserController@store')->name('users.store')
                                                         ->middleware('permission:Users.create');
-    Route::get('users', 'UserController@index')->name('users.index')
+    Route::post('users/store2', 'UserController@store2')->name('users.store2')
+                                                        ->middleware('permission:Users.create2');
+    Route::post('users/store3', 'UserController@store3')->name('users.store3')
+                                                        ->middleware('permission:Users.create3');
+    Route::get('users1', 'UserController@index')->name('users.index')
                                                         ->middleware('permission:Users.index');
+    Route::get('users1elim', 'UserController@indexelim')->name('users.indexelim')
+                                                        ->middleware('permission:Users.index');
+    Route::get('users2', 'UserController@index2')->name('users.index2')
+                                                        ->middleware('permission:Users.index2');
+    Route::get('users2elim', 'UserController@index2elim')->name('users.index2elim')
+                                                        ->middleware('permission:Users.index2');
+    Route::get('users3', 'UserController@index3')->name('users.index3')
+                                                        ->middleware('permission:Users.index3');
+    Route::get('users3elim', 'UserController@index3elim')->name('users.index3elim')
+                                                        ->middleware('permission:Users.index3');
     Route::get('users/create', 'UserController@create')->name('users.create')
                                                         ->middleware('permission:Users.create');
+    Route::get('users/create2', 'UserController@create2')->name('users.create2')
+                                                        ->middleware('permission:Users.create2');
+    Route::get('users/create3', 'UserController@create3')->name('users.create3')
+                                                        ->middleware('permission:Users.create3');
     Route::put('users/{role}', 'UserController@update')->name('users.update')
                                                         ->middleware('permission:Users.edit');
     Route::get('users/{role}', 'UserController@show')->name('users.show')
@@ -111,4 +141,6 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:Users.destroy');
     Route::get('users/{role}/edit', 'UserController@edit')->name('users.edit')
                                                         ->middleware('permission:Users.edit');
+    Route::post('users/{role}', 'UserController@reactivar')->name('users.reactivar')
+                                                        ->middleware('permission:Users.reactivar');
 });

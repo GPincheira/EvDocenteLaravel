@@ -22,8 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('Nombre');
             $table->string('ApellidoPaterno');
             $table->string('ApellidoMaterno');
-            $table->enum('Estado', ['Activo', 'Inactivo']);
             $table->primary('id');
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

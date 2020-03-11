@@ -21,6 +21,7 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'academicos.show']);
       Permission::create(['name' => 'academicos.create']);
       Permission::create(['name' => 'academicos.destroy']);
+      Permission::create(['name' => 'academicos.reactivar']);
 
       Permission::create(['name' => 'comisiones.index']);
       Permission::create(['name' => 'comisiones.edit']);
@@ -33,6 +34,7 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'departamentos.show']);
       Permission::create(['name' => 'departamentos.create']);
       Permission::create(['name' => 'departamentos.destroy']);
+      Permission::create(['name' => 'departamentos.reactivar']);
 
       Permission::create(['name' => 'evaluaciones.index']);
       Permission::create(['name' => 'evaluaciones.edit']);
@@ -45,18 +47,24 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'facultades.show']);
       Permission::create(['name' => 'facultades.create']);
       Permission::create(['name' => 'facultades.destroy']);
+      Permission::create(['name' => 'facultades.reactivar']);
 
       Permission::create(['name' => 'Users.index']);
+      Permission::create(['name' => 'Users.index2']);
+      Permission::create(['name' => 'Users.index3']);
       Permission::create(['name' => 'Users.edit']);
       Permission::create(['name' => 'Users.show']);
       Permission::create(['name' => 'Users.create']);
+      Permission::create(['name' => 'Users.create2']);
+      Permission::create(['name' => 'Users.create3']);
       Permission::create(['name' => 'Users.destroy']);
+      Permission::create(['name' => 'Users.reactivar']);
 
       $Administrador = Role::create(['name' => 'Administrador']);
       $Administrador->givePermissionTo([
           'academicos.index',
+          'academicos.edit',
           'academicos.show',
-          'academicos.create',
           'comisiones.index',
           'comisiones.show',
           'departamentos.index',
@@ -64,6 +72,7 @@ class PermissionsTableSeeder extends Seeder
           'departamentos.show',
           'departamentos.create',
           'departamentos.destroy',
+          'departamentos.reactivar',
           'evaluaciones.index',
           'evaluaciones.show',
           'facultades.index',
@@ -71,11 +80,17 @@ class PermissionsTableSeeder extends Seeder
           'facultades.show',
           'facultades.create',
           'facultades.destroy',
+          'facultades.reactivar',
           'Users.index',
+          'Users.index2',
+          'Users.index3',
           'Users.edit',
           'Users.show',
           'Users.create',
+          'Users.create2',
+          'Users.create3',
           'Users.destroy',
+          'Users.reactivar',
       ]);
 
       $SecFacultad = Role::create(['name' => 'SecFacultad']);
@@ -85,6 +100,7 @@ class PermissionsTableSeeder extends Seeder
           'academicos.show',
           'academicos.create',
           'academicos.destroy',
+          'academicos.reactivar',
           'comisiones.index',
           'comisiones.show',
           'comisiones.create',

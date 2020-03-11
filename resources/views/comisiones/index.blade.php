@@ -6,9 +6,11 @@
             <div class="pull-left">
                 <h2>Comisiones UCM</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('comisiones.create') }}"> Crear Nueva Comision</a>
-            </div>
+            @if(@Auth::user()->hasRole('SecFacultad'))
+              <div class="pull-right">
+                  <a class="btn btn-success" href="{{ route('comisiones.create') }}"> Crear Nueva Comision</a>
+              </div>
+            @endif  
         </div>
     </div>
 

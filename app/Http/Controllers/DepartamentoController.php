@@ -20,6 +20,13 @@ class DepartamentoController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+    public function indexelim()
+    {
+      $departamentos = Departamento::onlyTrashed()->latest()->paginate(10);
+      return view('departamentos.index',compact('departamentos'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -43,7 +50,6 @@ class DepartamentoController extends Controller
         'id' => 'required',
         'Nombre' => 'required',
         'CodigoFacultad' => 'required',
-        'Estado' => 'Activo',
       ]);
       Departamento::create($request->all());
       return redirect()->route('departamentos.index')
@@ -71,7 +77,8 @@ class DepartamentoController extends Controller
     public function edit($id)
     {
       $departamento = departamento::find($id);
-      return view('departamentos.edit',compact('departamento'));
+      $facultades = Facultad::all();
+      return view('departamentos.edit',compact('departamento'),['facultades' => $facultades]);
     }
 
     /**
@@ -86,8 +93,7 @@ class DepartamentoController extends Controller
       $request->validate([
         'id' => 'required',
         'Nombre' => 'required',
-        'CodigoFacultad' => 'required',
-        'Estado' => 'required',
+        'CodigoFacultad' => 'required'
       ]);
       $departamento = departamento::find($id);
       $departamento->update($request->all());
@@ -107,5 +113,13 @@ class DepartamentoController extends Controller
       $departamento->delete();
       return redirect()->route('departamentos.index')
         ->with('success','Departamento Eliminado Exitosamente');
+    }
+
+    public function reactivar($id)
+    {
+      $departamento = departamento::onlyTrashed()->find($id);
+      $departamento->restore();
+      return redirect()->route('departamentos.index')
+        ->with('success','Departamento Reactivado Exitosamente');
     }
 }

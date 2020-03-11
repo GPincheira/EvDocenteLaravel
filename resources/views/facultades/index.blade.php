@@ -6,9 +6,18 @@
             <div class="pull-left">
                 <h2>Facultades UCM</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('facultades.create') }}"> Crear Nueva Facultad</a>
+            @if (Request::is('facultades'))
+              <div class="pull-left">
+                  <a class="btn btn-success" href="{{ route('facultades.indexelim') }}"> Ver Inactivas</a>
+              </div>
+              <div class="pull-right">
+                  <a class="btn btn-success" href="{{ route('facultades.create') }}"> Crear Nueva Facultad</a>
+              </div>
+            @else
+            <div class="pull-left">
+                <a class="btn btn-success" href="{{ route('facultades.index') }}"> Ver Activas</a>
             </div>
+            @endif
         </div>
     </div>
 
@@ -17,7 +26,6 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-
     <table class="table table-bordered">
         <tr>
             <th>Id</th>
@@ -35,17 +43,22 @@
             <td>{{ $facultad->DecanoNombre }}</td>
             <td>{{ $facultad->DecanoAPaterno }}</td>
             <td>{{ $facultad->DecanoAMaterno }}</td>
-            <td>{{ $facultad->Estado }}</td>
+            <td>@if (Request::is('facultades'))Activo @else Inactivo @endif</td>
             <td>
+              @if (Request::is('facultades'))
                 <form action="{{ route('facultades.destroy',$facultad->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('facultades.show',$facultad->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('facultades.edit',$facultad->id) }}">Edit</a>
-
+                    <a class="btn btn-info" href="{{ route('facultades.show',$facultad->id) }}">Mostrar</a>
+                    <a class="btn btn-primary" href="{{ route('facultades.edit',$facultad->id) }}">Editar</a>
                     @csrf
                     @method('DELETE')
-
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger">Desactivar</button>
                 </form>
+              @else
+                <form action="{{ route('facultades.reactivar',$facultad->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Reactivar</button>
+                </form>
+              @endif
             </td>
 
         </tr>

@@ -21,6 +21,13 @@ class AcademicoController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+    public function indexelim()
+    {
+      $academicos = Academico::onlyTrashed()->latest()->paginate(10);
+      return view('academicos.index',compact('academicos'))
+        ->with('i',(request()->input('page',1)-1)*5);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -53,7 +60,6 @@ class AcademicoController extends Controller
         'Categoria' => 'required',
         'HorasContrato' => 'required',
         'TipoPlanta' => 'required',
-        'Estado' => 'Activo',
       ]);
       Academico::create($request->all());
       return redirect()->route('academicos.index')
@@ -81,7 +87,9 @@ class AcademicoController extends Controller
     public function edit($id)
     {
       $academico = academico::find($id);
-      return view('academicos.edit',compact('academico'));
+      $departamentos = Departamento::all();
+      $secFacultades = SecFacultad::all();
+      return view('academicos.edit',compact('academico'),['departamentos' => $departamentos,'secFacultades' => $secFacultades]);
     }
 
     /**
@@ -104,8 +112,7 @@ class AcademicoController extends Controller
         'CodigoDpto' => 'required',
         'Categoria' => 'required',
         'HorasContrato' => 'required',
-        'TipoPlanta' => 'required',
-        'Estado' => 'required',
+        'TipoPlanta' => 'required'
       ]);
       $academico = academico::find($id);
       $academico->update($request->all());
@@ -125,5 +132,13 @@ class AcademicoController extends Controller
       $academico->delete();
       return redirect()->route('academicos.index')
         ->with('success','Academico Eliminado Exitosamente');
+    }
+
+    public function reactivar($id)
+    {
+      $academico = academico::onlyTrashed()->find($id);
+      $academico->restore();
+      return redirect()->route('academicos.index')
+        ->with('success','Academico Reactivado Exitosamente');
     }
 }

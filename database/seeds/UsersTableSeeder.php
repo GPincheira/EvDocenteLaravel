@@ -21,8 +21,7 @@ class UsersTableSeeder extends Seeder
           'password' => bcrypt('asdfasdf'),
           'Nombre' => 'German',
           'ApellidoPaterno' => 'Pincheira',
-          'ApellidoMaterno' => 'Leiva',
-          'Estado' => 'Activo'
+          'ApellidoMaterno' => 'Leiva'
         ]);
 
         $user->assignRole('Administrador');

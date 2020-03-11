@@ -17,11 +17,12 @@ class CreateDepartamentosTable extends Migration
           $table->integer('id')->unique();
           $table->string('Nombre')->unique();
           $table->integer('CodigoFacultad');
-          $table->enum('Estado', ['Activo', 'Inactivo']);
           $table->primary('id');
           $table->foreign('CodigoFacultad')
                 ->references('id')
-                ->on('facultades');
+                ->on('facultades')
+                ->onUpdate('cascade');
+          $table->softDeletes();
           $table->timestamps();
         });
     }

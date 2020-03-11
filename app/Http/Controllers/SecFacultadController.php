@@ -39,9 +39,10 @@ class SecFacultadController extends Controller
      {
        $request->validate([
          'id' => 'required',
+         'CodigoFacultad' => 'required'
        ]);
        SecFacultad::create($request->all());
-       return redirect()->route('secFacultades.index')
+       return redirect()->route('users.index')
          ->with('success','Secretario de Facultad creado exitosamente.');
      }
 

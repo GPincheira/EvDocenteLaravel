@@ -6,9 +6,20 @@
             <div class="pull-left">
                 <h2>Academicos UCM</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('academicos.create') }}"> Crear Nuevo Academico</a>
+            @if (Request::is('academicos'))
+              <div class="pull-left">
+                  <a class="btn btn-success" href="{{ route('academicos.indexelim') }}"> Ver Inactivos</a>
+              </div>
+              @if(@Auth::user()->hasRole('SecFacultad'))
+                <div class="pull-right">
+                    <a class="btn btn-success" href="{{ route('academicos.create') }}"> Crear Nuevo Academico</a>
+                </div>
+              @endif  
+            @else
+            <div class="pull-left">
+                <a class="btn btn-success" href="{{ route('academicos.index') }}"> Ver Activos</a>
             </div>
+            @endif
         </div>
     </div>
 
@@ -35,17 +46,22 @@
             <td>{{ $academico->TituloProfesional }}</td>
             <td>{{ $academico->GradoAcademico }}</td>
             <td>{{ $academico->CodigoDpto }}</td>
-            <td>{{ $academico->Estado }}</td>
+            <td>@if (Request::is('academicos'))Activo @else Inactivo @endif</td>
             <td>
+              @if (Request::is('academicos'))
                 <form action="{{ route('academicos.destroy',$academico->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('academicos.show',$academico->id) }}">Ver</a>
+                    <a class="btn btn-info" href="{{ route('academicos.show',$academico->id) }}">Mostrar</a>
                     <a class="btn btn-primary" href="{{ route('academicos.edit',$academico->id) }}">Editar</a>
-
                     @csrf
                     @method('DELETE')
-
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="submit" class="btn btn-danger">Desactivar</button>
                 </form>
+              @else
+                <form action="{{ route('academicos.reactivar',$academico->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Reactivar</button>
+                </form>
+              @endif
             </td>
 
         </tr>

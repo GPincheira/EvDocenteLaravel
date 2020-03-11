@@ -5,10 +5,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Agregar nuevo Administrador</h2>
+            <h2>Agregar nuevo Secretario de Facultad</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Atras</a>
+            <a class="btn btn-primary" href="{{ route('users.index2') }}"> Atras</a>
         </div>
     </div>
 </div>
@@ -24,7 +24,7 @@
     </div>
 @endif
 
-<form action="{{ route('users.store') }}" method="POST">
+<form action="{{ route('users.store2') }}" method="POST">
     @csrf
 
      <div class="row">
@@ -68,6 +68,12 @@
             <div class="form-group">
                 <strong>Password:</strong>
                 <input type="password" name="password" class="form-control" placeholder="Ingrese ">
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Facultad:</strong>
+                <input type="integer" name="CodigoFacultad" class="form-control" placeholder="Ingrese ">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

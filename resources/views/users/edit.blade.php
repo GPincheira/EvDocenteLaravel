@@ -7,7 +7,15 @@
                 <h2>Editar Usuario</h2>
             </div>
             <div class="pull-right">
+              @if ($user->roles()->first()->name=='Administrador')
                 <a class="btn btn-primary" href="{{ route('users.index') }}"> Atras</a>
+              @endif
+              @if ($user->roles()->first()->name=='SecFacultad')
+                <a class="btn btn-primary" href="{{ route('users.index2') }}"> Atras</a>
+              @endif
+              @if ($user->roles()->first()->name=='Secretario')
+                <a class="btn btn-primary" href="{{ route('users.index3') }}"> Atras</a>
+              @endif
             </div>
         </div>
     </div>

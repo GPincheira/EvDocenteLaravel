@@ -19,8 +19,8 @@ class CreateFacultadesTable extends Migration
             $table->string('DecanoNombre');
             $table->string('DecanoAPaterno');
             $table->string('DecanoAMaterno');
-            $table->enum('Estado', ['Activo', 'Inactivo']);
             $table->primary('id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

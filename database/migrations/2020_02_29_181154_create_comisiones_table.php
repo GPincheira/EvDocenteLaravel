@@ -33,7 +33,8 @@ class CreateComisionesTable extends Migration
           $table->string('AMaterno2');
           $table->foreign('CodigoFacultad')
                 ->references('id')
-                ->on('facultades');
+                ->on('facultades')
+                ->onUpdate('cascade');
           $table->foreign('idSecFacultad')
                 ->references('id')
                 ->on('users');

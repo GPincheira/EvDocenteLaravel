@@ -22,7 +22,9 @@ class CreateSecFacultadesTable extends Migration
                   ->on('users');
             $table->foreign('CodigoFacultad')
                   ->references('id')
-                  ->on('facultades');
+                  ->on('facultades')
+                  ->onUpdate('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
