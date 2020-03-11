@@ -28,7 +28,6 @@
         </tr>
         @foreach ($evaluaciones as $evaluacion)
         <tr>
-            <td>{{ ++$i }}</td>
             <td>{{ $evaluacion->id }}</td>
             <td>{{ $evaluacion->CodigoComision }}</td>
             <td>{{ $evaluacion->RUTAcademmico }}</td>

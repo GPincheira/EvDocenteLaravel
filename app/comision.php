@@ -13,4 +13,14 @@ class comision extends Model
       'APaterno2','AMaterno2'
   ];
   protected $primaryKey ="id";
+
+  public function facultad()
+  {
+    return $this->belongsTo('App\facultad','CodigoFacultad','id');
+  }
+
+  public function evaluaciones()
+  {
+      return $this->hasMany('App\evaluacion','CodigoComision');
+  }
 }

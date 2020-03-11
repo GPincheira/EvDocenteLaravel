@@ -13,4 +13,14 @@ class evaluacion extends Model
   ];
 
   protected $primaryKey ="id";
+
+  public function comision()
+  {
+    return $this->belongsTo('App\comision','CodigoComision','id');
+  }
+
+  public function academico()
+  {
+    return $this->belongsTo('App\academico');
+  }
 }

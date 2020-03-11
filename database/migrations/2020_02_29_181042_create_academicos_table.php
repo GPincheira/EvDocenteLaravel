@@ -29,7 +29,8 @@ class CreateAcademicosTable extends Migration
           $table->foreign('CodigoDpto')
                 ->references('id')
                 ->on('departamentos')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
           $table->softDeletes();
           $table->timestamps();
         });

@@ -15,4 +15,15 @@ class departamento extends Model
 
   protected $dates = ['deleted_at'];
   protected $primaryKey ="id";
+
+  public function facultad()
+  {
+    return $this->belongsTo('App\facultad','CodigoFacultad','id');
+  }
+
+  public function academicos()
+  {
+      return $this->hasMany('App\academico','CodigoDpto');
+  }
+
 }

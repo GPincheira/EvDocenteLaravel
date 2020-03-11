@@ -17,4 +17,14 @@ class secFacultad extends Model
 
   protected $primaryKey ="id";
   public $incrementing = false;
+
+  public function user()
+  {
+    return $this->belongsTo('App\User','id','id');
+  }
+
+  public function facultad()
+  {
+    return $this->belongsTo('App\facultad','CodigoFacultad','id');
+  }
 }

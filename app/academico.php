@@ -14,6 +14,16 @@ class academico extends Model
       'GradoAcademico','CodigoDpto','Categoria','HorasContrato','TipoPlanta','Estado'
   ];
   protected $dates = ['deleted_at'];
-  
+
   protected $primaryKey ="id";
+
+  public function departamento()
+  {
+    return $this->belongsTo('App\departamento','CodigoDpto','id');
+  }
+
+  public function evaluaciones()
+  {
+      return $this->hasMany('App\evaluacion','RUTAcademico');
+  }
 }

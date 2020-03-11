@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\facultad;
+use App\departamento;
 use Illuminate\Http\Request;
 
 class FacultadController extends Controller

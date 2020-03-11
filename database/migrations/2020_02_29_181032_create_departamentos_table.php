@@ -21,7 +21,8 @@ class CreateDepartamentosTable extends Migration
           $table->foreign('CodigoFacultad')
                 ->references('id')
                 ->on('facultades')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
           $table->softDeletes();
           $table->timestamps();
         });

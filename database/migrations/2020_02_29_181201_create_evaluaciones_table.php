@@ -34,7 +34,8 @@ class CreateEvaluacionesTable extends Migration
                 ->on('comisiones');
           $table->foreign('RUTAcademico')
                 ->references('id')
-                ->on('academicos');
+                ->on('academicos')
+                ->onUpdate('cascade');
           $table->timestamps();
         });
     }
