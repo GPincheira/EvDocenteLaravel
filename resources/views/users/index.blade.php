@@ -51,13 +51,18 @@
               <td>@if (Request::is('users1'))Activo @else Inactivo @endif</td>
               <td>
                 @if (Request::is('users1'))
-                  <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                      <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Mostrar</a>
-                      <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger">Desactivar</button>
-                  </form>
+                  @if (@Auth::user()->id != $user->id)
+                    <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                        <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Mostrar</a>
+                        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Desactivar</button>
+                    </form>
+                  @else
+                    <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Mostrar</a>
+                    <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
+                  @endif
                 @else
                   <form action="{{ route('users.reactivar',$user->id) }}" method="POST">
                       @csrf

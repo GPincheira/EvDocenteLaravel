@@ -47,9 +47,9 @@ class DepartamentoController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'id' => 'required',
+        'id' => ['required','integer'],
         'Nombre' => 'required',
-        'CodigoFacultad' => 'required',
+        'CodigoFacultad' => ['required','integer'],
       ]);
       Departamento::create($request->all());
       return redirect()->route('departamentos.index')
@@ -91,9 +91,9 @@ class DepartamentoController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'id' => 'required',
+        'id' => ['required','integer'],
         'Nombre' => 'required',
-        'CodigoFacultad' => 'required'
+        'CodigoFacultad' => ['required','integer'],
       ]);
       $departamento = departamento::find($id);
       $departamento->update($request->all());

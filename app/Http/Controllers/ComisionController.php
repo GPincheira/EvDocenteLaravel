@@ -44,8 +44,8 @@ class ComisionController extends Controller
       $secFacultad = secFacultad::find(@Auth::user()->id);
       $facultad = facultad::find($secFacultad->CodigoFacultad);
       $request->validate([
-        'Año' => 'required',
-        'Fecha' => 'required',
+        'Año' => ['required','integer','min:2000','max:2100'],
+        'Fecha' => ['required'],
         'Nombre1' => 'required',
         'APaterno1' => 'required',
         'AMaterno1' => 'required',
@@ -100,12 +100,8 @@ class ComisionController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'Año' => 'required',
-        'Fecha' => 'required',
-        'CodigoFacultad' => 'required',
-        'NombreDecano' => 'required',
-        'idSecFacultad' => 'required',
-        'NombreSecFacultad' => 'required',
+        'Año' => ['required','year'],
+        'Fecha' => ['required','timedate'],
         'Nombre1' => 'required',
         'Nombre2' => 'required',
       ]);

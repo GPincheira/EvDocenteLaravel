@@ -38,8 +38,8 @@ class SecFacultadController extends Controller
      public function store(Request $request)
      {
        $request->validate([
-         'id' => 'required',
-         'CodigoFacultad' => 'required'
+         'id' => ['required','integer','min:1000000','max:25000000','unique:secFacultades'],
+         'CodigoFacultad' => ['required','integer','unique:secFacultades']
        ]);
        SecFacultad::create($request->all());
        return redirect()->route('users.index')

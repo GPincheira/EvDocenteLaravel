@@ -47,7 +47,7 @@ class FacultadController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'id' => 'required',
+        'id' => ['required','integer'],
         'Nombre' => 'required',
         'DecanoNombre' => 'required',
         'DecanoAPaterno' => 'required',
@@ -92,7 +92,7 @@ class FacultadController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'id' => 'required',
+        'id' => ['required','integer'],
         'Nombre' => 'required',
         'DecanoNombre' => 'required',
         'DecanoAPaterno' => 'required',

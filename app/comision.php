@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class comision extends Model
 {
+  use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
+  
   protected $table = 'comisiones';
   protected $fillable = [
       'Año','Fecha','CodigoFacultad','NombreDecano','APaternoDecano','AMaternoDecano','idSecFacultad',

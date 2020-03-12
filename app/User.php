@@ -13,6 +13,7 @@ class User extends Authenticatable
     use Notifiable;
     use HasRoles;
     use SoftDeletes;
+    use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +27,8 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
+
+    protected $softCascade = ['secFacultad'];
 
     /**
      * The attributes that should be hidden for arrays.

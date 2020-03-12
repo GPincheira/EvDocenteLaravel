@@ -41,12 +41,6 @@
            </div>
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
-                   <strong>Facultad a la que pertenece:</strong>
-                   <input type="integer" name="CodigoFacultad" value="{{ $comision->CodigoFacultad }}" class="form-control" placeholder="Ingrese la facultad">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
                    <strong>Nombre del participante 1:</strong>
                    <input type="text" name="Nombre1" value="{{ $comision->Nombre1 }}" class="form-control" placeholder="Ingrese el nombre del primer integrante extra">
              </div>

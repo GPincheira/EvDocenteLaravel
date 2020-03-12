@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class departamento extends Model
 {
   use SoftDeletes;
+  use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
   protected $fillable = [
       'id','Nombre','CodigoFacultad','Estado'
   ];
 
   protected $dates = ['deleted_at'];
+
+  protected $softCascade = ['academicos'];
+
   protected $primaryKey ="id";
 
   public function facultad()

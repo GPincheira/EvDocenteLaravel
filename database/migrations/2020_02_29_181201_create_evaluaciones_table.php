@@ -23,11 +23,11 @@ class CreateEvaluacionesTable extends Migration
           $table->float('n3',2,1)->nullable();
           $table->float('n4',2,1)->nullable();
           $table->float('n5',2,1)->nullable();
-          $table->float('p1',2,1)->nullable();
-          $table->float('p2',2,1)->nullable();
-          $table->float('p3',2,1)->nullable();
-          $table->float('p4',2,1)->nullable();
-          $table->float('p5',2,1)->nullable();
+          $table->integer('p1')->nullable();
+          $table->integer('p2')->nullable();
+          $table->integer('p3')->nullable();
+          $table->integer('p4')->nullable();
+          $table->integer('p5')->nullable();
           $table->float('NotaFinal',3,2);
           $table->foreign('CodigoComision')
                 ->references('id')

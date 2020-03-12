@@ -91,10 +91,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'id' => 'required',
-        'verificador' => 'required',
-        'email' => 'required',
-        'password' => 'required',
+        'id' => ['required','integer','min:1000000','max:25000000','unique:users'],
+        'verificador' => ['required','max:1'],
+        'email' => ['required','unique:users','email'],
+        'password' => ['required','min:6','max:20'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
@@ -110,14 +110,14 @@ class UserController extends Controller
     public function store2(Request $request)
     {
       $request->validate([
-        'id' => 'required',
-        'verificador' => 'required',
-        'email' => 'required',
-        'password' => 'required',
+        'id' => ['required','integer','min:1000000','max:25000000','unique:users'],
+        'verificador' => ['required','max:1'],
+        'email' => ['required','unique:users','email'],
+        'password' => ['required','min:6','max:20'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
-        'CodigoFacultad' => 'required'
+        'CodigoFacultad' => ['required','integer','unique:secFacultades'],
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
@@ -131,10 +131,10 @@ class UserController extends Controller
     public function store3(Request $request)
     {
       $request->validate([
-        'id' => 'required',
-        'verificador' => 'required',
-        'email' => 'required',
-        'password' => 'required',
+        'id' => ['required','integer','min:1000000','max:25000000','unique:users'],
+        'verificador' => ['required','max:1'],
+        'email' => ['required','unique:users','email'],
+        'password' => ['required','min:6','max:20'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
@@ -181,7 +181,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'email' => 'required',
+        'email' => ['required','unique:users','email'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',

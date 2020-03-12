@@ -49,61 +49,61 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Ponderacion:</strong>
-                <input type="integer" name="P1" class="form-control">
+                <input type="float" name="p1" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nota 1:</strong>
-                <input type="decimal" name="N1" class="form-control">
+                <input type="float" name="n1" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Ponderacion:</strong>
-                <input type="integer" name="P2" class="form-control">
+                <input type="float" name="p2" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nota 2:</strong>
-                <input type="decimal" name="N2" class="form-control">
+                <input type="float" name="n2" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Ponderacion:</strong>
-                <input type="integer" name="P3" class="form-control">
+                <input type="float" name="p3" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nota 3:</strong>
-                <input type="decimal" name="N3" class="form-control">
+                <input type="float" name="n3" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Ponderacion:</strong>
-                <input type="integer" name="P4" class="form-control">
+                <input type="float" name="p4" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nota 4:</strong>
-                <input type="decimal" name="N4" class="form-control">
+                <input type="float" name="n4" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Ponderacion:</strong>
-                <input type="integer" name="P5" class="form-control">
+                <input type="float" name="p5" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nota 5:</strong>
-                <input type="decimal" name="N5" class="form-control">
+                <input type="float" name="n5" class="form-control">
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

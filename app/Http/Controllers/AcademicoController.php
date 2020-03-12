@@ -49,16 +49,16 @@ class AcademicoController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'id' => 'required',
-        'verificador' => 'required',
+        'id' => ['required','integer','min:1000000','max:25000000','unique:academicos'],
+        'verificador' => ['required','max:1'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
         'TituloProfesional' => 'required',
         'GradoAcademico' => 'required',
-        'CodigoDpto' => 'required',
+        'CodigoDpto' => ['required','integer'],
         'Categoria' => 'required',
-        'HorasContrato' => 'required',
+        'HorasContrato' => ['required','integer','min:0','max:44'],
         'TipoPlanta' => 'required',
       ]);
       Academico::create($request->all());
@@ -102,17 +102,17 @@ class AcademicoController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'id' => 'required',
-        'verificador' => 'required',
+        'id' => ['required','integer','min:1000000','max:25000000','unique:academicos'],
+        'verificador' => ['required','max:1'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
         'TituloProfesional' => 'required',
         'GradoAcademico' => 'required',
-        'CodigoDpto' => 'required',
+        'CodigoDpto' => ['required','integer'],
         'Categoria' => 'required',
-        'HorasContrato' => 'required',
-        'TipoPlanta' => 'required'
+        'HorasContrato' => ['required','integer','min:0','max:44'],
+        'TipoPlanta' => 'required',
       ]);
       $academico = academico::find($id);
       $academico->update($request->all());

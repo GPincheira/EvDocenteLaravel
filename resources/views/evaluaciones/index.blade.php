@@ -6,9 +6,11 @@
             <div class="pull-left">
                 <h2>Evaluaciones UCM</h2>
             </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('evaluaciones.create') }}"> Realizar Nueva Evaluacion</a>
-            </div>
+            @if(@Auth::user()->hasRole('SecFacultad'))
+              <div class="pull-right">
+                  <a class="btn btn-success" href="{{ route('evaluaciones.create') }}"> Realizar Nueva Evaluacion</a>
+              </div>
+            @endif
         </div>
     </div>
 
@@ -30,8 +32,8 @@
         <tr>
             <td>{{ $evaluacion->id }}</td>
             <td>{{ $evaluacion->CodigoComision }}</td>
-            <td>{{ $evaluacion->RUTAcademmico }}</td>
-            <td>{{ $comision->NotaFinal }}</td>
+            <td>{{ $evaluacion->RUTAcademico }}</td>
+            <td>{{ $evaluacion->NotaFinal }}</td>
             <td>
                 <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Ver</a>

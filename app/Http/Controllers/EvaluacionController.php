@@ -38,24 +38,30 @@ class EvaluacionController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'CodigoComision' => 'required',
-        'RUTAcademico' => 'required',
-        'Argumento' => 'required',
-        'n1' => 'required',
-        'n2' => 'required',
-        'n3' => 'required',
-        'n4' => 'required',
-        'n5' => 'required',
-        'p1' => 'required',
-        'p2' => 'required',
-        'p3' => 'required',
-        'p4' => 'required',
-        'p5' => 'required',
-        'NotaFinal' => 'required',
+        'CodigoComision' => ['required','integer'],
+        'RUTAcademico' => ['required','integer','min:1000000','max:25000000'],
+        'Argumento' => ['required','max:100'],
+        'p1' => ['integer','min:0','max:100'],
+        'n1' => ['numeric','min:1','max:5'],
+        'p2' => ['integer','min:0','max:100'],
+        'n2' => ['numeric','min:1','max:5'],
+        'p3' => ['integer','min:0','max:100'],
+        'n3' => ['numeric','min:1','max:5'],
+        'p4' => ['integer','min:0','max:100'],
+        'n4' => ['numeric','min:1','max:5'],
+        'p5' => ['integer','min:0','max:100'],
+        'n5' => ['numeric','min:1','max:5'],
       ]);
-      Evaluacion::create($request->all());
+      if($request['p1']+$request['p2']+$request['p3']+$request['p4']+$request['p5'] == 100){
+        $request['NotaFinal']=($request['n1']*$request['p1']+$request['n2']*$request['p2']+$request['n3']*$request['p3']+$request['n4']*$request['p4']+$request['n5']*$request['p5'])/100;
+        Evaluacion::create($request->all());
+        return redirect()->route('evaluaciones.index')
+          ->with('success','Evaluacion creada exitosamente.');
+      }
+      else{
       return redirect()->route('evaluaciones.index')
-        ->with('success','Evaluacion creada exitosamente.');
+        ->with('success','Los porcentajes deben sumar 100%.');
+      }
     }
 
     /**
@@ -92,20 +98,19 @@ class EvaluacionController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'CodigoComision' => 'required',
-        'RUTAcademico' => 'required',
-        'Argumento' => 'required',
-        'n1' => 'required',
-        'n2' => 'required',
-        'n3' => 'required',
-        'n4' => 'required',
-        'n5' => 'required',
-        'p1' => 'required',
-        'p2' => 'required',
-        'p3' => 'required',
-        'p4' => 'required',
-        'p5' => 'required',
-        'NotaFinal' => 'required',
+        'CodigoComision' => ['required','integer'],
+        'RUTAcademico' => ['required','integer','min:1000000','max:25000000','unique:users'],
+        'Argumento' => ['required','max:100'],
+        'p1' => ['integer','min:0','max:100'],
+        'n1' => ['numeric','min:1','max:5'],
+        'p2' => ['integer','min:0','max:100'],
+        'n2' => ['numeric','min:1','max:5'],
+        'p3' => ['integer','min:0','max:100'],
+        'n3' => ['numeric','min:1','max:5'],
+        'p4' => ['integer','min:0','max:100'],
+        'n4' => ['numeric','min:1','max:5'],
+        'p5' => ['integer','min:0','max:100'],
+        'n5' => ['numeric','min:1','max:5'],
       ]);
       $evaluacion = evaluacion::find($id);
       $evaluacion->update($request->all());
