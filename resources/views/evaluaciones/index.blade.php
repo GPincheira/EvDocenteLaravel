@@ -6,10 +6,19 @@
             <div class="pull-left">
                 <h2>Evaluaciones UCM</h2>
             </div>
-            @if(@Auth::user()->hasRole('SecFacultad'))
-              <div class="pull-right">
-                  <a class="btn btn-success" href="{{ route('evaluaciones.create') }}"> Realizar Nueva Evaluacion</a>
+            @if (Request::is('evaluaciones'))
+              <div class="pull-left">
+                  <a class="btn btn-success" href="{{ route('evaluaciones.indexelim') }}"> Ver Inactivas</a>
               </div>
+              @if(@Auth::user()->hasRole('SecFacultad'))
+                <div class="pull-right">
+                    <a class="btn btn-success" href="{{ route('evaluaciones.create') }}"> Realizar Nueva Evaluacion</a>
+                </div>
+              @endif
+            @else
+            <div class="pull-left">
+                <a class="btn btn-success" href="{{ route('evaluaciones.index') }}"> Ver Activas</a>
+            </div>
             @endif
         </div>
     </div>
@@ -22,33 +31,61 @@
 
     <table class="table table-bordered">
         <tr>
-          {{ @Auth::user()->secFacultad->CodigoFacultad }}
             <th>Id</th>
             <th>Codigo Comision</th>
             <th>RUT del Academico</th>
             <th>Nota Final</th>
+            <th>Estado</th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($evaluaciones as $evaluacion)
-        <tr>
-            <td>{{ $evaluacion->id }}</td>
-            <td>{{ $evaluacion->CodigoComision }}</td>
-            <td>{{ $evaluacion->RUTAcademico }}</td>
-            <td>{{ $evaluacion->NotaFinal }}</td>
-            <td>
-                <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Ver</a>
-                    <a class="btn btn-primary" href="{{ route('evaluaciones.edit',$evaluacion->id) }}">Editar</a>
-
-                    @csrf
-                    @method('DELETE')
-
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                </form>
-            </td>
-
-        </tr>
-        @endforeach
+        @if(@Auth::user()->hasRole('SecFacultad'))
+          @foreach ($evaluaciones as $evaluacion)
+            @foreach ($comisiones as $comision)
+              @if ($evaluacion->CodigoComision == $comision->id)
+                <tr>
+                  <td>{{ $evaluacion->id }}</td>
+                  <td>{{ $evaluacion->CodigoComision }}</td>
+                  <td>{{ $evaluacion->RUTAcademico }}</td>
+                  <td>{{ $evaluacion->NotaFinal }}</td>
+                  <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
+                  <td>
+                    @if (Request::is('evaluaciones'))
+                      <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
+                          <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Mostrar</a>
+                          <a class="btn btn-primary" href="{{ route('evaluaciones.edit',$evaluacion->id) }}">Editar</a>
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-danger">Desactivar</button>
+                      </form>
+                    @else
+                      <form action="{{ route('evaluaciones.reactivar',$evaluacion->id) }}" method="POST">
+                          @csrf
+                          <button type="submit" class="btn btn-danger">Reactivar</button>
+                      </form>
+                    @endif
+                  </td>
+                </tr>
+              @endif
+            @endforeach
+          @endforeach
+        @else
+            @foreach ($evaluaciones as $evaluacion)
+            <tr>
+              <td>{{ $evaluacion->id }}</td>
+              <td>{{ $evaluacion->CodigoComision }}</td>
+              <td>{{ $evaluacion->RUTAcademico }}</td>
+              <td>{{ $evaluacion->NotaFinal }}</td>
+              <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
+              <td>
+                @if (Request::is('evaluaciones'))
+                  <form>
+                      <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Mostrar</a>
+                  </form>
+                @endif
+              </td>
+            </tr>
+            @endforeach
+          @endif
     </table>
 
     {!! $evaluaciones->links() !!}

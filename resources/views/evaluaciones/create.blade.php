@@ -29,6 +29,21 @@
 
   <div class="row">
 
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Instrucciones</div>
+                    <div class="card-body">
+                        Debe seleccionar la comision que aplicará la evaluación y el academico a evaluar. Solo se permiten permiten academicos de su facultad, y comisiones en las que está integrado.
+                        <br>Los porcentajes deben sumar 100%, y las calificaciones van desde 1.0 hasta 5.0.
+                        <br>ESCALA: Excelente=4.5 a 5 --- Muy Bueno=4.0 a 4.4 --- Bueno=3.5 a 3.9 --- Regular=2.7 a 3.4 --- Deficiente=menos de 2.7
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
         <strong>Profesor a evaluar:</strong>
@@ -44,84 +59,78 @@
       </div>
     </div>
 
-    <div class="form-group">
-        <strong>Comision Evaluadora:</strong>
-        @foreach ($comisiones as $comision)
-            @if(@Auth::user()->secFacultad->CodigoFacultad == $comision->CodigoFacultad)
-               <div class="checkbox">
-                 <label>
-                   <input name="CodigoComision" type='checkbox' value='{{$comision->id}}'>{{$comision->id}}>
-                 </label>
-              </div>
-            @endif
-        @endforeach
-    </div>
-
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
-          <strong>Argumento:</strong>
-            <input type="text" name="Argumento" class="form-control" placeholder="Escriba su argumento">
-      </div>
+        <strong>Comision Evaluadora:</strong>
+        <select name="CodigoComision" class="form-control">
+        @foreach ($comisiones as $comision)
+            @if(@Auth::user()->secFacultad->CodigoFacultad == $comision->CodigoFacultad)
+                <option value='{{$comision->id}}'>{{$comision->id}} </option>
+            @endif
+        @endforeach
+        </select>
+    </div>
+  </div>
+
+  <strong>Actividades realizadas:</strong>
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    1. Actividades de docencia
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p1" class="form-control" placeholder="tiempo asignado (%)">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n1" class="form-control" placeholder="Nota 1">
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Ponderacion:</strong>
-            <input type="float" name="p1" class="form-control">
-        </div>
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    2. Actividades de Investigacion
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p2" class="form-control" placeholder="tiempo asignado (%)">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n12" class="form-control" placeholder="Nota 2">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    3. Extension y Vinculacion
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p3" class="form-control" placeholder="tiempo asignado (%)">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n3" class="form-control" placeholder="Nota 3">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    4. Administracion Academica
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p4" class="form-control" placeholder="tiempo asignado (%)">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n4" class="form-control" placeholder="Nota 4">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    5. Otras actividades realizadas
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p5" class="form-control" placeholder="tiempo asignado (%)">
       </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n5" class="form-control" placeholder="Nota 5">
+      </div>
+  </div>
+
+
         <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nota 1:</strong>
-                <input type="float" name="n1" class="form-control">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Ponderacion:</strong>
-                <input type="float" name="p2" class="form-control">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nota 2:</strong>
-                <input type="float" name="n2" class="form-control">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Ponderacion:</strong>
-                <input type="float" name="p3" class="form-control">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nota 3:</strong>
-                <input type="float" name="n3" class="form-control">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Ponderacion:</strong>
-                <input type="float" name="p4" class="form-control">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nota 4:</strong>
-                <input type="float" name="n4" class="form-control">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Ponderacion:</strong>
-                <input type="float" name="p5" class="form-control">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nota 5:</strong>
-                <input type="float" name="n5" class="form-control">
+          <div class="form-group">
+              <strong>Argumento:</strong>
+                <textarea type="msg" name="Argumento" class="form-control" placeholder="Escriba su argumento" ></textarea>
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

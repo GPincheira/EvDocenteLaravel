@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\academico;
 use App\departamento;
+use App\facultad;
 use App\secFacultad;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AcademicoController extends Controller
 {
@@ -17,15 +19,31 @@ class AcademicoController extends Controller
     public function index()
     {
       $academicos = Academico::latest()->paginate(10);
-      return view('academicos.index',compact('academicos'))
-        ->with('i',(request()->input('page',1)-1)*5);
+      if(@Auth::user()->hasRole('SecFacultad')){
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $departamentos = Facultad::find($CodigoFacultad)->departamentos;
+        return view('academicos.index',compact('academicos'),['departamentos' => $departamentos])
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+      else{
+        return view('academicos.index',compact('academicos'))
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
     }
 
     public function indexelim()
     {
       $academicos = Academico::onlyTrashed()->latest()->paginate(10);
-      return view('academicos.index',compact('academicos'))
-        ->with('i',(request()->input('page',1)-1)*5);
+      if(@Auth::user()->hasRole('SecFacultad')){
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $departamentos = Facultad::find($CodigoFacultad)->departamentos;
+        return view('academicos.index',compact('academicos'),['departamentos' => $departamentos])
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+      else{
+        return view('academicos.index',compact('academicos'))
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
     }
 
     /**

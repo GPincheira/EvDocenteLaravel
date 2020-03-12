@@ -15,8 +15,9 @@ class CreateEvaluacionesTable extends Migration
     {
         Schema::create('evaluaciones', function (Blueprint $table) {
           $table->increments('id');
-          $table->unsignedInteger('CodigoComision');
           $table->integer('RUTAcademico');
+          $table->unsignedInteger('CodigoComision');
+          $table->year('año');
           $table->string('Argumento',100)->nullable();
           $table->float('n1',2,1)->nullable();
           $table->float('n2',2,1)->nullable();
@@ -36,6 +37,7 @@ class CreateEvaluacionesTable extends Migration
                 ->references('id')
                 ->on('academicos')
                 ->onUpdate('cascade');
+          $table->softDeletes();
           $table->timestamps();
         });
     }

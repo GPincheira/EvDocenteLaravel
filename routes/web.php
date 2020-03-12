@@ -80,6 +80,8 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:evaluaciones.create');
     Route::get('evaluaciones', 'EvaluacionController@index')->name('evaluaciones.index')
                                                         ->middleware('permission:evaluaciones.index');
+    Route::get('evaluacioneselim', 'EvaluacionController@indexelim')->name('evaluaciones.indexelim')
+                                                        ->middleware('permission:evaluaciones.index');
     Route::get('evaluaciones/create', 'EvaluacionController@create')->name('evaluaciones.create')
                                                         ->middleware('permission:evaluaciones.create');
     Route::put('evaluaciones/{role}', 'EvaluacionController@update')->name('evaluaciones.update')
@@ -90,6 +92,8 @@ Route::middleware(['auth'])->group(function () {
                                                          ->middleware('permission:evaluaciones.destroy');
     Route::get('evaluaciones/{role}/edit', 'EvaluacionController@edit')->name('evaluaciones.edit')
                                                          ->middleware('permission:evaluaciones.edit');
+    Route::post('evaluaciones/{role}', 'EvaluacionController@reactivar')->name('evaluaciones.reactivar')
+                                                        ->middleware('permission:evaluaciones.reactivar');
 
     Route::post('facultades/store', 'FacultadController@store')->name('facultades.store')
                                                         ->middleware('permission:facultades.create');

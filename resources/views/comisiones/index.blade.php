@@ -10,7 +10,7 @@
               <div class="pull-right">
                   <a class="btn btn-success" href="{{ route('comisiones.create') }}"> Crear Nueva Comision</a>
               </div>
-            @endif  
+            @endif
         </div>
     </div>
 
@@ -42,14 +42,10 @@
               <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>
               <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
               <td>
-                  <form action="{{ route('comisiones.destroy',$comision->id) }}" method="POST">
+                  <form>
                       <a class="btn btn-info" href="{{ route('comisiones.show',$comision->id) }}">Ver</a>
-                      <a class="btn btn-primary" href="{{ route('comisiones.edit',$comision->id) }}">Editar</a>
 
                       @csrf
-                      @method('DELETE')
-
-                      <button type="submit" class="btn btn-danger">Eliminar</button>
                   </form>
               </td>
             </tr>
@@ -67,14 +63,9 @@
                 <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>
                 <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
                 <td>
-                    <form action="{{ route('comisiones.destroy',$comision->id) }}" method="POST">
+                    <form>
                         <a class="btn btn-info" href="{{ route('comisiones.show',$comision->id) }}">Ver</a>
-                        <a class="btn btn-primary" href="{{ route('comisiones.edit',$comision->id) }}">Editar</a>
-
                         @csrf
-                        @method('DELETE')
-
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>
               </tr>

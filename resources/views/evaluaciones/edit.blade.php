@@ -1,114 +1,113 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Editar Evaluacion</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('evaluaciones.index') }}"> Atras</a>
+
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Editar Evaluacion</h2>
+        </div>
+        <div class="pull-right">
+            <a class="btn btn-primary" href="{{ route('evaluaciones.index') }}"> Atras</a>
+        </div>
+    </div>
+</div>
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> Se ha detectado un problema.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<form action="{{ route('evaluaciones.update',$evaluacion->id) }}" method="POST">
+    @csrf
+    @method('PUT')
+  <div class="row">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Instrucciones</div>
+                    <div class="card-body">
+                        Los porcentajes deben sumar 100%, y las calificaciones van desde 1.0 hasta 5.0.
+                        <br>ESCALA: Excelente=4.5 a 5 --- Muy Bueno=4.0 a 4.4 --- Bueno=3.5 a 3.9 --- Regular=2.7 a 3.4 --- Deficiente=menos de 2.7
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+  <strong>Actividades realizadas:</strong>
+
+  <div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    1. Actividades de docencia
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p1" value="{{ $evaluacion->p1 }}" class="form-control" placeholder="tiempo asignado (%)">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n1" value="{{ $evaluacion->n1 }}" class="form-control" placeholder="Nota 1">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    2. Actividades de Investigacion
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p2" value="{{ $evaluacion->p2 }}" class="form-control" placeholder="tiempo asignado (%)">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n2" value="{{ $evaluacion->n2 }}" class="form-control" placeholder="Nota 2">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    3. Extension y Vinculacion
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p3" value="{{ $evaluacion->p3 }}" class="form-control" placeholder="tiempo asignado (%)">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n3" value="{{ $evaluacion->n3 }}" class="form-control" placeholder="Nota 3">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    4. Administracion Academica
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p4" value="{{ $evaluacion->p4 }}" class="form-control" placeholder="tiempo asignado (%)">
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n4" value="{{ $evaluacion->n4 }}" class="form-control" placeholder="Nota 4">
+    </div>
+
+    <div class="col-xs-6 col-sm-6 col-md-6">
+    5. Otras actividades realizadas
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="p5" value="{{ $evaluacion->p5 }}" class="form-control" placeholder="tiempo asignado (%)">
+      </div>
+    <div class="col-xs-2 col-sm-2 col-md-2">
+            <input type="float" name="n5" value="{{ $evaluacion->n5 }}" class="form-control" placeholder="Nota 5">
+      </div>
+  </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+              <strong>Argumento:</strong>
+                <textarea type="msg" name="Argumento" value="{{ $evaluacion->Argumento }}" class="form-control" placeholder="Escriba su argumento" ></textarea>
+          </div>
         </div>
-    @endif
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </div>
 
-    <form action="{{ route('evaluaciones.update',$evaluacion->id) }}" method="POST">
-        @csrf
-        @method('PUT')
-        <div class="row">
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Codigo de la Comision:</strong>
-                   <input type="integer" name="CodigoComision" value="{{ $evaluacion->CodigoComision }}" class="form-control" placeholder="Ingrese la comision evaluadora">
-               </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>RUT Academico:</strong>
-                   <input type="integer" name="RUTAcademico" value="{{ $evaluacion->RUTAcademico }}" class="form-control" placeholder="RUT academico a evaluar">
-               </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Argumento:</strong>
-                   <input type="text" name="Argumento" value="{{ $evaluacion->Argumento }}" class="form-control" placeholder="Escriba su argumento">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Ponderacion:</strong>
-                   <input type="integer" name="P1" value="{{ $evaluacion->P1 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Nota 1:</strong>
-                   <input type="decimal" name="N1" value="{{ $evaluacion->N1 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Ponderacion:</strong>
-                   <input type="integer" name="P2" value="{{ $evaluacion->P2 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Nota 2:</strong>
-                   <input type="decimal" name="N2" value="{{ $evaluacion->N2 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Ponderacion:</strong>
-                   <input type="integer" name="P3" value="{{ $evaluacion->P3 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Nota 3:</strong>
-                   <input type="decimal" name="N3" value="{{ $evaluacion->N3 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Ponderacion:</strong>
-                   <input type="integer" name="P4" value="{{ $evaluacion->P4 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Nota 4:</strong>
-                   <input type="decimal" name="N4" value="{{ $evaluacion->N4 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Ponderacion:</strong>
-                   <input type="integer" name="P5" value="{{ $evaluacion->P5 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Nota 5:</strong>
-                   <input type="decimal" name="N5" value="{{ $evaluacion->N5 }}" class="form-control">
-             </div>
-           </div>
-           <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                   <button type="submit" class="btn btn-primary">Guardar</button>
-           </div>
-       </div>
-
-    </form>
+</form>
 @endsection

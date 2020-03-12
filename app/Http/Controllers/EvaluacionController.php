@@ -19,8 +19,31 @@ class EvaluacionController extends Controller
     public function index()
     {
       $evaluaciones = Evaluacion::latest()->paginate(10);
-      return view('evaluaciones.index',compact('evaluaciones'))
-        ->with('i',(request()->input('page',1)-1)*5);
+      if(@Auth::user()->hasRole('SecFacultad')){
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $comisiones = Facultad::find($CodigoFacultad)->comisiones;
+        return view('evaluaciones.index',compact('evaluaciones'),['comisiones' => $comisiones])
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+      else{
+        return view('evaluaciones.index',compact('evaluaciones'))
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+    }
+
+    public function indexelim()
+    {
+      $evaluaciones = Evaluacion::onlyTrashed()->latest()->paginate(10);
+      if(@Auth::user()->hasRole('SecFacultad')){
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $comisiones = Facultad::find($CodigoFacultad)->comisiones;
+        return view('evaluaciones.index',compact('evaluaciones'),['comisiones' => $comisiones])
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+      else{
+        return view('evaluaciones.index',compact('evaluaciones'))
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
     }
 
     /**
@@ -60,6 +83,16 @@ class EvaluacionController extends Controller
         'p5' => ['integer','min:0','max:100'],
         'n5' => ['numeric','min:1','max:5'],
       ]);
+      $comisiones = Comision::all();
+      $comision = Comision::find($request['CodigoComision']);
+      $request['año']=$comision->Año;
+      $evaluaciones = Evaluacion::all();
+      foreach ($evaluaciones as $evaluacion){
+        if($evaluacion->año == $request['año'] && $evaluacion->RUTAcademico == $request['RUTAcademico']){
+          return redirect()->route('evaluaciones.index')
+            ->with('success','Ya existe.');
+          }
+      }
       if($request['p1']+$request['p2']+$request['p3']+$request['p4']+$request['p5'] == 100){
         $request['NotaFinal']=($request['n1']*$request['p1']+$request['n2']*$request['p2']+$request['n3']*$request['p3']+$request['n4']*$request['p4']+$request['n5']*$request['p5'])/100;
         Evaluacion::create($request->all());
@@ -71,25 +104,19 @@ class EvaluacionController extends Controller
         ->with('success','Los porcentajes deben sumar 100%.');
       }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\evaluacion  $evaluacion
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-      $evaluacion = evaluacion::find($id);
-      return view('evaluaciones.show',compact('evaluacion'));
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\evaluacion  $evaluacion
      * @return \Illuminate\Http\Response
      */
+
+     public function show($id)
+     {
+          $evaluacion = evaluacion::withTrashed()->find($id);
+          return view('evaluaciones.show',compact('evaluacion'));
+     }
+
     public function edit($id)
     {
       $evaluacion = evaluacion::find($id);
@@ -106,8 +133,6 @@ class EvaluacionController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'CodigoComision' => ['required','integer'],
-        'RUTAcademico' => ['required','integer','min:1000000','max:25000000','unique:users'],
         'Argumento' => ['required','max:100'],
         'p1' => ['integer','min:0','max:100'],
         'n1' => ['numeric','min:1','max:5'],
@@ -138,5 +163,13 @@ class EvaluacionController extends Controller
       $evaluacion->delete();
       return redirect()->route('evaluaciones.index')
         ->with('success','Evaluacion Eliminada Exitosamente');
+    }
+
+    public function reactivar($id)
+    {
+      $evaluacion = evaluacion::onlyTrashed()->find($id);
+      $evaluacion->restore();
+      return redirect()->route('evaluaciones.index')
+        ->with('success','Evaluacion Reactivada Exitosamente');
     }
 }

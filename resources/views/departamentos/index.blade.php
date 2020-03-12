@@ -52,8 +52,6 @@
                 </form>
               @else
                 <form action="{{ route('departamentos.reactivar',$departamento->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('departamentos.show',$departamento->id) }}">Mostrar</a>
-                    <a class="btn btn-primary" href="{{ route('departamentos.edit',$departamento->id) }}">Editar</a>
                     @csrf
                     <button type="submit" class="btn btn-danger">Reactivar</button>
                 </form>

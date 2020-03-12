@@ -41,6 +41,7 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'evaluaciones.show']);
       Permission::create(['name' => 'evaluaciones.create']);
       Permission::create(['name' => 'evaluaciones.destroy']);
+      Permission::create(['name' => 'evaluaciones.reactivar']);
 
       Permission::create(['name' => 'facultades.index']);
       Permission::create(['name' => 'facultades.edit']);
@@ -109,6 +110,7 @@ class PermissionsTableSeeder extends Seeder
           'evaluaciones.show',
           'evaluaciones.create',
           'evaluaciones.destroy',
+          'evaluaciones.reactivar',
       ]);
 
       $Secretario = Role::create(['name' => 'Secretario']);

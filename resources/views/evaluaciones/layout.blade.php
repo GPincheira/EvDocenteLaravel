@@ -6,10 +6,6 @@
 </head>
 
 <body>
-  <header>
-      <!-- Esta funcion include pertmite que se vea el contenido del archivo nav contenido en temples/partials, este se mostrara en foma de barra en la parte superior de las paginas  -->
-      @include('partials.nav')
-    </header>
 
 <div class="container">
     @yield('content')
