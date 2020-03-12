@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\evaluacion;
+use App\academico;
+use App\facultad;
+use App\comision;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluacionController extends Controller
 {
@@ -26,7 +30,11 @@ class EvaluacionController extends Controller
      */
     public function create()
     {
-        return view('evaluaciones.create');
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $academicos = Academico::all();
+        $comisiones = Comision::all();
+        $departamentos = Facultad::find($CodigoFacultad)->departamentos;
+        return view('evaluaciones.create',['academicos' => $academicos , 'departamentos' => $departamentos , 'comisiones' => $comisiones]);
     }
 
     /**

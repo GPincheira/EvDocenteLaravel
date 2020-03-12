@@ -22,6 +22,7 @@
 
     <table class="table table-bordered">
         <tr>
+          {{ @Auth::user()->secFacultad->CodigoFacultad }}
             <th>Id</th>
             <th>Codigo Comision</th>
             <th>RUT del Academico</th>

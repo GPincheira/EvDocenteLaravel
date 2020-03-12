@@ -27,31 +27,49 @@
 <form action="{{ route('evaluaciones.store') }}" method="POST">
     @csrf
 
-     <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Codigo de la Comision:</strong>
-                <input type="integer" name="CodigoComision" class="form-control" placeholder="Ingrese la comision evaluadora">
-            </div>
+  <div class="row">
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="form-group">
+        <strong>Profesor a evaluar:</strong>
+        <select name="RUTAcademico" class="form-control">
+        @foreach ($departamentos as $departamento)
+          @foreach($academicos as $academico)
+            @if($academico->CodigoDpto == $departamento->id)
+              <option value='{{$academico->id}}'>{{$academico->id}}-{{$academico->verificador}} {{$academico->Nombre}} {{$academico->ApellidoPaterno}} {{$academico->ApellidoMaterno}}</option>
+            @endif
+          @endforeach
+        @endforeach
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <strong>Comision Evaluadora:</strong>
+        @foreach ($comisiones as $comision)
+            @if(@Auth::user()->secFacultad->CodigoFacultad == $comision->CodigoFacultad)
+               <div class="checkbox">
+                 <label>
+                   <input name="CodigoComision" type='checkbox' value='{{$comision->id}}'>{{$comision->id}}>
+                 </label>
+              </div>
+            @endif
+        @endforeach
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+      <div class="form-group">
+          <strong>Argumento:</strong>
+            <input type="text" name="Argumento" class="form-control" placeholder="Escriba su argumento">
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Ponderacion:</strong>
+            <input type="float" name="p1" class="form-control">
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>RUT Academico:</strong>
-                <input type="integer" name="RUTAcademico" class="form-control" placeholder="RUT academico a evaluar">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Argumento:</strong>
-                <input type="text" name="Argumento" class="form-control" placeholder="Escriba su argumento">
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Ponderacion:</strong>
-                <input type="float" name="p1" class="form-control">
-          </div>
-        </div>
+      </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nota 1:</strong>

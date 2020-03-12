@@ -37,7 +37,8 @@ class facultad extends Model
 
   public function academicos()
   {
-    return $this->hasManyThrough('App\academico', 'App\departamento');
+    return $this->hasManyThrough('App\academico', 'App\departamento', 'CodigoFacultad',
+                                'CodigoDpto', 'id', 'id');
   }
 
 }
