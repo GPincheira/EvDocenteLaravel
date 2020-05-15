@@ -12,6 +12,8 @@ class SecFacultadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function index()
     {
       $secFacultades = SecFacultad::latest()->paginate(10);
@@ -35,6 +37,8 @@ class SecFacultadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+  //validacion de los datos para crear un nuevo sec de facultad
      public function store(Request $request)
      {
        $request->validate([

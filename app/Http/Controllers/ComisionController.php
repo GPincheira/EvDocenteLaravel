@@ -16,6 +16,7 @@ class ComisionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+//En index se obtiene el listado completo de comisiones y se paginan de 10. Se va hacia la vista de blade
     public function index()
     {
       $comisiones = Comision::latest()->paginate(10);
@@ -39,6 +40,8 @@ class ComisionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+  //funcion para validar los datos ingresados para la comision, y si esta todo en orden crea el registro
     public function store(Request $request)
     {
       $secFacultad = secFacultad::find(@Auth::user()->id);
@@ -53,11 +56,11 @@ class ComisionController extends Controller
         'APaterno2' => 'required',
         'AMaterno2' => 'required',
       ]);
-      $request['CodigoFacultad']=$facultad->id;
+      $request['CodigoFacultad']=$facultad->id; //se le asignan varios campos de la facultad a la comision que se crea
       $request['NombreDecano']= $facultad->DecanoNombre;
       $request['APaternoDecano']= $facultad->DecanoAPaterno;
       $request['AMaternoDecano']= $facultad->DecanoAMaterno;
-      $request['idSecFacultad']= @Auth::user()->id;
+      $request['idSecFacultad']= @Auth::user()->id;   //asi como tambien campos del secretario de facultad
       $request['NombreSecFac']= @Auth::user()->Nombre;
       $request['APaternoSecFac']= @Auth::user()->ApellidoPaterno;
       $request['AMaternoSecFac']= @Auth::user()->ApellidoMaterno;
@@ -97,6 +100,8 @@ class ComisionController extends Controller
      * @param  \App\comision  $comision
      * @return \Illuminate\Http\Response
      */
+
+  //funcion que valida los datos para editar, y si esta todo en orden, realiza los cambios
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -117,6 +122,8 @@ class ComisionController extends Controller
      * @param  \App\comision  $comision
      * @return \Illuminate\Http\Response
      */
+
+  //funcion que elimina un registro (soft)
     public function destroy($id)
     {
       $comision = comision::find($id);

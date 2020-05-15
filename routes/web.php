@@ -19,9 +19,9 @@ Route::resource('roles','RoleController');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/grafica', 'HomeController@grafico')->name('grafica');
+Route::get('/exportar', 'EvaluacionController@export')->name('exportar');;
 
-
+//rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {
     Route::post('academicos/store', 'AcademicoController@store')->name('academicos.store')
                                                         ->middleware('permission:academicos.create');
@@ -82,6 +82,8 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:evaluaciones.index');
     Route::get('evaluacioneselim', 'EvaluacionController@indexelim')->name('evaluaciones.indexelim')
                                                         ->middleware('permission:evaluaciones.index');
+    Route::get('evaluaciones2', 'EvaluacionController@index2')->name('evaluaciones.index2')
+                                                        ->middleware('permission:evaluaciones.index2');
     Route::get('evaluaciones/create', 'EvaluacionController@create')->name('evaluaciones.create')
                                                         ->middleware('permission:evaluaciones.create');
     Route::put('evaluaciones/{role}', 'EvaluacionController@update')->name('evaluaciones.update')
@@ -94,6 +96,8 @@ Route::middleware(['auth'])->group(function () {
                                                          ->middleware('permission:evaluaciones.edit');
     Route::post('evaluaciones/{role}', 'EvaluacionController@reactivar')->name('evaluaciones.reactivar')
                                                         ->middleware('permission:evaluaciones.reactivar');
+    Route::get('evaluaciones2/{role}', 'EvaluacionController@pdf')->name('evaluaciones.pdf')
+                                                        ->middleware('permission:evaluaciones.pdf');
 
     Route::post('facultades/store', 'FacultadController@store')->name('facultades.store')
                                                         ->middleware('permission:facultades.create');

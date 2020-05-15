@@ -6,6 +6,8 @@
             <div class="pull-left">
                 <h2>Comisiones UCM</h2>
             </div>
+
+  {{--Si el usuario es un secretario de facultad, se le muestra el boton para crear nueva comision --}}
             @if(@Auth::user()->hasRole('SecFacultad'))
               <div class="pull-right">
                   <a class="btn btn-success" href="{{ route('comisiones.create') }}"> Crear Nueva Comision</a>

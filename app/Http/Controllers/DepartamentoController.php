@@ -13,17 +13,21 @@ class DepartamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+//En index se obtiene el listado completo de departamentos y se paginan de 10. Se va hacia la vista de blade
     public function index()
     {
       $departamentos = Departamento::latest()->paginate(10);
-      return view('departamentos.index',compact('departamentos'))
+      $facultades = Facultad::all();
+      return view('departamentos.index',compact('departamentos'),['facultades' => $facultades])
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function indexelim()
     {
       $departamentos = Departamento::onlyTrashed()->latest()->paginate(10);
-      return view('departamentos.index',compact('departamentos'))
+      $facultades = Facultad::all();
+      return view('departamentos.index',compact('departamentos'),['facultades' => $facultades])
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
@@ -47,8 +51,8 @@ class DepartamentoController extends Controller
     public function store(Request $request)
     {
       $request->validate([
-        'id' => ['required','integer'],
-        'Nombre' => 'required',
+        'id' => ['required','integer','unique:departamentos'],
+        'Nombre' => ['required','unique:departamentos'],
         'CodigoFacultad' => ['required','integer'],
       ]);
       Departamento::create($request->all());
@@ -107,6 +111,8 @@ class DepartamentoController extends Controller
      * @param  \App\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
+
+//funcion para eliminar un registro conociendo su id
     public function destroy($id)
     {
       $departamento = departamento::find($id);
@@ -115,6 +121,7 @@ class DepartamentoController extends Controller
         ->with('success','Departamento Eliminado Exitosamente');
     }
 
+//funcion para reactivar un registro eliminado, utilizando restore()
     public function reactivar($id)
     {
       $departamento = departamento::onlyTrashed()->find($id);

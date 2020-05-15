@@ -23,13 +23,8 @@
                 {{ $evaluacion->RUTAcademico }}
             </div>
         </div>
-
-
-
-
-
+        
         <strong>Actividades realizadas:</strong>
-
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6">
           1. Actividades de docencia

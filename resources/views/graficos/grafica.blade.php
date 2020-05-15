@@ -1,39 +1,33 @@
-<!DOCTYPE html>
+
+<!-- Templates necesario para la visualizacion de los graficos -->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=0.5">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
-    </head>
-    <body>
-        <canvas id="myChart" width="200" height="200"></canvas>
-    </body>
-    <script>
-        var ctx= document.getElementById("myChart").getContext("2d");
-        var myChart= new Chart(ctx,{
-            type:"bar",
-            data:{
-                labels:['col1','col2','col3'],
-                datasets:[{
-                        label:'Num datos',
-                        data:[10,9,15],
-                        backgroundColor:[
-                            'rgb(66, 134, 244,0.5)',
-                            'rgb(74, 135, 72,0.5)',
-                            'rgb(229, 89, 50,0.5)'
-                        ]
-                }]
-            },
-            options:{
-                scales:{
-                    yAxes:[{
-                            ticks:{
-                                beginAtZero:true
-                            }
-                    }]
-                }
-            }
-        });
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Esta funcion tomara los datos proporcionados por el controlador ChartController y TestController y los aplicara a la grafica
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Evaluaciones','Evaluaciones'],
+          @foreach ($evaluacion as $evaluaciones)
+          ['{{ $evaluaciones->RUTAcademico}}', {{ $evaluaciones->NotaFinal}}]
+          @endforeach
+        ]);
+
+        var options = {
+          title: 'Cantidad de articulos vinculados a una categoria.'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
     </script>
+  </head>
+  <body>
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+  </body>
 </html>

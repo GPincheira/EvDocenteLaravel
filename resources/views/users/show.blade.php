@@ -47,7 +47,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Estado:</strong>
-                {{ $user->Estado }}
+                @if ($user->deleted_at == NULL) Activo @else Inactivo @endif
             </div>
         </div>
     </div>

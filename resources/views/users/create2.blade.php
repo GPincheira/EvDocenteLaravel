@@ -28,13 +28,13 @@
     @csrf
 
      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
                 <strong>RUT:</strong>
                 <input type="integer" name="id" class="form-control" placeholder="Ingrese el RUT">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-2 col-sm-2 col-md-2">
             <div class="form-group">
                 <strong>Verificador:</strong>
                 <input type="text" name="verificador" class="form-control" placeholder="Ingrese el verificador">
@@ -72,8 +72,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Facultad:</strong>
-                <input type="integer" name="CodigoFacultad" class="form-control" placeholder="Ingrese ">
+                <strong>Facultad a la que pertenece:</strong>
+                <select name="CodigoFacultad" class="form-control">
+                  @foreach($facultades as $facultad)
+                  <option value='{{$facultad->id}}'>{{$facultad->id}} - {{$facultad->Nombre}}</option>
+                  @endforeach
+                </select>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

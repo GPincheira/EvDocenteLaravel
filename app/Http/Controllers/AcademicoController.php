@@ -9,6 +9,7 @@ use App\secFacultad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+//Controlador para los academicos
 class AcademicoController extends Controller
 {
     /**
@@ -16,21 +17,23 @@ class AcademicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     //En index se obtiene el listado completo de academicos y se paginan de 10. Se va hacia la vista de blade, de manera diferente dependiendo del rol de usuario
     public function index()
     {
       $academicos = Academico::latest()->paginate(10);
-      if(@Auth::user()->hasRole('SecFacultad')){
+      if(@Auth::user()->hasRole('SecFacultad')){    //si es un secretario de Facultad, se pasan tambien los dptos que coinciden con la facultad del usuario actual
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
         $departamentos = Facultad::find($CodigoFacultad)->departamentos;
         return view('academicos.index',compact('academicos'),['departamentos' => $departamentos])
           ->with('i',(request()->input('page',1)-1)*5);
       }
-      else{
+      else{   //sino, no es necesario pasar mas parametros
         return view('academicos.index',compact('academicos'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
     }
 
+    //funcion indexelim que funciona igual que index, pero en este caso con onlyTrashed, para consultar solo academicos eliminados logicamente
     public function indexelim()
     {
       $academicos = Academico::onlyTrashed()->latest()->paginate(10);
@@ -51,6 +54,8 @@ class AcademicoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+  //funcion crear, que luego lleva a la vista para la creacion
     public function create()
     {
         $departamentos = Departamento::all();
@@ -64,6 +69,8 @@ class AcademicoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+  //funcion store, donde se validan los datos recibidos en el blade para crear, y si esta todo correcto se guarda el nuevo registro
     public function store(Request $request)
     {
       $request->validate([
@@ -90,6 +97,8 @@ class AcademicoController extends Controller
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
+
+     //funcion show, que muestra los datos de un registro en especifico
     public function show($id)
     {
       $academico = academico::find($id);
@@ -102,6 +111,8 @@ class AcademicoController extends Controller
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
+
+     //funcion editar, que luego lleva a la vista para recibir los datos
     public function edit($id)
     {
       $academico = academico::find($id);
@@ -117,6 +128,8 @@ class AcademicoController extends Controller
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
+
+  //los datos recibidos en academico.create son validados con la funcion store
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -132,7 +145,7 @@ class AcademicoController extends Controller
         'HorasContrato' => ['required','integer','min:0','max:44'],
         'TipoPlanta' => 'required',
       ]);
-      $academico = academico::find($id);
+      $academico = academico::find($id);    //si todo es valido, se busca el registro a actualizar y se hacen los cambios
       $academico->update($request->all());
       return redirect()->route('academicos.index')
         ->with('success','Academico Actualizado Exitosamente');
@@ -144,6 +157,8 @@ class AcademicoController extends Controller
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
+
+     //funcion para eliminar, realiza la busqueda y luego hace eliminado logico (soft)
     public function destroy($id)
     {
       $academico = academico::find($id);

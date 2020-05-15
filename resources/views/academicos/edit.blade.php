@@ -22,6 +22,7 @@
         </div>
     @endif
 
+{{--Funcionamiento similar al create, pero estos datos son pasados a update para validar --}}
     <form action="{{ route('academicos.update',$academico->id) }}" method="POST">
         @csrf
         @method('PUT')

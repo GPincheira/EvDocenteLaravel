@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+//modelo evaluacion, en el que se hace la declaracion para utilizar softDeletes
 class evaluacion extends Model
 {
   use SoftDeletes;
@@ -19,11 +20,13 @@ class evaluacion extends Model
 
   protected $primaryKey ="id";
 
+  //relaciones de la tabla, donde una comision puede realizar muchas evaluaciones
   public function comision()
   {
     return $this->belongsTo('App\comision','CodigoComision','id');
   }
 
+  //relaciones de la tabla, donde una academico puede tener muchas evaluaciones
   public function academico()
   {
     return $this->belongsTo('App\academico');

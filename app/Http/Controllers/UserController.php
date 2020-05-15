@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\secFacultad;
+use App\facultad;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
@@ -15,7 +16,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
+//En el controlador de usuario existen varios index, uno para cada tipo de usuario, y cada uno con un index para eliminados
     public function index()
     {
       $users = User::latest()->paginate(10);
@@ -73,7 +74,8 @@ class UserController extends Controller
     public function create2()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('users.create2',compact('roles'));
+        $facultades = Facultad::all();
+        return view('users.create2',compact('roles'),['facultades' => $facultades]);
     }
 
     public function create3()
@@ -181,7 +183,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'email' => ['required','unique:users','email'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
         'ApellidoMaterno' => 'required',
@@ -202,15 +203,13 @@ class UserController extends Controller
     {
       $user = user::find($id);
       $user->delete();
-      return redirect()->route('users.index')
-        ->with('success','Usuario Eliminado Exitosamente');
+      return Redirect()->back()->with('success','Usuario Eliminado Exitosamente');
     }
 
     public function reactivar($id)
     {
       $user = user::onlyTrashed()->find($id);
       $user->restore();
-      return redirect()->route('users.index')
-        ->with('success','Usuario Reactivado Exitosamente');
+      return Redirect()->back()->with('success','Usuario Reactivado Exitosamente');
     }
 }

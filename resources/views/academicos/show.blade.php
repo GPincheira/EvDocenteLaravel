@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+{{--Se muestran los datos de un usuario en academico --}}
   <h1>RUT del Academico: {{ $academico->id }} - {{ $academico->verificador }}</h1>
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -11,7 +13,6 @@
     </div>
 
     <div class="row">
-
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Nombre del Academico:</strong>
@@ -66,10 +67,12 @@
                 {{ $academico->TipoPlanta }}
             </div>
         </div>
+
+  {{--Si el deleted_at (que guarda fecha de eliminacion) es nulo, se muestra como activo --}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Estado:</strong>
-                {{ $academico->Estado }}
+                  @if ($academico->deleted_at == NULL) Activo @else Inactivo @endif
             </div>
         </div>
     </div>

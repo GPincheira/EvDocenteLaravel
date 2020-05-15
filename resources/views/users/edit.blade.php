@@ -53,12 +53,6 @@
                       <input type="text" name="ApellidoMaterno" value="{{ $user->ApellidoMaterno }}" class="form-control" placeholder="Ingrese Apellido Materno">
                   </div>
               </div>
-              <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="form-group">
-                      <strong>Email:</strong>
-                      <input type="email" name="email" value="{{ $user->email }}" class="form-control" placeholder="Ingrese el email">
-                  </div>
-              </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Guardar</button>
             </div>

@@ -39,25 +39,27 @@
                 <strong>Nombre:</strong>
                 <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre de la Facultad">
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
+      </div>
+
+        <div class="col-xs-4 col-sm-4 col-md-4">
+          <div class="form-group">
                 <strong>Nombre Decano:</strong>
                 <input type="text" name="DecanoNombre" class="form-control" placeholder="Ingrese el Nombre del Decano">
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
+          </div>
+      <div class="col-xs-4 col-sm-4 col-md-4">
+        <div class="form-group">
                 <strong>Apellido Paterno Decano:</strong>
                 <input type="text" name="DecanoAPaterno" class="form-control" placeholder="Ingrese Apellido Paterno del Decano">
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
+          </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+          <div class="form-group">
                 <strong>Apellido Materno Decano:</strong>
                 <input type="text" name="DecanoAMaterno" class="form-control" placeholder="Ingrese Apellido Materno del Decano">
             </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
         </div>

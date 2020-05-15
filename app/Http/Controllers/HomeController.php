@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\evaluacion;
 
+//Controlador Home, que incluye el index hacia la vista donde se ingresa una vez que se inicia la sesion
 class HomeController extends Controller
 {
     /**
@@ -24,10 +26,5 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
-    }
-
-    public function grafico()
-    {
-        return view('grafica');
     }
 }

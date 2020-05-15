@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+//modelo usuario, en el que se hace la declaracion para utilizar softDeletes, y en cascada
 class User extends Authenticatable
 {
     use Notifiable;
@@ -27,7 +28,7 @@ class User extends Authenticatable
     ];
 
     protected $dates = ['deleted_at'];
-
+//si se elimina el registro, tambien se hace con el asignado al secretario de facultad
     protected $softCascade = ['secFacultad'];
 
     /**
@@ -52,6 +53,7 @@ class User extends Authenticatable
     protected $primaryKey = 'id';
     public $incrementing = false;
 
+    //relacion de la tabla usuario, que puede tener solo un registro de secretario de facultad asignado
     public function secFacultad() {
       return $this->hasOne('App\secFacultad','id');
     }

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+//modelo academico, en el que se hace la declaracion para utilizar softDeletes
 class academico extends Model
 {
   use SoftDeletes;
@@ -15,15 +16,18 @@ class academico extends Model
       'GradoAcademico','CodigoDpto','Categoria','HorasContrato','TipoPlanta','Estado'
   ];
   protected $dates = ['deleted_at'];
+  //dato que se utiliza la el soft delete
 
 
   protected $primaryKey ="id";
 
+  //relaciones de la tabla, donde un dpto puede tener muchos usuarios
   public function departamento()
   {
     return $this->belongsTo('App\departamento','CodigoDpto','id');
   }
 
+  //relaciones de la tabla, donde el academico puede tener muchas evaluaciones
   public function evaluaciones()
   {
       return $this->hasMany('App\evaluacion','RUTAcademico');

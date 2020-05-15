@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -23,6 +22,7 @@
         </div>
     @endif
 
+{{--Funcionamiento similar al create, pero estos datos son pasados a update para validar --}}
     <form action="{{ route('comisiones.update',$comision->id) }}" method="POST">
         @csrf
         @method('PUT')

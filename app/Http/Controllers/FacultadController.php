@@ -13,6 +13,8 @@ class FacultadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+//En index se obtiene el listado completo de facultades y se paginan de 10.
     public function index()
     {
       $facultades = Facultad::latest()->paginate(10);
@@ -20,6 +22,7 @@ class FacultadController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+//Index para ver los eliminados, con onlyTrashed()
     public function indexelim()
     {
       $facultades = Facultad::onlyTrashed()->latest()->paginate(10);
@@ -44,11 +47,13 @@ class FacultadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+  //funcion para validar los datos que se ingresan en la blade de crear, se revisa que este todo en orden y se guarda el registro
     public function store(Request $request)
     {
       $request->validate([
-        'id' => ['required','integer'],
-        'Nombre' => 'required',
+        'id' => ['required','integer','unique:facultades'],
+        'Nombre' => ['required','unique:facultades'],
         'DecanoNombre' => 'required',
         'DecanoAPaterno' => 'required',
         'DecanoAMaterno' => 'required',
@@ -64,6 +69,8 @@ class FacultadController extends Controller
      * @param  \App\facultad  $facultad
      * @return \Illuminate\Http\Response
      */
+
+  //funcion para mostrar cada registro, este eliminado o no
     public function show($id)
     {
         $facultad = facultad::withTrashed()->find($id);
@@ -76,6 +83,8 @@ class FacultadController extends Controller
      * @param  \App\facultad  $facultad
      * @return \Illuminate\Http\Response
      */
+
+  //funcion para editar, que busca el $id que se quiere, y luego lleva a la vista donde se ingresan los datos
     public function edit($id)
     {
         $facultad = facultad::find($id);
@@ -89,6 +98,8 @@ class FacultadController extends Controller
      * @param  \App\facultad  $facultad
      * @return \Illuminate\Http\Response
      */
+
+  //se validan los datos de la edicion y se guarda si todo esta correcto
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -110,6 +121,8 @@ class FacultadController extends Controller
      * @param  \App\facultad  $facultad
      * @return \Illuminate\Http\Response
      */
+
+  //funcion para eliminar (soft)
     public function destroy($id)
     {
       $facultad = facultad::find($id);
@@ -118,6 +131,7 @@ class FacultadController extends Controller
         ->with('success','Facultad Eliminada Exitosamente');
     }
 
+//funcion para reactivar un registro eliminado, se busa su $id entre los elementos eliminados y se usa restore
     public function reactivar($id)
     {
       $facultad = facultad::onlyTrashed()->find($id);

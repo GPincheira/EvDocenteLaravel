@@ -53,7 +53,8 @@
                       <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
                           <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Mostrar</a>
                           <a class="btn btn-primary" href="{{ route('evaluaciones.edit',$evaluacion->id) }}">Editar</a>
-                          @csrf
+                          <a class="btn btn-primary" href="{{ route('evaluaciones.pdf',$evaluacion->id) }}">Generar PDF</a>
+                            @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger">Desactivar</button>
                       </form>
@@ -68,7 +69,7 @@
               @endif
             @endforeach
           @endforeach
-        @else
+        @elseif(@Auth::user()->hasRole('SecFacultad'))
             @foreach ($evaluaciones as $evaluacion)
             <tr>
               <td>{{ $evaluacion->id }}</td>
@@ -80,10 +81,31 @@
                 @if (Request::is('evaluaciones'))
                   <form>
                       <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Mostrar</a>
+                      <a class="btn btn-primary" href="{{ route('evaluaciones.pdf',$evaluacion->id) }}">Generar PDF</a>
                   </form>
                 @endif
               </td>
             </tr>
+            @endforeach
+          @else
+            @foreach ($evaluaciones as $evaluacion)
+              @if ($evaluacion->año == date("Y"))
+                <tr>
+                  <td>{{ $evaluacion->id }}</td>
+                  <td>{{ $evaluacion->CodigoComision }}</td>
+                  <td>{{ $evaluacion->RUTAcademico }}</td>
+                  <td>{{ $evaluacion->NotaFinal }}</td>
+                  <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
+                  <td>
+                    @if (Request::is('evaluaciones'))
+                      <form>
+                          <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Mostrar</a>
+                          <a class="btn btn-primary" href="{{ route('evaluaciones.pdf',$evaluacion->id) }}">Generar PDF</a>
+                      </form>
+                    @endif
+                  </td>
+                </tr>
+                @endif
             @endforeach
           @endif
     </table>

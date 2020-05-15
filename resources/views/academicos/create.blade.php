@@ -2,6 +2,7 @@
 
 @section('content')
 
+{{--Boton con enlace para volver atras (al index)--}}
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -13,6 +14,7 @@
     </div>
 </div>
 
+{{--Mensaje de error si fuese el caso --}}
 @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> Se ha detectado un problema.<br><br>
@@ -24,35 +26,35 @@
     </div>
 @endif
 
+{{--Formulario que luego de ser completado se envía a store de academicos para ser procesado--}}
 <form action="{{ route('academicos.store') }}" method="POST">
     @csrf
-
      <div class="row">
-       <div class="col-xs-12 col-sm-12 col-md-12">
+       <div class="col-xs-5 col-sm-5 col-md-5">
            <div class="form-group">
                <strong>RUT:</strong>
                <input type="integer" name="id" class="form-control" placeholder="Ingrese el RUT">
            </div>
        </div>
-       <div class="col-xs-12 col-sm-12 col-md-12">
+       <div class="col-xs-2 col-sm-2 col-md-2">
            <div class="form-group">
                <strong>verificador:</strong>
                <input type="text" name="verificador" class="form-control" placeholder="Ingrese el verificador">
            </div>
        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
                 <strong>Nombre:</strong>
                 <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre del Academico">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
                 <strong>Apellido Paterno:</strong>
                 <input type="text" name="ApellidoPaterno" class="form-control" placeholder="Ingrese el Apellido Paterno">
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
                 <strong>Apellido Materno:</strong>
                 <input type="text" name="ApellidoMaterno" class="form-control" placeholder="Ingrese Apellido Materno">
@@ -71,6 +73,8 @@
                 <input type="text" name="GradoAcademico" class="form-control" placeholder="Ingrese el Grado Academico">
             </div>
         </div>
+
+{{--Se recorren los dptos para enlistar solo los que pertenezcan a la misma facultad que el secretario de facultad que está trabajando--}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Departamento al que pertenece:</strong>
@@ -85,6 +89,7 @@
                 </select>
             </div>
         </div>
+  {{--Para eleccion de categoria se enlistan opciones estaticas--}}
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Categoria:</strong>
@@ -108,6 +113,8 @@
                 <input type="text" name="TipoPlanta" class="form-control" placeholder="Ingrese el tipo de Planta">
             </div>
         </div>
+
+      {{--Boton para terminar el proceso--}}
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
         </div>

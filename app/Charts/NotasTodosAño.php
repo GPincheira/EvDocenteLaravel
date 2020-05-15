@@ -4,6 +4,7 @@ namespace App\Charts;
 
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 
+//Clase utilizada para la generacion de graficos
 class NotasTodosAño extends Chart
 {
     /**

@@ -27,7 +27,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Estado:</strong>
-                {{ $facultad->Estado }}
+                  @if ($facultad->deleted_at == NULL) Activa @else Inactiva @endif
             </div>
         </div>
     </div>

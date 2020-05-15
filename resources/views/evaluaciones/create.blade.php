@@ -13,6 +13,10 @@
     </div>
 </div>
 
+@if (Session::has('message'))
+<div class="alert alert-danger">{{Session::get('message')}}</div>
+ @endif
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> Se ha detectado un problema.<br><br>
@@ -64,8 +68,8 @@
         <strong>Comision Evaluadora:</strong>
         <select name="CodigoComision" class="form-control">
         @foreach ($comisiones as $comision)
-            @if(@Auth::user()->secFacultad->CodigoFacultad == $comision->CodigoFacultad)
-                <option value='{{$comision->id}}'>{{$comision->id}} </option>
+            @if(@Auth::user()->secFacultad->CodigoFacultad == $comision->CodigoFacultad && $comision->Año == date("Y"))
+                <option value='{{$comision->id}}'>{{$comision->id}} ( {{$comision->NombreDecano}} {{$comision->APaternoDecano}} - {{$comision->NombreSecFac}} {{$comision->APaternoSecFac}} - {{$comision->Nombre1}} {{$comision->APaterno1}} - {{$comision->Nombre2}} {{$comision->APaterno2}} ) </option>
             @endif
         @endforeach
         </select>
@@ -92,7 +96,7 @@
             <input type="float" name="p2" class="form-control" placeholder="tiempo asignado (%)">
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
-            <input type="float" name="n12" class="form-control" placeholder="Nota 2">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 2">
     </div>
 
     <div class="col-xs-6 col-sm-6 col-md-6">
