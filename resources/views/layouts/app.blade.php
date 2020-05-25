@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ ('UCM') }}</title>
+    <title>{{ config('app.name', 'UCM') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,11 +25,13 @@
       @include('partials.header')
       @include('partials.nav')
   </header>
-
     <div id="app">
       <div class="container">
-          @yield('content')
+        <main class="mt-4">
+              @yield('content')
+          </main>
       </div>
+
     </div>
 </body>
 </html>
