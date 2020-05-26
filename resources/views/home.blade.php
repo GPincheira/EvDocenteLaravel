@@ -7,7 +7,6 @@
                 <div class="card">
 
                   {{--Mensaje de bienvenida para el usuario que inicio sesion --}}
-
                     <div class="card-header">Bienvenido!</div>
                     <div class="card-body">
                         @if (session('status'))

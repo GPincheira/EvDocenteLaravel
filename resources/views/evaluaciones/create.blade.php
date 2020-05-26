@@ -78,69 +78,139 @@
 
   <strong>Actividades realizadas:</strong>
 
+
+
   <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-6">
+    <div class="col-xs-3 col-sm-3 col-md-3">
     1. Actividades de docencia
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
             <input type="float" name="p1" class="form-control" placeholder="tiempo asignado (%)">
     </div>
-    <div class="col-xs-2 col-sm-2 col-md-2">
-            <input type="float" name="n1" class="form-control" placeholder="Nota 1">
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n1" class="form-control" placeholder="Nota 10">
     </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 11">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 12">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+    </div>
+  </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-6">
+  <div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3">
     2. Actividades de Investigacion
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
             <input type="float" name="p2" class="form-control" placeholder="tiempo asignado (%)">
     </div>
-    <div class="col-xs-2 col-sm-2 col-md-2">
-            <input type="float" name="n2" class="form-control" placeholder="Nota 2">
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n1" class="form-control" placeholder="Nota 10">
     </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 11">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 12">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+    </div>
+  </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-6">
+  <div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3">
     3. Extension y Vinculacion
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
             <input type="float" name="p3" class="form-control" placeholder="tiempo asignado (%)">
     </div>
-    <div class="col-xs-2 col-sm-2 col-md-2">
-            <input type="float" name="n3" class="form-control" placeholder="Nota 3">
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n1" class="form-control" placeholder="Nota 10">
     </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 11">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 12">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+    </div>
+  </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-6">
+  <div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3">
     4. Administracion Academica
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
             <input type="float" name="p4" class="form-control" placeholder="tiempo asignado (%)">
     </div>
-    <div class="col-xs-2 col-sm-2 col-md-2">
-            <input type="float" name="n4" class="form-control" placeholder="Nota 4">
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n1" class="form-control" placeholder="Nota 10">
     </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 11">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 12">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1">
+            <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+    </div>
+  </div>
 
-    <div class="col-xs-6 col-sm-6 col-md-6">
+  <div class="row">
+    <div class="col-xs-3 col-sm-3 col-md-3">
     5. Otras actividades realizadas
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2">
             <input type="float" name="p5" class="form-control" placeholder="tiempo asignado (%)">
       </div>
-    <div class="col-xs-2 col-sm-2 col-md-2">
-            <input type="float" name="n5" class="form-control" placeholder="Nota 5">
+      <div class="col-xs-1 col-sm-1 col-md-1">
+              <input type="float" name="n1" class="form-control" placeholder="Nota 10">
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1">
+              <input type="float" name="n2" class="form-control" placeholder="Nota 11">
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1">
+              <input type="float" name="n2" class="form-control" placeholder="Nota 12">
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1">
+              <input type="float" name="n2" class="form-control" placeholder="Nota 13">
+      </div>
+      <div class="col-xs-1 col-sm-1 col-md-1">
+              <input type="float" name="n2" class="form-control" placeholder="Nota 13">
       </div>
   </div>
 
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
-          <div class="form-group">
-              <strong>Argumento:</strong>
-                <textarea type="msg" name="Argumento" class="form-control" placeholder="Escriba su argumento" ></textarea>
-          </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Guardar</button>
-        </div>
+  <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="form-group">
+        <strong>Argumento:</strong>
+          <textarea type="msg" name="Argumento" class="form-control" placeholder="Escriba su argumento" ></textarea>
     </div>
+  </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</div>
 
 </form>
 @endsection
