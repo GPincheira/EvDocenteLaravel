@@ -23,12 +23,20 @@ class EvaluacionController extends Controller
 
 //En index se obtiene el listado completo de evaluaciones realizadas y se paginan de 10.
 // Se va hacia la vista de blade, de manera diferente dependiendo del rol de usuario
-public function index()
-{
-    $evaluacion = Evaluacion::all();
-    return $evaluacion;
-    //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
-}
+    public function index()
+    {
+      $evaluaciones = Evaluacion::latest()->paginate(10);
+      if(@Auth::user()->hasRole('SecFacultad')){
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $comisiones = Facultad::find($CodigoFacultad)->comisiones;
+        return view('evaluaciones.index',compact('evaluaciones'),['comisiones' => $comisiones])
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+      else{
+        return view('evaluaciones.index',compact('evaluaciones'))
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+    }
 
 //index para los elementos eliminados
     public function indexelim()
@@ -59,6 +67,16 @@ public function index()
      * @return \Illuminate\Http\Response
      */
 
+//funcion para crear, se lleva a la vista de creacion pasandole otros parametros como academicos o comisiones,
+//para asi poder contar con selecciones entre los registros de estas tablas
+    public function create()
+    {
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $academicos = Academico::all();
+        $comisiones = Comision::all();
+        $departamentos = Facultad::find($CodigoFacultad)->departamentos;
+        return view('evaluaciones.create',['academicos' => $academicos , 'departamentos' => $departamentos , 'comisiones' => $comisiones]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -68,29 +86,46 @@ public function index()
      */
 
   //funcion store, valida los datos que fueron ingresados en blade, y si esta todo en orden procede
+    public function store(Request $request)
+    {
+      $request->validate([
+        'CodigoComision' => ['required','integer'],
+        'RUTAcademico' => ['required','integer','min:1000000','max:25000000'],
+        'Argumento' => ['required','max:100'],
+        'p1' => ['integer','min:0','max:100'],
+        'n1' => ['numeric','min:0','max:5'],
+        'p2' => ['integer','min:0','max:100'],
+        'n2' => ['numeric','min:0','max:5'],
+        'p3' => ['integer','min:0','max:100'],
+        'n3' => ['numeric','min:0','max:5'],
+        'p4' => ['integer','min:0','max:100'],
+        'n4' => ['numeric','min:0','max:5'],
+        'p5' => ['integer','min:0','max:100'],
+        'n5' => ['numeric','min:0','max:5'],
+      ]);
+      $comisiones = Comision::all();
+      $comision = Comision::find($request['CodigoComision']);
+      $request['año']=$comision->Año;     //tambien se le pasan otros parametros correspondientes a la comision
+      $evaluaciones = Evaluacion::all();
 
-      public function store(Request $request)
-      {
-          $evaluacion = new Evaluacion();
-          $evaluacion->RUTAcademico = $request->RUTAcademico;
-          $evaluacion->CodigoComision = $request->CodigoComision;
-          $evaluacion->año = $request->año;
-          $evaluacion->p1 = $request->p1;
-          $evaluacion->n1 = $request->n1;
-          $evaluacion->p2 = $request->p2;
-          $evaluacion->n2 = $request->n2;
-          $evaluacion->p3 = $request->p3;
-          $evaluacion->n3 = $request->n3;
-          $evaluacion->p4 = $request->p4;
-          $evaluacion->n4 = $request->n4;
-          $evaluacion->p5 = $request->p5;
-          $evaluacion->n5 = $request->n5;
-          $evaluacion->Argumento = $request->Argumento;
-          $evaluacion->NotaFinal = $request->NotaFinal;
-          $evaluacion->save();
-          //Esta función guardará las tareas que enviaremos mediante vuejs
+      //se revisa que no exista ya una evaluacion para el academico elegido en el año en curso
+      foreach ($evaluaciones as $evaluacion){   //si ya existe, se vuelve atras y no se crea el registro
+        if($evaluacion->año == $request['año'] && $evaluacion->RUTAcademico == $request['RUTAcademico']){
+          return Redirect()->back()->with(['message' => 'Ya existe una evaluacion en este año para este academico']);
+          }
+
+      //luego se comprueba que las ponderaciones sumen 100%, si se cumple se guarda el registro
       }
-
+      if($request['p1']+$request['p2']+$request['p3']+$request['p4']+$request['p5'] == 100){
+        $request['NotaFinal']=($request['n1']*$request['p1']+$request['n2']*$request['p2']+$request['n3']*$request['p3']+$request['n4']*$request['p4']+$request['n5']*$request['p5'])/100;
+        Evaluacion::create($request->all());
+        return redirect()->route('evaluaciones.index')
+          ->with('success','Evaluacion creada exitosamente.');
+      }
+      else{   //si no se cumple, se vuelve atras entregando un mensaje, y no se guarda el registro
+      return Redirect()->back()->with(['message' => 'La suma de los porcentajes debe ser 100']);
+    }
+  }
     /**
      * Show the form for editing the specified resource.
      *

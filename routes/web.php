@@ -19,7 +19,10 @@ Route::resource('roles','RoleController');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/exportar', 'EvaluacionController@export')->name('exportar');;
+Route::get('/exportar', 'EvaluacionController@export')->name('exportar');
+
+Route::get('/tareas', 'EvaluacionController@index');
+Route::post('/tareas/guardar', 'EvaluacionController@store');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {

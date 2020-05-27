@@ -1899,6 +1899,167 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      RUTAcademico: "",
+      //Esta variable, mediante v-model esta relacionada con el input del formulario
+      CodigoComision: "",
+      //Esta variable, mediante v-model esta relacionada con el input del formulario
+      año: "",
+      p1: "",
+      //Esta variable, mediante v-model esta relacionada con el input del formulario
+      n1: "",
+      p2: "",
+      n2: "",
+      p3: "",
+      n3: "",
+      p4: "",
+      n4: "",
+      p5: "",
+      n5: "",
+      NotaFinal: "",
+      Argumento: "",
+      update: 0,
+      arrayEvaluacions: [] //Este array contendrá las tareas de nuestra bd
+
+    };
+  },
+  methods: {
+    getEvaluacions: function getEvaluacions() {
+      var me = this;
+      var url = '/tareas'; //Ruta que hemos creado para que nos devuelva todas las tareas
+
+      axios.get(url).then(function (response) {
+        //creamos un array y guardamos el contenido que nos devuelve el response
+        me.arrayEvaluacions = response.data;
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    saveEvaluacions: function saveEvaluacions() {
+      var me = this;
+      var url = '/tareas/guardar'; //Ruta que hemos creado para enviar una tarea y guardarla
+
+      axios.post(url, {
+        //estas variables son las que enviaremos para que crear la tarea
+        'RUTAcademico': this.RUTAcademico,
+        'CodigoComision': this.CodigoComision,
+        'año': this.año,
+        'p1': this.p1,
+        'n1': this.n1,
+        'p2': this.p2,
+        'n2': this.n2,
+        'p3': this.p3,
+        'n3': this.n3,
+        'p4': this.p4,
+        'n4': this.n4,
+        'p5': this.p5,
+        'n5': this.n5,
+        'NotaFinal': this.NotaFinal,
+        'Argumento': this.Argumento
+      }).then(function (response) {
+        me.getEvaluacions(); //llamamos al para que refresque nuestro array y muestro los nuevos datos
+
+        me.clearFields();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    clearFields: function clearFields() {
+      /*Limpia los campos e inicializa la variable update a 0*/
+    }
+  },
+  mounted: function mounted() {
+    this.getEvaluacions();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -37269,9 +37430,465 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("h2", [_vm._v("Lista de Evaluaciones")]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table text-center" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.arrayEvaluacions, function(evaluacion) {
+              return _c("tr", { key: evaluacion.id }, [
+                _c("td", {
+                  domProps: { textContent: _vm._s(evaluacion.RUTAcademico) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(evaluacion.CodigoComision) }
+                }),
+                _vm._v(" "),
+                _c("td", {
+                  domProps: { textContent: _vm._s(evaluacion.NotaFinal) }
+                })
+              ])
+            }),
+            0
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("RUTAcademico")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.RUTAcademico,
+                expression: "RUTAcademico"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.RUTAcademico },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.RUTAcademico = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("CodigoComision")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.CodigoComision,
+                expression: "CodigoComision"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.CodigoComision },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.CodigoComision = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("AÑo")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.año,
+                expression: "año"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.año },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.año = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("P1")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.p1,
+                expression: "p1"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.p1 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.p1 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("N1")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.n1,
+                expression: "n1"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "float" },
+            domProps: { value: _vm.n1 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.n1 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("P2")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.p2,
+                expression: "p2"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.p2 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.p2 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("N2")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.n2,
+                expression: "n2"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "float" },
+            domProps: { value: _vm.n2 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.n2 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("P3")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.p3,
+                expression: "p3"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.p3 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.p3 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("N3")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.n3,
+                expression: "n3"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "float" },
+            domProps: { value: _vm.n3 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.n3 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("P4")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.p4,
+                expression: "p4"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.p4 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.p4 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("N4")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.n4,
+                expression: "n4"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "float" },
+            domProps: { value: _vm.n4 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.n4 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("P5")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.p5,
+                expression: "p5"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.p5 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.p5 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("N5")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.n5,
+                expression: "n5"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "float" },
+            domProps: { value: _vm.n5 },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.n5 = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("NotaFinal")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.NotaFinal,
+                expression: "NotaFinal"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "float" },
+            domProps: { value: _vm.NotaFinal },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.NotaFinal = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("label", [_vm._v("Argumento")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.Argumento,
+                expression: "Argumento"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "string" },
+            domProps: { value: _vm.Argumento },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.Argumento = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "container-buttons" }, [
+          _vm.update == 0
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-success",
+                  on: {
+                    click: function($event) {
+                      return _vm.saveEvaluacions()
+                    }
+                  }
+                },
+                [_vm._v("Añadir")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.update != 0
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn btn-warning",
+                  on: {
+                    click: function($event) {
+                      return _vm.updateTasks()
+                    }
+                  }
+                },
+                [_vm._v("Actualizar")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.update != 0
+            ? _c(
+                "button",
+                {
+                  staticClass: "btn",
+                  on: {
+                    click: function($event) {
+                      return _vm.clearFields()
+                    }
+                  }
+                },
+                [_vm._v("Atrás")]
+              )
+            : _vm._e()
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("RUT")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Codigo Comision")]),
+        _vm._v(" "),
+        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nota Final")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -49529,15 +50146,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=template&id=299e239e& */ "./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExampleComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
-var script = {}
+
+
 
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"],
   _ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -49551,6 +50170,20 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 if (false) { var api; }
 component.options.__file = "resources/js/components/ExampleComponent.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

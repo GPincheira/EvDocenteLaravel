@@ -18,20 +18,20 @@ class AcademicoController extends Controller
      * @return \Illuminate\Http\Response
      */
      //En index se obtiene el listado completo de academicos y se paginan de 10. Se va hacia la vista de blade, de manera diferente dependiendo del rol de usuario
-    public function index()
-    {
-      $academicos = Academico::latest()->paginate(10);
-      if(@Auth::user()->hasRole('SecFacultad')){    //si es un secretario de Facultad, se pasan tambien los dptos que coinciden con la facultad del usuario actual
-        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $departamentos = Facultad::find($CodigoFacultad)->departamentos;
-        return view('academicos.index',compact('academicos'),['departamentos' => $departamentos])
-          ->with('i',(request()->input('page',1)-1)*5);
-      }
-      else{   //sino, no es necesario pasar mas parametros
-        return view('academicos.index',compact('academicos'))
-          ->with('i',(request()->input('page',1)-1)*5);
-      }
-    }
+     public function index()
+     {
+       $academicos = Academico::latest()->paginate(10);
+       if(@Auth::user()->hasRole('SecFacultad')){    //si es un secretario de Facultad, se pasan tambien los dptos que coinciden con la facultad del usuario actual
+         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+         $departamentos = Facultad::find($CodigoFacultad)->departamentos;
+         return view('academicos.index',compact('academicos'),['departamentos' => $departamentos])
+           ->with('i',(request()->input('page',1)-1)*5);
+       }
+       else{   //sino, no es necesario pasar mas parametros
+         return view('academicos.index',compact('academicos'))
+           ->with('i',(request()->input('page',1)-1)*5);
+       }
+     }
 
     //funcion indexelim que funciona igual que index, pero en este caso con onlyTrashed, para consultar solo academicos eliminados logicamente
     public function indexelim()

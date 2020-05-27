@@ -33,6 +33,8 @@
     </div>
 @endif
 
+
+
 {{--Cabecera de la tabla --}}
 <table class="table table-bordered">
     <tr>
