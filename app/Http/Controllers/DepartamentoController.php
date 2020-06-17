@@ -15,12 +15,11 @@ class DepartamentoController extends Controller
      */
 
 //En index se obtiene el listado completo de departamentos y se paginan de 10. Se va hacia la vista de blade
+
     public function index()
     {
-      $departamentos = Departamento::latest()->paginate(10);
-      $facultades = Facultad::all();
-      return view('departamentos.index',compact('departamentos'),['facultades' => $facultades])
-        ->with('i',(request()->input('page',1)-1)*5);
+
+        return Departamento::all();
     }
 
     public function indexelim()

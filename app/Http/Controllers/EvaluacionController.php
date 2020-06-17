@@ -25,8 +25,16 @@ class EvaluacionController extends Controller
 // Se va hacia la vista de blade, de manera diferente dependiendo del rol de usuario
 public function index()
 {
-    $evaluacion = Evaluacion::all();
-    return $evaluacion;
+
+      return Evaluacion::all();
+    
+
+
+
+/** Probar algo asi
+    return Modelo::select('id', 'name')
+                   ->orderBy('id', 'desc')
+                   ->get(); */
     //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
 }
 
@@ -98,11 +106,12 @@ public function index()
      * @return \Illuminate\Http\Response
      */
 
-     public function show($id)
-     {
-          $evaluacion = evaluacion::withTrashed()->find($id);
-          return view('evaluaciones.show',compact('evaluacion'));
-     }
+     public function show(Request $request)
+    {
+        $evaluacion = Evaluacion::findOrFail($request->id);
+        return $evaluacion;
+        //Esta función devolverá los datos de una tarea que hayamos seleccionado para cargar el formulario con sus datos
+    }
 
     public function edit($id)
     {
@@ -119,25 +128,24 @@ public function index()
      */
 
 //funcion update valida los datos ingresados, y realiza los cambios si todo esta en orden
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-      $request->validate([
-        'Argumento' => ['required','max:100'],
-        'p1' => ['integer','min:0','max:100'],
-        'n1' => ['numeric','min:1','max:5'],
-        'p2' => ['integer','min:0','max:100'],
-        'n2' => ['numeric','min:1','max:5'],
-        'p3' => ['integer','min:0','max:100'],
-        'n3' => ['numeric','min:1','max:5'],
-        'p4' => ['integer','min:0','max:100'],
-        'n4' => ['numeric','min:1','max:5'],
-        'p5' => ['integer','min:0','max:100'],
-        'n5' => ['numeric','min:1','max:5'],
-      ]);
-      $evaluacion = evaluacion::find($id);
-      $evaluacion->update($request->all());
-      return redirect()->route('evaluaciones.index')
-        ->with('success','Evaluacion Actualizada Exitosamente');
+      $evaluacion = Evaluacion::findOrFail($request->$id);
+      $evaluacion->p1 = $request->p1;
+      $evaluacion->n1 = $request->n1;
+      $evaluacion->p2 = $request->p2;
+      $evaluacion->n2 = $request->n2;
+      $evaluacion->p3 = $request->p3;
+      $evaluacion->n3 = $request->n3;
+      $evaluacion->p4 = $request->p4;
+      $evaluacion->n4 = $request->n4;
+      $evaluacion->p5 = $request->p5;
+      $evaluacion->n5 = $request->n5;
+      $evaluacion->Argumento = $request->Argumento;
+      $evaluacion->NotaFinal = $request->NotaFinal;
+
+      $evaluacion->save();
+      return $evaluacion;
     }
 
     /**
@@ -146,12 +154,10 @@ public function index()
      * @param  \App\evaluacion  $evaluacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-      $evaluacion = evaluacion::find($id);
-      $evaluacion->delete();
-      return redirect()->route('evaluaciones.index')
-        ->with('success','Evaluacion Eliminada Exitosamente');
+      $evaluacion = Evaluacion::destroy($request->id);
+      return $evaluacion;
     }
 
 //funcion para reactivar un elemento ya eliminado

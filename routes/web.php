@@ -22,7 +22,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/exportar', 'EvaluacionController@export')->name('exportar');
 
 Route::get('/tareas', 'EvaluacionController@index');
+Route::get('/dptos', 'DepartamentoController@index');
 Route::post('/tareas/guardar', 'EvaluacionController@store');
+Route::put('/tareas/actualizar', 'EvaluacionController@update');
+Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy');
+Route::get('/tareas/buscar', 'EvaluacionController@show');
+
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {
