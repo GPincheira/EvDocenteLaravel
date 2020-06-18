@@ -4,8 +4,8 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="#">Facultades</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('facultades.index') }}">Facultades</a></li>
     <li class="breadcrumb-item active" aria-current="page">Crear Facultad</li>
   </ol>
 </nav>

@@ -4,18 +4,18 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
       @if ($user->roles()->first()->name=='Administrador')
-        <li class="breadcrumb-item"><a href="#">Administradores</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Administrador {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Administradores</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Administrador: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
       @endif
       @if ($user->roles()->first()->name=='SecFacultad')
-        <li class="breadcrumb-item"><a href="#">Secretarios de Facultad</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Secretario de Facultad {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item"><a href="{{ route('users.index2') }}">Secretarios de Facultad</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Secretario de Facultad: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
       @endif
       @if ($user->roles()->first()->name=='Secretario')
-        <li class="breadcrumb-item"><a href="#">Secretarios</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Secretario {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item"><a href="{{ route('users.index3') }}">Secretarios</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Secretario: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
       @endif
   </ol>
 </nav>

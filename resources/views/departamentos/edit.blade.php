@@ -4,9 +4,9 @@
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-    <li class="breadcrumb-item"><a href="#">Departamentos</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Editar Departamento {{ $departamento->Nombre }}</li>
+    <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('departamentos.index') }}">Departamentos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar {{ $departamento->Nombre }}</li>
   </ol>
 </nav>
 
