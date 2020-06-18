@@ -2,6 +2,14 @@
 <title>Crear Academico UCM</title>
 @section('content')
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="#">Academicos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Crear Academico</li>
+  </ol>
+</nav>
+
 {{--Boton con enlace para volver atras (al index)--}}
 <div class="row">
     <div class="col-lg-12 margin-tb">

@@ -1,6 +1,15 @@
 @extends('layouts.app')
 <title>Facultades UCM</title>
 @section('content')
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="#">Facultades</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Facultad {{ $facultad->Nombre }}</li>
+  </ol>
+</nav>
+
   <h1>Codigo de Facultad: {{ $facultad->id }}</h1>
     <div class="row">
         <div class="col-lg-12 margin-tb">

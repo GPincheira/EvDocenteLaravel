@@ -2,6 +2,14 @@
 <title>Crear Comision UCM</title>
 @section('content')
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="#">Comisiones</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Crear Comision</li>
+  </ol>
+</nav>
+
 {{--Boton con enlace para volver atras (al index)--}}
 <div class="row">
     <div class="col-lg-12 margin-tb">

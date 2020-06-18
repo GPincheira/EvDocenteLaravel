@@ -1,6 +1,15 @@
 @extends('layouts.app')
 <title>Editar Comision UCM</title>
 @section('content')
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="#">Comisiones</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Editar Comision {{ $comision->id }}</li>
+  </ol>
+</nav>
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">

@@ -2,6 +2,14 @@
 <title>Academicos UCM</title>
 @section('content')
 
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="#">Academicos</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Academico {{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno[0] }}.</li>
+  </ol>
+</nav>
+
 {{--Se muestran los datos de un usuario en academico --}}
   <h1>RUT del Academico: {{ $academico->id }} - {{ $academico->verificador }}</h1>
     <div class="row">

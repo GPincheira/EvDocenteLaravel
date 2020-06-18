@@ -25,13 +25,15 @@
       @include('partials.header')
       @include('partials.nav')
   </header>
-    <div id="app">
-      <div class="container">
-        <main class="mt-4">
-              @yield('content')
-          </main>
-      </div>
-
+  <div id="app">
+    <div class="container">
+      <main class="mt-4">
+            @yield('content')
+        </main>
     </div>
+  </div>
+  <footer class="row">
+        @include('partials.footer')
+  </footer>
 </body>
 </html>

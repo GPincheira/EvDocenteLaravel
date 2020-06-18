@@ -1,6 +1,15 @@
 @extends('layouts.app')
 <title>Evaluaciones UCM</title>
 @section('content')
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item"><a href="#">Evaluaciones</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Evaluacion {{ $evaluacion->id }}</li>
+  </ol>
+</nav>
+
   <h1>ID de la Evaluacion: {{ $evaluacion->id }}</h1>
     <div class="row">
         <div class="col-lg-12 margin-tb">

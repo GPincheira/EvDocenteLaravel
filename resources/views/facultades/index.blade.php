@@ -1,6 +1,14 @@
 @extends('layouts.app')
 <title>Facultades UCM</title>
 @section('content')
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Facultades</li>
+  </ol>
+</nav>
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
