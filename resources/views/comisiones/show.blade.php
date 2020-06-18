@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Comisiones UCM</title>
 @section('content')
   <h1>Codigo de la Comision: {{ $comision->id }}</h1>
     <div class="row">

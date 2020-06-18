@@ -1,4 +1,5 @@
 @extends('layouts.app')
+<title>Editar Academico UCM</title>
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">

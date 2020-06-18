@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Crear Departamento UCM</title>
 @section('content')
 
 <div class="row">

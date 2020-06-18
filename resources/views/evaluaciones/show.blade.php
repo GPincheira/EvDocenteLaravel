@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Evaluaciones UCM</title>
 @section('content')
   <h1>ID de la Evaluacion: {{ $evaluacion->id }}</h1>
     <div class="row">
@@ -23,7 +23,7 @@
                 {{ $evaluacion->RUTAcademico }}
             </div>
         </div>
-        
+
         <strong>Actividades realizadas:</strong>
         <div class="row">
           <div class="col-xs-6 col-sm-6 col-md-6">

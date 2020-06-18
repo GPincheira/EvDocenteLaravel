@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Academicos UCM</title>
 @section('content')
 
 {{--Se muestran los datos de un usuario en academico --}}

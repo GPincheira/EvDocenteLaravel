@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Editar Evaluacion UCM</title>
 @section('content')
 
 <div class="row">

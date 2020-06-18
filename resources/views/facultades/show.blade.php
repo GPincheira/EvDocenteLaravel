@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Facultades UCM</title>
 @section('content')
   <h1>Codigo de Facultad: {{ $facultad->id }}</h1>
     <div class="row">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Crear Comision UCM</title>
 @section('content')
 
 {{--Boton con enlace para volver atras (al index)--}}
