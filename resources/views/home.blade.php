@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
 
-                  <example-component></example-component><!--Añadimos nuestro componente vuejs-->
+                  <evaluacion-component></evaluacion-component><!--Añadimos nuestro componente vuejs-->
 
                   {{--Mensaje de bienvenida para el usuario que inicio sesion --}}
                     <div class="card-header">Bienvenido!</div>

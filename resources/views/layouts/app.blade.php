@@ -18,6 +18,29 @@
     <!-- Styles -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        html {
+            min-height: 100%;
+            position: relative;
+        }
+        body {
+            background-color: #f6f9f9;
+            color: #636b6f;
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            margin-bottom: 100px;
+        }
+        footer {
+            background-color: rgb(0, 85, 169);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            color: white;
+        }
+    </style>
+
 </head>
 <body>
   <header>
@@ -32,8 +55,14 @@
         </main>
     </div>
   </div>
-  <footer class="row">
-        @include('partials.footer')
-  </footer>
+
+
 </body>
+<footer>
+  <div class="container bg-grey-lighter absolute pin-b pin-x p-8 pt-3 pb-3">
+    @include('partials.footer')
+  </div>
+</footer>
+
+
 </html>
