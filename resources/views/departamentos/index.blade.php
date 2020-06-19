@@ -51,7 +51,7 @@
             <th>Nombre</th>
             <th>Codigo Facultad</th>
             <th>Estado</th>
-            <th width="280px">Action</th>
+            <th width="280px"></th>
         </tr>
 
           @foreach ($departamentos as $departamento)

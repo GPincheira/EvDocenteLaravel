@@ -29,7 +29,7 @@
                   <a class="btn btn-success" href="{{ route('facultades.indexelim') }}"> Ver Inactivas</a>
               </div>
               <div class="pull-right">
-                  <a class="btn btn-success" href="{{ route('facultades.create') }}"> Crear Nueva Facultad</a>
+                  <a class="btn btn-success" href="{{ route('facultades.store') }}"> Crear Nueva Facultad</a>
               </div>
             @else
             <div class="pull-left">
@@ -48,9 +48,7 @@
         <tr>
             <th>Id</th>
             <th>Nombre</th>
-            <th>Decano Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
+            <th>Decano</th>
             <th>Estado</th>
             <th width="280px">Action</th>
         </tr>
@@ -58,9 +56,7 @@
         <tr>
             <td>{{ $facultad->id }}</td>
             <td>{{ $facultad->Nombre }}</td>
-            <td>{{ $facultad->DecanoNombre }}</td>
-            <td>{{ $facultad->DecanoAPaterno }}</td>
-            <td>{{ $facultad->DecanoAMaterno }}</td>
+            <td>{{ $facultad->DecanoNombre }} {{ $facultad->DecanoAPaterno }} {{ $facultad->DecanoAMaterno }}</td>
             <td>@if (Request::is('facultades'))Activo @else Inactivo @endif</td>
             <td>
               @if (Request::is('facultades'))

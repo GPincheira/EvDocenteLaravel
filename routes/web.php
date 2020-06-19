@@ -22,11 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
 Route::get('/exportar', 'EvaluacionController@export')->name('exportar');
 
-Route::get('/tareas', 'EvaluacionController@index');
-Route::get('/dptos', 'DepartamentoController@index');
-Route::post('/tareas/guardar', 'EvaluacionController@store');
-Route::put('/tareas/actualizar', 'EvaluacionController@update');
-Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy');
+Route::get('/tareas', 'EvaluacionController@json');
+Route::get('/dptos', 'DepartamentoController@json');
+Route::post('/tareas/guardar', 'EvaluacionController@store2');
+Route::put('/tareas/actualizar', 'EvaluacionController@update2');
+Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy2');
 Route::get('/tareas/buscar', 'EvaluacionController@show');
 
 

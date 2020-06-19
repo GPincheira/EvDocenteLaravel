@@ -76,13 +76,13 @@
       <div id="carouselExampleControls" class="carousel slide full-height" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{{ asset('/images/foto1.jpg') }}" class="d-block w-100" alt="4">
-          </div>
-          <div class="carousel-item">
             <img src="{{ asset('/images/foto2.jpg') }}" class="d-block w-100" alt="4">
           </div>
           <div class="carousel-item">
             <img src="{{ asset('/images/foto3.jpg') }}" class="d-block w-100" alt="4">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ asset('/images/foto1.jpg') }}" class="d-block w-100" alt="4">
           </div>
         </div>
       </div>

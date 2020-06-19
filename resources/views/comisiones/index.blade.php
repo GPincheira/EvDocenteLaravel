@@ -45,7 +45,7 @@
             <th>Secretario de Facultad:</th>
             <th>Integrante 3:</th>
             <th>Integrante 4:</th>
-            <th width="280px">Action</th>
+            <th width="280px"></th>
         </tr>
         @if(@Auth::user()->hasRole('Administrador'))
           @foreach ($comisiones as $comision)

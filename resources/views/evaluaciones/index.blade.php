@@ -50,7 +50,7 @@
             <th>RUT del Academico</th>
             <th>Nota Final</th>
             <th>Estado</th>
-            <th width="280px">Action</th>
+            <th width="280px"></th>
         </tr>
         @if(@Auth::user()->hasRole('SecFacultad'))
           @foreach ($evaluaciones as $evaluacion)

@@ -56,7 +56,7 @@
 {{--Cabecera de la tabla --}}
 <table class="table table-bordered">
     <tr>
-        <th>RUT</th>
+        <th width="120px">RUT</th>
         <th>Nombre Completo</th>
         <th>Titulo Profesional</th>
         <th>Grado Academico</th>

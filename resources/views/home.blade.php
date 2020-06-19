@@ -5,9 +5,6 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-
-                  <evaluacion-component></evaluacion-component><!--Añadimos nuestro componente vuejs-->
-
                   {{--Mensaje de bienvenida para el usuario que inicio sesion --}}
                     <div class="card-header">Bienvenido!</div>
                     <div class="card-body">

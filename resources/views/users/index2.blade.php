@@ -45,14 +45,13 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>RUT</th>
+            <th width="120px">RUT</th>
             <th>Nombre</th>
-            <th>ApellidoPaterno</th>
-            <th>ApellidoMaterno</th>
-            <th>email</th>
-            <th>Rol</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>E-mail</th>
             <th>Estado</th>
-            <th width="280px">Action</th>
+            <th width="280px"></th>
         </tr>
         @foreach ($users as $user)
           @if ($user->roles()->first()->name=='SecFacultad')
@@ -62,7 +61,6 @@
               <td>{{ $user->ApellidoPaterno }}</td>
               <td>{{ $user->ApellidoMaterno }}</td>
               <td>{{ $user->email }}</td>
-              <td>{{ $user->roles()->first()->name}}</td>
               <td>@if (Request::is('users2'))Activo @else Inactivo @endif</td>
               <td>
                 @if (Request::is('users2'))

@@ -23,12 +23,26 @@ class EvaluacionController extends Controller
 
 //En index se obtiene el listado completo de evaluaciones realizadas y se paginan de 10.
 // Se va hacia la vista de blade, de manera diferente dependiendo del rol de usuario
-public function index()
-{
+    public function json()
+    {
+        return Evaluacion::all();
+        //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
+    }
 
-      return Evaluacion::all();
-    //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
-}
+    public function index()
+    {
+      $evaluaciones = Evaluacion::latest()->paginate(10);
+      if(@Auth::user()->hasRole('SecFacultad')){
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $comisiones = Facultad::find($CodigoFacultad)->comisiones;
+        return view('evaluaciones.index',compact('evaluaciones'),['comisiones' => $comisiones])
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+      else{
+        return view('evaluaciones.index',compact('evaluaciones'))
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+    }
 
 //index para los elementos eliminados
     public function indexelim()
@@ -69,7 +83,134 @@ public function index()
 
   //funcion store, valida los datos que fueron ingresados en blade, y si esta todo en orden procede
 
-      public function store(Request $request)
+  public function create()
+  {
+      $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+      $academicos = Academico::all();
+      $comisiones = Comision::all();
+      $departamentos = Facultad::find($CodigoFacultad)->departamentos;
+      return view('evaluaciones.create',['academicos' => $academicos , 'departamentos' => $departamentos , 'comisiones' => $comisiones]);
+  }
+
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+
+//funcion store, valida los datos que fueron ingresados en blade, y si esta todo en orden procede
+  public function store(Request $request)
+  {
+    $request->validate([
+      'CodigoComision' => ['required','integer'],
+      'RUTAcademico' => ['required','integer','min:1000000','max:25000000'],
+      'Argumento' => ['required','max:100'],
+      'p1' => ['integer','min:0','max:100'],
+      'n1' => ['numeric','min:0','max:5'],
+      'p2' => ['integer','min:0','max:100'],
+      'n2' => ['numeric','min:0','max:5'],
+      'p3' => ['integer','min:0','max:100'],
+      'n3' => ['numeric','min:0','max:5'],
+      'p4' => ['integer','min:0','max:100'],
+      'n4' => ['numeric','min:0','max:5'],
+      'p5' => ['integer','min:0','max:100'],
+      'n5' => ['numeric','min:0','max:5'],
+    ]);
+    $comisiones = Comision::all();
+    $comision = Comision::find($request['CodigoComision']);
+    $request['año']=$comision->Año;     //tambien se le pasan otros parametros correspondientes a la comision
+    $evaluaciones = Evaluacion::all();
+
+    //se revisa que no exista ya una evaluacion para el academico elegido en el año en curso
+    foreach ($evaluaciones as $evaluacion){   //si ya existe, se vuelve atras y no se crea el registro
+      if($evaluacion->año == $request['año'] && $evaluacion->RUTAcademico == $request['RUTAcademico']){
+        return Redirect()->back()->with(['message' => 'Ya existe una evaluacion en este año para este academico']);
+        }
+
+    //luego se comprueba que las ponderaciones sumen 100%, si se cumple se guarda el registro
+    }
+    if($request['p1']+$request['p2']+$request['p3']+$request['p4']+$request['p5'] == 100){
+      $request['NotaFinal']=($request['n1']*$request['p1']+$request['n2']*$request['p2']+$request['n3']*$request['p3']+$request['n4']*$request['p4']+$request['n5']*$request['p5'])/100;
+      Evaluacion::create($request->all());
+      return redirect()->route('evaluaciones.index')
+        ->with('success','Evaluacion creada exitosamente.');
+    }
+    else{   //si no se cumple, se vuelve atras entregando un mensaje, y no se guarda el registro
+    return Redirect()->back()->with(['message' => 'La suma de los porcentajes debe ser 100']);
+  }
+}
+
+public function edit($id)
+{
+  $evaluacion = evaluacion::find($id);
+  return view('evaluaciones.edit',compact('evaluacion'));
+}
+
+/**
+ * Update the specified resource in storage.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  \App\evaluacion  $evaluacion
+ * @return \Illuminate\Http\Response
+ */
+
+//funcion update valida los datos ingresados, y realiza los cambios si todo esta en orden
+public function update(Request $request, $id)
+{
+  $request->validate([
+    'Argumento' => ['required','max:100'],
+    'p1' => ['integer','min:0','max:100'],
+    'n1' => ['numeric','min:1','max:5'],
+    'p2' => ['integer','min:0','max:100'],
+    'n2' => ['numeric','min:1','max:5'],
+    'p3' => ['integer','min:0','max:100'],
+    'n3' => ['numeric','min:1','max:5'],
+    'p4' => ['integer','min:0','max:100'],
+    'n4' => ['numeric','min:1','max:5'],
+    'p5' => ['integer','min:0','max:100'],
+    'n5' => ['numeric','min:1','max:5'],
+  ]);
+  $evaluacion = evaluacion::find($id);
+  $evaluacion->update($request->all());
+  return redirect()->route('evaluaciones.index')
+    ->with('success','Evaluacion Actualizada Exitosamente');
+}
+
+/**
+ * Remove the specified resource from storage.
+ *
+ * @param  \App\evaluacion  $evaluacion
+ * @return \Illuminate\Http\Response
+ */
+public function destroy($id)
+{
+  $evaluacion = evaluacion::find($id);
+  $evaluacion->delete();
+  return redirect()->route('evaluaciones.index')
+    ->with('success','Evaluacion Eliminada Exitosamente');
+}
+
+//funcion para reactivar un elemento ya eliminado
+public function reactivar($id)
+{
+  $evaluacion = evaluacion::onlyTrashed()->find($id);
+  $evaluacion->restore();
+  return redirect()->route('evaluaciones.index')
+    ->with('success','Evaluacion Reactivada Exitosamente');
+}
+
+
+
+
+
+
+
+
+
+
+
+      public function store2(Request $request)
       {
           $evaluacion = new Evaluacion();
           $evaluacion->RUTAcademico = $request->RUTAcademico;
@@ -105,7 +246,7 @@ public function index()
         //Esta función devolverá los datos de una tarea que hayamos seleccionado para cargar el formulario con sus datos
     }
 
-    public function edit($id)
+    public function edit2($id)
     {
       $evaluacion = evaluacion::find($id);
       return view('evaluaciones.edit',compact('evaluacion'));
@@ -120,7 +261,7 @@ public function index()
      */
 
 //funcion update valida los datos ingresados, y realiza los cambios si todo esta en orden
-    public function update(Request $request)
+    public function update2(Request $request)
     {
       $evaluacion = Evaluacion::findOrFail($request->$id);
       $evaluacion->p1 = $request->p1;
@@ -146,19 +287,10 @@ public function index()
      * @param  \App\evaluacion  $evaluacion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy2(Request $request)
     {
       $evaluacion = Evaluacion::destroy($request->id);
       return $evaluacion;
-    }
-
-//funcion para reactivar un elemento ya eliminado
-    public function reactivar($id)
-    {
-      $evaluacion = evaluacion::onlyTrashed()->find($id);
-      $evaluacion->restore();
-      return redirect()->route('evaluaciones.index')
-        ->with('success','Evaluacion Reactivada Exitosamente');
     }
 
 //funcion para generar un archivo excel, llamado "evaluacion"
