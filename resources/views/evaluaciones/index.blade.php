@@ -1,5 +1,11 @@
 @extends('layouts.app')
-<title>Evaluaciones UCM</title>
+
+@if (Request::is('evaluaciones'))
+  <title>Evaluaciones UCM</title>
+@else
+  <title>Evaluaciones Eliminadas UCM</title>
+@endif
+
 @section('content')
 
 <nav aria-label="breadcrumb">
@@ -77,7 +83,7 @@
               @endif
             @endforeach
           @endforeach
-        @elseif(@Auth::user()->hasRole('SecFacultad'))
+        @elseif(@Auth::user()->hasRole('Administrador'))
             @foreach ($evaluaciones as $evaluacion)
             <tr>
               <td>{{ $evaluacion->id }}</td>

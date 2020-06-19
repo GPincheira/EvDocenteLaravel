@@ -27,14 +27,6 @@ public function index()
 {
 
       return Evaluacion::all();
-    
-
-
-
-/** Probar algo asi
-    return Modelo::select('id', 'name')
-                   ->orderBy('id', 'desc')
-                   ->get(); */
     //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
 }
 

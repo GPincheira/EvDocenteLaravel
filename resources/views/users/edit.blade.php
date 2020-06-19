@@ -1,5 +1,15 @@
 @extends('layouts.app')
 
+@if ($user->roles()->first()->name=='Administrador')
+  <title>Editar Administrador {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+@endif
+@if ($user->roles()->first()->name=='SecFacultad')
+  <title>Editar Sec Facultad {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+@endif
+@if ($user->roles()->first()->name=='Secretario')
+  <title>Editar Secretario {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+@endif
+
 @section('content')
 
 <nav aria-label="breadcrumb">

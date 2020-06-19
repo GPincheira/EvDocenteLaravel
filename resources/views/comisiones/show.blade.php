@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Comisiones UCM</title>
+<title>Comision {{ $comision->id }}</title>
 @section('content')
 
 <nav aria-label="breadcrumb">

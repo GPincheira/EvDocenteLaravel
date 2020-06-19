@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Editar Facultad UCM</title>
+<title>Editar {{ $facultad->Nombre }}</title>
 @section('content')
 
 <nav aria-label="breadcrumb">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Crear Secretario UCM</title>
 @section('content')
 
 <nav aria-label="breadcrumb">

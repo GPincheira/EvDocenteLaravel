@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<title>Crear Sec de Facultad UCM</title>
 @section('content')
 
 <nav aria-label="breadcrumb">

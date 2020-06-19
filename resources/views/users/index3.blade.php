@@ -1,11 +1,19 @@
 @extends('layouts.app')
-
+@if (Request::is('users3'))
+  <title>Secretarios UCM</title>
+@else
+  <title>Secretarios Eliminados UCM</title>
+@endif
 @section('content')
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Secretarios</li>
+    @if (Request::is('users3'))
+      <li class="breadcrumb-item active" aria-current="page">Secretarios</li>
+    @else
+      <li class="breadcrumb-item active" aria-current="page">Secretarios Eliminados</li>
+    @endif
   </ol>
 </nav>
 

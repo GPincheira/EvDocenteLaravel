@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Evaluaciones UCM</title>
+<title>Evaluaciones Excelencia UCM</title>
 @section('content')
 
 <nav aria-label="breadcrumb">

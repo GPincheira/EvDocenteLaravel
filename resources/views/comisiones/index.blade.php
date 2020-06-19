@@ -1,5 +1,11 @@
 @extends('layouts.app')
-<title>Comisiones UCM</title>
+
+@if (Request::is('comisiones'))
+  <title>Comisiones UCM</title>
+@else
+  <title>Comisiones Eliminadas UCM</title>
+@endif
+
 @section('content')
 
 <nav aria-label="breadcrumb">

@@ -1,11 +1,21 @@
 @extends('layouts.app')
-<title>Academicos UCM</title>
+
+@if (Request::is('academicos'))
+  <title>Academicos UCM</title>
+@else
+  <title>Academicos Eliminados UCM</title>
+@endif
+
 @section('content')
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Academicos</li>
+    @if (Request::is('academicos'))
+      <li class="breadcrumb-item active" aria-current="page">Academicos</li>
+    @else
+      <li class="breadcrumb-item active" aria-current="page">Academicos Eliminados</li>
+    @endif
   </ol>
 </nav>
 
