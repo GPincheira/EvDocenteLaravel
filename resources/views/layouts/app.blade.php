@@ -29,14 +29,14 @@
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             margin: 0;
-            margin-bottom: 100px;
+            margin-bottom: 170px;
         }
         footer {
             background-color: rgb(0, 85, 169);
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 100px;
+            height: 170px;
             color: white;
         }
     </style>
