@@ -19,6 +19,7 @@ Route::resource('roles','RoleController');
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/mapa', 'HomeController@mapa')->name('mapa');
 Route::get('/exportar', 'EvaluacionController@export')->name('exportar');
 
 Route::get('/tareas', 'EvaluacionController@index');
