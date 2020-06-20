@@ -16,11 +16,11 @@
             </div>
             @if (Request::is('evaluaciones'))
               <div class="pull-left">
-                  <a class="btn btn-success" href="{{ route('evaluaciones.indexelim') }}"> Ver Inactivas</a>
+                  <a class="btn btn-secondary" href="{{ route('evaluaciones.indexelim') }}"> Ver Inactivas</a>
               </div>
             @else
             <div class="pull-left">
-                <a class="btn btn-success" href="{{ route('evaluaciones.index') }}"> Ver Activas</a>
+                <a class="btn btn-info" href="{{ route('evaluaciones.index') }}"> Ver Activas</a>
             </div>
             @endif
         </div>

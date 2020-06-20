@@ -18,6 +18,7 @@
     <!-- Styles -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <style>
         html {
@@ -39,6 +40,24 @@
             height: 170px;
             color: white;
         }
+        .material-icons {
+            color: #f7f7f7;
+        }
+        .btn{
+            margin: 1px;
+        }
+        .btn-warning{
+            background-color: #d4b153;
+        }
+        .btn-info{
+            color: #f7f7f7;
+        }
+        .btn:hover{
+            opacity: 0.5;
+            -moz-opacity: 0.5;
+            filter:alpha (opacity=0.5);
+        }
+
     </style>
 
 </head>

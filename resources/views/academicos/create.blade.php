@@ -17,7 +17,7 @@
             <h2>Agregar nuevo Academico</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('academicos.index') }}"> Atras</a>
+            <a href="{{ route('academicos.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
         </div>
     </div>
 </div>

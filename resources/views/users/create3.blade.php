@@ -16,7 +16,7 @@
             <h2>Agregar nuevo Secretario</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index3') }}"> Atras</a>
+            <a href="{{ route('users.index3') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
         </div>
     </div>
 </div>

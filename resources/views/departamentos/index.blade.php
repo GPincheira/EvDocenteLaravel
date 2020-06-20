@@ -26,14 +26,14 @@
             </div>
             @if (Request::is('departamentos'))
               <div class="pull-left">
-                  <a class="btn btn-success" href="{{ route('departamentos.indexelim') }}"> Ver Inactivos</a>
+                  <a class="btn btn-secondary" href="{{ route('departamentos.indexelim') }}"> Ver Inactivos</a>
               </div>
               <div class="pull-right">
-                  <a class="btn btn-success" href="{{ route('departamentos.create') }}"> Crear Nuevo Departamento</a>
+                  <a class="btn btn-success" href="{{ route('departamentos.create') }}"> Añadir Departamento</a>
               </div>
             @else
             <div class="pull-left">
-                <a class="btn btn-success" href="{{ route('departamentos.index') }}"> Ver Activos</a>
+                <a class="btn btn-info" href="{{ route('departamentos.index') }}"> Ver Activos</a>
             </div>
             @endif
         </div>
@@ -64,18 +64,18 @@
                 <td>
                   @if (Request::is('departamentos'))
                     <form action="{{ route('departamentos.destroy',$departamento->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('departamentos.show',$departamento->id) }}">Mostrar</a>
-                        <a class="btn btn-primary" href="{{ route('departamentos.edit',$departamento->id) }}">Editar</a>
+                        <a href="{{ route('departamentos.show',$departamento->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                        <a href="{{ route('departamentos.edit',$departamento->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Desactivar</button>
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
                     </form>
                   @else
                     @foreach ($facultades as $facultad)
                     @if ($departamento->CodigoFacultad == $facultad->id && $facultad->deleted_at==NULL)
                     <form action="{{ route('departamentos.reactivar',$departamento->id) }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-danger">Reactivar</button>
+                        <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
                     </form>
                     @endif
                     @endforeach

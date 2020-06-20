@@ -26,14 +26,14 @@
             </div>
             @if (Request::is('facultades'))
               <div class="pull-left">
-                  <a class="btn btn-success" href="{{ route('facultades.indexelim') }}"> Ver Inactivas</a>
+                  <a class="btn btn-secondary" href="{{ route('facultades.indexelim') }}"> Ver Inactivas</a>
               </div>
               <div class="pull-right">
-                  <a class="btn btn-success" href="{{ route('facultades.store') }}"> Crear Nueva Facultad</a>
+                  <a href="{{ route('facultades.create') }}" class="btn btn-success">Añadir Facultad</a>
               </div>
             @else
             <div class="pull-left">
-                <a class="btn btn-success" href="{{ route('facultades.index') }}"> Ver Activas</a>
+                <a class="btn btn-info" href="{{ route('facultades.index') }}"> Ver Activas</a>
             </div>
             @endif
         </div>
@@ -61,16 +61,16 @@
             <td>
               @if (Request::is('facultades'))
                 <form action="{{ route('facultades.destroy',$facultad->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('facultades.show',$facultad->id) }}">Mostrar</a>
-                    <a class="btn btn-primary" href="{{ route('facultades.edit',$facultad->id) }}">Editar</a>
+                    <a href="{{ route('facultades.show',$facultad->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                    <a href="{{ route('facultades.edit',$facultad->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Desactivar</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
                 </form>
               @else
                 <form action="{{ route('facultades.reactivar',$facultad->id) }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Reactivar</button>
+                    <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
                 </form>
               @endif
             </td>

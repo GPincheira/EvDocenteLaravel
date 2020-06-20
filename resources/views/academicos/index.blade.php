@@ -28,18 +28,18 @@
 {{--Segun la pagina en la que se encuentra actualmente, se ofrecen alternativas de rutas--}}
         @if (Request::is('academicos'))
           <div class="pull-left">
-              <a class="btn btn-success" href="{{ route('academicos.indexelim') }}"> Ver Inactivos</a>
+              <a class="btn btn-secondary" href="{{ route('academicos.indexelim') }}"> Ver Inactivos</a>
           </div>
 
 {{--Boton de Crear se activa solo si el usuario logeado es un secretario de facultad--}}
           @if(@Auth::user()->hasRole('SecFacultad'))
             <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('academicos.create') }}"> Crear Nuevo Academico</a>
+                <a class="btn btn-success" href="{{ route('academicos.create') }}"> Añadir Academico</a>
             </div>
           @endif
         @else
         <div class="pull-left">
-            <a class="btn btn-success" href="{{ route('academicos.index') }}"> Ver Activos</a>
+            <a class="btn btn-info" href="{{ route('academicos.index') }}"> Ver Activos</a>
         </div>
         @endif
     </div>
@@ -82,11 +82,11 @@
       {{--Botones se muestran solo si se estan viendo los academicos activos --}}
               @if (Request::is('academicos'))
                 <form action="{{ route('academicos.destroy',$academico->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('academicos.show',$academico->id) }}">Mostrar</a>
-                    <a class="btn btn-primary" href="{{ route('academicos.edit',$academico->id) }}">Editar</a>
+                    <a href="{{ route('academicos.show',$academico->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                    <a href="{{ route('academicos.edit',$academico->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Desactivar</button>
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
                 </form>
               @else
 
@@ -94,7 +94,7 @@
                 @if ($academico->CodigoDpto == $departamento->id && $departamento->deleted_at==NULL)
                 <form action="{{ route('academicos.reactivar',$academico->id) }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Reactivar</button>
+                    <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
                 </form>
                 @endif
               @endif
@@ -117,7 +117,7 @@
             <td>
               @if (Request::is('academicos'))
                 <form>
-                    <a class="btn btn-info" href="{{ route('academicos.show',$academico->id) }}">Mostrar</a>
+                    <a href="{{ route('academicos.show',$academico->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                 </form>
               @endif
             </td>

@@ -16,7 +16,7 @@
                 <h2>Editar Departamento</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('departamentos.index') }}"> Atras</a>
+                <a href="{{ route('departamentos.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
             </div>
         </div>
     </div>

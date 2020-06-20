@@ -24,14 +24,14 @@
             </div>
             @if (Request::is('users2'))
               <div class="pull-left">
-                  <a class="btn btn-success" href="{{ route('users.index2elim') }}"> Ver Inactivos</a>
+                  <a class="btn btn-secondary" href="{{ route('users.index2elim') }}"> Ver Inactivos</a>
               </div>
               <div class="pull-right">
                   <a class="btn btn-success" href="{{ route('users.create2') }}"> Crear Nuevo Secretario de Facultad</a>
               </div>
             @else
             <div class="pull-left">
-                <a class="btn btn-success" href="{{ route('users.index2') }}"> Ver Activos</a>
+                <a class="btn btn-info" href="{{ route('users.index2') }}"> Ver Activos</a>
             </div>
             @endif
         </div>
@@ -65,16 +65,16 @@
               <td>
                 @if (Request::is('users2'))
                     <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Mostrar</a>
-                        <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Editar</a>
+                        <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                        <a href="{{ route('users.edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Desactivar</button>
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
                     </form>
                 @else
                   <form action="{{ route('users.reactivar',$user->id) }}" method="POST">
                       @csrf
-                      <button type="submit" class="btn btn-danger">Reactivar</button>
+                      <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
                   </form>
                 @endif
               </td>

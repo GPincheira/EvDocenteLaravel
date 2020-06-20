@@ -22,7 +22,7 @@
             </div>
             @if (Request::is('evaluaciones'))
               <div class="pull-left">
-                  <a class="btn btn-success" href="{{ route('evaluaciones.indexelim') }}"> Ver Inactivas</a>
+                  <a class="btn btn-secondary" href="{{ route('evaluaciones.indexelim') }}"> Ver Inactivas</a>
               </div>
               @if(@Auth::user()->hasRole('SecFacultad'))
                 <div class="pull-right">
@@ -31,7 +31,7 @@
               @endif
             @else
             <div class="pull-left">
-                <a class="btn btn-success" href="{{ route('evaluaciones.index') }}"> Ver Activas</a>
+                <a class="btn btn-info" href="{{ route('evaluaciones.index') }}"> Ver Activas</a>
             </div>
             @endif
         </div>
@@ -65,17 +65,19 @@
                   <td>
                     @if (Request::is('evaluaciones'))
                       <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
-                          <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Mostrar</a>
-                          <a class="btn btn-primary" href="{{ route('evaluaciones.edit',$evaluacion->id) }}">Editar</a>
+                          <a class="btn btn-info" href=>Mostrar</a>
+                          <a class="btn btn-primary" href=>Editar</a>
+                          <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                          <a href="{{ route('evaluaciones.edit',$evaluacion->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
                           <a class="btn btn-primary" href="{{ route('evaluaciones.pdf',$evaluacion->id) }}">Generar PDF</a>
                             @csrf
                           @method('DELETE')
-                          <button type="submit" class="btn btn-danger">Desactivar</button>
+                          <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
                       </form>
                     @else
                       <form action="{{ route('evaluaciones.reactivar',$evaluacion->id) }}" method="POST">
                           @csrf
-                          <button type="submit" class="btn btn-danger">Reactivar</button>
+                          <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
                       </form>
                     @endif
                   </td>
@@ -94,8 +96,8 @@
               <td>
                 @if (Request::is('evaluaciones'))
                   <form>
-                      <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Mostrar</a>
-                      <a class="btn btn-primary" href="{{ route('evaluaciones.pdf',$evaluacion->id) }}">Generar PDF</a>
+                      <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                      <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
                   </form>
                 @endif
               </td>
@@ -113,7 +115,7 @@
                   <td>
                     @if (Request::is('evaluaciones'))
                       <form>
-                          <a class="btn btn-info" href="{{ route('evaluaciones.show',$evaluacion->id) }}">Mostrar</a>
+                          <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                           <a class="btn btn-primary" href="{{ route('evaluaciones.pdf',$evaluacion->id) }}">Generar PDF</a>
                       </form>
                     @endif

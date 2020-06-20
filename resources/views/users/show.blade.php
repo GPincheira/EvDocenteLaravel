@@ -35,13 +35,13 @@
         <div class="col-lg-12 margin-tb">
             <div class="pull-right">
               @if ($user->roles()->first()->name=='Administrador')
-                <a class="btn btn-primary" href="{{ route('users.index') }}"> Atras</a>
+                <a href="{{ route('users.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
               @endif
               @if ($user->roles()->first()->name=='SecFacultad')
-                <a class="btn btn-primary" href="{{ route('users.index2') }}"> Atras</a>
+                <a href="{{ route('users.index2') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
               @endif
               @if ($user->roles()->first()->name=='Secretario')
-                <a class="btn btn-primary" href="{{ route('users.index3') }}"> Atras</a>
+                <a href="{{ route('users.index3') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
               @endif
             </div>
         </div>

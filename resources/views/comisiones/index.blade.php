@@ -24,7 +24,7 @@
   {{--Si el usuario es un secretario de facultad, se le muestra el boton para crear nueva comision --}}
             @if(@Auth::user()->hasRole('SecFacultad'))
               <div class="pull-right">
-                  <a class="btn btn-success" href="{{ route('comisiones.create') }}"> Crear Nueva Comision</a>
+                  <a href="{{ route('comisiones.create') }}" class="btn btn-success">Añadir Comision</a>
               </div>
             @endif
         </div>
@@ -59,8 +59,7 @@
               <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
               <td>
                   <form>
-                      <a class="btn btn-info" href="{{ route('comisiones.show',$comision->id) }}">Ver</a>
-
+                      <a href="{{ route('comisiones.show',$comision->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                       @csrf
                   </form>
               </td>
@@ -80,7 +79,7 @@
                 <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
                 <td>
                     <form>
-                        <a class="btn btn-info" href="{{ route('comisiones.show',$comision->id) }}">Ver</a>
+                        <a href="{{ route('comisiones.show',$comision->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                         @csrf
                     </form>
                 </td>
