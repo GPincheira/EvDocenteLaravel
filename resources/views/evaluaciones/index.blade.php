@@ -65,11 +65,9 @@
                   <td>
                     @if (Request::is('evaluaciones'))
                       <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
-                          <a class="btn btn-info" href=>Mostrar</a>
-                          <a class="btn btn-primary" href=>Editar</a>
                           <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                           <a href="{{ route('evaluaciones.edit',$evaluacion->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
-                          <a class="btn btn-primary" href="{{ route('evaluaciones.pdf',$evaluacion->id) }}">Generar PDF</a>
+                          <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
                             @csrf
                           @method('DELETE')
                           <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
@@ -116,7 +114,7 @@
                     @if (Request::is('evaluaciones'))
                       <form>
                           <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
-                          <a class="btn btn-primary" href="{{ route('evaluaciones.pdf',$evaluacion->id) }}">Generar PDF</a>
+                          <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
                       </form>
                     @endif
                   </td>
