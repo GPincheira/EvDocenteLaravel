@@ -29,6 +29,6 @@ class evaluacion extends Model
   //relaciones de la tabla, donde una academico puede tener muchas evaluaciones
   public function academico()
   {
-    return $this->belongsTo('App\academico');
+    return $this->belongsTo('App\academico','RUTAcademico','id');
   }
 }

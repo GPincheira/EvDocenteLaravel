@@ -85,6 +85,10 @@
             grid-column: 3;
             grid-row: 2;
         }
+        .fecha {
+          grid-column : 1;
+          grid-row : 2;
+        }
 
     </style>
 

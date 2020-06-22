@@ -315,4 +315,5 @@ public function reactivar($id)
         $pdf = PDF::loadView('pdf.evaluaciones', compact('evaluacion'));
         return $pdf->download('evaluacion.pdf');
     }
+
 }

@@ -7,11 +7,25 @@
 
         <title>Laravel y data en PDF | Rimorsoft Online</title>
 
+        <style>
+            html {
+                min-height: 100%;
+                position: relative;
+            }
+            .content {
+                text-align: center;
+            }
+            .izq {
+                text-align: left;
+            }
+
+        </style>
+
     </head>
     <body>
         <div class="container">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-md-12">
                 	@yield('content')
                 </div>
             </div>

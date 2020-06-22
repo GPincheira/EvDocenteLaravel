@@ -37,40 +37,40 @@
 			<table class="table table-bordered content">
 				<tbody>
 					<tr>
-						<td></td>
-						<td></td>
+						<td height=40>{{ $evaluacion->academico->Nombre }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
+						<td>{{ $evaluacion->academico->departamento->Nombre }}</td>
 					</tr>
           <tr class="table-active">
 						<td width="50%">Académico</td>
 						<td width="50%">Departamento</td>
 					</tr>
-          <tr>
-						<td></td>
-						<td></td>
+          <tr high="20px">
+						<td height=40>{{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
+						<td>{{ $evaluacion->comision->Año }}</td>
 					</tr>
-          <tr class="table-active">
+          <tr class="table-active" height="4%">
 						<td>Facultad o Instituto al que pertenece</td>
 						<td>Periodo que se evalua</td>
 					</tr>
           <tr>
-						<td></td>
-						<td></td>
+						<td height=40>{{ $evaluacion->academico->TituloProfesional }}</td>
+						<td>{{ $evaluacion->academico->HorasContrato }}</td>
 					</tr>
           <tr class="table-active">
 						<td>Título Profesional</td>
 						<td>Horas de Contrato</td>
 					</tr>
           <tr>
-						<td></td>
-						<td></td>
+						<td height=40>{{ $evaluacion->academico->Categoria }}</td>
+						<td>{{ $evaluacion->academico->GradoAcademico }}</td>
 					</tr>
           <tr class="table-active">
 						<td>Categoría</td>
 						<td>Grado Académico</td>
 					</tr>
           <tr>
-						<td></td>
-						<td></td>
+						<td height=40></td>
+						<td>{{ $evaluacion->academico->TipoPlanta }}</td>
 					</tr>
           <tr class="table-active">
 						<td>Calificación Anterior</td>
@@ -107,7 +107,7 @@
   			  </tr>
           <tr>
 						<td class="izq">1. Actividades de Docencia</td>
-						<td></td>
+						<td>{{ $evaluacion->p1 }} %</td>
             <td></td>
             <td></td>
             <td></td>
@@ -117,7 +117,7 @@
 					</tr>
           <tr>
 						<td class="izq">2. Actividades de Investigación</td>
-						<td></td>
+						<td>{{ $evaluacion->p2 }} %</td>
             <td></td>
             <td></td>
             <td></td>
@@ -127,7 +127,7 @@
 					</tr>
           <tr>
 						<td class="izq">3. Extension y Vinculación</td>
-						<td></td>
+						<td>{{ $evaluacion->p3 }} %</td>
             <td></td>
             <td></td>
             <td></td>
@@ -137,7 +137,7 @@
 					</tr>
           <tr>
 						<td class="izq">4. Administración Académica</td>
-						<td></td>
+						<td>{{ $evaluacion->p4 }} %</td>
             <td></td>
             <td></td>
             <td></td>
@@ -147,7 +147,7 @@
 					</tr>
           <tr>
 						<td class="izq">5. Otras actividades realizadas</td>
-						<td></td>
+						<td>{{ $evaluacion->p5 }} %</td>
             <td></td>
             <td></td>
             <td></td>
@@ -157,7 +157,7 @@
 					</tr>
           <tr>
 						<th class="izq" colspan="7">Nota Final</th>
-						<td></td>
+						<td>{{ $evaluacion->NotaFinal }}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -194,17 +194,25 @@
 
 <div class="row container">
     <h3>IV. ARGUMENTOS DE LA CALIFICACION FINAL</h3>
+    <div class="col-md-12 margin-tb container">
+        <div class="card card-active" style="background-color:white">
+            <div class="card-body">
+                {{ $evaluacion->Argumento }}
+            </div>
+          </div>
+      </div>
+  </div>
 </div>
 
 <div class="col-md-12 container">
-      <h4 class="content">FIRMA COMISION:</h4>
+      <h5 class="content">FIRMA COMISION:</h5>
   </div>
 
   <div class="wrapper container">
     <div class="one">
       <table class="table table-bordered content">
           <tr>
-            <td></td>
+            <td height=100></td>
           </tr>
           <tr class="table-active">
             <td>Nombre y Firma</td>
@@ -215,7 +223,7 @@
     <div class="two">
       <table class="table table-bordered content">
           <tr>
-            <td></td>
+            <td height=100></td>
           </tr>
           <tr class="table-active">
             <td>Nombre y Firma</td>
@@ -226,7 +234,7 @@
     <div class="three">
       <table class="table table-bordered content">
           <tr>
-            <td></td>
+            <td height=100></td>
           </tr>
           <tr class="table-active">
             <td>Nombre y Firma</td>
@@ -237,7 +245,7 @@
     <div class="four">
       <table class="table table-bordered content">
           <tr>
-            <td></td>
+            <td height=100></td>
           </tr>
           <tr class="table-active">
             <td>Nombre y Firma</td>
@@ -245,93 +253,12 @@
         </tbody>
       </table>
     </div>
+    <div class="fecha">
+      <br><br><br><br><h5>Fecha:{{ $evaluacion->comision->Fecha }}</h5>
+    </div>
   </div>
 
-<div class="col-md-12 container">
-  <div class="pull-left">
-      <h5>Fecha:</h5>
-  </div>
-</div>
 
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>CodigoComision:</strong>
-                {{ $evaluacion->CodigoComision }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>RUT del Academico:</strong>
-                {{ $evaluacion->RUTAcademico }}
-            </div>
-        </div>
 
-        <strong>Actividades realizadas:</strong>
-        <div class="row">
-          <div class="col-xs-6 col-sm-6 col-md-6">
-          1. Actividades de docencia
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  {{ $evaluacion->p1 }} %
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  Nota:{{ $evaluacion->n1 }}
-          </div>
 
-          <div class="col-xs-6 col-sm-6 col-md-6">
-          2. Actividades de Investigacion
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  {{ $evaluacion->p2 }} %
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  Nota:{{ $evaluacion->n2 }}
-          </div>
-
-          <div class="col-xs-6 col-sm-6 col-md-6">
-          3. Extension y Vinculacion
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  {{ $evaluacion->p3 }} %
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  Nota:{{ $evaluacion->n3 }}
-          </div>
-
-          <div class="col-xs-6 col-sm-6 col-md-6">
-          4. Administracion Academica
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  {{ $evaluacion->p4 }} %
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  Nota:{{ $evaluacion->n4 }}
-          </div>
-
-          <div class="col-xs-6 col-sm-6 col-md-6">
-          5. Otras actividades realizadas
-          </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  {{ $evaluacion->p5 }} %
-            </div>
-          <div class="col-xs-2 col-sm-2 col-md-2">
-                  Nota:{{ $evaluacion->n5 }}
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <br><strong>Nota Final Obtenida:</strong>
-            {{ $evaluacion->NotaFinal }}
-        </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Argumento:</strong>
-            {{ $evaluacion->Argumento }}
-        </div>
-    </div>
 @endsection
