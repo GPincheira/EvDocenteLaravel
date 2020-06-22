@@ -27,7 +27,7 @@
         }
         body {
             background-color: #f6f9f9;
-            color: #636b6f;
+            color: #000000;
             font-family: 'Nunito', sans-serif;
             margin: 0;
             margin-bottom: 170px;
@@ -59,6 +59,31 @@
         }
         .content {
             text-align: center;
+        }
+        .izq {
+            text-align: left;
+        }
+        .wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 0px;
+            grid-auto-rows: minmax(100px, auto);
+        }
+        .one {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .two {
+            grid-column: 2;
+            grid-row: 1;
+        }
+        .three {
+            grid-column: 3;
+            grid-row: 1;
+        }
+        .four {
+            grid-column: 3;
+            grid-row: 2;
         }
 
     </style>
