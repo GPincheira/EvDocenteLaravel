@@ -53,8 +53,8 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Codigo del Departamento:</strong>
-                {{ $academico->CodigoDpto }}
+                <strong>Departamento:</strong>
+                {{ $academico->CodigoDpto }}  - {{ $academico->departamento->Nombre }}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

@@ -49,7 +49,7 @@
         <tr>
             <th>Id</th>
             <th>Nombre</th>
-            <th>Codigo Facultad</th>
+            <th>Facultad</th>
             <th>Estado</th>
             <th width="280px"></th>
         </tr>
@@ -59,7 +59,7 @@
             <tr>
                 <td>{{ $departamento->id }}</td>
                 <td>{{ $departamento->Nombre }}</td>
-                <td>{{ $departamento->CodigoFacultad }}</td>
+                <td>{{ $departamento->CodigoFacultad }} - {{ $departamento->facultad->Nombre }}</td>
                 <td>@if (Request::is('departamentos'))Activo @else Inactivo @endif</td>
                 <td>
                   @if (Request::is('departamentos'))

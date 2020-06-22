@@ -50,6 +50,7 @@
             <th>Apellido Paterno</th>
             <th>Apellido Materno</th>
             <th>E-mail</th>
+            <th>Facultad</th>
             <th>Estado</th>
             <th width="280px"></th>
         </tr>
@@ -61,6 +62,7 @@
               <td>{{ $user->ApellidoPaterno }}</td>
               <td>{{ $user->ApellidoMaterno }}</td>
               <td>{{ $user->email }}</td>
+              <td>{{ $user->secFacultad->CodigoFacultad }} - {{ $user->secFacultad->facultad->Nombre }}</td>
               <td>@if (Request::is('users2'))Activo @else Inactivo @endif</td>
               <td>
                 @if (Request::is('users2'))

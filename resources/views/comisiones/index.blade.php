@@ -40,11 +40,11 @@
         <tr>
             <th>Id</th>
             <th>Año</th>
-            <th>Facultad:</th>
-            <th>Decano:</th>
-            <th>Secretario de Facultad:</th>
-            <th>Integrante 3:</th>
-            <th>Integrante 4:</th>
+            <th>Facultad</th>
+            <th>Decano</th>
+            <th>Secretario de Facultad</th>
+            <th>Integrante 3</th>
+            <th>Integrante 4</th>
             <th width="280px"></th>
         </tr>
         @if(@Auth::user()->hasRole('Administrador'))
@@ -52,7 +52,7 @@
             <tr>
               <td>{{ $comision->id }}</td>
               <td>{{ $comision->Año }}</td>
-              <td>{{ $comision->CodigoFacultad }}</td>
+              <td>{{ $comision->CodigoFacultad }} - {{ $comision->facultad->Nombre }}</td>
               <td>{{ $comision->NombreDecano }} {{ $comision->APaternoDecano }} {{ $comision->AMaternoDecano }}</td>
               <td>{{ $comision->NombreSecFac }} {{ $comision->APaternoSecFac }} {{ $comision->AMaternoSecFac }}</td>
               <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>
@@ -72,7 +72,7 @@
               <tr>
                 <td>{{ $comision->id }}</td>
                 <td>{{ $comision->Año }}</td>
-                <td>{{ $comision->CodigoFacultad }}</td>
+                <td>{{ $comision->CodigoFacultad }} - {{ $comision->facultad->Nombre }}</td>
                 <td>{{ $comision->NombreDecano }} {{ $comision->APaternoDecano }} {{ $comision->AMaternoDecano }}</td>
                 <td>{{ $comision->NombreSecFac }} {{ $comision->APaternoSecFac }} {{ $comision->AMaternoSecFac }}</td>
                 <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>

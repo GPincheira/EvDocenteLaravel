@@ -59,7 +59,7 @@
                 <tr>
                   <td>{{ $evaluacion->id }}</td>
                   <td>{{ $evaluacion->CodigoComision }}</td>
-                  <td>{{ $evaluacion->RUTAcademico }}</td>
+                  <td>{{ $evaluacion->RUTAcademico }} - {{ $evaluacion->academico->verificador }}</td>
                   <td>{{ $evaluacion->NotaFinal }}</td>
                   <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
                   <td>

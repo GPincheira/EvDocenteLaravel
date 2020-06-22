@@ -23,7 +23,7 @@
       <div class="col-xs-12 col-sm-12 col-md-12">
           <div class="form-group">
               <strong>Facultad:</strong>
-              {{ $comision->CodigoFacultad }}
+              {{ $comision->CodigoFacultad }} - {{ $comision->facultad->Nombre }}
           </div>
       </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

@@ -19,7 +19,8 @@
                         @endif
                         @if(@Auth::user()->hasRole('SecFacultad'))
                           <h2>Tu rol: Secretario de Facultad</h2>
-                          Codigo de tu Facultad: {{ @Auth::user()->secFacultad->CodigoFacultad }}
+                          Tu Facultad: {{ @Auth::user()->secFacultad->CodigoFacultad }} - {{ @Auth::user()->secFacultad->facultad->Nombre }}
+
                         @endif
                         @if(@Auth::user()->hasRole('Secretario'))
                           <h2>Tu rol: Secretario</h2>
