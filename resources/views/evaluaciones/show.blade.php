@@ -10,14 +10,129 @@
   </ol>
 </nav>
 
-  <h1>ID de la Evaluacion: {{ $evaluacion->id }}</h1>
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-right">
-                <a href="{{ route('evaluaciones.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
-            </div>
-        </div>
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+    <div class="pull-left">
+        <h2>ID de la Evaluacion: {{ $evaluacion->id }}</h2>
     </div>
+    <div class="pull-right">
+        <a href="{{ route('evaluaciones.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
+    </div>
+  </div>
+</div>
+
+<div class="row content">
+  <div class="col-lg-12 margin-tb">
+    <h1>PAUTA RESUMEN</h1>
+  </div>
+</div>
+
+<div class="row container">
+    <h3>I. IDENTIFICACION</h3>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table table-bordered content">
+				<tbody>
+					<tr>
+						<td>
+
+						</td>
+						<td>
+
+						</td>
+					</tr>
+          <tr class="table-active">
+						<td width="50%">
+							Académico
+						</td>
+						<td width="50%">
+							Departamento
+						</td>
+					</tr>
+          <tr>
+						<td>
+
+						</td>
+						<td>
+
+						</td>
+					</tr>
+          <tr class="table-active">
+						<td>
+							Facultad o Instituto al que pertenece
+						</td>
+						<td>
+							Periodo que se evalua
+						</td>
+					</tr>
+          <tr>
+						<td>
+
+						</td>
+						<td>
+
+						</td>
+					</tr>
+          <tr class="table-active">
+						<td>
+							Título Profesional
+						</td>
+						<td>
+							Horas de Contrato
+						</td>
+					</tr>
+          <tr>
+						<td>
+
+						</td>
+						<td>
+
+						</td>
+					</tr>
+          <tr class="table-active">
+						<td>
+							Categoría
+						</td>
+						<td>
+							Grado Académico
+						</td>
+					</tr>
+          <tr>
+						<td>
+
+						</td>
+						<td>
+
+						</td>
+					</tr>
+          <tr class="table-active">
+						<td>
+							Calificación Anterior
+						</td>
+						<td>
+							Tipo de Planta
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row container">
+    <h3>II. CALIFICACION ACADEMICA</h3>
+</div>
+
+<div class="row container">
+    <h3>III. ESCALA EVALUATIVA</h3>
+</div>
+
+<div class="row container">
+    <h3>IV. ARGUMENTOS DE LA CALIFICACION FINAL</h3>
+</div>
 
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">

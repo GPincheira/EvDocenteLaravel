@@ -27,8 +27,8 @@ Route::get('/dptos', 'DepartamentoController@json');
 Route::post('/tareas/guardar', 'EvaluacionController@store2');
 Route::put('/tareas/actualizar', 'EvaluacionController@update2');
 Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy2');
-Route::get('/tareas/buscar', 'EvaluacionController@show');
-
+Route::get('/tareas/buscar', 'EvaluacionController@show2');
+Route::get('/evaluaciones/evaluar', 'EvaluacionController@evaluar');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {

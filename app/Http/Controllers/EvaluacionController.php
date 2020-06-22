@@ -29,6 +29,10 @@ class EvaluacionController extends Controller
         //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
     }
 
+    public function evaluar(){
+        return view('evaluaciones.evaluar');
+    }
+
     public function index()
     {
       $evaluaciones = Evaluacion::latest()->paginate(10);
@@ -141,6 +145,12 @@ class EvaluacionController extends Controller
   }
 }
 
+public function show($id)
+{
+     $evaluacion = evaluacion::withTrashed()->find($id);
+     return view('evaluaciones.show',compact('evaluacion'));
+}
+
 public function edit($id)
 {
   $evaluacion = evaluacion::find($id);
@@ -239,7 +249,7 @@ public function reactivar($id)
      * @return \Illuminate\Http\Response
      */
 
-     public function show(Request $request)
+     public function show2(Request $request)
     {
         $evaluacion = Evaluacion::findOrFail($request->id);
         return $evaluacion;
@@ -263,7 +273,7 @@ public function reactivar($id)
 //funcion update valida los datos ingresados, y realiza los cambios si todo esta en orden
     public function update2(Request $request)
     {
-      $evaluacion = Evaluacion::findOrFail($request->$id);
+      $evaluacion = Evaluacion::findOrFail($request->id);
       $evaluacion->p1 = $request->p1;
       $evaluacion->n1 = $request->n1;
       $evaluacion->p2 = $request->p2;
@@ -276,7 +286,6 @@ public function reactivar($id)
       $evaluacion->n5 = $request->n5;
       $evaluacion->Argumento = $request->Argumento;
       $evaluacion->NotaFinal = $request->NotaFinal;
-
       $evaluacion->save();
       return $evaluacion;
     }

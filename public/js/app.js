@@ -2006,6 +2006,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2027,11 +2031,26 @@ __webpack_require__.r(__webpack_exports__);
       n5: "",
       NotaFinal: "",
       Argumento: "",
+      update: 0,
+      arrayEvaluacions: [],
+      //Este array contendrá las tareas de nuestra bd
       arrayDepartamentos: [] //Este array contendrá las tareas de nuestra bd
 
     };
   },
   methods: {
+    getEvaluacions: function getEvaluacions() {
+      var me = this;
+      var url = '/tareas'; //Ruta que hemos creado para que nos devuelva todas las tareas
+
+      axios.get(url).then(function (response) {
+        //creamos un array y guardamos el contenido que nos devuelve el response
+        me.arrayEvaluacions = response.data;
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
     getDepartamentos: function getDepartamentos() {
       var me = this;
       var url = '/dptos'; //Ruta que hemos creado para que nos devuelva todas las tareas
@@ -2072,9 +2091,96 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    updateEvaluacions: function updateEvaluacions() {
+      /*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
+      tarea que queremos modificar*/
+      var me = this;
+      axios.put('/tareas/actualizar', {
+        'id': this.update,
+        'RUTAcademico': this.RUTAcademico,
+        'CodigoComision': this.CodigoComision,
+        'año': this.año,
+        'p1': this.p1,
+        'n1': this.n1,
+        'p2': this.p2,
+        'n2': this.n2,
+        'p3': this.p3,
+        'n3': this.n3,
+        'p4': this.p4,
+        'n4': this.n4,
+        'p5': this.p5,
+        'n5': this.n5,
+        'NotaFinal': this.NotaFinal,
+        'Argumento': this.Argumento
+      }).then(function (response) {
+        me.getEvaluacions(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
+
+        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    loadFieldsUpdate: function loadFieldsUpdate(data) {
+      //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
+      this.update = data.id;
+      var me = this;
+      var url = '/tareas/buscar?id=' + this.update;
+      axios.get(url).then(function (response) {
+        me.id = response.data.id;
+        me.RUTAcademico = response.data.RUTAcademico;
+        me.CodigoComision = response.data.CodigoComision;
+        me.año = response.data.año;
+        me.p1 = response.data.p1;
+        me.n1 = response.data.n1;
+        me.p2 = response.data.p2;
+        me.n2 = response.data.n2;
+        me.p3 = response.data.p3;
+        me.n3 = response.data.n3;
+        me.p4 = response.data.p4;
+        me.n4 = response.data.n4;
+        me.p5 = response.data.p5;
+        me.n5 = response.data.n5;
+        me.NotaFinal = response.data.NotaFinal;
+        me.Argumento = response.data.Argumento;
+      })["catch"](function (error) {
+        // handle error
+        console.log(error);
+      });
+    },
+    deleteEvaluacion: function deleteEvaluacion(data) {
+      //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
+      var me = this;
+      var evaluacion_id = data.id;
+
+      if (confirm('¿Seguro que deseas borrar esta tarea?')) {
+        axios["delete"]('/tareas/borrar/' + evaluacion_id).then(function (response) {
+          me.getEvaluacions();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
+    },
+    clearFields: function clearFields() {
+      /*Limpia los campos e inicializa la variable update a 0*/
+      this.RUTAcademico = "";
+      this.CodigoComision = "";
+      this.año = "";
+      this.p1 = "";
+      this.n1 = "";
+      this.p2 = "";
+      this.n2 = "";
+      this.p3 = "";
+      this.n3 = "";
+      this.p4 = "";
+      this.n4 = "";
+      this.p5 = "";
+      this.n5 = "";
+      this.update = 0;
     }
   },
   mounted: function mounted() {
+    this.getEvaluacions();
     this.getDepartamentos();
   }
 });
@@ -37489,7 +37595,7 @@ var render = function() {
               _vm._l(_vm.arrayEvaluacions, function(evaluacion) {
                 return _c("tr", { key: evaluacion.id }, [
                   _c("td", {
-                    domProps: { textContent: _vm._s(evaluacion.RUTAcademico) }
+                    domProps: { textContent: _vm._s(evaluacion.id) }
                   }),
                   _vm._v(" "),
                   _c("td", {
@@ -37533,6 +37639,30 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6" }, [
         _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v("id")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.id,
+                expression: "id"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { type: "integer" },
+            domProps: { value: _vm.id },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.id = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
           _c("label", [_vm._v("RUTAcademico")]),
           _vm._v(" "),
           _c("input", {

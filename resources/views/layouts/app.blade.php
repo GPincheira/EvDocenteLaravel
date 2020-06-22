@@ -57,6 +57,9 @@
             -moz-opacity: 0.5;
             filter:alpha (opacity=0.5);
         }
+        .content {
+            text-align: center;
+        }
 
     </style>
 
