@@ -17,25 +17,25 @@
   </ol>
 </nav>
 
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Usuarios Secretarios</h2>
-            </div>
-            @if (Request::is('users3'))
-              <div class="pull-left">
-                  <a class="btn btn-secondary" href="{{ route('users.index3elim') }}"> Ver Inactivos</a>
-              </div>
-              <div class="pull-right">
-                  <a class="btn btn-success" href="{{ route('users.create3') }}"> Crear Nuevo Secretario</a>
-              </div>
-            @else
-            <div class="pull-left">
-                <a class="btn btn-info" href="{{ route('users.index3') }}"> Ver Activos</a>
-            </div>
-            @endif
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Usuarios Secretarios @if(Request::is('users3elim')) Eliminados @endif UCM</h2>
         </div>
+        @if (Request::is('users3'))
+          <div class="pull-left">
+              <a class="btn btn-secondary" style="margin-left: 12px" href="{{ route('users.index3elim') }}"> Ver Inactivos</a>
+          </div>
+          <div class="pull-right">
+              <a class="btn btn-success" href="{{ route('users.create3') }}"> Crear Nuevo Secretario</a>
+          </div>
+        @else
+        <div class="pull-left">
+            <a class="btn btn-info" style="margin-left: 12px" href="{{ route('users.index3') }}"> Ver Activos</a>
+        </div>
+        @endif
     </div>
+</div>
 
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -43,23 +43,18 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="margin-top: 8px">
         <tr>
             <th width="120px">RUT</th>
-            <th>Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
+            <th>Nombre Completo</th>
             <th>E-mail</th>
             <th>Estado</th>
-            <th width="280px"></th>
         </tr>
         @foreach ($users as $user)
           @if ($user->roles()->first()->name=='Secretario')
           <tr>
               <td>{{ $user->id }}-{{ $user->verificador }}</td>
-              <td>{{ $user->Nombre }}</td>
-              <td>{{ $user->ApellidoPaterno }}</td>
-              <td>{{ $user->ApellidoMaterno }}</td>
+              <td>{{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</td>
               <td>{{ $user->email }}</td>
               <td>@if (Request::is('users3'))Activo @else Inactivo @endif</td>
               <td>

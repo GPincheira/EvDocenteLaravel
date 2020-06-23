@@ -25,15 +25,16 @@
                 <li class="nav navbar-nav">
                   <a class="nav-link" href="{{ route('facultades.index')}}">Facultades</a>
                 </li>
-                <li class="nav navbar-nav">
-                  <a class="nav-link" href="{{ route('users.index')}}">Administradores</a>
-                </li>
-                <li class="nav navbar-nav">
-                  <a class="nav-link" href="{{ route('users.index2')}}">Secretarios de Facultad</a>
-                </li>
-                <li class="nav navbar-nav">
-                  <a class="nav-link" href="{{ route('users.index3')}}">Secretarios</a>
-                </li>
+                <ul class="navbar-nav ml-auto">
+                      <li class="nav-item dropdown">
+                          <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Usuarios<span class="caret"></span></a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="{{ route('users.index') }}" >{{ __('Administradores') }}</a>
+                              <a class="dropdown-item" href="{{ route('users.index2') }}" >{{ __('Secretarios de Facultad') }}</a>
+                              <a class="dropdown-item" href="{{ route('users.index3') }}" >{{ __('Secretarias') }}</a>
+                          </div>
+                      </li>
+                </ul>
 
               @endif
               @if(@Auth::user()->hasRole('SecFacultad'))

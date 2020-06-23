@@ -36,16 +36,15 @@
         </div>
     @endif
 
-    <table class="table table-bordered">
+    <table class="table table-bordered" style="margin-top: 8px">
         <tr>
             <th>Id</th>
             <th>Año</th>
             <th>Facultad</th>
-            <th>Decano</th>
+            <th>Decano de Facultad</th>
             <th>Secretario de Facultad</th>
             <th>Integrante 3</th>
             <th>Integrante 4</th>
-            <th width="280px"></th>
         </tr>
         @if(@Auth::user()->hasRole('Administrador'))
           @foreach ($comisiones as $comision)

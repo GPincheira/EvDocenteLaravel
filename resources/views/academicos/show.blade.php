@@ -53,6 +53,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>Facultad:</strong>
+                {{ $academico->departamento->facultad->id }}  - {{ $academico->departamento->facultad->Nombre }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Departamento:</strong>
                 {{ $academico->CodigoDpto }}  - {{ $academico->departamento->Nombre }}
             </div>
