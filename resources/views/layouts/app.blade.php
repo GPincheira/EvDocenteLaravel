@@ -57,6 +57,11 @@
             -moz-opacity: 0.5;
             filter:alpha (opacity=0.5);
         }
+        .blue{
+          background-color: rgb(0, 85, 169);
+          color: white;
+          text-align: right;
+        }
         .content {
             text-align: center;
         }

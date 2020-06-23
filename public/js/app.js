@@ -2010,6 +2010,189 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37558,81 +37741,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
+    _vm._m(0),
+    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-6" }, [
         _c("h2", [_vm._v("Lista de Evaluaciones")]),
         _vm._v(" "),
         _c("table", { staticClass: "table text-center" }, [
-          _vm._m(0),
+          _vm._m(1),
           _vm._v(" "),
           _c(
             "tbody",
-            [
-              _c("div", { staticClass: "col-md-6" }, [
-                _c("h2", [_vm._v("Lista de Evaluaciones")]),
+            _vm._l(_vm.arrayEvaluacions, function(evaluacion) {
+              return _c("tr", { key: evaluacion.id }, [
+                _c("td", { domProps: { textContent: _vm._s(evaluacion.id) } }),
                 _vm._v(" "),
-                _c("table", { staticClass: "table text-center" }, [
-                  _vm._m(1),
+                _c("td", {
+                  domProps: { textContent: _vm._s(evaluacion.NotaFinal) }
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn",
+                      on: {
+                        click: function($event) {
+                          return _vm.loadFieldsUpdate(evaluacion)
+                        }
+                      }
+                    },
+                    [_vm._v("Modificar")]
+                  ),
                   _vm._v(" "),
                   _c(
-                    "tbody",
-                    _vm._l(_vm.arrayDepartamentos, function(departamento) {
-                      return _c("tr", { key: departamento.id }, [
-                        _c("td", {
-                          domProps: { textContent: _vm._s(departamento.id) }
-                        }),
-                        _vm._v(" "),
-                        _c("td", {
-                          domProps: { textContent: _vm._s(departamento.Nombre) }
-                        })
-                      ])
-                    }),
-                    0
+                    "button",
+                    {
+                      staticClass: "btn",
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteEvaluacion(evaluacion)
+                        }
+                      }
+                    },
+                    [_vm._v("Borrar")]
                   )
                 ])
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.arrayEvaluacions, function(evaluacion) {
-                return _c("tr", { key: evaluacion.id }, [
-                  _c("td", {
-                    domProps: { textContent: _vm._s(evaluacion.id) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", {
-                    domProps: { textContent: _vm._s(evaluacion.NotaFinal) }
-                  }),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.loadFieldsUpdate(evaluacion)
-                          }
-                        }
-                      },
-                      [_vm._v("Modificar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn",
-                        on: {
-                          click: function($event) {
-                            return _vm.deleteEvaluacion(evaluacion)
-                          }
-                        }
-                      },
-                      [_vm._v("Borrar")]
-                    )
-                  ])
-                ])
-              })
-            ],
-            2
+              ])
+            }),
+            0
           )
         ])
       ]),
@@ -38079,11 +38236,309 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("RUT")]),
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "row content" }, [
+          _c("div", { staticClass: "col-lg-12 margin-tb" }, [
+            _c("h1", [_vm._v("PAUTA RESUMEN")])
+          ])
+        ]),
         _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Nota Final")])
+        _c("div", { staticClass: "row container" }, [
+          _c("h3", [_vm._v("I. IDENTIFICACION")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("table", { staticClass: "table table-bordered content" }, [
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", { attrs: { height: "40" } }),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", { staticClass: "table-active" }, [
+                    _c("td", { attrs: { width: "50%" } }, [
+                      _vm._v("Académico")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { attrs: { width: "50%" } }, [
+                      _vm._v("Departamento")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", { attrs: { high: "20px" } }, [
+                    _c("td", { attrs: { height: "40" } }),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "tr",
+                    { staticClass: "table-active", attrs: { height: "4%" } },
+                    [
+                      _c("td", [
+                        _vm._v("Facultad o Instituto al que pertenece")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v("Periodo que se evalua")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { attrs: { height: "40" } }),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", { staticClass: "table-active" }, [
+                    _c("td", [_vm._v("Título Profesional")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Horas de Contrato")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { attrs: { height: "40" } }),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", { staticClass: "table-active" }, [
+                    _c("td", [_vm._v("Categoría")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Grado Académico")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { attrs: { height: "40" } }),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", { staticClass: "table-active" }, [
+                    _c("td", [_vm._v("Calificación Anterior")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Tipo de Planta")])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row container" }, [
+          _c("h3", [_vm._v("II. CALIFICACION ACADEMICA")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("table", { staticClass: "table table-bordered content" }, [
+                _c("tbody", [
+                  _c("tr", [
+                    _c("th", { attrs: { rowspan: "2", width: "32%" } }),
+                    _vm._v(" "),
+                    _c("th", { attrs: { rowspan: "2", width: "20%" } }, [
+                      _vm._v("% tiempo asignado a tareas programadas")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { colspan: "5", width: "40%" } }, [
+                      _vm._v("Calificacion")
+                    ]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { width: "8%" } }, [_vm._v("Pond")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", { attrs: { width: "8%" } }, [_vm._v("E")]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { width: "8%" } }, [_vm._v("MB")]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { width: "8%" } }, [_vm._v("B")]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { width: "8%" } }, [_vm._v("R")]),
+                    _vm._v(" "),
+                    _c("th", { attrs: { width: "8%" } }, [_vm._v("I")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("%T*C/100")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { staticClass: "izq" }, [
+                      _vm._v("1. Actividades de Docencia")
+                    ]),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { staticClass: "izq" }, [
+                      _vm._v("2. Actividades de Investigación")
+                    ]),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { staticClass: "izq" }, [
+                      _vm._v("3. Extension y Vinculación")
+                    ]),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { staticClass: "izq" }, [
+                      _vm._v("4. Administración Académica")
+                    ]),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", { staticClass: "izq" }, [
+                      _vm._v("5. Otras actividades realizadas")
+                    ]),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td"),
+                    _vm._v(" "),
+                    _c("td")
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", { staticClass: "izq", attrs: { colspan: "7" } }, [
+                      _vm._v("Nota Final")
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row container" }, [
+          _c("h3", [_vm._v("III. ESCALA EVALUATIVA")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row container" }, [
+          _c("div", { staticClass: "col-md-12 margin-tb container" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card card-active",
+                staticStyle: { "background-color": "rgba(200,200,200)" }
+              },
+              [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _vm._v(
+                      "\n                              ESCALA:\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _vm._v("\n                              Excelente=4.5 a 5"),
+                    _c("br"),
+                    _vm._v(
+                      "\n                              Regular=2.7 a 3.4\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _vm._v(
+                      "\n                              Muy Bueno=4.0 a 4.4"
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n                              Deficiente=menos de 2.7\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _vm._v(
+                      "\n                              Bueno=3.5 a 3.9\n                            "
+                    )
+                  ])
+                ])
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row container" }, [
+          _c("h3", [_vm._v("IV. ARGUMENTOS DE LA CALIFICACION FINAL")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-12 margin-tb container" }, [
+            _c(
+              "div",
+              {
+                staticClass: "card card-active",
+                staticStyle: { "background-color": "white" }
+              },
+              [_c("div", { staticClass: "card-body" })]
+            )
+          ])
+        ])
       ])
     ])
   },

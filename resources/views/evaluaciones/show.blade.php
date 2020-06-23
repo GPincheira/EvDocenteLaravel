@@ -78,6 +78,7 @@
 					</tr>
 				</tbody>
 			</table>
+
 		</div>
 	</div>
 </div>
@@ -202,7 +203,6 @@
           </div>
       </div>
   </div>
-</div>
 
 <div class="col-md-12 container">
       <h5 class="content">FIRMA COMISION:</h5>

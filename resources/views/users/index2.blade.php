@@ -59,8 +59,8 @@
               <td>{{ $user->email }}</td>
               <td>{{ $user->secFacultad->CodigoFacultad }} - {{ $user->secFacultad->facultad->Nombre }}</td>
               <td>@if (Request::is('users2'))Activo @else Inactivo @endif</td>
-              <td width="167px">
-                @if (Request::is('users2'))
+              @if (Request::is('users2'))
+                <td width="167px">
                     <form action="{{ route('users.destroy',$user->id) }}" method="POST">
                         <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                         <a href="{{ route('users.edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
@@ -68,13 +68,15 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
                     </form>
-                @else
+                </td>
+              @else
+                <td width="60px">
                   <form action="{{ route('users.reactivar',$user->id) }}" method="POST">
                       @csrf
                       <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
                   </form>
-                @endif
-              </td>
+                </td>
+              @endif
           </tr>
           @endif
         @endforeach

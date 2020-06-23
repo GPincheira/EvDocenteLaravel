@@ -11,7 +11,7 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-    @if (Request::is('departamentos'))
+    @if (Request::is('facultades'))
       <li class="breadcrumb-item active" aria-current="page">Facultades</li>
     @else
       <li class="breadcrumb-item active" aria-current="page">Facultades Eliminadas</li>

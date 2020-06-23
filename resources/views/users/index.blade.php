@@ -58,26 +58,32 @@
               <td>{{ $user->email }}</td>
               <td>@if (Request::is('users1'))Activo @else Inactivo @endif</td>
               <td>
-                @if (Request::is('users1'))
-                  @if (@Auth::user()->id != $user->id)
+              @if (Request::is('users1'))
+                @if (@Auth::user()->id != $user->id)
+                  <td width="167px">
                     <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                        <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
-                        <a href="{{ route('users.edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
+                      <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                      <a href="{{ route('users.edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
                     </form>
-                  @else
-                  <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
-                  <a href="{{ route('users.edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
-                  @endif
+                  <td>
                 @else
+                  <td width="167px">
+                    <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                    <a href="{{ route('users.edit',$user->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
+                  </td>
+                @endif
+              @else
+                <td width="60px">
                   <form action="{{ route('users.reactivar',$user->id) }}" method="POST">
                       @csrf
                       <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
                   </form>
-                @endif
-              </td>
+                </td>
+              @endif
+
           </tr>
           @endif
         @endforeach

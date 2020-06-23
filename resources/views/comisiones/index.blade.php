@@ -11,14 +11,18 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Comisiones</li>
+    <li class="breadcrumb-item active" aria-current="page">Comisiones @if(@Auth::user()->hasRole('SecFacultad')) {{ @Auth::user()->secFacultad->facultad->Nombre }} @endif</li>
   </ol>
 </nav>
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Comisiones UCM</h2>
+                @if(@Auth::user()->hasRole('SecFacultad'))
+                <h2>Comisiones {{ @Auth::user()->secFacultad->facultad->Nombre }} UCM</h2>
+                @else
+                  <h2>Comisiones UCM</h2>
+                @endif
             </div>
 
   {{--Si el usuario es un secretario de facultad, se le muestra el boton para crear nueva comision --}}

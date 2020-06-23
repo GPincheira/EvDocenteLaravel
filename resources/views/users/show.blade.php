@@ -2,12 +2,10 @@
 
 @if ($user->roles()->first()->name=='Administrador')
   <title>Administrador {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
-@endif
-@if ($user->roles()->first()->name=='SecFacultad')
+@elseif ($user->roles()->first()->name=='SecFacultad')
   <title>Sec Facultad {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
-@endif
-@if ($user->roles()->first()->name=='Secretario')
-  <title>Secretario {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+@else
+  <title>Secretaria {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
 @endif
 
 @section('content')
@@ -18,21 +16,26 @@
       @if ($user->roles()->first()->name=='Administrador')
         <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Administradores</a></li>
         <li class="breadcrumb-item active" aria-current="page">Administrador: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
-      @endif
-      @if ($user->roles()->first()->name=='SecFacultad')
+      @elseif ($user->roles()->first()->name=='SecFacultad')
         <li class="breadcrumb-item"><a href="{{ route('users.index2') }}">Secretarios de Facultad</a></li>
         <li class="breadcrumb-item active" aria-current="page">Secretario de Facultad: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
-      @endif
-      @if ($user->roles()->first()->name=='Secretario')
-        <li class="breadcrumb-item"><a href="{{ route('users.index3') }}">Secretarios</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Secretario: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+      @else
+        <li class="breadcrumb-item"><a href="{{ route('users.index3') }}">Secretarias</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Secretaria: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
       @endif
   </ol>
 </nav>
 
-  <h1>RUT del Usuario: {{ $user->id }} - {{ $user->verificador }}</h1>
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
+          <div class="pull-left">
+              <h1>Usuario @if($user->roles()->first()->name=='Administrador') Administrador
+                          @elseif($user->roles()->first()->name=='SecFacultad') Secretario de Facultad
+                          @else Secretaria
+                          @endif
+                : {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</h1>
+          </div>
             <div class="pull-right">
               @if ($user->roles()->first()->name=='Administrador')
                 <a href="{{ route('users.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
@@ -47,37 +50,45 @@
         </div>
     </div>
 
-    <div class="row">
-
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Nombre del Usuario:</strong>
-                {{ $user->Nombre }}
-            </div>
+    <div class="content">
+      <div class="row">
+        <div class="col-md-8">
+          <table class="table table-bordered container" style="margin-left: 100px">
+            <tbody>
+              <tr>
+                <th class="blue">Rol</th>
+                <td>@if($user->roles()->first()->name=='Administrador') Administrador
+                    @elseif($user->roles()->first()->name=='SecFacultad') Secretario de Facultad
+                    @else Secretaria
+                    @endif
+                </td>
+              </tr>
+              @if($user->roles()->first()->name=='SecFacultad')
+                <tr>
+                  <th class="blue">Facultad</th>
+                  <td>{{ $user->SecFacultad->facultad->Nombre }}</td>
+                </tr>
+              @endif
+              <tr>
+                <th class="blue">RUT</th>
+                <td>{{ $user->id }}-{{ $user->verificador }}</td>
+              </tr>
+              <tr>
+                <th class="blue">Nombre Completo</th>
+                <td>{{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</td>
+              </tr>
+              <tr>
+                <th class="blue">E-mail</th>
+                <td>{{ $user->email }}</td>
+              </tr>
+              <tr>
+                <th class="blue">Estado</th>
+                <td>@if ($user->deleted_at == NULL) Activo @else Inactivo @endif</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Apellido Paterno:</strong>
-                {{ $user->ApellidoPaterno }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Apellido Materno:</strong>
-                {{ $user->ApellidoMaterno }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>email:</strong>
-                {{ $user->email }}
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Estado:</strong>
-                @if ($user->deleted_at == NULL) Activo @else Inactivo @endif
-            </div>
-        </div>
+      </div>
     </div>
+
 @endsection

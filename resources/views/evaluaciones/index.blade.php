@@ -64,7 +64,7 @@
             <th>Id</th>
             <th>Codigo Comision</th>
             <th>Nombre Academico</th>
-            @if(@Auth::user()->hasRole('SecFacultad') || @Auth::user()->hasRole('SecFacultad'))
+            @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
               <th>Facultad</th>
             @endif
             <th>Departamento</th>
@@ -108,15 +108,16 @@
           @endforeach
         @elseif(@Auth::user()->hasRole('Administrador'))
             @foreach ($evaluaciones as $evaluacion)
-            <td width="115px">
+            <tr>
               <td>{{ $evaluacion->id }}</td>
+              <td>{{ $evaluacion->CodigoComision }}</td>
               <td>{{ $evaluacion->academico->Nombre}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
               <td>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
               <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
               <td>{{ $evaluacion->NotaFinal }}</td>
               <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
               @if (Request::is('evaluaciones'))
-                <td>
+                <td width="115px">
                   <form>
                       <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                       <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
@@ -137,7 +138,7 @@
                   <td>{{ $evaluacion->NotaFinal }}</td>
                   <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
                   @if (Request::is('evaluaciones'))
-                    <td <td width="115px">>
+                    <td width="115px">
                       <form>
                           <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                           <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
