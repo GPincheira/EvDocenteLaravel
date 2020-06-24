@@ -36,6 +36,4 @@
     </div>
 @endif
 
-<evaluacion-component></ecaluacion-component>
-
 @endsection

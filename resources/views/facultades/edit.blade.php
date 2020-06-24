@@ -38,33 +38,40 @@
          <div class="row">
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
-                   <strong>Codigo Facultad:</strong>
-                   <input type="integer" name="id" value="{{ $facultad->id }}" class="form-control" placeholder="Ingrese el Codigo de la Facultad">
+                   <strong>Id Facultad:</strong>
+                   <input type="integer" name="id" value="{{ $facultad->id }}" class="form-control">
                </div>
            </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Nombre:</strong>
-                    <input type="text" name="Nombre" value="{{ $facultad->Nombre }}" class="form-control" placeholder="Nombre">
+                    <strong>Nombre Facultad:</strong>
+                    <input type="text" name="Nombre" value="{{ $facultad->Nombre }}" class="form-control">
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-4 col-sm-4 col-md-4">
                 <div class="form-group">
-                    <strong>DecanoNombre:</strong>
+                    <strong>Nombre Decano:</strong>
                     <input type="text" name="DecanoNombre" value="{{ $facultad->DecanoNombre }}" class="form-control" placeholder="Ingrese Nombre Decano">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-4 col-sm-4 col-md-4">
                 <div class="form-group">
-                    <strong>DecanoAPaterno:</strong>
-                    <input type="text" name="DecanoAPaterno" value="{{ $facultad->DecanoAPaterno }}" class="form-control" placeholder="Ingrese AP Decano">
+                    <br><input type="text" name="DecanoAPaterno" value="{{ $facultad->DecanoAPaterno }}" class="form-control" placeholder="Ingrese AP Decano">
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+                <div class="form-group">
+                    <br><input type="text" name="DecanoAMaterno" value="{{ $facultad->DecanoAMaterno }}" class="form-control" placeholder="Ingrese AM Decano">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>DecanoAMaterno:</strong>
-                    <input type="text" name="DecanoAMaterno" value="{{ $facultad->DecanoAMaterno }}" class="form-control" placeholder="Ingrese AM Decano">
+                    <strong>Estado:</strong>
+                    <select name="deleted_at" class="form-control">
+                      <option value="Activo">Activo</option>
+                      <option value="Inactivo">Inactivo</option>
+                    </select>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

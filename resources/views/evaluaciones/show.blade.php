@@ -1,19 +1,19 @@
 @extends('layouts.app')
-<title>Evaluacion {{ $evaluacion->id }}</title>
+<title>Evaluacion</title>
 @section('content')
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
     <li class="breadcrumb-item"><a href="{{ route('evaluaciones.index') }}">Evaluaciones</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Evaluacion {{ $evaluacion->id }}</li>
+    <li class="breadcrumb-item active" aria-current="page">Evaluacion</li>
   </ol>
 </nav>
 
 <div class="row">
   <div class="col-lg-12 margin-tb">
     <div class="pull-left">
-        <h2>ID de la Evaluacion: {{ $evaluacion->id }}</h2>
+        <h2>ID de la Evaluacion:</h2>
     </div>
     <div class="pull-right">
         <a href="{{ route('evaluaciones.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
@@ -37,32 +37,32 @@
 			<table class="table table-bordered content">
 				<tbody>
 					<tr>
-						<td height=40>{{ $evaluacion->academico->Nombre }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
-						<td>{{ $evaluacion->academico->departamento->Nombre }}</td>
+						<td height=40></td>
+						<td></td>
 					</tr>
           <tr class="table-active">
 						<td width="50%">Académico</td>
 						<td width="50%">Departamento</td>
 					</tr>
           <tr high="20px">
-						<td height=40>{{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
-						<td>{{ $evaluacion->comision->Año }}</td>
+						<td height=40></td>
+						<td></td>
 					</tr>
           <tr class="table-active" height="4%">
 						<td>Facultad o Instituto al que pertenece</td>
 						<td>Periodo que se evalua</td>
 					</tr>
           <tr>
-						<td height=40>{{ $evaluacion->academico->TituloProfesional }}</td>
-						<td>{{ $evaluacion->academico->HorasContrato }}</td>
+						<td height=40></td>
+						<td></td>
 					</tr>
           <tr class="table-active">
 						<td>Título Profesional</td>
 						<td>Horas de Contrato</td>
 					</tr>
           <tr>
-						<td height=40>{{ $evaluacion->academico->Categoria }}</td>
-						<td>{{ $evaluacion->academico->GradoAcademico }}</td>
+						<td height=40></td>
+						<td></td>
 					</tr>
           <tr class="table-active">
 						<td>Categoría</td>
@@ -70,7 +70,7 @@
 					</tr>
           <tr>
 						<td height=40></td>
-						<td>{{ $evaluacion->academico->TipoPlanta }}</td>
+						<td></td>
 					</tr>
           <tr class="table-active">
 						<td>Calificación Anterior</td>
@@ -108,7 +108,7 @@
   			  </tr>
           <tr>
 						<td class="izq">1. Actividades de Docencia</td>
-						<td>{{ $evaluacion->p1 }} %</td>
+						<td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -118,7 +118,7 @@
 					</tr>
           <tr>
 						<td class="izq">2. Actividades de Investigación</td>
-						<td>{{ $evaluacion->p2 }} %</td>
+						<td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -128,7 +128,7 @@
 					</tr>
           <tr>
 						<td class="izq">3. Extension y Vinculación</td>
-						<td>{{ $evaluacion->p3 }} %</td>
+						<td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -138,7 +138,7 @@
 					</tr>
           <tr>
 						<td class="izq">4. Administración Académica</td>
-						<td>{{ $evaluacion->p4 }} %</td>
+						<td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -148,7 +148,7 @@
 					</tr>
           <tr>
 						<td class="izq">5. Otras actividades realizadas</td>
-						<td>{{ $evaluacion->p5 }} %</td>
+						<td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -158,7 +158,7 @@
 					</tr>
           <tr>
 						<th class="izq" colspan="7">Nota Final</th>
-						<td>{{ $evaluacion->NotaFinal }}</td>
+						<td></td>
 					</tr>
 				</tbody>
 			</table>
@@ -198,7 +198,7 @@
     <div class="col-md-12 margin-tb container">
         <div class="card card-active" style="background-color:white">
             <div class="card-body">
-                {{ $evaluacion->Argumento }}
+
             </div>
           </div>
       </div>
@@ -254,7 +254,7 @@
       </table>
     </div>
     <div class="fecha">
-      <br><br><br><br><h5>Fecha:{{ $evaluacion->comision->Fecha }}</h5>
+      <br><br><br><br><h5>Fecha:</h5>
     </div>
   </div>
 

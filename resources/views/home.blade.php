@@ -6,6 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                   {{--Mensaje de bienvenida para el usuario que inicio sesion --}}
+                  <evaluacion-componentrespaldo></evaluacion-componentrespaldo>
                     <div class="card-header"><h3>¡Bienvenido!</h3></div>
                     <div class="card-body">
                         @if (session('status'))

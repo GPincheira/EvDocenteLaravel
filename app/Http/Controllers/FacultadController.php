@@ -74,9 +74,8 @@ class FacultadController extends Controller
      */
 
   //funcion para mostrar cada registro, este eliminado o no
-    public function show($id)
+    public function show(Facultad $facultad)
     {
-        $facultad = facultad::withTrashed()->find($id);
         return view('facultades.show',compact('facultad'));
     }
 
@@ -114,6 +113,9 @@ class FacultadController extends Controller
       ]);
       $facultad = facultad::find($id);
       $facultad->update($request->all());
+      if ($request['deleted_at'] == "Inactivo"){
+        Facultad::destroy($id);
+      }
       return redirect()->route('facultades.index')
         ->with('success','Facultad Actualizada Exitosamente');
     }

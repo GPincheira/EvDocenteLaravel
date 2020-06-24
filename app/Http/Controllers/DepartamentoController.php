@@ -76,9 +76,9 @@ class DepartamentoController extends Controller
      * @param  \App\departamento  $departamento
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show(Departamento $departamento)
     {
-      $departamento = departamento::find($id);
       return view('departamentos.show',compact('departamento'));
     }
 
@@ -111,6 +111,9 @@ class DepartamentoController extends Controller
       ]);
       $departamento = departamento::find($id);
       $departamento->update($request->all());
+      if ($request['deleted_at'] == "Inactivo"){
+        Departamento::destroy($id);
+      }
       return redirect()->route('departamentos.index')
         ->with('success','Departamento Actualizado Exitosamente');
     }

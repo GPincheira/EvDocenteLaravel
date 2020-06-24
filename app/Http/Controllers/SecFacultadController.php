@@ -56,10 +56,10 @@ class SecFacultadController extends Controller
      * @param  \App\secFacultad  $secFacultad
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show(SecFacultad $secFacultad)
     {
-      $secFacultad = secFacultad::find($id);
-      return view('secFacultades.show',compact('secFacultad'));
+        return view('secFacultades.show',compact('secFacultad'));
     }
 
     /**

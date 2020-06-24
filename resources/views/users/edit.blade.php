@@ -64,28 +64,52 @@
         @csrf
         @method('PUT')
          <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="col-xs-4 col-sm-4 col-md-4">
                   <div class="form-group">
-                      <strong>Nombre:</strong>
+                      <strong>Nombre Completo:</strong>
                       <input type="text" name="Nombre" value="{{ $user->Nombre }}" class="form-control" placeholder="Ingrese Nombre">
                   </div>
               </div>
-              <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="col-xs-4 col-sm-4 col-md-4">
                   <div class="form-group">
-                      <strong>Apellido Paterno:</strong>
-                      <input type="text" name="ApellidoPaterno" value="{{ $user->ApellidoPaterno }}" class="form-control" placeholder="Ingrese Apellido Paterno">
+                      <br><input type="text" name="ApellidoPaterno" value="{{ $user->ApellidoPaterno }}" class="form-control" placeholder="Ingrese Apellido Paterno">
                   </div>
               </div>
-              <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="col-xs-4 col-sm-4 col-md-4">
                   <div class="form-group">
-                      <strong>Apellido Materno:</strong>
-                      <input type="text" name="ApellidoMaterno" value="{{ $user->ApellidoMaterno }}" class="form-control" placeholder="Ingrese Apellido Materno">
+                      <br><input type="text" name="ApellidoMaterno" value="{{ $user->ApellidoMaterno }}" class="form-control" placeholder="Ingrese Apellido Materno">
                   </div>
               </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="form-group">
+                  <strong>Email:</strong>
+                  <input type="email" name="email" value="{{ $user->email }}" class="form-control">
+              </div>
+          </div>
+        </div>
+
+
+        @if (@Auth::user()->id != $user->id)
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Estado:</strong>
+                    <select name="deleted_at" class="form-control">
+                      <option value="Activo">Activo</option>
+                      <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+          </div>
+        @endif
+        <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
-        </div>
+          </div>
+
 
     </form>
 @endsection

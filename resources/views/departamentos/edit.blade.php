@@ -38,13 +38,13 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12">
               <div class="form-group">
-                  <strong>Codigo:</strong>
-                  <input type="integer" name="id" value="{{ $departamento->id }}" class="form-control" placeholder="Ingrese el Codigo del Departamento">
+                  <strong>Id Departamento:</strong>
+                  <input type="integer" name="id" value="{{ $departamento->id }}" class="form-control">
               </div>
           </div>
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
-                   <strong>Nombre:</strong>
+                   <strong>Nombre Departamento:</strong>
                    <input type="text" name="Nombre" value="{{ $departamento->Nombre }}" class="form-control" placeholder="Ingrese el nombre del Departamento">
                </div>
            </div>
@@ -57,6 +57,15 @@
                        <option value='{{$facultad->id}}' @if($departamento->CodigoFacultad==$facultad->id) selected @endif>{{$facultad->id}} - {{$facultad->Nombre}}</option>
                      @endforeach
                    </select>
+                 </div>
+             </div>
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="form-group">
+                     <strong>Estado:</strong>
+                     <select name="deleted_at" class="form-control">
+                       <option value="Activo">Activo</option>
+                       <option value="Inactivo">Inactivo</option>
+                     </select>
                  </div>
              </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

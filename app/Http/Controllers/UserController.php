@@ -165,9 +165,9 @@ class UserController extends Controller
      * @param  \App\user  $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show(User $user)
     {
-        $user = user::find($id);
         return view('users.show',compact('user'));
     }
 
@@ -180,7 +180,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = user::find($id);
-        return view('users.edit',compact('user'));
+        $facultades = Facultad::all();
+        return view('users.edit',compact('user'),['facultades' => $facultades]);
     }
 
     /**
@@ -199,6 +200,9 @@ class UserController extends Controller
       ]);
       $user = user::find($id);
       $user->update($request->all());
+      if ($request['deleted_at'] == "Inactivo"){
+        User::destroy($id);
+      }
       return redirect()->route('users.index')
         ->with('success','Usuario Actualizado Exitosamente');
     }

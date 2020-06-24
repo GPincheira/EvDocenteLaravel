@@ -28,7 +28,7 @@ Route::post('/tareas/guardar', 'EvaluacionController@store2');
 Route::put('/tareas/actualizar', 'EvaluacionController@update2');
 Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy2');
 Route::get('/tareas/buscar', 'EvaluacionController@show2');
-Route::get('/evaluaciones/evaluar', 'EvaluacionController@evaluar');
+Route::get('/evaluaciones/eva', 'EvaluacionController@eva');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {
@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:academicos.create');
     Route::put('academicos/{role}', 'AcademicoController@update')->name('academicos.update')
                                                         ->middleware('permission:academicos.edit');
-    Route::get('academicos/{role}', 'AcademicoController@show')->name('academicos.show')
+    Route::get('academicos/{academico}', 'AcademicoController@show')->name('academicos.show')
                                                         ->middleware('permission:academicos.show');
     Route::delete('academicos/{role}', 'AcademicoController@destroy')->name('academicos.destroy')
                                                         ->middleware('permission:academicos.destroy');
@@ -59,7 +59,7 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:comisiones.create');
     Route::put('comisiones/{role}', 'ComisionController@update')->name('comisiones.update')
                                                         ->middleware('permission:comisiones.edit');
-    Route::get('comisiones/{role}', 'ComisionController@show')->name('comisiones.show')
+    Route::get('comisiones/{comision}', 'ComisionController@show')->name('comisiones.show')
                                                         ->middleware('permission:comisiones.show');
     Route::delete('comisiones/{role}', 'ComisionController@destroy')->name('comisiones.destroy')
                                                         ->middleware('permission:comisiones.destroy');
@@ -76,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:departamentos.create');
     Route::put('departamentos/{role}', 'DepartamentoController@update')->name('departamentos.update')
                                                         ->middleware('permission:departamentos.edit');
-    Route::get('departamentos/{role}', 'DepartamentoController@show')->name('departamentos.show')
+    Route::get('departamentos/{departamento}', 'DepartamentoController@show')->name('departamentos.show')
                                                        ->middleware('permission:departamentos.show');
     Route::delete('departamentos/{role}', 'DepartamentoController@destroy')->name('departamentos.destroy')
                                                          ->middleware('permission:departamentos.destroy');
@@ -97,7 +97,7 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:evaluaciones.create');
     Route::put('evaluaciones/{role}', 'EvaluacionController@update')->name('evaluaciones.update')
                                                         ->middleware('permission:evaluaciones.edit');
-    Route::get('evaluaciones/{role}', 'EvaluacionController@show')->name('evaluaciones.show')
+    Route::get('evaluaciones/{evaluacion}', 'EvaluacionController@show')->name('evaluaciones.show')
                                                        ->middleware('permission:evaluaciones.show');
     Route::delete('evaluaciones/{role}', 'EvaluacionController@destroy')->name('evaluaciones.destroy')
                                                          ->middleware('permission:evaluaciones.destroy');
@@ -118,7 +118,7 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:facultades.create');
     Route::put('facultades/{role}', 'FacultadController@update')->name('facultades.update')
                                                         ->middleware('permission:facultades.edit');
-    Route::get('facultades/{role}', 'FacultadController@show')->name('facultades.show')
+    Route::get('/facultades/{facultad}', 'FacultadController@show')->name('facultades.show')
                                                         ->middleware('permission:facultades.show');
     Route::delete('facultades/{role}', 'FacultadController@destroy')->name('facultades.destroy')
                                                         ->middleware('permission:facultades.destroy');
@@ -153,7 +153,7 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:Users.create3');
     Route::put('users/{role}', 'UserController@update')->name('users.update')
                                                         ->middleware('permission:Users.edit');
-    Route::get('users/{role}', 'UserController@show')->name('users.show')
+    Route::get('users/{user}', 'UserController@show')->name('users.show')
                                                         ->middleware('permission:Users.show');
     Route::delete('users/{role}', 'UserController@destroy')->name('users.destroy')
                                                         ->middleware('permission:Users.destroy');

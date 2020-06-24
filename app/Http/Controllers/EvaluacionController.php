@@ -29,8 +29,8 @@ class EvaluacionController extends Controller
         //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
     }
 
-    public function evaluar(){
-        return view('evaluaciones.evaluar');
+    public function eva(){
+        return view('evaluaciones.eva');
     }
 
     public function index()
@@ -145,10 +145,9 @@ class EvaluacionController extends Controller
   }
 }
 
-public function show($id)
+public function show(Evaluacion $evaluacion)
 {
-     $evaluacion = evaluacion::withTrashed()->find($id);
-     return view('evaluaciones.show',compact('evaluacion'));
+    return view('evaluaciones.show',compact('evaluacion'));
 }
 
 public function edit($id)

@@ -105,9 +105,8 @@ class AcademicoController extends Controller
      */
 
      //funcion show, que muestra los datos de un registro en especifico
-    public function show($id)
+    public function show(Academico $academico)
     {
-      $academico = academico::find($id);
       return view('academicos.show',compact('academico'));
     }
 
@@ -153,6 +152,9 @@ class AcademicoController extends Controller
       ]);
       $academico = academico::find($id);    //si todo es valido, se busca el registro a actualizar y se hacen los cambios
       $academico->update($request->all());
+      if ($request['deleted_at'] == "Inactivo"){
+        Academico::destroy($id);
+      }
       return redirect()->route('academicos.index')
         ->with('success','Academico Actualizado Exitosamente');
     }

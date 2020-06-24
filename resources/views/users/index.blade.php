@@ -57,7 +57,6 @@
               <td>{{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</td>
               <td>{{ $user->email }}</td>
               <td>@if (Request::is('users1'))Activo @else Inactivo @endif</td>
-              <td>
               @if (Request::is('users1'))
                 @if (@Auth::user()->id != $user->id)
                   <td width="167px">
