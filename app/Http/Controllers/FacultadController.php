@@ -59,6 +59,9 @@ class FacultadController extends Controller
         'DecanoAMaterno' => 'required',
       ]);
       Facultad::create($request->all());
+      if ($request['deleted_at'] == "Inactivo"){
+        Facultad::destroy($request['id']);
+      }
       return redirect()->route('facultades.index')
         ->with('success','Facultad creada exitosamente.');
     }

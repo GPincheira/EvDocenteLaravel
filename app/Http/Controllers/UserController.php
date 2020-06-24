@@ -105,6 +105,9 @@ class UserController extends Controller
       $request['password']= $password;
       $user = User::create($request->all());
       $user->assignRole('Administrador');
+      if ($request['deleted_at'] == "Inactivo"){
+        User::destroy($request['id']);
+      }
       return redirect()->route('users.index')
         ->with('success','Administrador creado exitosamente.');
     }
@@ -126,6 +129,10 @@ class UserController extends Controller
       $user = User::create($request->all());
       $user->assignRole('SecFacultad');
       secFacultad::create(['id' => $request['id'], 'CodigoFacultad' => $request['CodigoFacultad']]);
+      if ($request['deleted_at'] == "Inactivo"){
+        User::destroy($request['id']);
+        secFacultad::destroy($request['id']);
+      }
       return redirect()->route('users.index2')
         ->with('success','Usuario creado exitosamente.');
     }
@@ -144,6 +151,9 @@ class UserController extends Controller
       $password=bcrypt($request['password']);
       $request['password']= $password;
       $user = User::create($request->all());
+      if ($request['deleted_at'] == "Inactivo"){
+        User::destroy($request['id']);
+      }
       $user->assignRole('Secretario');
       return redirect()->route('users.index3')
         ->with('success','Usuario creado exitosamente.');

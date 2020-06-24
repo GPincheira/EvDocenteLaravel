@@ -87,8 +87,14 @@ class AcademicoController extends Controller
         'TipoPlanta' => 'required',
       ]);
       Academico::create($request->all());
+      if ($request['deleted_at'] == "Inactivo"){
+        Academico::destroy($request['id']);
+      }
       return redirect()->route('academicos.index')
         ->with('success','Academico creado exitosamente.');
+
+
+
     }
 
     /**

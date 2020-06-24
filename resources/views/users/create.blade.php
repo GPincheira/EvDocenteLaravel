@@ -36,48 +36,64 @@
     @csrf
 
      <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-4">
+        <div class="col-xs-2 col-sm-2 col-md-2">
             <div class="form-group">
                 <strong>RUT:</strong>
                 <input type="integer" name="id" class="form-control" placeholder="Ingrese el RUT">
             </div>
         </div>
-        <div class="col-xs-2 col-sm-2 col-md-2">
+        <div class="col-xs-1 col-sm-1 col-md-1">
             <div class="form-group">
-                <strong>Verificador:</strong>
-                <input type="text" name="verificador" class="form-control" placeholder="Ingrese el verificador">
+                <br><input type="text" name="verificador" class="form-control">
             </div>
         </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
+      </div>
+      <div class="row">
+          <div class="col-xs-4 col-sm-4 col-md-4">
               <div class="form-group">
-                  <strong>Nombre:</strong>
+                  <strong>Nombre Administrador:</strong>
                   <input type="text" name="Nombre" class="form-control" placeholder="Ingrese Nombre">
               </div>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="col-xs-4 col-sm-4 col-md-4">
               <div class="form-group">
-                  <strong>Apellido Paterno:</strong>
-                  <input type="text" name="ApellidoPaterno" class="form-control" placeholder="Ingrese Apellido Paterno">
+                  <br><input type="text" name="ApellidoPaterno" class="form-control" placeholder="Ingrese Apellido Paterno">
+              </div>
+        </div>
+          <div class="col-xs-4 col-sm-4 col-md-4">
+              <div class="form-group">
+                  <br><input type="text" name="ApellidoMaterno" class="form-control" placeholder="Ingrese Apellido Materno">
               </div>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                  <strong>Apellido Materno:</strong>
-                  <input type="text" name="ApellidoMaterno" class="form-control" placeholder="Ingrese Apellido Materno">
-              </div>
-          </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Email:</strong>
-                <input type="email" name="email" class="form-control" placeholder="Ingrese el email">
+                <input type="email" name="email" class="form-control" placeholder="Ingrese el Email">
             </div>
         </div>
+        </div>
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Password:</strong>
-                <input type="password" name="password" class="form-control" placeholder="Ingrese ">
+                <strong>Contraseña:</strong>
+                <input type="password" name="password" class="form-control" placeholder="Ingrese la Contraseña">
             </div>
         </div>
+        </div>
+        <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Estado:</strong>
+                <select name="deleted_at" class="form-control">
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+            </div>
+        </div>
+        </div>
+        <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
         </div>

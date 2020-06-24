@@ -34,17 +34,16 @@
 
 <form action="{{ route('facultades.store') }}" method="POST">
     @csrf
-
      <div class="row">
        <div class="col-xs-12 col-sm-12 col-md-12">
            <div class="form-group">
-               <strong>Codigo Facultad:</strong>
-               <input type="integer" name="id" class="form-control" placeholder="Ingrese el Codigo de la Facultad">
+               <strong>Id Facultad:</strong>
+               <input type="integer" name="id" class="form-control" placeholder="Ingrese el Id de la Facultad">
            </div>
        </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Nombre:</strong>
+                <strong>Nombre Facultad:</strong>
                 <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre de la Facultad">
             </div>
       </div>
@@ -57,17 +56,23 @@
           </div>
       <div class="col-xs-4 col-sm-4 col-md-4">
         <div class="form-group">
-                <strong>Apellido Paterno Decano:</strong>
-                <input type="text" name="DecanoAPaterno" class="form-control" placeholder="Ingrese Apellido Paterno del Decano">
+                <br><input type="text" name="DecanoAPaterno" class="form-control" placeholder="Ingrese Apellido Paterno del Decano">
             </div>
           </div>
         <div class="col-xs-4 col-sm-4 col-md-4">
           <div class="form-group">
-                <strong>Apellido Materno Decano:</strong>
-                <input type="text" name="DecanoAMaterno" class="form-control" placeholder="Ingrese Apellido Materno del Decano">
+                <br><input type="text" name="DecanoAMaterno" class="form-control" placeholder="Ingrese Apellido Materno del Decano">
             </div>
         </div>
-
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Estado:</strong>
+                <select name="deleted_at" class="form-control">
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                 <button type="submit" class="btn btn-primary">Guardar</button>
         </div>

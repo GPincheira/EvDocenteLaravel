@@ -45,19 +45,20 @@
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
                    <strong>Nombre:</strong>
-                   <input type="text" name="Nombre" value="{{ $departamento->Nombre }}" class="form-control" placeholder="Ingrese el nombre del Departmaento">
+                   <input type="text" name="Nombre" value="{{ $departamento->Nombre }}" class="form-control" placeholder="Ingrese el nombre del Departamento">
                </div>
            </div>
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
                    <strong>Facultad a la que pertenece:</strong>
-                   <select name="CodigoFacultad" value="{{ $departamento->CodigoFacultad }}" class="form-control">
+                   <select name="CodigoFacultad" class="form-control" required>
+                     <option value="">SELECCIONE LA FACULTAD</option>
                      @foreach($facultades as $facultad)
-                     <option value='{{$facultad->id}}'>{{$facultad->id}} - {{$facultad->Nombre}}</option>
+                       <option value='{{$facultad->id}}' @if($departamento->CodigoFacultad==$facultad->id) selected @endif>{{$facultad->id}} - {{$facultad->Nombre}}</option>
                      @endforeach
                    </select>
-               </div>
-           </div>
+                 </div>
+             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Guardar</button>
             </div>

@@ -126,13 +126,14 @@
             <td>{{ $academico->departamento->facultad->id }}  - {{ $academico->departamento->facultad->Nombre }}</td>
             <td>{{ $academico->CodigoDpto }} - {{ $academico->departamento->Nombre }}</td>
             <td>@if (Request::is('academicos'))Activo @else Inactivo @endif</td>
-            <td>
-              @if (Request::is('academicos'))
+            @if (Request::is('academicos'))
+              <td width="120px">
                 <form>
                     <a href="{{ route('academicos.show',$academico->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                    <a href="{{ route('academicos.edit',$academico->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
                 </form>
-              @endif
-            </td>
+              </td>
+            @endif
           </tr>
       @endforeach
     @endif

@@ -63,6 +63,9 @@ class DepartamentoController extends Controller
         'CodigoFacultad' => ['required','integer'],
       ]);
       Departamento::create($request->all());
+      if ($request['deleted_at'] == "Inactivo"){
+        Departamento::destroy($request['id']);
+      }
       return redirect()->route('departamentos.index')
         ->with('success','Departamento creado exitosamente.');
     }

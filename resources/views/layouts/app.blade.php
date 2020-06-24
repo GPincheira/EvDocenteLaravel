@@ -94,7 +94,6 @@
           grid-column : 1;
           grid-row : 2;
         }
-
     </style>
 
 </head>

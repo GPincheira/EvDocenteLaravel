@@ -38,55 +38,64 @@
 <form action="{{ route('academicos.store') }}" method="POST">
     @csrf
      <div class="row">
-       <div class="col-xs-5 col-sm-5 col-md-5">
+       <div class="col-xs-2 col-sm-2 col-md-2">
            <div class="form-group">
                <strong>RUT:</strong>
                <input type="integer" name="id" class="form-control" placeholder="Ingrese el RUT">
            </div>
        </div>
-       <div class="col-xs-2 col-sm-2 col-md-2">
+       <div class="col-xs-1 col-sm-1 col-md-1">
            <div class="form-group">
-               <strong>verificador:</strong>
-               <input type="text" name="verificador" class="form-control" placeholder="Ingrese el verificador">
+               <br><input type="text" name="verificador" class="form-control">
            </div>
        </div>
-        <div class="col-xs-6 col-sm-6 col-md-6">
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
                 <strong>Nombre:</strong>
                 <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre del Academico">
             </div>
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
                 <strong>Apellido Paterno:</strong>
                 <input type="text" name="ApellidoPaterno" class="form-control" placeholder="Ingrese el Apellido Paterno">
             </div>
         </div>
-        <div class="col-xs-3 col-sm-3 col-md-3">
+        <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
                 <strong>Apellido Materno:</strong>
                 <input type="text" name="ApellidoMaterno" class="form-control" placeholder="Ingrese Apellido Materno">
             </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Titulo Profesional:</strong>
                 <input type="text" name="TituloProfesional" class="form-control" placeholder="Ingrese el Titulo Profesional">
             </div>
         </div>
-
+      </div>
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Grado Academico:</strong>
                 <input type="text" name="GradoAcademico" class="form-control" placeholder="Ingrese el Grado Academico">
             </div>
         </div>
+      </div>
+
+
 
 {{--Se recorren los dptos para enlistar solo los que pertenezcan a la misma facultad que el secretario de facultad que está trabajando--}}
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Departamento al que pertenece:</strong>
-                <select name="CodigoDpto" class="form-control">
+                <select name="CodigoDpto" class="form-control" required>
+                  <option value="">SELECCIONE EL DEPARTAMENTO</option>
                   @foreach($departamentos as $departamento)
                     @foreach($secFacultades as $secFacultad)
                     @if(@Auth::user()->id == $secFacultad->id && $secFacultad->CodigoFacultad == $departamento->CodigoFacultad)
@@ -97,11 +106,14 @@
                 </select>
             </div>
         </div>
+      </div>
   {{--Para eleccion de categoria se enlistan opciones estaticas--}}
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Categoria:</strong>
-                <select name="Categoria" class="form-control">
+                <select name="Categoria" class="form-control" required>
+                  <option value="">SELECCIONE CATEGORIA</option>
                   <option value="Instructor">Instructor</option>
                   <option value="Auxiliar">Auxiliar</option>
                   <option value="Adjunto">Adjunto</option>
@@ -109,18 +121,42 @@
                 </select>
             </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Horas de contrato:</strong>
-                <input type="integer" name="HorasContrato" class="form-control" placeholder="Ingrese cantidad de horas de contrato">
+                <strong>Grado Academico:</strong>
+                <input type="text" name="GradoAcademico" class="form-control" placeholder="Ingrese el Grado Academico">
             </div>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="form-group">
+                <strong>Horas de contrato (max 44):</strong>
+                <input type="number" name="HorasContrato" min="1" max="44" class="form-control">
+            </div>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Tipo de Planta:</strong>
                 <input type="text" name="TipoPlanta" class="form-control" placeholder="Ingrese el tipo de Planta">
             </div>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Estado:</strong>
+                <select name="deleted_at" class="form-control">
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+                </select>
+            </div>
+        </div>
+      </div>
 
       {{--Boton para terminar el proceso--}}
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

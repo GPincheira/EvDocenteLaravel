@@ -27,7 +27,7 @@
               <a class="btn btn-secondary" style="margin-left: 12px" href="{{ route('users.index3elim') }}"> Ver Inactivos</a>
           </div>
           <div class="pull-right">
-              <a class="btn btn-success" href="{{ route('users.create3') }}"> Crear Nuevo Secretario</a>
+              <a class="btn btn-success" href="{{ route('users.create3') }}"> Crear Nueva Secretaria</a>
           </div>
         @else
         <div class="pull-left">
