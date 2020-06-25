@@ -88,59 +88,139 @@
                       <th width="8%">I</th>
                       <th>%T*C/100</th>
                     </tr>
-                    <tr>
-                      <td class="izq">1. Actividades de Docencia</td>
-                      <td><input type="number" v-model="p1"></td>
-                      <td><input type="float" v-model="arrayN1[0]"></td>
-                      <td><input type="float" v-model="arrayN1[1]"></td>
-                      <td><input type="float" v-model="arrayN1[2]"></td>
-                      <td><input type="float" v-model="arrayN1[3]"></td>
-                      <td><input type="float" v-model="arrayN1[4]"></td>
-                      <td>{{  }}</td>
-                    </tr>
-                    <tr>
-                      <td class="izq">2. Actividades de Investigación</td>
-                      <td><input type="number" v-model="p2"></td>
-                      <td><input type="float" v-model="arrayN2[0]"></td>
-                      <td><input type="float" v-model="arrayN2[1]"></td>
-                      <td><input type="float" v-model="arrayN2[2]"></td>
-                      <td><input type="float" v-model="arrayN2[3]"></td>
-                      <td><input type="float" v-model="arrayN2[4]"></td>
-                      <td>{{ arrayN2[0] * arrayN2[1] * arrayN2[2] * arrayN2[3] * arrayN2[4] }}</td>
-                    </tr>
-                    <tr>
-                      <td class="izq">3. Extension y Vinculación</td>
-                      <td><input type="number" v-model="p3"></td>
-                      <td><input type="float" v-model="arrayN3[0]"></td>
-                      <td><input type="float" v-model="arrayN3[1]"></td>
-                      <td><input type="float" v-model="arrayN3[2]"></td>
-                      <td><input type="float" v-model="arrayN3[3]"></td>
-                      <td><input type="float" v-model="arrayN3[4]"></td>
-                      <td>{{ arrayN3[0] + arrayN3[1] + arrayN3[2] + arrayN3[3] + arrayN3[4] }}</td>
-                    </tr>
-                    <tr>
-                      <td class="izq">4. Administración Académica</td>
-                      <td><input type="number" v-model="p4"></td>
-                      <td><input type="float" v-model="arrayN4[0]"></td>
-                      <td><input type="float" v-model="arrayN4[1]"></td>
-                      <td><input type="float" v-model="arrayN4[2]"></td>
-                      <td><input type="float" v-model="arrayN4[3]"></td>
-                      <td><input type="float" v-model="arrayN4[4]"></td>
-                      <td>{{ arrayN4[0] * arrayN4[1] * arrayN4[2] * arrayN4[3] * arrayN4[4] }}</td>
-                    </tr>
-                    <tr>
-                      <td class="izq">5. Otras actividades realizadas</td>
-                      <td><input type="number" v-model="p5"></td>
-                      <td><input type="float" v-model="arrayN5[0]"></td>
-                      <td><input type="float" v-model="arrayN5[1]"></td>
-                      <td><input type="float" v-model="arrayN5[2]"></td>
-                      <td><input type="float" v-model="arrayN5[3]"></td>
-                      <td><input type="float" v-model="arrayN5[4]"></td>
-                      <td>{{ arrayN5[0] * arrayN5[1] * arrayN5[2] * arrayN5[3] * arrayN5[4] }}</td>
-                    </tr>
+
+                      <tr v-if="p1>0">
+                        <td class="izq">1. Actividades de Docencia</td>
+                        <td><input type="number" v-model="p1" max="100"></td>
+                        <td v-if="arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[0]" min="4.5" max="5" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[0]" min="4.5" max="5"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0"><input type="float" v-model="arrayN1[4]" min="0" max="2.6" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[4]" min="0" max="2.6"></td>
+                        <td>{{  }}</td>
+                      </tr>
+                      <tr v-else>
+                        <td class="izq">1. Actividades de Docencia</td>
+                        <td><input type="number" v-model="p1" max="100"></td>
+                        <td><input type="float" v-model="arrayN1[0]" min="4.5" max="5" disabled></td>
+                        <td><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4" disabled></td>
+                        <td><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" disabled></td>
+                        <td><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" disabled></td>
+                        <td><input type="float" v-model="arrayN1[4]" min="0" max="2.6" disabled></td>
+                        <td>{{  }}</td>
+                      </tr>
+
+                      <tr v-if="p2>0">
+                        <td class="izq">2. Actividades de Investigación</td>
+                        <td><input type="number" v-model="p2" max="100"></td>
+                        <td v-if="arrayN2[1]>0 || arrayN2[2]>0 || arrayN2[3]>0 || arrayN2[4]>0"><input type="float" v-model="arrayN2[0]" min="4.5" max="5" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN2[0]" min="4.5" max="5"></td>
+                        <td v-if="arrayN2[0]>0 || arrayN2[2]>0 || arrayN2[3]>0 || arrayN2[4]>0"><input type="float" v-model="arrayN2[1]" min="4.0" max="4.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN2[1]" min="4.0" max="4.4"></td>
+                        <td v-if="arrayN2[0]>0 || arrayN2[1]>0 || arrayN2[3]>0 || arrayN2[4]>0"><input type="float" v-model="arrayN2[2]" min="3.5" max="3.9" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN2[2]" min="3.5" max="3.9"></td>
+                        <td v-if="arrayN2[0]>0 || arrayN2[1]>0 || arrayN2[2]>0 || arrayN2[4]>0"><input type="float" v-model="arrayN2[3]" min="2.7" max="3.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN2[3]" min="2.7" max="3.4"></td>
+                        <td v-if="arrayN2[0]>0 || arrayN2[1]>0 || arrayN2[2]>0 || arrayN2[3]>0"><input type="float" v-model="arrayN2[4]" min="0" max="2.6" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN2[4]" min="0" max="2.6"></td>
+                        <td>{{  }}</td>
+                      </tr>
+                      <tr v-else>
+                        <td class="izq">2. Actividades de Investigación</td>
+                        <td><input type="number" v-model="p2" max="100"></td>
+                        <td><input type="float" v-model="arrayN2[0]" min="4.5" max="5" disabled></td>
+                        <td><input type="float" v-model="arrayN2[1]" min="4.0" max="4.4" disabled></td>
+                        <td><input type="float" v-model="arrayN2[2]" min="3.5" max="3.9" disabled></td>
+                        <td><input type="float" v-model="arrayN2[3]" min="2.7" max="3.4" disabled></td>
+                        <td><input type="float" v-model="arrayN2[4]" min="0" max="2.6" disabled></td>
+                        <td>{{  }}</td>
+                      </tr>
+
+                      <tr v-if="p3>0">
+                        <td class="izq">3. Extension y Vinculación</td>
+                        <td><input type="number" v-model="p3" max="100"></td>
+                        <td v-if="arrayN3[1]>0 || arrayN3[2]>0 || arrayN3[3]>0 || arrayN3[4]>0"><input type="float" v-model="arrayN3[0]" min="4.5" max="5" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN3[0]" min="4.5" max="5"></td>
+                        <td v-if="arrayN3[0]>0 || arrayN3[2]>0 || arrayN3[3]>0 || arrayN3[4]>0"><input type="float" v-model="arrayN3[1]" min="4.0" max="4.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN3[1]" min="4.0" max="4.4"></td>
+                        <td v-if="arrayN3[0]>0 || arrayN3[1]>0 || arrayN3[3]>0 || arrayN3[4]>0"><input type="float" v-model="arrayN3[2]" min="3.5" max="3.9" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN3[2]" min="3.5" max="3.9"></td>
+                        <td v-if="arrayN3[0]>0 || arrayN3[1]>0 || arrayN3[2]>0 || arrayN3[4]>0"><input type="float" v-model="arrayN3[3]" min="2.7" max="3.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN3[3]" min="2.7" max="3.4"></td>
+                        <td v-if="arrayN3[0]>0 || arrayN3[1]>0 || arrayN3[2]>0 || arrayN3[3]>0"><input type="float" v-model="arrayN3[4]" min="0" max="2.6" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN3[4]" min="0" max="2.6"></td>
+                        <td>{{  }}</td>
+                      </tr>
+                      <tr v-else>
+                        <td class="izq">3. Extension y Vinculación</td>
+                        <td><input type="number" v-model="p3" max="100"></td>
+                        <td><input type="float" v-model="arrayN3[0]" min="4.5" max="5" disabled></td>
+                        <td><input type="float" v-model="arrayN3[1]" min="4.0" max="4.4" disabled></td>
+                        <td><input type="float" v-model="arrayN3[2]" min="3.5" max="3.9" disabled></td>
+                        <td><input type="float" v-model="arrayN3[3]" min="2.7" max="3.4" disabled></td>
+                        <td><input type="float" v-model="arrayN3[4]" min="0" max="2.6" disabled></td>
+                        <td>{{  }}</td>
+                      </tr>
+
+                      <tr v-if="p4>0">
+                        <td class="izq">4. Administración Académica</td>
+                        <td><input type="number" v-model="p4" max="100"></td>
+                        <td v-if="arrayN4[1]>0 || arrayN4[2]>0 || arrayN4[3]>0 || arrayN4[4]>0"><input type="float" v-model="arrayN4[0]" min="4.5" max="5" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN4[0]" min="4.5" max="5"></td>
+                        <td v-if="arrayN4[0]>0 || arrayN4[2]>0 || arrayN4[3]>0 || arrayN4[4]>0"><input type="float" v-model="arrayN4[1]" min="4.0" max="4.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN4[1]" min="4.0" max="4.4"></td>
+                        <td v-if="arrayN4[0]>0 || arrayN4[1]>0 || arrayN4[3]>0 || arrayN4[4]>0"><input type="float" v-model="arrayN4[2]" min="3.5" max="3.9" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN4[2]" min="3.5" max="3.9"></td>
+                        <td v-if="arrayN4[0]>0 || arrayN4[1]>0 || arrayN4[2]>0 || arrayN4[4]>0"><input type="float" v-model="arrayN4[3]" min="2.7" max="3.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN4[3]" min="2.7" max="3.4"></td>
+                        <td v-if="arrayN4[0]>0 || arrayN4[1]>0 || arrayN4[2]>0 || arrayN4[3]>0"><input type="float" v-model="arrayN4[4]" min="0" max="2.6" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN4[4]" min="0" max="2.6"></td>
+                        <td>{{  }}</td>
+                      </tr>
+                      <tr v-else>
+                        <td class="izq">4. Administración Académica</td>
+                        <td><input type="number" v-model="p4" max="100"></td>
+                        <td><input type="float" v-model="arrayN4[0]" min="4.5" max="5" disabled></td>
+                        <td><input type="float" v-model="arrayN4[1]" min="4.0" max="4.4" disabled></td>
+                        <td><input type="float" v-model="arrayN4[2]" min="3.5" max="3.9" disabled></td>
+                        <td><input type="float" v-model="arrayN4[3]" min="2.7" max="3.4" disabled></td>
+                        <td><input type="float" v-model="arrayN4[4]" min="0" max="2.6" disabled></td>
+                        <td>{{  }}</td>
+                      </tr>
+
+                      <tr v-if="p5>0">
+                        <td class="izq">5. Otras actividades realizadas</td>
+                        <td><input type="number" v-model="p5" max="100"></td>
+                        <td v-if="arrayN5[1]>0 || arrayN5[2]>0 || arrayN5[3]>0 || arrayN5[4]>0"><input type="float" v-model="arrayN5[0]" min="4.5" max="5" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN5[0]" min="4.5" max="5"></td>
+                        <td v-if="arrayN5[0]>0 || arrayN5[2]>0 || arrayN5[3]>0 || arrayN5[4]>0"><input type="float" v-model="arrayN5[1]" min="4.0" max="4.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN5[1]" min="4.0" max="4.4"></td>
+                        <td v-if="arrayN5[0]>0 || arrayN5[1]>0 || arrayN5[3]>0 || arrayN5[4]>0"><input type="float" v-model="arrayN5[2]" min="3.5" max="3.9" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN5[2]" min="3.5" max="3.9"></td>
+                        <td v-if="arrayN5[0]>0 || arrayN5[1]>0 || arrayN5[2]>0 || arrayN5[4]>0"><input type="float" v-model="arrayN5[3]" min="2.7" max="3.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN5[3]" min="2.7" max="3.4"></td>
+                        <td v-if="arrayN5[0]>0 || arrayN5[1]>0 || arrayN5[2]>0 || arrayN5[3]>0"><input type="float" v-model="arrayN5[4]" min="0" max="2.6" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN5[4]" min="0" max="2.6"></td>
+                        <td>{{ parseFloat(arrayN5[0]) + parseFloat(arrayN5[1]) + parseFloat(arrayN5[2]) +parseFloat(arrayN5[3]) +parseFloat(arrayN5[4]) }}</td>
+                      </tr>
+                      <tr v-else>
+                        <td class="izq">5. Otras actividades realizadas</td>
+                        <td><input type="number" v-model="p5" max="100"></td>
+                        <td><input type="float" v-model="arrayN5[0]" min="4.5" max="5" disabled></td>
+                        <td><input type="float" v-model="arrayN5[1]" min="4.0" max="4.4" disabled></td>
+                        <td><input type="float" v-model="arrayN5[2]" min="3.5" max="3.9" disabled></td>
+                        <td><input type="float" v-model="arrayN5[3]" min="2.7" max="3.4" disabled></td>
+                        <td><input type="float" v-model="arrayN5[4]" value="0" min="0" max="2.6" disabled></td>
+                        <td>{{ parseFloat(arrayN5[0]) + parseFloat(arrayN5[1]) +parseFloat(arrayN5[2]) +parseFloat(arrayN5[3]) +parseFloat(arrayN5[4]) }}</td>
+                      </tr>
                     <tr>
                       <th class="izq" colspan="7">Nota Final</th>
-                      <td>{{ parseInt(p1) + parseInt(p2) }}</td>
+                      <td>{{ parseFloat(p1) + parseFloat(p2)+ parseFloat(p3) + parseFloat(p4) + parseFloat(p5) }}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -216,42 +296,7 @@
             <div class="col-md-6">
               <div class="form-group"><!-- Formulario para la creación o modificación-->
 
-              <label>id</label>
-              <input v-model="id" type="integer" class="form-control">
 
-
-                <label>RUTAcademico</label>
-                <input v-model="RUTAcademico" type="integer" class="form-control">
-
-
-                <label>CodigoComision</label>
-                <input v-model="CodigoComision" type="integer" class="form-control">
-
-                <label>AÑo</label>
-                <input v-model="año" type="integer" class="form-control">
-
-                <label>P1</label>
-                <input v-model="p1" type="integer" class="form-control">
-                <label>N1</label>
-                <input v-model="n1" type="float" class="form-control">
-                <label>P2</label>
-                <input v-model="p2" type="integer" class="form-control">
-                <label>N2</label>
-                <input v-model="n2" type="float" class="form-control">
-                <label>P3</label>
-                <input v-model="p3" type="integer" class="form-control">
-                <label>N3</label>
-                <input v-model="n3" type="float" class="form-control">
-                <label>P4</label>
-                <input v-model="p4" type="integer" class="form-control">
-                <label>N4</label>
-                <input v-model="n4" type="float" class="form-control">
-                <label>P5</label>
-                <input v-model="p5" type="integer" class="form-control">
-                <label>N5</label>
-                <input v-model="n5" type="float" class="form-control">
-                <label>NotaFinal</label>
-                <input v-model="NotaFinal" type="float" class="form-control">
 
                 <label>Argumento</label>
                 <input v-model="Argumento" type="string" class="form-control">
@@ -272,18 +317,15 @@
 
 <script>
     export default {
-
         data(){
-
             return{
                 RUTAcademico:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
                 CodigoComision:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
                 año:"",
-
                 NotaFinal:"",
                 Argumento:"",
-                p1: '0',
-                p2: '0',
+                p1: 0,
+                p2: 0,
                 p3: 0,
                 p4: 0,
                 p5: 0,
@@ -300,7 +342,7 @@
         methods:{
         getEvaluacions(){
             let me =this;
-            let url = '/tareas' //Ruta que hemos creado para que nos devuelva todas las tareas
+            let url = '/blabla' //Ruta que hemos creado para que nos devuelva todas las tareas
             axios.get(url).then(function (response) {
                 //creamos un array y guardamos el contenido que nos devuelve el response
                 me.arrayEvaluacions = response.data;
@@ -322,7 +364,6 @@
                 console.log(error);
             });
         },
-
         saveEvaluacions(){
             let me =this;
             let url = '/tareas/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
@@ -350,7 +391,6 @@
                 console.log(error);
             });
         },
-
         updateEvaluacions(){/*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
                 tarea que queremos modificar*/
                 let me = this;

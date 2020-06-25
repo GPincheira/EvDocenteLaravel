@@ -22,13 +22,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
 Route::get('/exportar', 'EvaluacionController@export')->name('exportar');
 
-Route::get('/tareas', 'EvaluacionController@json');
+Route::get('/blabla', 'EvaluacionController@json');
 Route::get('/dptos', 'DepartamentoController@json');
-Route::post('/tareas/guardar', 'EvaluacionController@store2');
+Route::post('/blabla/guardar', 'EvaluacionController@store2');
 Route::put('/tareas/actualizar', 'EvaluacionController@update2');
 Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy2');
-Route::get('/tareas/buscar', 'EvaluacionController@show2');
-Route::get('/evaluaciones/eva', 'EvaluacionController@eva');
+
+Route::get('evaluaciones/evaluar', 'EvaluacionController@evaluar');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {

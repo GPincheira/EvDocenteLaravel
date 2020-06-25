@@ -121,7 +121,7 @@
 						<td></td>
             <td></td>
             <td></td>
-            <td></td>
+            <td>{{ $evaluacion->p5 }} %</td>
             <td></td>
             <td></td>
             <td></td>

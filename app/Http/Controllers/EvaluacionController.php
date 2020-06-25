@@ -15,23 +15,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class EvaluacionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-//En index se obtiene el listado completo de evaluaciones realizadas y se paginan de 10.
-// Se va hacia la vista de blade, de manera diferente dependiendo del rol de usuario
-    public function json()
-    {
-        return Evaluacion::all();
-        //Esta función nos devolvera todas las tareas que tenemos en nuestra BD
-    }
-
-    public function eva(){
-        return view('evaluaciones.eva');
-    }
 
     public function index()
     {
@@ -144,6 +127,7 @@ class EvaluacionController extends Controller
     return Redirect()->back()->with(['message' => 'La suma de los porcentajes debe ser 100']);
   }
 }
+
 
 public function show(Evaluacion $evaluacion)
 {
@@ -313,6 +297,15 @@ public function reactivar($id)
         $evaluacion = evaluacion::find($id);
         $pdf = PDF::loadView('pdf.evaluaciones', compact('evaluacion'));
         return $pdf->download('evaluacion.pdf');
+    }
+
+    public function json()
+    {
+        return Evaluacion::all();
+    }
+
+    public function evaluar(){
+        return view('evaluaciones.evaluar');
     }
 
 }

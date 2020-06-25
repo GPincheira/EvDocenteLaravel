@@ -18,7 +18,6 @@ class DepartamentoController extends Controller
 
     public function json()
     {
-
         return Departamento::all();
     }
 
