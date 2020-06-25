@@ -18,7 +18,7 @@ class CreateAcademicosTable extends Migration
           $table->char('verificador',1);
           $table->string('Nombre');
           $table->string('ApellidoPaterno');
-          $table->string('ApellidoMaterno');
+          $table->string('ApellidoMaterno')->nullable();
           $table->string('TituloProfesional');
           $table->string('GradoAcademico');
           $table->integer('CodigoDpto');

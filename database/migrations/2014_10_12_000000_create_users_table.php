@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('Nombre');
             $table->string('ApellidoPaterno');
-            $table->string('ApellidoMaterno');
+            $table->string('ApellidoMaterno')->nullable();
             $table->primary('id');
             $table->softDeletes();
             $table->rememberToken();

@@ -239,6 +239,11 @@ public function reactivar($id)
         //Esta función devolverá los datos de una tarea que hayamos seleccionado para cargar el formulario con sus datos
     }
 
+    public function show2(Evaluacion $evaluacion)
+    {
+        return view('evaluaciones.show',compact('evaluacion'));
+    }
+
     public function edit2($id)
     {
       $evaluacion = evaluacion::find($id);
@@ -305,11 +310,7 @@ public function reactivar($id)
     }
 
     public function evaluar(){
-      $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-      $academicos = Academico::all();
-      $comisiones = Comision::all();
-      $departamentos = Facultad::find($CodigoFacultad)->departamentos;
-      return view('evaluaciones.evaluar',['academicos' => $academicos , 'departamentos' => $departamentos , 'comisiones' => $comisiones]);
+        return view('evaluaciones2.evaluar');
     }
 
 }

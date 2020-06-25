@@ -2200,6 +2200,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2233,11 +2241,37 @@ __webpack_require__.r(__webpack_exports__);
       update: 0,
       arrayEvaluacions: [],
       //Este array contendrá las tareas de nuestra bd
-      arrayDepartamentos: [] //Este array contendrá las tareas de nuestra bd
-
+      arrayDepartamentos: [],
+      //Este array contendrá las tareas de nuestra bd
+      errors: []
     };
   },
   methods: {
+    checkForm: function checkForm(e) {
+      this.errors = [];
+
+      if (!this.RUTAcademico) {
+        this.errors.push('El RUT es obligatorio');
+      }
+
+      if (!this.CodigoComision) {
+        this.errors.push('Comision es obligatoria');
+      }
+
+      if (!this.año) {
+        this.errors.push('El año es obligatorio');
+      }
+
+      if (parseFloat(this.p1) + parseFloat(this.p2) + parseFloat(this.p3) + parseFloat(this.p4) + parseFloat(this.p5) != 100) {
+        this.errors.push('Los procentajes deben sumar 100%');
+      }
+
+      if (!this.errors.length) {
+        return true;
+      }
+
+      e.preventDefault();
+    },
     suma: function suma(p, a, b, c, d, e) {
       var fila = parseFloat(a) + parseFloat(b) + parseFloat(c) + parseFloat(d) + parseFloat(e);
       if (p == 0) fila = 0;
@@ -2259,18 +2293,6 @@ __webpack_require__.r(__webpack_exports__);
       axios.get(url).then(function (response) {
         //creamos un array y guardamos el contenido que nos devuelve el response
         me.arrayEvaluacions = response.data;
-      })["catch"](function (error) {
-        // handle error
-        console.log(error);
-      });
-    },
-    getDepartamentos: function getDepartamentos() {
-      var me = this;
-      var url = '/dptos'; //Ruta que hemos creado para que nos devuelva todas las tareas
-
-      axios.get(url).then(function (response) {
-        //creamos un array y guardamos el contenido que nos devuelve el response
-        me.arrayDepartamentos = response.data;
       })["catch"](function (error) {
         // handle error
         console.log(error);
@@ -2305,75 +2327,6 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    updateEvaluacions: function updateEvaluacions() {
-      /*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
-      tarea que queremos modificar*/
-      var me = this;
-      axios.put('/tareas/actualizar', {
-        'id': this.update,
-        'RUTAcademico': this.RUTAcademico,
-        'CodigoComision': this.CodigoComision,
-        'año': this.año,
-        'p1': this.p1,
-        'n1': this.n1,
-        'p2': this.p2,
-        'n2': this.n2,
-        'p3': this.p3,
-        'n3': this.n3,
-        'p4': this.p4,
-        'n4': this.n4,
-        'p5': this.p5,
-        'n5': this.n5,
-        'NotaFinal': this.NotaFinal,
-        'Argumento': this.Argumento
-      }).then(function (response) {
-        me.getEvaluacions(); //llamamos al metodo getTask(); para que refresque nuestro array y muestro los nuevos datos
-
-        me.clearFields(); //Limpiamos los campos e inicializamos la variable update a 0
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    loadFieldsUpdate: function loadFieldsUpdate(data) {
-      //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
-      this.update = data.id;
-      var me = this;
-      var url = '/tareas/buscar?id=' + this.update;
-      axios.get(url).then(function (response) {
-        me.id = response.data.id;
-        me.RUTAcademico = response.data.RUTAcademico;
-        me.CodigoComision = response.data.CodigoComision;
-        me.año = response.data.año;
-        me.p1 = response.data.p1;
-        me.n1 = response.data.n1;
-        me.p2 = response.data.p2;
-        me.n2 = response.data.n2;
-        me.p3 = response.data.p3;
-        me.n3 = response.data.n3;
-        me.p4 = response.data.p4;
-        me.n4 = response.data.n4;
-        me.p5 = response.data.p5;
-        me.n5 = response.data.n5;
-        me.NotaFinal = response.data.NotaFinal;
-        me.Argumento = response.data.Argumento;
-      })["catch"](function (error) {
-        // handle error
-        console.log(error);
-      });
-    },
-    deleteEvaluacion: function deleteEvaluacion(data) {
-      //Esta nos abrirá un alert de javascript y si aceptamos borrará la tarea que hemos elegido
-      var me = this;
-      var evaluacion_id = data.id;
-
-      if (confirm('¿Seguro que deseas borrar esta tarea?')) {
-        axios["delete"]('/tareas/borrar/' + evaluacion_id).then(function (response) {
-          me.getEvaluacions();
-        })["catch"](function (error) {
-          console.log(error);
-        });
-      }
-    },
     clearFields: function clearFields() {
       /*Limpia los campos e inicializa la variable update a 0*/
       this.RUTAcademico = "";
@@ -2389,12 +2342,11 @@ __webpack_require__.r(__webpack_exports__);
       this.n4 = "";
       this.p5 = "";
       this.n5 = "";
-      this.update = 0;
+      this.Argumento = "";
     }
   },
   mounted: function mounted() {
     this.getEvaluacions();
-    this.getDepartamentos();
   }
 });
 
@@ -37770,3055 +37722,3115 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _vm._m(2),
-        _vm._v(" "),
-        _vm._m(3),
-        _vm._v(" "),
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("table", { staticClass: "table table-bordered content" }, [
-                _c("tbody", [
-                  _vm._m(4),
-                  _vm._v(" "),
-                  _vm._m(5),
-                  _vm._v(" "),
-                  _vm.p1 > 0
-                    ? _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("1. Actividades de Docencia")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p1,
-                                expression: "p1"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p1 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p1 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _vm.arrayN1[1] > 0 ||
-                        _vm.arrayN1[2] > 0 ||
-                        _vm.arrayN1[3] > 0 ||
-                        _vm.arrayN1[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[0],
-                                    expression: "arrayN1[0]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.5",
-                                  max: "5",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN1[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[0],
-                                    expression: "arrayN1[0]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "4.5", max: "5" },
-                                domProps: { value: _vm.arrayN1[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN1[0] > 0 ||
-                        _vm.arrayN1[2] > 0 ||
-                        _vm.arrayN1[3] > 0 ||
-                        _vm.arrayN1[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[1],
-                                    expression: "arrayN1[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN1[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[1],
-                                    expression: "arrayN1[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4"
-                                },
-                                domProps: { value: _vm.arrayN1[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN1[0] > 0 ||
-                        _vm.arrayN1[1] > 0 ||
-                        _vm.arrayN1[3] > 0 ||
-                        _vm.arrayN1[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[2],
-                                    expression: "arrayN1[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN1[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[2],
-                                    expression: "arrayN1[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9"
-                                },
-                                domProps: { value: _vm.arrayN1[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN1[0] > 0 ||
-                        _vm.arrayN1[1] > 0 ||
-                        _vm.arrayN1[2] > 0 ||
-                        _vm.arrayN1[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[3],
-                                    expression: "arrayN1[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN1[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[3],
-                                    expression: "arrayN1[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4"
-                                },
-                                domProps: { value: _vm.arrayN1[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN1[0] > 0 ||
-                        _vm.arrayN1[1] > 0 ||
-                        _vm.arrayN1[2] > 0 ||
-                        _vm.arrayN1[3] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[4],
-                                    expression: "arrayN1[4]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "0",
-                                  max: "2.6",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN1[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN1[4],
-                                    expression: "arrayN1[4]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "0", max: "2.6" },
-                                domProps: { value: _vm.arrayN1[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN1,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x1 = _vm.promparcial(
-                                _vm.p1,
-                                _vm.suma(
-                                  _vm.p1,
-                                  _vm.arrayN1[0],
-                                  _vm.arrayN1[1],
-                                  _vm.arrayN1[2],
-                                  _vm.arrayN1[3],
-                                  _vm.arrayN1[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ])
-                    : _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("1. Actividades de Docencia")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p1,
-                                expression: "p1"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p1 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p1 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN1[0],
-                                expression: "arrayN1[0]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.5",
-                              max: "5",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN1[0] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN1, 0, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN1[1],
-                                expression: "arrayN1[1]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.0",
-                              max: "4.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN1[1] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN1, 1, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN1[2],
-                                expression: "arrayN1[2]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "3.5",
-                              max: "3.9",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN1[2] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN1, 2, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN1[3],
-                                expression: "arrayN1[3]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "2.7",
-                              max: "3.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN1[3] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN1, 3, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN1[4],
-                                expression: "arrayN1[4]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "0",
-                              max: "2.6",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN1[4] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN1, 4, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x1 = _vm.promparcial(
-                                _vm.p1,
-                                _vm.suma(
-                                  _vm.p1,
-                                  _vm.arrayN1[0],
-                                  _vm.arrayN1[1],
-                                  _vm.arrayN1[2],
-                                  _vm.arrayN1[3],
-                                  _vm.arrayN1[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ]),
-                  _vm._v(" "),
-                  _vm.p2 > 0
-                    ? _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("2. Actividades de Investigación")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p2,
-                                expression: "p2"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p2 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p2 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _vm.arrayN2[1] > 0 ||
-                        _vm.arrayN2[2] > 0 ||
-                        _vm.arrayN2[3] > 0 ||
-                        _vm.arrayN2[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[0],
-                                    expression: "arrayN2[0]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.5",
-                                  max: "5",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN2[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[0],
-                                    expression: "arrayN2[0]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "4.5", max: "5" },
-                                domProps: { value: _vm.arrayN2[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN2[0] > 0 ||
-                        _vm.arrayN2[2] > 0 ||
-                        _vm.arrayN2[3] > 0 ||
-                        _vm.arrayN2[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[1],
-                                    expression: "arrayN2[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN2[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[1],
-                                    expression: "arrayN2[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4"
-                                },
-                                domProps: { value: _vm.arrayN2[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN2[0] > 0 ||
-                        _vm.arrayN2[1] > 0 ||
-                        _vm.arrayN2[3] > 0 ||
-                        _vm.arrayN2[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[2],
-                                    expression: "arrayN2[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN2[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[2],
-                                    expression: "arrayN2[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9"
-                                },
-                                domProps: { value: _vm.arrayN2[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN2[0] > 0 ||
-                        _vm.arrayN2[1] > 0 ||
-                        _vm.arrayN2[2] > 0 ||
-                        _vm.arrayN2[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[3],
-                                    expression: "arrayN2[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN2[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[3],
-                                    expression: "arrayN2[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4"
-                                },
-                                domProps: { value: _vm.arrayN2[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN2[0] > 0 ||
-                        _vm.arrayN2[1] > 0 ||
-                        _vm.arrayN2[2] > 0 ||
-                        _vm.arrayN2[3] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[4],
-                                    expression: "arrayN2[4]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "0",
-                                  max: "2.6",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN2[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN2[4],
-                                    expression: "arrayN2[4]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "0", max: "2.6" },
-                                domProps: { value: _vm.arrayN2[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN2,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x2 = _vm.promparcial(
-                                _vm.p2,
-                                _vm.suma(
-                                  _vm.p2,
-                                  _vm.arrayN2[0],
-                                  _vm.arrayN2[1],
-                                  _vm.arrayN2[2],
-                                  _vm.arrayN2[3],
-                                  _vm.arrayN2[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ])
-                    : _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("2. Actividades de Investigación")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p2,
-                                expression: "p2"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p2 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p2 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN2[0],
-                                expression: "arrayN2[0]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.5",
-                              max: "5",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN2[0] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN2, 0, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN2[1],
-                                expression: "arrayN2[1]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.0",
-                              max: "4.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN2[1] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN2, 1, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN2[2],
-                                expression: "arrayN2[2]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "3.5",
-                              max: "3.9",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN2[2] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN2, 2, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN2[3],
-                                expression: "arrayN2[3]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "2.7",
-                              max: "3.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN2[3] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN2, 3, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN2[4],
-                                expression: "arrayN2[4]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "0",
-                              max: "2.6",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN2[4] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN2, 4, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x2 = _vm.promparcial(
-                                _vm.p2,
-                                _vm.suma(
-                                  _vm.p2,
-                                  _vm.arrayN2[0],
-                                  _vm.arrayN2[1],
-                                  _vm.arrayN2[2],
-                                  _vm.arrayN2[3],
-                                  _vm.arrayN2[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ]),
-                  _vm._v(" "),
-                  _vm.p3 > 0
-                    ? _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("3. Extension y Vinculación")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p3,
-                                expression: "p3"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p3 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p3 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _vm.arrayN3[1] > 0 ||
-                        _vm.arrayN3[2] > 0 ||
-                        _vm.arrayN3[3] > 0 ||
-                        _vm.arrayN3[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[0],
-                                    expression: "arrayN3[0]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.5",
-                                  max: "5",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN3[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[0],
-                                    expression: "arrayN3[0]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "4.5", max: "5" },
-                                domProps: { value: _vm.arrayN3[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN3[0] > 0 ||
-                        _vm.arrayN3[2] > 0 ||
-                        _vm.arrayN3[3] > 0 ||
-                        _vm.arrayN3[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[1],
-                                    expression: "arrayN3[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN3[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[1],
-                                    expression: "arrayN3[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4"
-                                },
-                                domProps: { value: _vm.arrayN3[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN3[0] > 0 ||
-                        _vm.arrayN3[1] > 0 ||
-                        _vm.arrayN3[3] > 0 ||
-                        _vm.arrayN3[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[2],
-                                    expression: "arrayN3[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN3[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[2],
-                                    expression: "arrayN3[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9"
-                                },
-                                domProps: { value: _vm.arrayN3[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN3[0] > 0 ||
-                        _vm.arrayN3[1] > 0 ||
-                        _vm.arrayN3[2] > 0 ||
-                        _vm.arrayN3[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[3],
-                                    expression: "arrayN3[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN3[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[3],
-                                    expression: "arrayN3[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4"
-                                },
-                                domProps: { value: _vm.arrayN3[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN3[0] > 0 ||
-                        _vm.arrayN3[1] > 0 ||
-                        _vm.arrayN3[2] > 0 ||
-                        _vm.arrayN3[3] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[4],
-                                    expression: "arrayN3[4]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "0",
-                                  max: "2.6",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN3[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN3[4],
-                                    expression: "arrayN3[4]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "0", max: "2.6" },
-                                domProps: { value: _vm.arrayN3[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN3,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x3 = _vm.promparcial(
-                                _vm.p3,
-                                _vm.suma(
-                                  _vm.p3,
-                                  _vm.arrayN3[0],
-                                  _vm.arrayN3[1],
-                                  _vm.arrayN3[2],
-                                  _vm.arrayN3[3],
-                                  _vm.arrayN3[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ])
-                    : _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("3. Extension y Vinculación")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p3,
-                                expression: "p3"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p3 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p3 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN3[0],
-                                expression: "arrayN3[0]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.5",
-                              max: "5",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN3[0] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN3, 0, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN3[1],
-                                expression: "arrayN3[1]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.0",
-                              max: "4.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN3[1] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN3, 1, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN3[2],
-                                expression: "arrayN3[2]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "3.5",
-                              max: "3.9",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN3[2] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN3, 2, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN3[3],
-                                expression: "arrayN3[3]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "2.7",
-                              max: "3.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN3[3] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN3, 3, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN3[4],
-                                expression: "arrayN3[4]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "0",
-                              max: "2.6",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN3[4] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN3, 4, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x3 = _vm.promparcial(
-                                _vm.p3,
-                                _vm.suma(
-                                  _vm.p3,
-                                  _vm.arrayN3[0],
-                                  _vm.arrayN3[1],
-                                  _vm.arrayN3[2],
-                                  _vm.arrayN3[3],
-                                  _vm.arrayN3[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ]),
-                  _vm._v(" "),
-                  _vm.p4 > 0
-                    ? _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("4. Administración Académica")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p4,
-                                expression: "p4"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p4 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p4 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _vm.arrayN4[1] > 0 ||
-                        _vm.arrayN4[2] > 0 ||
-                        _vm.arrayN4[3] > 0 ||
-                        _vm.arrayN4[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[0],
-                                    expression: "arrayN4[0]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.5",
-                                  max: "5",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN4[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[0],
-                                    expression: "arrayN4[0]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "4.5", max: "5" },
-                                domProps: { value: _vm.arrayN4[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN4[0] > 0 ||
-                        _vm.arrayN4[2] > 0 ||
-                        _vm.arrayN4[3] > 0 ||
-                        _vm.arrayN4[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[1],
-                                    expression: "arrayN4[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN4[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[1],
-                                    expression: "arrayN4[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4"
-                                },
-                                domProps: { value: _vm.arrayN4[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN4[0] > 0 ||
-                        _vm.arrayN4[1] > 0 ||
-                        _vm.arrayN4[3] > 0 ||
-                        _vm.arrayN4[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[2],
-                                    expression: "arrayN4[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN4[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[2],
-                                    expression: "arrayN4[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9"
-                                },
-                                domProps: { value: _vm.arrayN4[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN4[0] > 0 ||
-                        _vm.arrayN4[1] > 0 ||
-                        _vm.arrayN4[2] > 0 ||
-                        _vm.arrayN4[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[3],
-                                    expression: "arrayN4[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN4[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[3],
-                                    expression: "arrayN4[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4"
-                                },
-                                domProps: { value: _vm.arrayN4[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN4[0] > 0 ||
-                        _vm.arrayN4[1] > 0 ||
-                        _vm.arrayN4[2] > 0 ||
-                        _vm.arrayN4[3] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[4],
-                                    expression: "arrayN4[4]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "0",
-                                  max: "2.6",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN4[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN4[4],
-                                    expression: "arrayN4[4]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "0", max: "2.6" },
-                                domProps: { value: _vm.arrayN4[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN4,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x4 = _vm.promparcial(
-                                _vm.p4,
-                                _vm.suma(
-                                  _vm.p4,
-                                  _vm.arrayN4[0],
-                                  _vm.arrayN4[1],
-                                  _vm.arrayN4[2],
-                                  _vm.arrayN4[3],
-                                  _vm.arrayN4[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ])
-                    : _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("4. Administración Académica")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p4,
-                                expression: "p4"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p4 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p4 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN4[0],
-                                expression: "arrayN4[0]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.5",
-                              max: "5",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN4[0] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN4, 0, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN4[1],
-                                expression: "arrayN4[1]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.0",
-                              max: "4.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN4[1] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN4, 1, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN4[2],
-                                expression: "arrayN4[2]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "3.5",
-                              max: "3.9",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN4[2] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN4, 2, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN4[3],
-                                expression: "arrayN4[3]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "2.7",
-                              max: "3.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN4[3] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN4, 3, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN4[4],
-                                expression: "arrayN4[4]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "0",
-                              max: "2.6",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN4[4] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN4, 4, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x4 = _vm.promparcial(
-                                _vm.p4,
-                                _vm.suma(
-                                  _vm.p4,
-                                  _vm.arrayN4[0],
-                                  _vm.arrayN4[1],
-                                  _vm.arrayN4[2],
-                                  _vm.arrayN4[3],
-                                  _vm.arrayN4[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ]),
-                  _vm._v(" "),
-                  _vm.p5 > 0
-                    ? _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("5. Otras actividades realizadas")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p5,
-                                expression: "p5"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p5 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p5 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _vm.arrayN5[1] > 0 ||
-                        _vm.arrayN5[2] > 0 ||
-                        _vm.arrayN5[3] > 0 ||
-                        _vm.arrayN5[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[0],
-                                    expression: "arrayN5[0]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.5",
-                                  max: "5",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN5[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[0],
-                                    expression: "arrayN5[0]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "4.5", max: "5" },
-                                domProps: { value: _vm.arrayN5[0] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      0,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN5[0] > 0 ||
-                        _vm.arrayN5[2] > 0 ||
-                        _vm.arrayN5[3] > 0 ||
-                        _vm.arrayN5[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[1],
-                                    expression: "arrayN5[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN5[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[1],
-                                    expression: "arrayN5[1]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "4.0",
-                                  max: "4.4"
-                                },
-                                domProps: { value: _vm.arrayN5[1] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      1,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN5[0] > 0 ||
-                        _vm.arrayN5[1] > 0 ||
-                        _vm.arrayN5[3] > 0 ||
-                        _vm.arrayN5[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[2],
-                                    expression: "arrayN5[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN5[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[2],
-                                    expression: "arrayN5[2]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "3.5",
-                                  max: "3.9"
-                                },
-                                domProps: { value: _vm.arrayN5[2] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      2,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN5[0] > 0 ||
-                        _vm.arrayN5[1] > 0 ||
-                        _vm.arrayN5[2] > 0 ||
-                        _vm.arrayN5[4] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[3],
-                                    expression: "arrayN5[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN5[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[3],
-                                    expression: "arrayN5[3]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "2.7",
-                                  max: "3.4"
-                                },
-                                domProps: { value: _vm.arrayN5[3] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      3,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _vm.arrayN5[0] > 0 ||
-                        _vm.arrayN5[1] > 0 ||
-                        _vm.arrayN5[2] > 0 ||
-                        _vm.arrayN5[3] > 0
-                          ? _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[4],
-                                    expression: "arrayN5[4]"
-                                  }
-                                ],
-                                attrs: {
-                                  type: "float",
-                                  min: "0",
-                                  max: "2.6",
-                                  disabled: ""
-                                },
-                                domProps: { value: _vm.arrayN5[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ])
-                          : _c("td", [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrayN5[4],
-                                    expression: "arrayN5[4]"
-                                  }
-                                ],
-                                attrs: { type: "float", min: "0", max: "2.6" },
-                                domProps: { value: _vm.arrayN5[4] },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.arrayN5,
-                                      4,
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x5 = _vm.promparcial(
-                                _vm.p5,
-                                _vm.suma(
-                                  _vm.p5,
-                                  _vm.arrayN5[0],
-                                  _vm.arrayN5[1],
-                                  _vm.arrayN5[2],
-                                  _vm.arrayN5[3],
-                                  _vm.arrayN5[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ])
-                    : _c("tr", [
-                        _c("td", { staticClass: "izq" }, [
-                          _vm._v("5. Otras actividades realizadas")
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.p5,
-                                expression: "p5"
-                              }
-                            ],
-                            attrs: { type: "number", max: "100" },
-                            domProps: { value: _vm.p5 },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.p5 = $event.target.value
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN5[0],
-                                expression: "arrayN5[0]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.5",
-                              max: "5",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN5[0] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN5, 0, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN5[1],
-                                expression: "arrayN5[1]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "4.0",
-                              max: "4.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN5[1] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN5, 1, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN5[2],
-                                expression: "arrayN5[2]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "3.5",
-                              max: "3.9",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN5[2] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN5, 2, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN5[3],
-                                expression: "arrayN5[3]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              min: "2.7",
-                              max: "3.4",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN5[3] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN5, 3, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.arrayN5[4],
-                                expression: "arrayN5[4]"
-                              }
-                            ],
-                            attrs: {
-                              type: "float",
-                              value: "0",
-                              min: "0",
-                              max: "2.6",
-                              disabled: ""
-                            },
-                            domProps: { value: _vm.arrayN5[4] },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(_vm.arrayN5, 4, $event.target.value)
-                              }
-                            }
-                          })
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            _vm._s(
-                              (_vm.x5 = _vm.promparcial(
-                                _vm.p5,
-                                _vm.suma(
-                                  _vm.p5,
-                                  _vm.arrayN5[0],
-                                  _vm.arrayN5[1],
-                                  _vm.arrayN5[2],
-                                  _vm.arrayN5[3],
-                                  _vm.arrayN5[4]
-                                )
-                              ))
-                            )
-                          )
-                        ])
-                      ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c("th", { staticClass: "izq", attrs: { colspan: "7" } }, [
-                      _vm._v("Nota Final")
-                    ]),
+  return _c("form", { attrs: { id: "app" }, on: { submit: _vm.checkForm } }, [
+    _vm.errors.length
+      ? _c("p", [
+          _c("b", [
+            _vm._v("Por favor, corrija el(los) siguiente(s) error(es):")
+          ]),
+          _vm._v(" "),
+          _c(
+            "ul",
+            _vm._l(_vm.errors, function(error) {
+              return _c("li", [_vm._v(_vm._s(error))])
+            }),
+            0
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "container" }, [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("table", { staticClass: "table table-bordered content" }, [
+                  _c("tbody", [
+                    _vm._m(4),
                     _vm._v(" "),
-                    _c("td", [
-                      _vm._v(
-                        _vm._s(
-                          (_vm.pf = _vm.promedio(
-                            _vm.x1,
-                            _vm.x2,
-                            _vm.x3,
-                            _vm.x4,
-                            _vm.x5
-                          ))
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm.p1 > 0
+                      ? _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("1. Actividades de Docencia")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p1,
+                                  expression: "p1"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p1 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p1 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm.arrayN1[1] > 0 ||
+                          _vm.arrayN1[2] > 0 ||
+                          _vm.arrayN1[3] > 0 ||
+                          _vm.arrayN1[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[0],
+                                      expression: "arrayN1[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN1[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[0],
+                                      expression: "arrayN1[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5"
+                                  },
+                                  domProps: { value: _vm.arrayN1[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN1[0] > 0 ||
+                          _vm.arrayN1[2] > 0 ||
+                          _vm.arrayN1[3] > 0 ||
+                          _vm.arrayN1[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[1],
+                                      expression: "arrayN1[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN1[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[1],
+                                      expression: "arrayN1[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4"
+                                  },
+                                  domProps: { value: _vm.arrayN1[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN1[0] > 0 ||
+                          _vm.arrayN1[1] > 0 ||
+                          _vm.arrayN1[3] > 0 ||
+                          _vm.arrayN1[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[2],
+                                      expression: "arrayN1[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN1[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[2],
+                                      expression: "arrayN1[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9"
+                                  },
+                                  domProps: { value: _vm.arrayN1[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN1[0] > 0 ||
+                          _vm.arrayN1[1] > 0 ||
+                          _vm.arrayN1[2] > 0 ||
+                          _vm.arrayN1[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[3],
+                                      expression: "arrayN1[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN1[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[3],
+                                      expression: "arrayN1[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4"
+                                  },
+                                  domProps: { value: _vm.arrayN1[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN1[0] > 0 ||
+                          _vm.arrayN1[1] > 0 ||
+                          _vm.arrayN1[2] > 0 ||
+                          _vm.arrayN1[3] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[4],
+                                      expression: "arrayN1[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN1[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN1[4],
+                                      expression: "arrayN1[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6"
+                                  },
+                                  domProps: { value: _vm.arrayN1[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN1,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x1 = _vm.promparcial(
+                                  _vm.p1,
+                                  _vm.suma(
+                                    _vm.p1,
+                                    _vm.arrayN1[0],
+                                    _vm.arrayN1[1],
+                                    _vm.arrayN1[2],
+                                    _vm.arrayN1[3],
+                                    _vm.arrayN1[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ])
+                      : _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("1. Actividades de Docencia")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p1,
+                                  expression: "p1"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p1 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p1 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN1[0],
+                                  expression: "arrayN1[0]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.5",
+                                max: "5",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN1[0] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN1, 0, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN1[1],
+                                  expression: "arrayN1[1]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.0",
+                                max: "4.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN1[1] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN1, 1, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN1[2],
+                                  expression: "arrayN1[2]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "3.5",
+                                max: "3.9",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN1[2] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN1, 2, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN1[3],
+                                  expression: "arrayN1[3]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "2.7",
+                                max: "3.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN1[3] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN1, 3, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN1[4],
+                                  expression: "arrayN1[4]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "0",
+                                max: "2.6",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN1[4] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN1, 4, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x1 = _vm.promparcial(
+                                  _vm.p1,
+                                  _vm.suma(
+                                    _vm.p1,
+                                    _vm.arrayN1[0],
+                                    _vm.arrayN1[1],
+                                    _vm.arrayN1[2],
+                                    _vm.arrayN1[3],
+                                    _vm.arrayN1[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ]),
+                    _vm._v(" "),
+                    _vm.p2 > 0
+                      ? _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("2. Actividades de Investigación")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p2,
+                                  expression: "p2"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p2 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p2 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm.arrayN2[1] > 0 ||
+                          _vm.arrayN2[2] > 0 ||
+                          _vm.arrayN2[3] > 0 ||
+                          _vm.arrayN2[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[0],
+                                      expression: "arrayN2[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN2[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[0],
+                                      expression: "arrayN2[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5"
+                                  },
+                                  domProps: { value: _vm.arrayN2[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN2[0] > 0 ||
+                          _vm.arrayN2[2] > 0 ||
+                          _vm.arrayN2[3] > 0 ||
+                          _vm.arrayN2[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[1],
+                                      expression: "arrayN2[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN2[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[1],
+                                      expression: "arrayN2[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4"
+                                  },
+                                  domProps: { value: _vm.arrayN2[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN2[0] > 0 ||
+                          _vm.arrayN2[1] > 0 ||
+                          _vm.arrayN2[3] > 0 ||
+                          _vm.arrayN2[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[2],
+                                      expression: "arrayN2[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN2[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[2],
+                                      expression: "arrayN2[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9"
+                                  },
+                                  domProps: { value: _vm.arrayN2[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN2[0] > 0 ||
+                          _vm.arrayN2[1] > 0 ||
+                          _vm.arrayN2[2] > 0 ||
+                          _vm.arrayN2[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[3],
+                                      expression: "arrayN2[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN2[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[3],
+                                      expression: "arrayN2[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4"
+                                  },
+                                  domProps: { value: _vm.arrayN2[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN2[0] > 0 ||
+                          _vm.arrayN2[1] > 0 ||
+                          _vm.arrayN2[2] > 0 ||
+                          _vm.arrayN2[3] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[4],
+                                      expression: "arrayN2[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN2[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN2[4],
+                                      expression: "arrayN2[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6"
+                                  },
+                                  domProps: { value: _vm.arrayN2[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN2,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x2 = _vm.promparcial(
+                                  _vm.p2,
+                                  _vm.suma(
+                                    _vm.p2,
+                                    _vm.arrayN2[0],
+                                    _vm.arrayN2[1],
+                                    _vm.arrayN2[2],
+                                    _vm.arrayN2[3],
+                                    _vm.arrayN2[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ])
+                      : _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("2. Actividades de Investigación")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p2,
+                                  expression: "p2"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p2 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p2 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN2[0],
+                                  expression: "arrayN2[0]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.5",
+                                max: "5",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN2[0] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN2, 0, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN2[1],
+                                  expression: "arrayN2[1]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.0",
+                                max: "4.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN2[1] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN2, 1, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN2[2],
+                                  expression: "arrayN2[2]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "3.5",
+                                max: "3.9",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN2[2] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN2, 2, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN2[3],
+                                  expression: "arrayN2[3]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "2.7",
+                                max: "3.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN2[3] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN2, 3, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN2[4],
+                                  expression: "arrayN2[4]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "0",
+                                max: "2.6",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN2[4] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN2, 4, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x2 = _vm.promparcial(
+                                  _vm.p2,
+                                  _vm.suma(
+                                    _vm.p2,
+                                    _vm.arrayN2[0],
+                                    _vm.arrayN2[1],
+                                    _vm.arrayN2[2],
+                                    _vm.arrayN2[3],
+                                    _vm.arrayN2[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ]),
+                    _vm._v(" "),
+                    _vm.p3 > 0
+                      ? _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("3. Extension y Vinculación")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p3,
+                                  expression: "p3"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p3 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p3 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm.arrayN3[1] > 0 ||
+                          _vm.arrayN3[2] > 0 ||
+                          _vm.arrayN3[3] > 0 ||
+                          _vm.arrayN3[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[0],
+                                      expression: "arrayN3[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN3[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[0],
+                                      expression: "arrayN3[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5"
+                                  },
+                                  domProps: { value: _vm.arrayN3[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN3[0] > 0 ||
+                          _vm.arrayN3[2] > 0 ||
+                          _vm.arrayN3[3] > 0 ||
+                          _vm.arrayN3[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[1],
+                                      expression: "arrayN3[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN3[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[1],
+                                      expression: "arrayN3[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4"
+                                  },
+                                  domProps: { value: _vm.arrayN3[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN3[0] > 0 ||
+                          _vm.arrayN3[1] > 0 ||
+                          _vm.arrayN3[3] > 0 ||
+                          _vm.arrayN3[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[2],
+                                      expression: "arrayN3[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN3[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[2],
+                                      expression: "arrayN3[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9"
+                                  },
+                                  domProps: { value: _vm.arrayN3[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN3[0] > 0 ||
+                          _vm.arrayN3[1] > 0 ||
+                          _vm.arrayN3[2] > 0 ||
+                          _vm.arrayN3[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[3],
+                                      expression: "arrayN3[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN3[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[3],
+                                      expression: "arrayN3[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4"
+                                  },
+                                  domProps: { value: _vm.arrayN3[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN3[0] > 0 ||
+                          _vm.arrayN3[1] > 0 ||
+                          _vm.arrayN3[2] > 0 ||
+                          _vm.arrayN3[3] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[4],
+                                      expression: "arrayN3[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN3[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN3[4],
+                                      expression: "arrayN3[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6"
+                                  },
+                                  domProps: { value: _vm.arrayN3[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN3,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x3 = _vm.promparcial(
+                                  _vm.p3,
+                                  _vm.suma(
+                                    _vm.p3,
+                                    _vm.arrayN3[0],
+                                    _vm.arrayN3[1],
+                                    _vm.arrayN3[2],
+                                    _vm.arrayN3[3],
+                                    _vm.arrayN3[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ])
+                      : _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("3. Extension y Vinculación")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p3,
+                                  expression: "p3"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p3 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p3 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN3[0],
+                                  expression: "arrayN3[0]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.5",
+                                max: "5",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN3[0] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN3, 0, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN3[1],
+                                  expression: "arrayN3[1]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.0",
+                                max: "4.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN3[1] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN3, 1, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN3[2],
+                                  expression: "arrayN3[2]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "3.5",
+                                max: "3.9",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN3[2] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN3, 2, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN3[3],
+                                  expression: "arrayN3[3]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "2.7",
+                                max: "3.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN3[3] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN3, 3, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN3[4],
+                                  expression: "arrayN3[4]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "0",
+                                max: "2.6",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN3[4] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN3, 4, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x3 = _vm.promparcial(
+                                  _vm.p3,
+                                  _vm.suma(
+                                    _vm.p3,
+                                    _vm.arrayN3[0],
+                                    _vm.arrayN3[1],
+                                    _vm.arrayN3[2],
+                                    _vm.arrayN3[3],
+                                    _vm.arrayN3[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ]),
+                    _vm._v(" "),
+                    _vm.p4 > 0
+                      ? _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("4. Administración Académica")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p4,
+                                  expression: "p4"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p4 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p4 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm.arrayN4[1] > 0 ||
+                          _vm.arrayN4[2] > 0 ||
+                          _vm.arrayN4[3] > 0 ||
+                          _vm.arrayN4[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[0],
+                                      expression: "arrayN4[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN4[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[0],
+                                      expression: "arrayN4[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5"
+                                  },
+                                  domProps: { value: _vm.arrayN4[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN4[0] > 0 ||
+                          _vm.arrayN4[2] > 0 ||
+                          _vm.arrayN4[3] > 0 ||
+                          _vm.arrayN4[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[1],
+                                      expression: "arrayN4[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN4[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[1],
+                                      expression: "arrayN4[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4"
+                                  },
+                                  domProps: { value: _vm.arrayN4[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN4[0] > 0 ||
+                          _vm.arrayN4[1] > 0 ||
+                          _vm.arrayN4[3] > 0 ||
+                          _vm.arrayN4[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[2],
+                                      expression: "arrayN4[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN4[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[2],
+                                      expression: "arrayN4[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9"
+                                  },
+                                  domProps: { value: _vm.arrayN4[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN4[0] > 0 ||
+                          _vm.arrayN4[1] > 0 ||
+                          _vm.arrayN4[2] > 0 ||
+                          _vm.arrayN4[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[3],
+                                      expression: "arrayN4[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN4[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[3],
+                                      expression: "arrayN4[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4"
+                                  },
+                                  domProps: { value: _vm.arrayN4[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN4[0] > 0 ||
+                          _vm.arrayN4[1] > 0 ||
+                          _vm.arrayN4[2] > 0 ||
+                          _vm.arrayN4[3] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[4],
+                                      expression: "arrayN4[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN4[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN4[4],
+                                      expression: "arrayN4[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6"
+                                  },
+                                  domProps: { value: _vm.arrayN4[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN4,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x4 = _vm.promparcial(
+                                  _vm.p4,
+                                  _vm.suma(
+                                    _vm.p4,
+                                    _vm.arrayN4[0],
+                                    _vm.arrayN4[1],
+                                    _vm.arrayN4[2],
+                                    _vm.arrayN4[3],
+                                    _vm.arrayN4[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ])
+                      : _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("4. Administración Académica")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p4,
+                                  expression: "p4"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p4 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p4 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN4[0],
+                                  expression: "arrayN4[0]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.5",
+                                max: "5",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN4[0] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN4, 0, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN4[1],
+                                  expression: "arrayN4[1]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.0",
+                                max: "4.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN4[1] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN4, 1, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN4[2],
+                                  expression: "arrayN4[2]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "3.5",
+                                max: "3.9",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN4[2] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN4, 2, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN4[3],
+                                  expression: "arrayN4[3]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "2.7",
+                                max: "3.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN4[3] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN4, 3, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN4[4],
+                                  expression: "arrayN4[4]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "0",
+                                max: "2.6",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN4[4] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN4, 4, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x4 = _vm.promparcial(
+                                  _vm.p4,
+                                  _vm.suma(
+                                    _vm.p4,
+                                    _vm.arrayN4[0],
+                                    _vm.arrayN4[1],
+                                    _vm.arrayN4[2],
+                                    _vm.arrayN4[3],
+                                    _vm.arrayN4[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ]),
+                    _vm._v(" "),
+                    _vm.p5 > 0
+                      ? _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("5. Otras actividades realizadas")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p5,
+                                  expression: "p5"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p5 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p5 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _vm.arrayN5[1] > 0 ||
+                          _vm.arrayN5[2] > 0 ||
+                          _vm.arrayN5[3] > 0 ||
+                          _vm.arrayN5[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[0],
+                                      expression: "arrayN5[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN5[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[0],
+                                      expression: "arrayN5[0]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.5",
+                                    max: "5"
+                                  },
+                                  domProps: { value: _vm.arrayN5[0] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        0,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN5[0] > 0 ||
+                          _vm.arrayN5[2] > 0 ||
+                          _vm.arrayN5[3] > 0 ||
+                          _vm.arrayN5[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[1],
+                                      expression: "arrayN5[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN5[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[1],
+                                      expression: "arrayN5[1]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "4.0",
+                                    max: "4.4"
+                                  },
+                                  domProps: { value: _vm.arrayN5[1] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        1,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN5[0] > 0 ||
+                          _vm.arrayN5[1] > 0 ||
+                          _vm.arrayN5[3] > 0 ||
+                          _vm.arrayN5[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[2],
+                                      expression: "arrayN5[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN5[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[2],
+                                      expression: "arrayN5[2]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "3.5",
+                                    max: "3.9"
+                                  },
+                                  domProps: { value: _vm.arrayN5[2] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        2,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN5[0] > 0 ||
+                          _vm.arrayN5[1] > 0 ||
+                          _vm.arrayN5[2] > 0 ||
+                          _vm.arrayN5[4] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[3],
+                                      expression: "arrayN5[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN5[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[3],
+                                      expression: "arrayN5[3]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "2.7",
+                                    max: "3.4"
+                                  },
+                                  domProps: { value: _vm.arrayN5[3] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        3,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _vm.arrayN5[0] > 0 ||
+                          _vm.arrayN5[1] > 0 ||
+                          _vm.arrayN5[2] > 0 ||
+                          _vm.arrayN5[3] > 0
+                            ? _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[4],
+                                      expression: "arrayN5[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6",
+                                    disabled: ""
+                                  },
+                                  domProps: { value: _vm.arrayN5[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ])
+                            : _c("td", [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrayN5[4],
+                                      expression: "arrayN5[4]"
+                                    }
+                                  ],
+                                  attrs: {
+                                    type: "float",
+                                    min: "0",
+                                    max: "2.6"
+                                  },
+                                  domProps: { value: _vm.arrayN5[4] },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.arrayN5,
+                                        4,
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                })
+                              ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x5 = _vm.promparcial(
+                                  _vm.p5,
+                                  _vm.suma(
+                                    _vm.p5,
+                                    _vm.arrayN5[0],
+                                    _vm.arrayN5[1],
+                                    _vm.arrayN5[2],
+                                    _vm.arrayN5[3],
+                                    _vm.arrayN5[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ])
+                      : _c("tr", [
+                          _c("td", { staticClass: "izq" }, [
+                            _vm._v("5. Otras actividades realizadas")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.p5,
+                                  expression: "p5"
+                                }
+                              ],
+                              attrs: { type: "number", max: "100" },
+                              domProps: { value: _vm.p5 },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.p5 = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN5[0],
+                                  expression: "arrayN5[0]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.5",
+                                max: "5",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN5[0] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN5, 0, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN5[1],
+                                  expression: "arrayN5[1]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "4.0",
+                                max: "4.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN5[1] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN5, 1, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN5[2],
+                                  expression: "arrayN5[2]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "3.5",
+                                max: "3.9",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN5[2] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN5, 2, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN5[3],
+                                  expression: "arrayN5[3]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                min: "2.7",
+                                max: "3.4",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN5[3] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN5, 3, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.arrayN5[4],
+                                  expression: "arrayN5[4]"
+                                }
+                              ],
+                              attrs: {
+                                type: "float",
+                                value: "0",
+                                min: "0",
+                                max: "2.6",
+                                disabled: ""
+                              },
+                              domProps: { value: _vm.arrayN5[4] },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(_vm.arrayN5, 4, $event.target.value)
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              _vm._s(
+                                (_vm.x5 = _vm.promparcial(
+                                  _vm.p5,
+                                  _vm.suma(
+                                    _vm.p5,
+                                    _vm.arrayN5[0],
+                                    _vm.arrayN5[1],
+                                    _vm.arrayN5[2],
+                                    _vm.arrayN5[3],
+                                    _vm.arrayN5[4]
+                                  )
+                                ))
+                              )
+                            )
+                          ])
+                        ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c(
+                        "th",
+                        { staticClass: "izq", attrs: { colspan: "7" } },
+                        [_vm._v("Nota Final")]
+                      ),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            (_vm.pf = _vm.promedio(
+                              _vm.x1,
+                              _vm.x2,
+                              _vm.x3,
+                              _vm.x4,
+                              _vm.x5
+                            ))
+                          )
                         )
-                      )
+                      ])
                     ])
                   ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("label", { attrs: { for: "RUTAcademico" } }, [
-                  _vm._v("RUTAcademico")
                 ]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.RUTAcademico,
-                      expression: "RUTAcademico"
-                    }
-                  ],
-                  attrs: {
-                    id: "RUTAcademico",
-                    type: "number",
-                    name: "RUTAcademico"
-                  },
-                  domProps: { value: _vm.RUTAcademico },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                _c("p", [
+                  _c("label", { attrs: { for: "RUTAcademico" } }, [
+                    _vm._v("RUTAcademico")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.RUTAcademico,
+                        expression: "RUTAcademico"
                       }
-                      _vm.RUTAcademico = $event.target.value
+                    ],
+                    attrs: {
+                      id: "RUTAcademico",
+                      type: "number",
+                      name: "RUTAcademico"
+                    },
+                    domProps: { value: _vm.RUTAcademico },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.RUTAcademico = $event.target.value
+                      }
                     }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("label", { attrs: { for: "CodigoComision" } }, [
-                  _vm._v("CodigoComision")
+                  })
                 ]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.CodigoComision,
-                      expression: "CodigoComision"
-                    }
-                  ],
-                  attrs: {
-                    id: "CodigoComision",
-                    type: "number",
-                    name: "CodigoComision"
-                  },
-                  domProps: { value: _vm.CodigoComision },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                _c("p", [
+                  _c("label", { attrs: { for: "CodigoComision" } }, [
+                    _vm._v("CodigoComision")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.CodigoComision,
+                        expression: "CodigoComision"
                       }
-                      _vm.CodigoComision = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("label", { attrs: { for: "año" } }, [_vm._v("año")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.año,
-                      expression: "año"
-                    }
-                  ],
-                  attrs: { id: "año", type: "number", name: "año" },
-                  domProps: { value: _vm.año },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                    ],
+                    attrs: {
+                      id: "CodigoComision",
+                      type: "number",
+                      name: "CodigoComision"
+                    },
+                    domProps: { value: _vm.CodigoComision },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.CodigoComision = $event.target.value
                       }
-                      _vm.año = $event.target.value
                     }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _c("label", { attrs: { for: "Argumento" } }, [
-                  _vm._v("Argumento")
+                  })
                 ]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.Argumento,
-                      expression: "Argumento"
-                    }
-                  ],
-                  attrs: { id: "Argumento", type: "text", name: "Argumento" },
-                  domProps: { value: _vm.Argumento },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                _c("p", [
+                  _c("label", { attrs: { for: "año" } }, [_vm._v("año")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.año,
+                        expression: "año"
                       }
-                      _vm.Argumento = $event.target.value
+                    ],
+                    attrs: { id: "año", type: "number", name: "año" },
+                    domProps: { value: _vm.año },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.año = $event.target.value
+                      }
                     }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _c("label", { attrs: { for: "Argumento" } }, [
+                    _vm._v("Argumento")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.Argumento,
+                        expression: "Argumento"
+                      }
+                    ],
+                    attrs: { id: "Argumento", type: "text", name: "Argumento" },
+                    domProps: { value: _vm.Argumento },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.Argumento = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(
+                  "\n                " +
+                    _vm._s(
+                      (_vm.n1 = _vm.suma(
+                        _vm.p5,
+                        _vm.arrayN1[0],
+                        _vm.arrayN1[1],
+                        _vm.arrayN1[2],
+                        _vm.arrayN1[3],
+                        _vm.arrayN1[4]
+                      ))
+                    ) +
+                    "\n                " +
+                    _vm._s(
+                      (_vm.n2 = _vm.suma(
+                        _vm.p5,
+                        _vm.arrayN2[0],
+                        _vm.arrayN2[1],
+                        _vm.arrayN2[2],
+                        _vm.arrayN2[3],
+                        _vm.arrayN2[4]
+                      ))
+                    ) +
+                    "\n                " +
+                    _vm._s(
+                      (_vm.n3 = _vm.suma(
+                        _vm.p5,
+                        _vm.arrayN3[0],
+                        _vm.arrayN3[1],
+                        _vm.arrayN3[2],
+                        _vm.arrayN3[3],
+                        _vm.arrayN3[4]
+                      ))
+                    ) +
+                    "\n                " +
+                    _vm._s(
+                      (_vm.n4 = _vm.suma(
+                        _vm.p5,
+                        _vm.arrayN4[0],
+                        _vm.arrayN4[1],
+                        _vm.arrayN4[2],
+                        _vm.arrayN4[3],
+                        _vm.arrayN4[4]
+                      ))
+                    ) +
+                    "\n                " +
+                    _vm._s(
+                      (_vm.n5 = _vm.suma(
+                        _vm.p5,
+                        _vm.arrayN5[0],
+                        _vm.arrayN5[1],
+                        _vm.arrayN5[2],
+                        _vm.arrayN5[3],
+                        _vm.arrayN5[4]
+                      ))
+                    ) +
+                    "\n\n                "
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._m(6),
+          _vm._v(" "),
+          _vm._m(7),
+          _vm._v(" "),
+          _c("div", { staticClass: "row container" }, [
+            _c("h3", [_vm._v("IV. ARGUMENTOS DE LA CALIFICACION FINAL")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-12 margin-tb container" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.Argumento,
+                    expression: "Argumento"
                   }
-                })
-              ]),
-              _vm._v(
-                "\n              " +
-                  _vm._s(
-                    (_vm.n1 = _vm.suma(
-                      _vm.p5,
-                      _vm.arrayN1[0],
-                      _vm.arrayN1[1],
-                      _vm.arrayN1[2],
-                      _vm.arrayN1[3],
-                      _vm.arrayN1[4]
-                    ))
-                  ) +
-                  "\n              " +
-                  _vm._s(
-                    (_vm.n2 = _vm.suma(
-                      _vm.p5,
-                      _vm.arrayN2[0],
-                      _vm.arrayN2[1],
-                      _vm.arrayN2[2],
-                      _vm.arrayN2[3],
-                      _vm.arrayN2[4]
-                    ))
-                  ) +
-                  "\n              " +
-                  _vm._s(
-                    (_vm.n3 = _vm.suma(
-                      _vm.p5,
-                      _vm.arrayN3[0],
-                      _vm.arrayN3[1],
-                      _vm.arrayN3[2],
-                      _vm.arrayN3[3],
-                      _vm.arrayN3[4]
-                    ))
-                  ) +
-                  "\n              " +
-                  _vm._s(
-                    (_vm.n4 = _vm.suma(
-                      _vm.p5,
-                      _vm.arrayN4[0],
-                      _vm.arrayN4[1],
-                      _vm.arrayN4[2],
-                      _vm.arrayN4[3],
-                      _vm.arrayN4[4]
-                    ))
-                  ) +
-                  "\n              " +
-                  _vm._s(
-                    (_vm.n5 = _vm.suma(
-                      _vm.p5,
-                      _vm.arrayN5[0],
-                      _vm.arrayN5[1],
-                      _vm.arrayN5[2],
-                      _vm.arrayN5[3],
-                      _vm.arrayN5[4]
-                    ))
-                  ) +
-                  "\n\n              "
-              )
+                ],
+                staticClass: "form-control",
+                staticStyle: { "background-color": "white" },
+                attrs: { type: "string" },
+                domProps: { value: _vm.Argumento },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.Argumento = $event.target.value
+                  }
+                }
+              })
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _vm._m(6),
-        _vm._v(" "),
-        _vm._m(7),
-        _vm._v(" "),
-        _c("div", { staticClass: "row container" }, [
-          _c("h3", [_vm._v("IV. ARGUMENTOS DE LA CALIFICACION FINAL")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-12 margin-tb container" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.Argumento,
-                  expression: "Argumento"
-                }
-              ],
-              staticClass: "form-control",
-              staticStyle: { "background-color": "white" },
-              attrs: { type: "string" },
-              domProps: { value: _vm.Argumento },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.Argumento = $event.target.value
-                }
-              }
-            })
-          ])
         ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12 content" }, [
-        _c("div", { staticClass: "container-buttons" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success",
-              staticStyle: { margin: "12px" },
-              on: {
-                click: function($event) {
-                  return _vm.saveEvaluacions()
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-12 content" }, [
+          _c("div", { staticClass: "container-buttons" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success",
+                staticStyle: { margin: "12px" },
+                on: {
+                  click: function($event) {
+                    return _vm.saveEvaluacions()
+                  }
                 }
-              }
-            },
-            [_vm._v("Añadir")]
-          )
+              },
+              [_vm._v("Añadir")]
+            )
+          ])
         ])
       ])
     ])
@@ -40989,29 +41001,29 @@ var staticRenderFns = [
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "col-md-3" }, [
                 _vm._v(
-                  "\n                              ESCALA:\n                            "
+                  "\n                                ESCALA:\n                              "
                 )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-3" }, [
-                _vm._v("\n                              Excelente=4.5 a 5"),
+                _vm._v("\n                                Excelente=4.5 a 5"),
                 _c("br"),
                 _vm._v(
-                  "\n                              Regular=2.7 a 3.4\n                            "
+                  "\n                                Regular=2.7 a 3.4\n                              "
                 )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-3" }, [
-                _vm._v("\n                              Muy Bueno=4.0 a 4.4"),
+                _vm._v("\n                                Muy Bueno=4.0 a 4.4"),
                 _c("br"),
                 _vm._v(
-                  "\n                              Deficiente=menos de 2.7\n                            "
+                  "\n                                Deficiente=menos de 2.7\n                              "
                 )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-3" }, [
                 _vm._v(
-                  "\n                              Bueno=3.5 a 3.9\n                            "
+                  "\n                                Bueno=3.5 a 3.9\n                              "
                 )
               ])
             ])
@@ -53271,14 +53283,15 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!*********************************************************!*\
   !*** ./resources/js/components/EvaluacionComponent.vue ***!
   \*********************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EvaluacionComponent_vue_vue_type_template_id_356e7f16___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EvaluacionComponent.vue?vue&type=template&id=356e7f16& */ "./resources/js/components/EvaluacionComponent.vue?vue&type=template&id=356e7f16&");
 /* harmony import */ var _EvaluacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EvaluacionComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/EvaluacionComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _EvaluacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _EvaluacionComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -53308,7 +53321,7 @@ component.options.__file = "resources/js/components/EvaluacionComponent.vue"
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/EvaluacionComponent.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

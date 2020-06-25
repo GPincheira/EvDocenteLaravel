@@ -14,5 +14,12 @@ class DatabaseSeeder extends Seeder
         //seeders que serán efecutados, en el orden correspondiente
         $this->call(PermissionsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(FacultadesSeeder::class);
+        $this->call(DepartamentosSeeder::class);
+        $this->call(AcademicosSeeder::class);
+        $this->call(SecFacultadesSeeder::class);
+        $this->call(ComisionesSeeder::class);
+        $this->call(EvaluacionesSeeder::class);
+        $this->call(ProcesosSeeder::class);
     }
 }

@@ -37,7 +37,8 @@ class CreateComisionesTable extends Migration
                 ->onUpdate('cascade');
           $table->foreign('idSecFacultad')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onUpdate('cascade');
           $table->timestamps();
         });
     }
