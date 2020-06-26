@@ -88,7 +88,6 @@
                       <th width="8%">I</th>
                       <th>%T*C/100</th>
                     </tr>
-
                       <tr v-if="p1>0">
                         <td class="izq">1. Actividades de Docencia</td>
                         <td><input type="number" v-model="p1" max="100"></td>
@@ -102,7 +101,7 @@
                         <td v-else><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4"></td>
                         <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0"><input type="float" v-model="arrayN1[4]" min="0" max="2.6" disabled></td>
                         <td v-else><input type="float" v-model="arrayN1[4]" min="0" max="2.6"></td>
-                        <td>{{  }}</td>
+                        <td>{{ arrayN1[0]*p1  }}</td>
                       </tr>
                       <tr v-else>
                         <td class="izq">1. Actividades de Docencia</td>
@@ -112,7 +111,7 @@
                         <td><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" disabled></td>
                         <td><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" disabled></td>
                         <td><input type="float" v-model="arrayN1[4]" min="0" max="2.6" disabled></td>
-                        <td>{{  }}</td>
+                        <td>{{ arrayN1[0]*p1 }}</td>
                       </tr>
 
                       <tr v-if="p2>0">
@@ -483,4 +482,8 @@
 }
 </script>
 
+<style>
+input {
+  width: 90px;
+}
 </style>

@@ -27,6 +27,10 @@ Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy2');
 Route::post('/blabla/guardar', 'EvaluacionController@store2');
 Route::get('evaluaciones/evaluar', 'EvaluacionController@evaluar');
 
+Route::get('procesos', 'ProcesoController@index')->name('procesos.index');
+Route::post('procesosa/{role}', 'ProcesoController@abrir')->name('procesos.abrir');
+Route::post('procesosc/{role}', 'ProcesoController@cerrar')->name('procesos.cerrar');
+
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {
     Route::post('academicos/store', 'AcademicoController@store')->name('academicos.store')

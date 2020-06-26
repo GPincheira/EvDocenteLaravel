@@ -6,6 +6,7 @@ use App\evaluacion;
 use App\academico;
 use App\facultad;
 use App\comision;
+use App\Proceso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\EvaluacionesExport;
@@ -310,7 +311,8 @@ public function reactivar($id)
     }
 
     public function evaluar(){
-      return view('evaluaciones.evaluar');
+      $proceso = Proceso::first();
+      return view('evaluaciones.evaluar',compact('proceso'));
     }
 
 }

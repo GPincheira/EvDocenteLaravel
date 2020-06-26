@@ -2148,24 +2148,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2174,7 +2156,7 @@ __webpack_require__.r(__webpack_exports__);
       CodigoComision: "",
       //Esta variable, mediante v-model esta relacionada con el input del formulario
       año: "",
-      NotaFinal: "",
+      NotaFinal: 0,
       Argumento: "",
       p1: 0,
       p2: 0,
@@ -2265,7 +2247,7 @@ __webpack_require__.r(__webpack_exports__);
         'RUTAcademico': this.RUTAcademico,
         'CodigoComision': this.CodigoComision,
         'Argumento': this.Argumento,
-        'NotaFinal': this.pf,
+        'NotaFinal': this.NotaFinal,
         'año': this.año,
         'p1': this.p1,
         'p2': this.p2,
@@ -6853,7 +6835,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput {\n  width: 120px;\n}\n", ""]);
+exports.push([module.i, "\ninput {\n  width: 90px;\n}\n", ""]);
 
 // exports
 
@@ -38379,11 +38361,7 @@ var render = function() {
                                     expression: "p1"
                                   }
                                 ],
-                                attrs: {
-                                  type: "number",
-                                  max: "100",
-                                  size: "5"
-                                },
+                                attrs: { type: "number", max: "100" },
                                 domProps: { value: _vm.p1 },
                                 on: {
                                   input: function($event) {
@@ -38414,7 +38392,6 @@ var render = function() {
                                       type: "float",
                                       min: "4.5",
                                       max: "5",
-                                      size: "5",
                                       disabled: ""
                                     },
                                     domProps: { value: _vm.arrayN1[0] },
@@ -38443,7 +38420,7 @@ var render = function() {
                                       }
                                     ],
                                     attrs: {
-                                      type: "text",
+                                      type: "float",
                                       min: "4.5",
                                       max: "5"
                                     },
@@ -38481,7 +38458,6 @@ var render = function() {
                                       type: "float",
                                       min: "4.0",
                                       max: "4.4",
-                                      size: "5",
                                       disabled: ""
                                     },
                                     domProps: { value: _vm.arrayN1[1] },
@@ -38510,7 +38486,7 @@ var render = function() {
                                       }
                                     ],
                                     attrs: {
-                                      type: "text",
+                                      type: "float",
                                       min: "4.0",
                                       max: "4.4"
                                     },
@@ -38548,7 +38524,6 @@ var render = function() {
                                       type: "float",
                                       min: "3.5",
                                       max: "3.9",
-                                      size: "5",
                                       disabled: ""
                                     },
                                     domProps: { value: _vm.arrayN1[2] },
@@ -38577,10 +38552,9 @@ var render = function() {
                                       }
                                     ],
                                     attrs: {
-                                      type: "text",
+                                      type: "float",
                                       min: "3.5",
-                                      max: "3.9",
-                                      size: "5"
+                                      max: "3.9"
                                     },
                                     domProps: { value: _vm.arrayN1[2] },
                                     on: {
@@ -38602,7 +38576,7 @@ var render = function() {
                             _vm.arrayN1[1] > 0 ||
                             _vm.arrayN1[2] > 0 ||
                             _vm.arrayN1[4] > 0
-                              ? _c("td", { attrs: { size: "5" } }, [
+                              ? _c("td", [
                                   _c("input", {
                                     directives: [
                                       {
@@ -38616,7 +38590,6 @@ var render = function() {
                                       type: "float",
                                       min: "2.7",
                                       max: "3.4",
-                                      size: "5",
                                       disabled: ""
                                     },
                                     domProps: { value: _vm.arrayN1[3] },
@@ -38645,10 +38618,9 @@ var render = function() {
                                       }
                                     ],
                                     attrs: {
-                                      type: "text",
+                                      type: "float",
                                       min: "2.7",
-                                      max: "3.4",
-                                      size: "5"
+                                      max: "3.4"
                                     },
                                     domProps: { value: _vm.arrayN1[3] },
                                     on: {
@@ -38670,7 +38642,7 @@ var render = function() {
                             _vm.arrayN1[1] > 0 ||
                             _vm.arrayN1[2] > 0 ||
                             _vm.arrayN1[3] > 0
-                              ? _c("td", { attrs: { size: "5" } }, [
+                              ? _c("td", [
                                   _c("input", {
                                     directives: [
                                       {
@@ -38684,7 +38656,6 @@ var render = function() {
                                       type: "float",
                                       min: "0",
                                       max: "2.6",
-                                      size: "5",
                                       disabled: ""
                                     },
                                     domProps: { value: _vm.arrayN1[4] },
@@ -38713,10 +38684,9 @@ var render = function() {
                                       }
                                     ],
                                     attrs: {
-                                      type: "text",
+                                      type: "float",
                                       min: "0",
-                                      max: "2.6",
-                                      size: "5"
+                                      max: "2.6"
                                     },
                                     domProps: { value: _vm.arrayN1[4] },
                                     on: {
@@ -38737,18 +38707,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x1 = _vm.promparcial(
+                                  (_vm.n1 = _vm.suma(
                                     _vm.p1,
-                                    _vm.suma(
-                                      _vm.p1,
-                                      _vm.arrayN1[0],
-                                      _vm.arrayN1[1],
-                                      _vm.arrayN1[2],
-                                      _vm.arrayN1[3],
-                                      _vm.arrayN1[4]
-                                    )
+                                    _vm.arrayN1[0],
+                                    _vm.arrayN1[1],
+                                    _vm.arrayN1[2],
+                                    _vm.arrayN1[3],
+                                    _vm.arrayN1[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p1 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x1 = (_vm.n1 * _vm.p1) / 100)) + " "
                               )
                             ])
                           ])
@@ -38767,11 +38740,7 @@ var render = function() {
                                     expression: "p1"
                                   }
                                 ],
-                                attrs: {
-                                  type: "number",
-                                  max: "100",
-                                  size: "5"
-                                },
+                                attrs: { type: "number", max: "100" },
                                 domProps: { value: _vm.p1 },
                                 on: {
                                   input: function($event) {
@@ -38795,10 +38764,9 @@ var render = function() {
                                   }
                                 ],
                                 attrs: {
-                                  type: "text",
+                                  type: "float",
                                   min: "4.5",
                                   max: "5",
-                                  size: "5",
                                   disabled: ""
                                 },
                                 domProps: { value: _vm.arrayN1[0] },
@@ -38828,10 +38796,9 @@ var render = function() {
                                   }
                                 ],
                                 attrs: {
-                                  type: "text",
+                                  type: "float",
                                   min: "4.0",
                                   max: "4.4",
-                                  size: "5",
                                   disabled: ""
                                 },
                                 domProps: { value: _vm.arrayN1[1] },
@@ -38861,10 +38828,9 @@ var render = function() {
                                   }
                                 ],
                                 attrs: {
-                                  type: "text",
+                                  type: "float",
                                   min: "3.5",
                                   max: "3.9",
-                                  size: "5",
                                   disabled: ""
                                 },
                                 domProps: { value: _vm.arrayN1[2] },
@@ -38894,10 +38860,9 @@ var render = function() {
                                   }
                                 ],
                                 attrs: {
-                                  type: "text",
+                                  type: "float",
                                   min: "2.7",
                                   max: "3.4",
-                                  size: "5",
                                   disabled: ""
                                 },
                                 domProps: { value: _vm.arrayN1[3] },
@@ -38927,10 +38892,9 @@ var render = function() {
                                   }
                                 ],
                                 attrs: {
-                                  type: "text",
+                                  type: "float",
                                   min: "0",
                                   max: "2.6",
-                                  size: "5",
                                   disabled: ""
                                 },
                                 domProps: { value: _vm.arrayN1[4] },
@@ -38952,18 +38916,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x1 = _vm.promparcial(
+                                  (_vm.n1 = _vm.suma(
                                     _vm.p1,
-                                    _vm.suma(
-                                      _vm.p1,
-                                      _vm.arrayN1[0],
-                                      _vm.arrayN1[1],
-                                      _vm.arrayN1[2],
-                                      _vm.arrayN1[3],
-                                      _vm.arrayN1[4]
-                                    )
+                                    _vm.arrayN1[0],
+                                    _vm.arrayN1[1],
+                                    _vm.arrayN1[2],
+                                    _vm.arrayN1[3],
+                                    _vm.arrayN1[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p1 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x1 = (_vm.n1 * _vm.p1) / 100)) + " "
                               )
                             ])
                           ]),
@@ -39330,18 +39297,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x2 = _vm.promparcial(
+                                  (_vm.n2 = _vm.suma(
                                     _vm.p2,
-                                    _vm.suma(
-                                      _vm.p2,
-                                      _vm.arrayN2[0],
-                                      _vm.arrayN2[1],
-                                      _vm.arrayN2[2],
-                                      _vm.arrayN2[3],
-                                      _vm.arrayN2[4]
-                                    )
+                                    _vm.arrayN2[0],
+                                    _vm.arrayN2[1],
+                                    _vm.arrayN2[2],
+                                    _vm.arrayN2[3],
+                                    _vm.arrayN2[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p2 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x2 = (_vm.n2 * _vm.p2) / 100)) + " "
                               )
                             ])
                           ])
@@ -39536,18 +39506,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x2 = _vm.promparcial(
+                                  (_vm.n2 = _vm.suma(
                                     _vm.p2,
-                                    _vm.suma(
-                                      _vm.p2,
-                                      _vm.arrayN2[0],
-                                      _vm.arrayN2[1],
-                                      _vm.arrayN2[2],
-                                      _vm.arrayN2[3],
-                                      _vm.arrayN2[4]
-                                    )
+                                    _vm.arrayN2[0],
+                                    _vm.arrayN2[1],
+                                    _vm.arrayN2[2],
+                                    _vm.arrayN2[3],
+                                    _vm.arrayN2[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p2 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x2 = (_vm.n2 * _vm.p2) / 100)) + " "
                               )
                             ])
                           ]),
@@ -39914,18 +39887,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x3 = _vm.promparcial(
+                                  (_vm.n3 = _vm.suma(
                                     _vm.p3,
-                                    _vm.suma(
-                                      _vm.p3,
-                                      _vm.arrayN3[0],
-                                      _vm.arrayN3[1],
-                                      _vm.arrayN3[2],
-                                      _vm.arrayN3[3],
-                                      _vm.arrayN3[4]
-                                    )
+                                    _vm.arrayN3[0],
+                                    _vm.arrayN3[1],
+                                    _vm.arrayN3[2],
+                                    _vm.arrayN3[3],
+                                    _vm.arrayN3[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p3 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x3 = (_vm.n3 * _vm.p3) / 100)) + " "
                               )
                             ])
                           ])
@@ -40120,18 +40096,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x3 = _vm.promparcial(
+                                  (_vm.n3 = _vm.suma(
                                     _vm.p3,
-                                    _vm.suma(
-                                      _vm.p3,
-                                      _vm.arrayN3[0],
-                                      _vm.arrayN3[1],
-                                      _vm.arrayN3[2],
-                                      _vm.arrayN3[3],
-                                      _vm.arrayN3[4]
-                                    )
+                                    _vm.arrayN3[0],
+                                    _vm.arrayN3[1],
+                                    _vm.arrayN3[2],
+                                    _vm.arrayN3[3],
+                                    _vm.arrayN3[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p3 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x3 = (_vm.n3 * _vm.p3) / 100)) + " "
                               )
                             ])
                           ]),
@@ -40498,18 +40477,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x4 = _vm.promparcial(
+                                  (_vm.n4 = _vm.suma(
                                     _vm.p4,
-                                    _vm.suma(
-                                      _vm.p4,
-                                      _vm.arrayN4[0],
-                                      _vm.arrayN4[1],
-                                      _vm.arrayN4[2],
-                                      _vm.arrayN4[3],
-                                      _vm.arrayN4[4]
-                                    )
+                                    _vm.arrayN4[0],
+                                    _vm.arrayN4[1],
+                                    _vm.arrayN4[2],
+                                    _vm.arrayN4[3],
+                                    _vm.arrayN4[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p4 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x4 = (_vm.n4 * _vm.p4) / 100)) + " "
                               )
                             ])
                           ])
@@ -40704,18 +40686,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x4 = _vm.promparcial(
+                                  (_vm.n4 = _vm.suma(
                                     _vm.p4,
-                                    _vm.suma(
-                                      _vm.p4,
-                                      _vm.arrayN4[0],
-                                      _vm.arrayN4[1],
-                                      _vm.arrayN4[2],
-                                      _vm.arrayN4[3],
-                                      _vm.arrayN4[4]
-                                    )
+                                    _vm.arrayN4[0],
+                                    _vm.arrayN4[1],
+                                    _vm.arrayN4[2],
+                                    _vm.arrayN4[3],
+                                    _vm.arrayN4[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p4 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x4 = (_vm.n4 * _vm.p4) / 100)) + " "
                               )
                             ])
                           ]),
@@ -41082,18 +41067,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x5 = _vm.promparcial(
+                                  (_vm.n5 = _vm.suma(
                                     _vm.p5,
-                                    _vm.suma(
-                                      _vm.p5,
-                                      _vm.arrayN5[0],
-                                      _vm.arrayN5[1],
-                                      _vm.arrayN5[2],
-                                      _vm.arrayN5[3],
-                                      _vm.arrayN5[4]
-                                    )
+                                    _vm.arrayN5[0],
+                                    _vm.arrayN5[1],
+                                    _vm.arrayN5[2],
+                                    _vm.arrayN5[3],
+                                    _vm.arrayN5[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p5 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x5 = (_vm.n5 * _vm.p5) / 100)) + " "
                               )
                             ])
                           ])
@@ -41289,18 +41277,21 @@ var render = function() {
                             _c("td", [
                               _vm._v(
                                 _vm._s(
-                                  (_vm.x5 = _vm.promparcial(
+                                  (_vm.n5 = _vm.suma(
                                     _vm.p5,
-                                    _vm.suma(
-                                      _vm.p5,
-                                      _vm.arrayN5[0],
-                                      _vm.arrayN5[1],
-                                      _vm.arrayN5[2],
-                                      _vm.arrayN5[3],
-                                      _vm.arrayN5[4]
-                                    )
+                                    _vm.arrayN5[0],
+                                    _vm.arrayN5[1],
+                                    _vm.arrayN5[2],
+                                    _vm.arrayN5[3],
+                                    _vm.arrayN5[4]
                                   ))
                                 )
+                              ),
+                              _c("a", [_vm._v("x")]),
+                              _vm._v(_vm._s(_vm.p5 / 100)),
+                              _c("a", [_vm._v("=")]),
+                              _vm._v(
+                                _vm._s((_vm.x5 = (_vm.n5 * _vm.p5) / 100)) + " "
                               )
                             ])
                           ]),
@@ -41315,13 +41306,12 @@ var render = function() {
                         _c("td", [
                           _vm._v(
                             _vm._s(
-                              (_vm.pf = _vm.promedio(
-                                _vm.x1,
-                                _vm.x2,
-                                _vm.x3,
-                                _vm.x4,
-                                _vm.x5
-                              ))
+                              (_vm.NotaFinal =
+                                parseFloat(_vm.x1) +
+                                parseFloat(_vm.x2) +
+                                parseFloat(_vm.x3) +
+                                parseFloat(_vm.x4) +
+                                parseFloat(_vm.x5))
                             )
                           )
                         ])
@@ -41442,65 +41432,7 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(
-                  "\n                " +
-                    _vm._s(
-                      (_vm.n1 = _vm.suma(
-                        _vm.p5,
-                        _vm.arrayN1[0],
-                        _vm.arrayN1[1],
-                        _vm.arrayN1[2],
-                        _vm.arrayN1[3],
-                        _vm.arrayN1[4]
-                      ))
-                    ) +
-                    "\n                " +
-                    _vm._s(
-                      (_vm.n2 = _vm.suma(
-                        _vm.p5,
-                        _vm.arrayN2[0],
-                        _vm.arrayN2[1],
-                        _vm.arrayN2[2],
-                        _vm.arrayN2[3],
-                        _vm.arrayN2[4]
-                      ))
-                    ) +
-                    "\n                " +
-                    _vm._s(
-                      (_vm.n3 = _vm.suma(
-                        _vm.p5,
-                        _vm.arrayN3[0],
-                        _vm.arrayN3[1],
-                        _vm.arrayN3[2],
-                        _vm.arrayN3[3],
-                        _vm.arrayN3[4]
-                      ))
-                    ) +
-                    "\n                " +
-                    _vm._s(
-                      (_vm.n4 = _vm.suma(
-                        _vm.p5,
-                        _vm.arrayN4[0],
-                        _vm.arrayN4[1],
-                        _vm.arrayN4[2],
-                        _vm.arrayN4[3],
-                        _vm.arrayN4[4]
-                      ))
-                    ) +
-                    "\n                " +
-                    _vm._s(
-                      (_vm.n5 = _vm.suma(
-                        _vm.p5,
-                        _vm.arrayN5[0],
-                        _vm.arrayN5[1],
-                        _vm.arrayN5[2],
-                        _vm.arrayN5[3],
-                        _vm.arrayN5[4]
-                      ))
-                    ) +
-                    "\n\n                "
-                )
+                ])
               ])
             ])
           ]),
@@ -41559,13 +41491,7 @@ var render = function() {
           ])
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _vm._m(7),
-    _vm._v(" "),
-    _vm._m(8),
-    _vm._v(" "),
-    _vm._m(9)
+    ])
   ])
 }
 var staticRenderFns = [
@@ -41600,9 +41526,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", { attrs: { rowspan: "2", width: "32%" } }),
+      _c("th", { attrs: { rowspan: "2", width: "22%" } }),
       _vm._v(" "),
-      _c("th", { attrs: { rowspan: "2", width: "20%" } }, [
+      _c("th", { attrs: { rowspan: "2", width: "18%" } }, [
         _vm._v("% tiempo asignado a tareas programadas")
       ]),
       _vm._v(" "),
@@ -41610,7 +41536,7 @@ var staticRenderFns = [
         _vm._v("Calificacion")
       ]),
       _vm._v(" "),
-      _c("th", { attrs: { width: "8%" } }, [_vm._v("Pond")])
+      _c("th", { attrs: { width: "20%" } }, [_vm._v("Pond")])
     ])
   },
   function() {
@@ -41684,33 +41610,6 @@ var staticRenderFns = [
           ]
         )
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("Nombre: "),
-      _c("input", { attrs: { type: "text", name: "nombre" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("Apellidos: "),
-      _c("input", { attrs: { type: "text", name: "apellidos", size: "60" } })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("p", [
-      _vm._v("Nacionalidad: "),
-      _c("input", { attrs: { type: "text", name: "nacionalidad", size: "5" } })
     ])
   }
 ]

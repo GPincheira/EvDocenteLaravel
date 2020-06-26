@@ -31,10 +31,10 @@
                 <table class="table table-bordered content compact-table">
                   <tbody>
                     <tr>
-                      <th rowspan="2" width="32%"></th>
-                      <th rowspan="2" width="20%">% tiempo asignado a tareas programadas</th>
+                      <th rowspan="2" width="22%"></th>
+                      <th rowspan="2" width="18%">% tiempo asignado a tareas programadas</th>
                       <th colspan="5" width="40%">Calificacion</th>
-                      <th width="8%">Pond</th>
+                      <th width="20%">Pond</th>
                     </tr>
                     <tr>
                       <th width="8%">E</th>
@@ -46,30 +46,29 @@
                     </tr>
                       <tr v-if="p1>0">
                         <td class="izq">1. Actividades de Docencia</td>
-                        <td><input type="number" v-model="p1" max="100" size="5"></td>
-                        <td v-if="arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[0]" min="4.5" max="5" size="5" disabled></td>
-                        <td v-else><input type="text" v-model="arrayN1[0]" min="4.5" max="5"></td>
-                        <td v-if="arrayN1[0]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4" size="5" disabled></td>
-                        <td v-else><input type="text" v-model="arrayN1[1]" min="4.0" max="4.4"></td>
-                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" size="5" disabled></td>
-                        <td v-else><input type="text" v-model="arrayN1[2]" min="3.5" max="3.9" size="5"></td>
-                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[4]>0" size="5"><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" size="5" disabled></td>
-                        <td v-else><input type="text" v-model="arrayN1[3]" min="2.7" max="3.4" size="5"></td>
-                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0" size="5"><input type="float" v-model="arrayN1[4]" min="0" max="2.6" size="5" disabled></td>
-                        <td v-else><input type="text" v-model="arrayN1[4]" min="0" max="2.6" size="5"></td>
-                        <td>{{ x1=promparcial(p1,suma(p1,arrayN1[0],arrayN1[1],arrayN1[2],arrayN1[3],arrayN1[4])) }}</td>
+                        <td><input type="number" v-model="p1" max="100"></td>
+                        <td v-if="arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[0]" min="4.5" max="5" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[0]" min="4.5" max="5"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0"><input type="float" v-model="arrayN1[4]" min="0" max="2.6" disabled></td>
+                        <td v-else><input type="float" v-model="arrayN1[4]" min="0" max="2.6"></td>
+                        <td>{{n1=suma(p1,arrayN1[0],arrayN1[1],arrayN1[2],arrayN1[3],arrayN1[4])}}<a>x</a>{{p1/100}}<a>=</a>{{x1=n1*p1/100}} </td>
                       </tr>
                       <tr v-else>
                         <td class="izq">1. Actividades de Docencia</td>
-                        <td><input type="number" v-model="p1" max="100" size="5"></td>
-                        <td><input type="text" v-model="arrayN1[0]" min="4.5" max="5" size="5" disabled></td>
-                        <td><input type="text" v-model="arrayN1[1]" min="4.0" max="4.4" size="5" disabled></td>
-                        <td><input type="text" v-model="arrayN1[2]" min="3.5" max="3.9" size="5" disabled></td>
-                        <td><input type="text" v-model="arrayN1[3]" min="2.7" max="3.4" size="5" disabled></td>
-                        <td><input type="text" v-model="arrayN1[4]" min="0" max="2.6" size="5" disabled></td>
-                        <td>{{ x1=promparcial(p1,suma(p1,arrayN1[0],arrayN1[1],arrayN1[2],arrayN1[3],arrayN1[4])) }}</td>
+                        <td><input type="number" v-model="p1" max="100"></td>
+                        <td><input type="float" v-model="arrayN1[0]" min="4.5" max="5" disabled></td>
+                        <td><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4" disabled></td>
+                        <td><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" disabled></td>
+                        <td><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" disabled></td>
+                        <td><input type="float" v-model="arrayN1[4]" min="0" max="2.6" disabled></td>
+                        <td>{{n1=suma(p1,arrayN1[0],arrayN1[1],arrayN1[2],arrayN1[3],arrayN1[4])}}<a>x</a>{{p1/100}}<a>=</a>{{x1=n1*p1/100}} </td>
                       </tr>
-
                       <tr v-if="p2>0">
                         <td class="izq">2. Actividades de Investigación</td>
                         <td><input type="number" v-model="p2" max="100"></td>
@@ -83,7 +82,7 @@
                         <td v-else><input type="float" v-model="arrayN2[3]" min="2.7" max="3.4"></td>
                         <td v-if="arrayN2[0]>0 || arrayN2[1]>0 || arrayN2[2]>0 || arrayN2[3]>0"><input type="float" v-model="arrayN2[4]" min="0" max="2.6" disabled></td>
                         <td v-else><input type="float" v-model="arrayN2[4]" min="0" max="2.6"></td>
-                        <td>{{ x2=promparcial(p2,suma(p2,arrayN2[0],arrayN2[1],arrayN2[2],arrayN2[3],arrayN2[4])) }}</td>
+                        <td>{{n2=suma(p2,arrayN2[0],arrayN2[1],arrayN2[2],arrayN2[3],arrayN2[4])}}<a>x</a>{{p2/100}}<a>=</a>{{x2=n2*p2/100}} </td>
                       </tr>
                       <tr v-else>
                         <td class="izq">2. Actividades de Investigación</td>
@@ -93,9 +92,8 @@
                         <td><input type="float" v-model="arrayN2[2]" min="3.5" max="3.9" disabled></td>
                         <td><input type="float" v-model="arrayN2[3]" min="2.7" max="3.4" disabled></td>
                         <td><input type="float" v-model="arrayN2[4]" min="0" max="2.6" disabled></td>
-                        <td>{{ x2=promparcial(p2,suma(p2,arrayN2[0],arrayN2[1],arrayN2[2],arrayN2[3],arrayN2[4])) }}</td>
+                        <td>{{n2=suma(p2,arrayN2[0],arrayN2[1],arrayN2[2],arrayN2[3],arrayN2[4])}}<a>x</a>{{p2/100}}<a>=</a>{{x2=n2*p2/100}} </td>
                       </tr>
-
                       <tr v-if="p3>0">
                         <td class="izq">3. Extension y Vinculación</td>
                         <td><input type="number" v-model="p3" max="100"></td>
@@ -109,7 +107,7 @@
                         <td v-else><input type="float" v-model="arrayN3[3]" min="2.7" max="3.4"></td>
                         <td v-if="arrayN3[0]>0 || arrayN3[1]>0 || arrayN3[2]>0 || arrayN3[3]>0"><input type="float" v-model="arrayN3[4]" min="0" max="2.6" disabled></td>
                         <td v-else><input type="float" v-model="arrayN3[4]" min="0" max="2.6"></td>
-                        <td>{{ x3=promparcial(p3,suma(p3,arrayN3[0],arrayN3[1],arrayN3[2],arrayN3[3],arrayN3[4])) }}</td>
+                        <td>{{n3=suma(p3,arrayN3[0],arrayN3[1],arrayN3[2],arrayN3[3],arrayN3[4])}}<a>x</a>{{p3/100}}<a>=</a>{{x3=n3*p3/100}} </td>
                       </tr>
                       <tr v-else>
                         <td class="izq">3. Extension y Vinculación</td>
@@ -119,9 +117,8 @@
                         <td><input type="float" v-model="arrayN3[2]" min="3.5" max="3.9" disabled></td>
                         <td><input type="float" v-model="arrayN3[3]" min="2.7" max="3.4" disabled></td>
                         <td><input type="float" v-model="arrayN3[4]" min="0" max="2.6" disabled></td>
-                        <td>{{ x3=promparcial(p3,suma(p3,arrayN3[0],arrayN3[1],arrayN3[2],arrayN3[3],arrayN3[4])) }}</td>
+                        <td>{{n3=suma(p3,arrayN3[0],arrayN3[1],arrayN3[2],arrayN3[3],arrayN3[4])}}<a>x</a>{{p3/100}}<a>=</a>{{x3=n3*p3/100}} </td>
                       </tr>
-
                       <tr v-if="p4>0">
                         <td class="izq">4. Administración Académica</td>
                         <td><input type="number" v-model="p4" max="100"></td>
@@ -135,7 +132,7 @@
                         <td v-else><input type="float" v-model="arrayN4[3]" min="2.7" max="3.4"></td>
                         <td v-if="arrayN4[0]>0 || arrayN4[1]>0 || arrayN4[2]>0 || arrayN4[3]>0"><input type="float" v-model="arrayN4[4]" min="0" max="2.6" disabled></td>
                         <td v-else><input type="float" v-model="arrayN4[4]" min="0" max="2.6"></td>
-                        <td>{{ x4=promparcial(p4,suma(p4,arrayN4[0],arrayN4[1],arrayN4[2],arrayN4[3],arrayN4[4])) }}</td>
+                        <td>{{n4=suma(p4,arrayN4[0],arrayN4[1],arrayN4[2],arrayN4[3],arrayN4[4])}}<a>x</a>{{p4/100}}<a>=</a>{{x4=n4*p4/100}} </td>
                       </tr>
                       <tr v-else>
                         <td class="izq">4. Administración Académica</td>
@@ -145,9 +142,8 @@
                         <td><input type="float" v-model="arrayN4[2]" min="3.5" max="3.9" disabled></td>
                         <td><input type="float" v-model="arrayN4[3]" min="2.7" max="3.4" disabled></td>
                         <td><input type="float" v-model="arrayN4[4]" min="0" max="2.6" disabled></td>
-                        <td>{{ x4=promparcial(p4,suma(p4,arrayN4[0],arrayN4[1],arrayN4[2],arrayN4[3],arrayN4[4])) }}</td>
+                        <td>{{n4=suma(p4,arrayN4[0],arrayN4[1],arrayN4[2],arrayN4[3],arrayN4[4])}}<a>x</a>{{p4/100}}<a>=</a>{{x4=n4*p4/100}} </td>
                       </tr>
-
                       <tr v-if="p5>0">
                         <td class="izq">5. Otras actividades realizadas</td>
                         <td><input type="number" v-model="p5" max="100"></td>
@@ -161,7 +157,7 @@
                         <td v-else><input type="float" v-model="arrayN5[3]" min="2.7" max="3.4"></td>
                         <td v-if="arrayN5[0]>0 || arrayN5[1]>0 || arrayN5[2]>0 || arrayN5[3]>0"><input type="float" v-model="arrayN5[4]" min="0" max="2.6" disabled></td>
                         <td v-else><input type="float" v-model="arrayN5[4]" min="0" max="2.6"></td>
-                        <td>{{ x5=promparcial(p5,suma(p5,arrayN5[0],arrayN5[1],arrayN5[2],arrayN5[3],arrayN5[4])) }}</td>
+                        <td>{{n5=suma(p5,arrayN5[0],arrayN5[1],arrayN5[2],arrayN5[3],arrayN5[4])}}<a>x</a>{{p5/100}}<a>=</a>{{x5=n5*p5/100}} </td>
                       </tr>
                       <tr v-else>
                         <td class="izq">5. Otras actividades realizadas</td>
@@ -171,15 +167,14 @@
                         <td><input type="float" v-model="arrayN5[2]" min="3.5" max="3.9" disabled></td>
                         <td><input type="float" v-model="arrayN5[3]" min="2.7" max="3.4" disabled></td>
                         <td><input type="float" v-model="arrayN5[4]" value="0" min="0" max="2.6" disabled></td>
-                        <td>{{ x5=promparcial(p5,suma(p5,arrayN5[0],arrayN5[1],arrayN5[2],arrayN5[3],arrayN5[4])) }}</td>
+                        <td>{{n5=suma(p5,arrayN5[0],arrayN5[1],arrayN5[2],arrayN5[3],arrayN5[4])}}<a>x</a>{{p5/100}}<a>=</a>{{x5=n5*p5/100}} </td>
                       </tr>
                     <tr>
                       <th class="izq" colspan="7">Nota Final</th>
-                      <td>{{ pf=promedio(x1,x2,x3,x4,x5) }}</td>
+                      <td>{{ NotaFinal=parseFloat(x1) + parseFloat(x2)+ parseFloat(x3) + parseFloat(x4) + parseFloat(x5) }}</td>
                     </tr>
                   </tbody>
                 </table>
-
                 <p><label for="RUTAcademico">RUTAcademico</label>
                 <input id="RUTAcademico" v-model="RUTAcademico" type="number" name="RUTAcademico"></p>
                 <p><label for="CodigoComision">CodigoComision</label>
@@ -188,12 +183,6 @@
                 <input id="año" v-model="año" type="number" name="año"></p>
                 <p><label for="Argumento">Argumento</label>
                 <input id="Argumento" v-model="Argumento" type="text" name="Argumento"></p>
-                {{n1=suma(p5,arrayN1[0],arrayN1[1],arrayN1[2],arrayN1[3],arrayN1[4])}}
-                {{n2=suma(p5,arrayN2[0],arrayN2[1],arrayN2[2],arrayN2[3],arrayN2[4])}}
-                {{n3=suma(p5,arrayN3[0],arrayN3[1],arrayN3[2],arrayN3[3],arrayN3[4])}}
-                {{n4=suma(p5,arrayN4[0],arrayN4[1],arrayN4[2],arrayN4[3],arrayN4[4])}}
-                {{n5=suma(p5,arrayN5[0],arrayN5[1],arrayN5[2],arrayN5[3],arrayN5[4])}}
-
                 </div>
               </div>
             </div>
@@ -243,13 +232,6 @@
             </div>
         </div>
     </div>
-
-
-    <p>Nombre: <input type="text" name="nombre"></p>
-
-    <p>Apellidos: <input type="text" name="apellidos" size="60"></p>
-
-    <p>Nacionalidad: <input type="text" name="nacionalidad" size="5"></p>
 </form>
 
 
@@ -263,7 +245,7 @@
                 RUTAcademico:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
                 CodigoComision:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
                 año:"",
-                NotaFinal:"",
+                NotaFinal:0,
                 Argumento:"",
                 p1: 0,
                 p2: 0,
@@ -343,7 +325,7 @@
                 'RUTAcademico':this.RUTAcademico,
                 'CodigoComision':this.CodigoComision,
                 'Argumento':this.Argumento,
-                'NotaFinal':this.pf,
+                'NotaFinal':this.NotaFinal,
                 'año':this.año,
                 'p1':this.p1,
                 'p2':this.p2,
@@ -388,6 +370,6 @@
 
 <style>
 input {
-  width: 120px;
+  width: 90px;
 }
 </style>

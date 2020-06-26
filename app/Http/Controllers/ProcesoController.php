@@ -15,7 +15,7 @@ class ProcesoController extends Controller
     public function index()
     {
       $procesos = Proceso::latest()->paginate(10);
-      return view('procesos.index')
+      return view('procesos.index',compact('procesos'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
@@ -83,5 +83,23 @@ class ProcesoController extends Controller
     public function destroy(Proceso $proceso)
     {
         //
+    }
+
+    public function abrir($id)
+    {
+      $proceso = proceso::all()->find($id);
+      $proceso->fin='2030/12/31';
+      $proceso->update();
+      return redirect()->route('procesos.index')
+        ->with('success','Proceso Abierto');
+    }
+
+    public function cerrar($id)
+    {
+      $proceso = proceso::all()->find($id);
+      $proceso->fin='2010/12/31';
+      $proceso->update();
+      return redirect()->route('procesos.index')
+        ->with('success','Proceso Cerrado');
     }
 }
