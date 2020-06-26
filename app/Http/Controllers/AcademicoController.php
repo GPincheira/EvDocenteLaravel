@@ -78,7 +78,6 @@ class AcademicoController extends Controller
         'verificador' => ['required','max:1'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
-        'ApellidoMaterno' => 'required',
         'TituloProfesional' => 'required',
         'GradoAcademico' => 'required',
         'CodigoDpto' => ['required','integer'],
@@ -138,7 +137,7 @@ class AcademicoController extends Controller
     public function update(Request $request, $id)
     {
       $request->validate([
-        'id' => ['required','integer','min:1000000','max:25000000','unique:academicos'],
+        'id' => ['required','integer','min:1000000','max:25000000'],
         'verificador' => ['required','max:1'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
@@ -159,12 +158,21 @@ class AcademicoController extends Controller
         ->with('success','Academico Actualizado Exitosamente');
     }
 
+    public function update2(Request $request, $id)
+    {
+      $academico = academico::find($id);    //si todo es valido, se busca el registro a actualizar y se hacen los cambios
+      $academico->update($request->all());
+      return redirect()->route('academicos.index')
+        ->with('success','Academico Actualizado Exitosamente');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\academico  $academico
      * @return \Illuminate\Http\Response
      */
+
 
      //funcion para eliminar, realiza la busqueda y luego hace eliminado logico (soft)
     public function destroy($id)

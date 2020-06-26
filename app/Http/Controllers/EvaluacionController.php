@@ -131,7 +131,11 @@ class EvaluacionController extends Controller
 
 public function show(Evaluacion $evaluacion)
 {
-    return view('evaluaciones.show',compact('evaluacion'));
+  $evs = Evaluacion::all();
+  return view('evaluaciones.show',compact('evaluacion'),['evs'=>$evs]);
+
+
+//  $departamentos = Facultad::find($CodigoFacultad)->departamentos;
 }
 
 public function edit($id)
@@ -295,7 +299,8 @@ public function reactivar($id)
     public function pdf($id)
     {
         $evaluacion = evaluacion::find($id);
-        $pdf = PDF::loadView('pdf.evaluaciones', compact('evaluacion'));
+        $evs = Evaluacion::all();
+        $pdf = PDF::loadView('pdf.evaluaciones',compact('evaluacion'),['evs'=>$evs]);
         return $pdf->download('evaluacion.pdf');
     }
 
@@ -305,11 +310,7 @@ public function reactivar($id)
     }
 
     public function evaluar(){
-      $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-      $academicos = Academico::all();
-      $comisiones = Comision::all();
-      $departamentos = Facultad::find($CodigoFacultad)->departamentos;
-      return view('evaluaciones.evaluar',['academicos' => $academicos , 'departamentos' => $departamentos , 'comisiones' => $comisiones]);
+      return view('evaluaciones.evaluar');
     }
 
 }

@@ -8,7 +8,7 @@
       </ul>
     </p>
 
-  <div class="container">
+  <div class="contenedor">
       <div class="row">
           <div class="col-md-12">
             <div class="row content">
@@ -28,7 +28,7 @@
             <div class="container">
               <div class="row">
               <div class="col-md-12">
-                <table class="table table-bordered content">
+                <table class="table table-bordered content compact-table">
                   <tbody>
                     <tr>
                       <th rowspan="2" width="32%"></th>
@@ -44,30 +44,29 @@
                       <th width="8%">I</th>
                       <th>%T*C/100</th>
                     </tr>
-
                       <tr v-if="p1>0">
                         <td class="izq">1. Actividades de Docencia</td>
-                        <td><input type="number" v-model="p1" max="100"></td>
-                        <td v-if="arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[0]" min="4.5" max="5" disabled></td>
-                        <td v-else><input type="float" v-model="arrayN1[0]" min="4.5" max="5"></td>
-                        <td v-if="arrayN1[0]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4" disabled></td>
-                        <td v-else><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4"></td>
-                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" disabled></td>
-                        <td v-else><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9"></td>
-                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" disabled></td>
-                        <td v-else><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4"></td>
-                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0"><input type="float" v-model="arrayN1[4]" min="0" max="2.6" disabled></td>
-                        <td v-else><input type="float" v-model="arrayN1[4]" min="0" max="2.6"></td>
+                        <td><input type="number" v-model="p1" max="100" size="5"></td>
+                        <td v-if="arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[0]" min="4.5" max="5" size="5" disabled></td>
+                        <td v-else><input type="text" v-model="arrayN1[0]" min="4.5" max="5"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4" size="5" disabled></td>
+                        <td v-else><input type="text" v-model="arrayN1[1]" min="4.0" max="4.4"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" size="5" disabled></td>
+                        <td v-else><input type="text" v-model="arrayN1[2]" min="3.5" max="3.9" size="5"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[4]>0" size="5"><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" size="5" disabled></td>
+                        <td v-else><input type="text" v-model="arrayN1[3]" min="2.7" max="3.4" size="5"></td>
+                        <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0" size="5"><input type="float" v-model="arrayN1[4]" min="0" max="2.6" size="5" disabled></td>
+                        <td v-else><input type="text" v-model="arrayN1[4]" min="0" max="2.6" size="5"></td>
                         <td>{{ x1=promparcial(p1,suma(p1,arrayN1[0],arrayN1[1],arrayN1[2],arrayN1[3],arrayN1[4])) }}</td>
                       </tr>
                       <tr v-else>
                         <td class="izq">1. Actividades de Docencia</td>
-                        <td><input type="number" v-model="p1" max="100"></td>
-                        <td><input type="float" v-model="arrayN1[0]" min="4.5" max="5" disabled></td>
-                        <td><input type="float" v-model="arrayN1[1]" min="4.0" max="4.4" disabled></td>
-                        <td><input type="float" v-model="arrayN1[2]" min="3.5" max="3.9" disabled></td>
-                        <td><input type="float" v-model="arrayN1[3]" min="2.7" max="3.4" disabled></td>
-                        <td><input type="float" v-model="arrayN1[4]" min="0" max="2.6" disabled></td>
+                        <td><input type="number" v-model="p1" max="100" size="5"></td>
+                        <td><input type="text" v-model="arrayN1[0]" min="4.5" max="5" size="5" disabled></td>
+                        <td><input type="text" v-model="arrayN1[1]" min="4.0" max="4.4" size="5" disabled></td>
+                        <td><input type="text" v-model="arrayN1[2]" min="3.5" max="3.9" size="5" disabled></td>
+                        <td><input type="text" v-model="arrayN1[3]" min="2.7" max="3.4" size="5" disabled></td>
+                        <td><input type="text" v-model="arrayN1[4]" min="0" max="2.6" size="5" disabled></td>
                         <td>{{ x1=promparcial(p1,suma(p1,arrayN1[0],arrayN1[1],arrayN1[2],arrayN1[3],arrayN1[4])) }}</td>
                       </tr>
 
@@ -244,7 +243,17 @@
             </div>
         </div>
     </div>
+
+
+    <p>Nombre: <input type="text" name="nombre"></p>
+
+    <p>Apellidos: <input type="text" name="apellidos" size="60"></p>
+
+    <p>Nacionalidad: <input type="text" name="nacionalidad" size="5"></p>
 </form>
+
+
+
 </template>
 
 <script>
@@ -377,4 +386,8 @@
 }
 </script>
 
+<style>
+input {
+  width: 120px;
+}
 </style>

@@ -21,6 +21,12 @@
     </div>
 </div>
 
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+<evaluacion-component></evaluacion-component>
+</div>
+</div>
+
 @if (Session::has('message'))
 <div class="alert alert-danger">{{Session::get('message')}}</div>
  @endif
@@ -36,6 +42,6 @@
     </div>
 @endif
 
-<evaluacion-component></evaluacion-component>
+
 
 @endsection

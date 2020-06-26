@@ -109,6 +109,8 @@ class ComisionController extends Controller
         'Fecha' => ['required','timedate'],
         'Nombre1' => 'required',
         'Nombre2' => 'required',
+        'AMaterno1' => 'required',
+        'APaterno2' => 'required',
       ]);
       $comision = comision::find($id);
       $comision->update($request->all());

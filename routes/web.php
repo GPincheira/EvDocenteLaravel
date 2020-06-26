@@ -16,18 +16,15 @@ Auth::routes();
 
 Route::resource('secFacultades','SecFacultadController');
 Route::resource('roles','RoleController');
-
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
 Route::get('/exportar', 'EvaluacionController@export')->name('exportar');
-
 Route::get('/blabla', 'EvaluacionController@json');
-Route::get('/dptos', 'DepartamentoController@json');
-Route::post('/blabla/guardar', 'EvaluacionController@store2');
+
 Route::put('/tareas/actualizar', 'EvaluacionController@update2');
 Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy2');
-
+Route::post('/blabla/guardar', 'EvaluacionController@store2');
 Route::get('evaluaciones/evaluar', 'EvaluacionController@evaluar');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
@@ -40,6 +37,8 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:academicos.index');
     Route::get('academicos/create', 'AcademicoController@create')->name('academicos.create')
                                                         ->middleware('permission:academicos.create');
+    Route::put('academicosadm/{role}', 'AcademicoController@update2')->name('academicos.update2')
+                                                        ->middleware('permission:academicos.edit');
     Route::put('academicos/{role}', 'AcademicoController@update')->name('academicos.update')
                                                         ->middleware('permission:academicos.edit');
     Route::get('academicos/{academico}', 'AcademicoController@show')->name('academicos.show')

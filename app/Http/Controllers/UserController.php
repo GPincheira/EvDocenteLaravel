@@ -98,8 +98,7 @@ class UserController extends Controller
         'email' => ['required','unique:users','email'],
         'password' => ['required','min:6','max:20'],
         'Nombre' => 'required',
-        'ApellidoPaterno' => 'required',
-        'ApellidoMaterno' => 'required',
+        'ApellidoPaterno' => 'required'
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
@@ -121,7 +120,6 @@ class UserController extends Controller
         'password' => ['required','min:6','max:20'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
-        'ApellidoMaterno' => 'required',
         'CodigoFacultad' => ['required','integer','unique:secFacultades'],
       ]);
       $password=bcrypt($request['password']);
@@ -145,8 +143,7 @@ class UserController extends Controller
         'email' => ['required','unique:users','email'],
         'password' => ['required','min:6','max:20'],
         'Nombre' => 'required',
-        'ApellidoPaterno' => 'required',
-        'ApellidoMaterno' => 'required',
+        'ApellidoPaterno' => 'required'
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
@@ -196,7 +193,7 @@ class UserController extends Controller
       $request->validate([
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
-        'ApellidoMaterno' => 'required',
+        'email' => ['required','email']
       ]);
       $user = user::find($id);
       $user->update($request->all());

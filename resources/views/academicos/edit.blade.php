@@ -33,6 +33,7 @@
     @endif
 
 {{--Funcionamiento similar al create, pero estos datos son pasados a update para validar --}}
+  @if(@Auth::user()->hasRole('SecFacultad'))
     <form action="{{ route('academicos.update',$academico->id) }}" method="POST">
         @csrf
         @method('PUT')
@@ -89,13 +90,11 @@
                      <strong>Departamento al que pertenece:</strong>
                      <select name="CodigoDpto" class="form-control">
                        @foreach($departamentos as $departamento)
-                        @if(@Auth::user()->hasRole('SecFacultad'))
                            @foreach($secFacultades as $secFacultad)
                            @if(@Auth::user()->id == $secFacultad->id && $secFacultad->CodigoFacultad == $departamento->CodigoFacultad)
                              <option value='{{$departamento->id}}' @if($academico->CodigoDpto==$departamento->id) selected @endif >{{$departamento->id}} - {{$departamento->Nombre}}</option>
                            @endif
                            @endforeach
-                        @endif
                        @endforeach
                      </select>
                  </div>
@@ -136,5 +135,27 @@
             </div>
         </div>
     </form>
-
+  @else
+  <form action="{{ route('academicos.update2',$academico->id) }}" method="POST">
+      @csrf
+      @method('PUT')
+      <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="form-group">
+                   <strong>Departamento al que pertenece:</strong>
+                   <select name="CodigoDpto" class="form-control">
+                     @foreach($departamentos as $departamento)
+                        <option value='{{$departamento->id}}' @if($academico->CodigoDpto==$departamento->id) selected @endif >{{$departamento->id}} - {{$departamento->Nombre}}</option>
+                     @endforeach
+                   </select>
+               </div>
+           </div>
+        </div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </div>
+      </div>
+  </form>
+  @endif
 @endsection
