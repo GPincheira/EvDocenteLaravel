@@ -20,16 +20,11 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
 Route::get('/exportar', 'EvaluacionController@export')->name('exportar');
-Route::get('/blabla', 'EvaluacionController@json');
-
-Route::put('/tareas/actualizar', 'EvaluacionController@update2');
-Route::delete('/tareas/borrar/{id}', 'EvaluacionController@destroy2');
-Route::post('/blabla/guardar', 'EvaluacionController@store2');
-Route::get('evaluaciones/evaluar', 'EvaluacionController@evaluar');
-
-Route::get('procesos', 'ProcesoController@index')->name('procesos.index');
-Route::post('procesosa/{role}', 'ProcesoController@abrir')->name('procesos.abrir');
-Route::post('procesosc/{role}', 'ProcesoController@cerrar')->name('procesos.cerrar');
+Route::get('/evsjson', 'EvaluacionController@json');
+Route::put('/evsjson/actualizar', 'EvaluacionController@update2');
+Route::delete('/evsjson/borrar/{id}', 'EvaluacionController@destroy2');
+Route::post('/evsjson/guardar', 'EvaluacionController@store2');
+Route::get('evsjson/evaluar', 'EvaluacionController@evaluar')->name('evaluaciones.evaluar');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {
@@ -164,4 +159,11 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:Users.edit');
     Route::post('users/{role}', 'UserController@reactivar')->name('users.reactivar')
                                                         ->middleware('permission:Users.reactivar');
+
+    Route::get('procesos', 'ProcesoController@index')->name('procesos.index')
+                                                        ->middleware('permission:procesos.cerrar');
+    Route::post('procesosa/{role}', 'ProcesoController@abrir')->name('procesos.abrir')
+                                                        ->middleware('permission:procesos.cerrar');
+    Route::post('procesosc/{role}', 'ProcesoController@cerrar')->name('procesos.cerrar')
+                                                        ->middleware('permission:procesos.cerrar');
 });

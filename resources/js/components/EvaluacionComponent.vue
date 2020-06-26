@@ -21,6 +21,20 @@
                 <h3>I. IDENTIFICACION</h3>
             </div>
 
+
+            <div class="col-md-12 margin-tb container">
+                    <label for="RUTAcademico">RUT Academico (sin verificador)</label>
+                    <input v-model="RUTAcademico" type="number" class="form-control" style="background-color:white">
+            </div>
+            <div class="col-md-12 margin-tb container">
+                    <label for="CodigoComision">Codigo Comision</label>
+                    <input v-model="CodigoComision" type="number" class="form-control" style="background-color:white">
+            </div>
+            <div class="col-md-12 margin-tb container">
+                    <label for="año">Año</label>
+                    <input v-model="año" type="number" class="form-control" style="background-color:white"><br>
+            </div>
+
             <div class="row container">
                 <h3>II. CALIFICACION ACADEMICA</h3>
             </div>
@@ -175,14 +189,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <p><label for="RUTAcademico">RUTAcademico</label>
-                <input id="RUTAcademico" v-model="RUTAcademico" type="number" name="RUTAcademico"></p>
-                <p><label for="CodigoComision">CodigoComision</label>
-                <input id="CodigoComision" v-model="CodigoComision" type="number" name="CodigoComision"></p>
-                <p><label for="año">año</label>
-                <input id="año" v-model="año" type="number" name="año"></p>
-                <p><label for="Argumento">Argumento</label>
-                <input id="Argumento" v-model="Argumento" type="text" name="Argumento"></p>
+
                 </div>
               </div>
             </div>
@@ -308,7 +315,7 @@
         },
         getEvaluacions(){
             let me =this;
-            let url = '/blabla' //Ruta que hemos creado para que nos devuelva todas las tareas
+            let url = '/evsjson' //Ruta que hemos creado para que nos devuelva todas las tareas
             axios.get(url).then(function (response) {
                 //creamos un array y guardamos el contenido que nos devuelve el response
                 me.arrayEvaluacions = response.data;
@@ -320,7 +327,7 @@
         },
         saveEvaluacions(){
             let me =this;
-            let url = '/blabla/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
+            let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
             axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
                 'RUTAcademico':this.RUTAcademico,
                 'CodigoComision':this.CodigoComision,

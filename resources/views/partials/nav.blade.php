@@ -25,6 +25,9 @@
                 <li class="nav navbar-nav">
                   <a class="nav-link" href="{{ route('facultades.index')}}">Facultades</a>
                 </li>
+                <li class="nav navbar-nav">
+                  <a class="nav-link" href="{{ route('procesos.index')}}">Procesos</a>
+                </li>
                 <ul class="navbar-nav ml-auto">
                       <li class="nav-item dropdown">
                           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Usuarios<span class="caret"></span></a>

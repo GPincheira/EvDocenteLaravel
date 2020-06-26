@@ -341,7 +341,7 @@
         methods:{
         getEvaluacions(){
             let me =this;
-            let url = '/blabla' //Ruta que hemos creado para que nos devuelva todas las tareas
+            let url = '/evsjson' //Ruta que hemos creado para que nos devuelva todas las tareas
             axios.get(url).then(function (response) {
                 //creamos un array y guardamos el contenido que nos devuelve el response
                 me.arrayEvaluacions = response.data;
@@ -351,21 +351,9 @@
                 console.log(error);
             });
         },
-        getDepartamentos(){
-            let me =this;
-            let url = '/dptos' //Ruta que hemos creado para que nos devuelva todas las tareas
-            axios.get(url).then(function (response) {
-                //creamos un array y guardamos el contenido que nos devuelve el response
-                me.arrayDepartamentos = response.data;
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-            });
-        },
         saveEvaluacions(){
             let me =this;
-            let url = '/tareas/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
+            let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
             axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
                 'RUTAcademico':this.RUTAcademico,
                 'CodigoComision':this.CodigoComision,
@@ -393,7 +381,7 @@
         updateEvaluacions(){/*Esta funcion, es igual que la anterior, solo que tambien envia la variable update que contiene el id de la
                 tarea que queremos modificar*/
                 let me = this;
-                axios.put('/tareas/actualizar',{
+                axios.put('/evsjson/actualizar',{
                     'id':this.update,
                     'RUTAcademico':this.RUTAcademico,
                     'CodigoComision':this.CodigoComision,
@@ -421,7 +409,7 @@
         loadFieldsUpdate(data){ //Esta función rellena los campos y la variable update, con la tarea que queremos modificar
                 this.update = data.id
                 let me =this;
-                let url = '/tareas/buscar?id='+this.update;
+                let url = '/evsjson/buscar?id='+this.update;
                 axios.get(url).then(function (response) {
                     me.id= response.data.id;
                     me.RUTAcademico= response.data.RUTAcademico;

@@ -115,51 +115,51 @@
           <tr>
 						<td class="izq">1. Actividades de Docencia</td>
 						<td>{{ $evaluacion->p1 }}</td>
-            <td>@if(($evaluacion->n1 > 0) && ($evaluacion->n1 < 2.7)) {{ $evaluacion->n1 }} @endif</td>
-            <td>@if(($evaluacion->n1 >= 2.7) && ($evaluacion->n1 <= 3.4)) {{ $evaluacion->n1 }} @endif</td>
-            <td>@if(($evaluacion->n1 >= 3.5) && ($evaluacion->n1 <= 3.9)) {{ $evaluacion->n1 }} @endif</td>
-            <td>@if(($evaluacion->n1 >= 4.0) && ($evaluacion->n1 <= 4.4)) {{ $evaluacion->n1 }} @endif</td>
             <td>@if(($evaluacion->n1 >= 4.5) && ($evaluacion->n1 <= 5)) {{ $evaluacion->n1 }} @endif</td>
+            <td>@if(($evaluacion->n1 >= 4.0) && ($evaluacion->n1 <= 4.4)) {{ $evaluacion->n1 }} @endif</td>
+            <td>@if(($evaluacion->n1 >= 3.5) && ($evaluacion->n1 <= 3.9)) {{ $evaluacion->n1 }} @endif</td>
+            <td>@if(($evaluacion->n1 >= 2.7) && ($evaluacion->n1 <= 3.4)) {{ $evaluacion->n1 }} @endif</td>
+            <td>@if(($evaluacion->n1 > 0) && ($evaluacion->n1 < 2.7)) {{ $evaluacion->n1 }} @endif</td>
             <td>{{ $evaluacion->n1 * ($evaluacion->p1/100) }}</td>
 					</tr>
           <tr>
 						<td class="izq">2. Actividades de Investigación</td>
 						<td>{{ $evaluacion->p2 }}</td>
-            <td>@if(($evaluacion->n2 > 0) && ($evaluacion->n2 < 2.7)) {{ $evaluacion->n2 }} @endif</td>
-            <td>@if(($evaluacion->n2 >= 2.7) && ($evaluacion->n2 <= 3.4)) {{ $evaluacion->n2 }} @endif</td>
-            <td>@if(($evaluacion->n2 >= 3.5) && ($evaluacion->n2 <= 3.9)) {{ $evaluacion->n2 }} @endif</td>
-            <td>@if(($evaluacion->n2 >= 4.0) && ($evaluacion->n2 <= 4.4)) {{ $evaluacion->n2 }} @endif</td>
             <td>@if(($evaluacion->n2 >= 4.5) && ($evaluacion->n2 <= 5)) {{ $evaluacion->n2 }} @endif</td>
+            <td>@if(($evaluacion->n2 >= 4.0) && ($evaluacion->n2 <= 4.4)) {{ $evaluacion->n2 }} @endif</td>
+            <td>@if(($evaluacion->n2 >= 3.5) && ($evaluacion->n2 <= 3.9)) {{ $evaluacion->n2 }} @endif</td>
+            <td>@if(($evaluacion->n2 >= 2.7) && ($evaluacion->n2 <= 3.4)) {{ $evaluacion->n2 }} @endif</td>
+            <td>@if(($evaluacion->n2 > 0) && ($evaluacion->n2 < 2.7)) {{ $evaluacion->n2 }} @endif</td>
             <td>{{ $evaluacion->n2 * ($evaluacion->p2/100) }}</td>
 					</tr>
           <tr>
 						<td class="izq">3. Extension y Vinculación</td>
 						<td>{{ $evaluacion->p3 }}</td>
-            <td>@if(($evaluacion->n3 > 0) && ($evaluacion->n3 < 2.7)) {{ $evaluacion->n3 }} @endif</td>
-            <td>@if(($evaluacion->n3 >= 2.7) && ($evaluacion->n3 <= 3.4)) {{ $evaluacion->n3 }} @endif</td>
-            <td>@if(($evaluacion->n3 >= 3.5) && ($evaluacion->n3 <= 3.9)) {{ $evaluacion->n3 }} @endif</td>
-            <td>@if(($evaluacion->n3 >= 4.0) && ($evaluacion->n3 <= 4.4)) {{ $evaluacion->n3 }} @endif</td>
             <td>@if(($evaluacion->n3 >= 4.5) && ($evaluacion->n3 <= 5)) {{ $evaluacion->n3 }} @endif</td>
+            <td>@if(($evaluacion->n3 >= 4.0) && ($evaluacion->n3 <= 4.4)) {{ $evaluacion->n3 }} @endif</td>
+            <td>@if(($evaluacion->n3 >= 3.5) && ($evaluacion->n3 <= 3.9)) {{ $evaluacion->n3 }} @endif</td>
+            <td>@if(($evaluacion->n3 >= 2.7) && ($evaluacion->n3 <= 3.4)) {{ $evaluacion->n3 }} @endif</td>
+            <td>@if(($evaluacion->n3 > 0) && ($evaluacion->n3 < 2.7)) {{ $evaluacion->n3 }} @endif</td>
             <td>{{ $evaluacion->n3 * ($evaluacion->p3/100) }}</td>
 					</tr>
           <tr>
 						<td class="izq">4. Administración Académica</td>
 						<td>{{ $evaluacion->p4 }}</td>
-            <td>@if(($evaluacion->n4 > 0) && ($evaluacion->n4 < 2.7)) {{ $evaluacion->n4 }} @endif</td>
-            <td>@if(($evaluacion->n4 >= 2.7) && ($evaluacion->n4 <= 3.4)) {{ $evaluacion->n4 }} @endif</td>
-            <td>@if(($evaluacion->n4 >= 3.5) && ($evaluacion->n4 <= 3.9)) {{ $evaluacion->n4 }} @endif</td>
-            <td>@if(($evaluacion->n4 >= 4.0) && ($evaluacion->n4 <= 4.4)) {{ $evaluacion->n4 }} @endif</td>
             <td>@if(($evaluacion->n4 >= 4.5) && ($evaluacion->n4 <= 5)) {{ $evaluacion->n4 }} @endif</td>
+            <td>@if(($evaluacion->n4 >= 4.0) && ($evaluacion->n4 <= 4.4)) {{ $evaluacion->n4 }} @endif</td>
+            <td>@if(($evaluacion->n4 >= 3.5) && ($evaluacion->n4 <= 3.9)) {{ $evaluacion->n4 }} @endif</td>
+            <td>@if(($evaluacion->n4 >= 2.7) && ($evaluacion->n4 <= 3.4)) {{ $evaluacion->n4 }} @endif</td>
+            <td>@if(($evaluacion->n4 > 0) && ($evaluacion->n4 < 2.7)) {{ $evaluacion->n4 }} @endif</td>
             <td>{{ $evaluacion->n4 * ($evaluacion->p4/100) }}</td>
 					</tr>
           <tr>
 						<td class="izq">5. Otras actividades realizadas</td>
 						<td>{{ $evaluacion->p5 }}</td>
-            <td>@if(($evaluacion->n5 > 0) && ($evaluacion->n5 < 2.7)) {{ $evaluacion->n5 }} @endif</td>
-            <td>@if(($evaluacion->n5 >= 2.7) && ($evaluacion->n5 <= 3.4)) {{ $evaluacion->n5 }} @endif</td>
-            <td>@if(($evaluacion->n5 >= 3.5) && ($evaluacion->n5 <= 3.9)) {{ $evaluacion->n5 }} @endif</td>
-            <td>@if(($evaluacion->n5 >= 4.0) && ($evaluacion->n5 <= 4.4)) {{ $evaluacion->n5 }} @endif</td>
             <td>@if(($evaluacion->n5 >= 4.5) && ($evaluacion->n5 <= 5)) {{ $evaluacion->n5 }} @endif</td>
+            <td>@if(($evaluacion->n5 >= 4.0) && ($evaluacion->n5 <= 4.4)) {{ $evaluacion->n5 }} @endif</td>
+            <td>@if(($evaluacion->n5 >= 3.5) && ($evaluacion->n5 <= 3.9)) {{ $evaluacion->n5 }} @endif</td>            
+            <td>@if(($evaluacion->n5 >= 2.7) && ($evaluacion->n5 <= 3.4)) {{ $evaluacion->n5 }} @endif</td>
+            <td>@if(($evaluacion->n5 > 0) && ($evaluacion->n5 < 2.7)) {{ $evaluacion->n5 }} @endif</td>
             <td>{{ $evaluacion->n5 * ($evaluacion->p5/100) }}</td>
 					</tr>
           <tr>

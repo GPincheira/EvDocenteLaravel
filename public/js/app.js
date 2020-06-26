@@ -2148,6 +2148,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2228,7 +2235,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     getEvaluacions: function getEvaluacions() {
       var me = this;
-      var url = '/blabla'; //Ruta que hemos creado para que nos devuelva todas las tareas
+      var url = '/evsjson'; //Ruta que hemos creado para que nos devuelva todas las tareas
 
       axios.get(url).then(function (response) {
         //creamos un array y guardamos el contenido que nos devuelve el response
@@ -2240,7 +2247,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     saveEvaluacions: function saveEvaluacions() {
       var me = this;
-      var url = '/blabla/guardar'; //Ruta que hemos creado para enviar una tarea y guardarla
+      var url = '/evsjson/guardar'; //Ruta que hemos creado para enviar una tarea y guardarla
 
       axios.post(url, {
         //estas variables son las que enviaremos para que crear la tarea
@@ -38331,6 +38338,92 @@ var render = function() {
           _vm._v(" "),
           _vm._m(1),
           _vm._v(" "),
+          _c("div", { staticClass: "col-md-12 margin-tb container" }, [
+            _c("label", { attrs: { for: "RUTAcademico" } }, [
+              _vm._v("RUT Academico (sin verificador)")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.RUTAcademico,
+                  expression: "RUTAcademico"
+                }
+              ],
+              staticClass: "form-control",
+              staticStyle: { "background-color": "white" },
+              attrs: { type: "number" },
+              domProps: { value: _vm.RUTAcademico },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.RUTAcademico = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-12 margin-tb container" }, [
+            _c("label", { attrs: { for: "CodigoComision" } }, [
+              _vm._v("Codigo Comision")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.CodigoComision,
+                  expression: "CodigoComision"
+                }
+              ],
+              staticClass: "form-control",
+              staticStyle: { "background-color": "white" },
+              attrs: { type: "number" },
+              domProps: { value: _vm.CodigoComision },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.CodigoComision = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-12 margin-tb container" }, [
+            _c("label", { attrs: { for: "año" } }, [_vm._v("Año")]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.año,
+                  expression: "año"
+                }
+              ],
+              staticClass: "form-control",
+              staticStyle: { "background-color": "white" },
+              attrs: { type: "number" },
+              domProps: { value: _vm.año },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.año = $event.target.value
+                }
+              }
+            }),
+            _c("br")
+          ]),
+          _vm._v(" "),
           _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "container" }, [
@@ -41318,121 +41411,7 @@ var render = function() {
                       ])
                     ])
                   ]
-                ),
-                _vm._v(" "),
-                _c("p", [
-                  _c("label", { attrs: { for: "RUTAcademico" } }, [
-                    _vm._v("RUTAcademico")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.RUTAcademico,
-                        expression: "RUTAcademico"
-                      }
-                    ],
-                    attrs: {
-                      id: "RUTAcademico",
-                      type: "number",
-                      name: "RUTAcademico"
-                    },
-                    domProps: { value: _vm.RUTAcademico },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.RUTAcademico = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _c("label", { attrs: { for: "CodigoComision" } }, [
-                    _vm._v("CodigoComision")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.CodigoComision,
-                        expression: "CodigoComision"
-                      }
-                    ],
-                    attrs: {
-                      id: "CodigoComision",
-                      type: "number",
-                      name: "CodigoComision"
-                    },
-                    domProps: { value: _vm.CodigoComision },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.CodigoComision = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _c("label", { attrs: { for: "año" } }, [_vm._v("año")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.año,
-                        expression: "año"
-                      }
-                    ],
-                    attrs: { id: "año", type: "number", name: "año" },
-                    domProps: { value: _vm.año },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.año = $event.target.value
-                      }
-                    }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("p", [
-                  _c("label", { attrs: { for: "Argumento" } }, [
-                    _vm._v("Argumento")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.Argumento,
-                        expression: "Argumento"
-                      }
-                    ],
-                    attrs: { id: "Argumento", type: "text", name: "Argumento" },
-                    domProps: { value: _vm.Argumento },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.Argumento = $event.target.value
-                      }
-                    }
-                  })
-                ])
+                )
               ])
             ])
           ]),

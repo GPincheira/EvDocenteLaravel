@@ -63,6 +63,10 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'Users.destroy']);
       Permission::create(['name' => 'Users.reactivar']);
 
+      Permission::create(['name' => 'procesos.index']);
+      Permission::create(['name' => 'procesos.abrir']);
+      Permission::create(['name' => 'procesos.cerrar']);
+
       //Creacion de los 3 tipos de roles, y se le asigna los permisos correspondientes a cada uno
       $Administrador = Role::create(['name' => 'Administrador']);
       $Administrador->givePermissionTo([
@@ -96,6 +100,9 @@ class PermissionsTableSeeder extends Seeder
           'Users.create3',
           'Users.destroy',
           'Users.reactivar',
+          'procesos.index',
+          'procesos.abrir',
+          'procesos.cerrar',
       ]);
 
       $SecFacultad = Role::create(['name' => 'SecFacultad']);

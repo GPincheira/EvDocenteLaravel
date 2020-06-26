@@ -42,7 +42,7 @@
               @endif
               @if(@Auth::user()->hasRole('SecFacultad'))
                 <div class="pull-right">
-                    <a class="btn btn-success" href="{{ route('evaluaciones.create') }}"> Realizar Nueva Evaluacion</a>
+                    <a class="btn btn-success" href="{{ route('evaluaciones.evaluar') }}"> Realizar Nueva Evaluacion</a>
                 </div>
               @endif
             @else
