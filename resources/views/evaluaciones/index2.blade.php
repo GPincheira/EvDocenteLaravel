@@ -41,7 +41,6 @@
             <td>{{ $evaluacion->academico->Nombre }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
             <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
             <td>{{ $evaluacion->NotaFinal }}</td>
-            <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
           </tr>
           @endif
         @endforeach

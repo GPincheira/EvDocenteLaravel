@@ -48,7 +48,9 @@
             <th width="120px">RUT</th>
             <th>Nombre Completo</th>
             <th>E-mail</th>
-            <th>Facultad</th>
+            @if (Request::is('users2'))
+              <th>Facultad</th>
+            @endif
             <th>Estado</th>
         </tr>
         @foreach ($users as $user)
@@ -57,7 +59,9 @@
               <td>{{ $user->id }}-{{ $user->verificador }}</td>
               <td>{{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</td>
               <td>{{ $user->email }}</td>
-              <td>{{ $user->secFacultad->CodigoFacultad }} - {{ $user->secFacultad->facultad->Nombre }}</td>
+              @if (Request::is('users2'))
+                <td>{{ $user->secFacultad->CodigoFacultad }} - {{ $user->secFacultad->facultad->Nombre }}</td>
+              @endif
               <td>@if (Request::is('users2'))Activo @else Inactivo @endif</td>
               @if (Request::is('users2'))
                 <td width="167px">

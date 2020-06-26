@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class evaluacion extends Model
 {
   use SoftDeletes;
+  use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
   protected $table = 'evaluaciones';
   protected $fillable = [
