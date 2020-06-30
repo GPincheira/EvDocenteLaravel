@@ -30,6 +30,9 @@
                 <li><a href="{{ route('facultades.indexelim') }}">Listado Facultades Inactivas</a></li>
                 <li><a href="{{ route('facultades.create') }}">Añadir Facultad</a></li><hr>
 
+                <h3>Proceso Evaluativo</h3>
+                <li><a href="{{ route('procesos.index') }}">Abrir o Cerrar Proceso</a></li><hr>
+
               </div>
               <div class="col-md-6">
                 <h3>Administradores</h3>

@@ -19,6 +19,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('evaluacion-component', require('./components/EvaluacionComponent.vue').default);
+Vue.component('editarev-component', require('./components/EditarEvComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -26,6 +27,11 @@ Vue.component('evaluacion-component', require('./components/EvaluacionComponent.
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
-});
+ window.onload = function () {
+     var app = document.getElementById('app');
+     if (app) {
+         const app = new Vue({
+             el: '#app',
+         });
+     }
+ };
