@@ -312,7 +312,8 @@ public function reactivar($id)
 
     public function evaluar(){
       $proceso = Proceso::first();
-      return view('evaluaciones.evaluar',compact('proceso'));
+      $academico = Academico::first();
+      return view('evaluaciones.evaluar',compact('proceso','academico'));
     }
 
 }

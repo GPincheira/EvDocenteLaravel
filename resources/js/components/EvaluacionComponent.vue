@@ -19,6 +19,7 @@
 
             <div class="row container">
                 <h3>I. IDENTIFICACION</h3>
+                {{ datito }}
             </div>
 
 
@@ -247,6 +248,7 @@
 
 <script>
     export default {
+        props:['datito'],
         data(){
             return{
                 RUTAcademico:"", //Esta variable, mediante v-model esta relacionada con el input del formulario

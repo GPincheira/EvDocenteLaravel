@@ -6,33 +6,31 @@
   <div class="row container">
   	<div class="row">
   		<div class="col-md-4">
-  			<img src="http://www.portalalumnos.ucm.cl/v2/assets/img/logo-ucm.jpg" class="logo" width="200" height="70"/>
+  			<img src="http://www.portalalumnos.ucm.cl/v2/assets/img/logo-ucm.jpg" class="logo" width="160" height="56"/>
   		</div>
   	</div>
   </div>
 
-
-
-<div class="row content">
-  <div class="col-lg-12 margin-tb">
-    <h1>PAUTA RESUMEN</h1>
+<div class="row container">
+  <div class="col-lg-12 margin-tb content">
+    <h3>PAUTA RESUMEN</h3>
   </div>
 </div>
 
 <br><div class="row container">
-    <h3>I. IDENTIFICACION</h3>
+    <h4>I. IDENTIFICACION</h4>
 </div>
 
 <div class="row container">
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table table-bordered content">
+			<table style="width:100%">
 				<tbody>
 					<tr>
 						<td>{{ $evaluacion->academico->Nombre }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
 						<td>{{ $evaluacion->academico->departamento->Nombre }}</td>
 					</tr>
-          <tr class="table-active" style="background-color:rgba(200,200,200)">
+          <tr style="background-color:rgba(200,200,200)">
 						<td width="50%">Académico</td>
 						<td width="50%">Departamento</td>
 					</tr>
@@ -40,7 +38,7 @@
 						<td>{{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
 						<td>{{ $evaluacion->comision->Año }}</td>
 					</tr>
-          <tr class="table-active" style="background-color:rgba(200,200,200)">
+          <tr style="background-color:rgba(200,200,200)">
 						<td>Facultad o Instituto al que pertenece</td>
 						<td>Periodo que se evalua</td>
 					</tr>
@@ -48,7 +46,7 @@
 						<td>{{ $evaluacion->academico->TituloProfesional }}</td>
 						<td>{{ $evaluacion->academico->HorasContrato }}</td>
 					</tr>
-          <tr class="table-active" style="background-color:rgba(200,200,200)">
+          <tr style="background-color:rgba(200,200,200)">
 						<td>Título Profesional</td>
 						<td>Horas de Contrato</td>
 					</tr>
@@ -56,7 +54,7 @@
 						<td>{{ $evaluacion->academico->Categoria }}</td>
 						<td>{{ $evaluacion->academico->GradoAcademico }}</td>
 					</tr>
-          <tr class="table-active" style="background-color:rgba(200,200,200)">
+          <tr style="background-color:rgba(200,200,200)">
 						<td>Categoría</td>
 						<td>Grado Académico</td>
 					</tr>
@@ -70,7 +68,7 @@
             </td>
 						<td>{{ $evaluacion->academico->TipoPlanta }}</td>
 					</tr>
-          <tr class="table-active" style="background-color:rgba(200,200,200)">
+          <tr style="background-color:rgba(200,200,200)">
 						<td>Calificación Anterior</td>
 						<td>Tipo de Planta</td>
 					</tr>
@@ -81,13 +79,13 @@
 </div>
 
 <div class="row container">
-    <h3>II. CALIFICACION ACADEMICA</h3>
+    <h4>II. CALIFICACION ACADEMICA</h4>
 </div>
 
 <div class="row container">
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table table-bordered content">
+			<table style="width:100%">
 				<tbody>
           <tr>
 						<th rowspan="2" width="32%"></th>
@@ -164,21 +162,21 @@
 </div>
 
 <div class="row container">
-    <h3>III. ESCALA EVALUATIVA</h3>
+    <h4>III. ESCALA EVALUATIVA</h4>
 </div>
 
 <div class="row container">
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table border="0" content">
+			<table class="table-bordered" style="width:100%">
 				<tbody>
-          <tr class="table-active" style="background-color:rgba(200,200,200)">
+          <tr style="background-color:rgba(200,200,200)">
 						<td width="25%">ESCALA:</td>
 						<td>Excelente=4.5 a 5</td>
             <td>Muy Bueno=4.0 a 4.4</td>
 						<td>Bueno=3.5 a 3.9</td>
 					</tr>
-          <tr class="table-active" style="background-color:rgba(200,200,200)">
+          <tr style="background-color:rgba(200,200,200)">
 						<td width="25%"></td>
 						<td>Regular=2.7 a 3.4</td>
 						<td>Deficiente=menos de 2.7</td>
@@ -191,21 +189,21 @@
 </div>
 
 <div class="row container">
-    <h3>IV. ARGUMENTOS DE LA CALIFICACION FINAL</h3>
+    <h4>IV. ARGUMENTOS DE LA CALIFICACION FINAL</h4>
     <p>{{ $evaluacion->Argumento }}</p>
-</div><br><br>
+</div><br>
 
 <div class="row container">
-      <h4 class="content">FIRMA COMISION:</h4>
+      <h5 class="content">FIRMA COMISION:</h5>
 </div>
 
 <div class="row container">
 	<div class="row">
 		<div class="col-md-12">
-			<table class="table table-bordered content">
+			<table class="table-bordered" style="width:100%">
 				<tbody>
           <tr>
-						<td width="33%" height="60">Integrante 1: {{ $evaluacion->comision->Nombre1 }} {{ $evaluacion->comision->APaterno1 }} {{ $evaluacion->comision->AMaterno1 }}</td>
+						<td width="33%" height="40">Integrante 1: {{ $evaluacion->comision->Nombre1 }} {{ $evaluacion->comision->APaterno1 }} {{ $evaluacion->comision->AMaterno1 }}</td>
 						<td width="33%">Integrante 2: {{ $evaluacion->comision->Nombre2 }} {{ $evaluacion->comision->APaterno2 }} {{ $evaluacion->comision->AMaterno2 }}</td>
 						<td width="33%">Secretario de Facultad:  {{ $evaluacion->comision->NombreSecFac }} {{ $evaluacion->comision->APaternoSecFac }} {{ $evaluacion->comision->AMaternoSecFac }}</td>
 					</tr>
@@ -218,26 +216,24 @@
 			</table>
 		</div>
 	</div>
+</div>
 
-  <div class="row container">
+  <div class="row container" style="margin-left:325pt;">
   	<div class="row">
   		<div class="col-md-3">
-  			<table class="table table-bordered content">
+  			<table class="table-bordered" style="width:100%">
   				<tbody>
             <tr>
-  						<td width="33%" height="60"></td>
-              <td width="33%"></td>
-              <td width="33%">Decano: {{ $evaluacion->comision->NombreDecano }} {{ $evaluacion->comision->APaternoDecano }} {{ $evaluacion->comision->AMaternoDecano }}</td>
+              <td width="33%" height="40">Decano: {{ $evaluacion->comision->NombreDecano }} {{ $evaluacion->comision->APaternoDecano }} {{ $evaluacion->comision->AMaternoDecano }}</td>
   					</tr>
             <tr class="table-active">
-  						<td></td>
-              <td></td>
               <td style="background-color:rgba(200,200,200)">Nombre y Firma</td>
   					</tr>
   				</tbody>
   			</table>
   		</div>
   	</div>
+  </div>
 
 <div class="row container">
       <h5>Fecha: {{ $evaluacion->comision->Fecha }}</h5>

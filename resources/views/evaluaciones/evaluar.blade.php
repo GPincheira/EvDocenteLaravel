@@ -24,7 +24,8 @@
 @if ($proceso->fin >= date('Y-m-d'))
   <div class="row">
     <div class="col-lg-12 margin-tb">
-        <evaluacion-component></evaluacion-component>
+        {{ $academico->Nombre }}
+        <evaluacion-component datito="{{ $academico->Nombre }}" ></evaluacion-component>
       </div>
   </div>
   @else

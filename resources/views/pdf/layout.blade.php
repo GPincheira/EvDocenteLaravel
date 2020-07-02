@@ -9,39 +9,19 @@
 
 
         <style>
-            html {
-                min-height: 100%;
-                position: relative;
+            table, th, td {
+              border: 1px solid black;
             }
-            .content {
-                text-align: center;
+            th, td {
+              padding: 1px;
+              text-align: center;
+            }
+            .content{
+              text-align: center;
             }
             .izq {
                 text-align: left;
             }
-            .wrapper {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                grid-gap: 0px;
-                grid-auto-rows: minmax(100px, auto);
-            }
-            .one {
-                grid-column: 1;
-                grid-row: 1;
-            }
-            .two {
-                grid-column: 2;
-                grid-row: 1;
-            }
-            .three {
-                grid-column: 3;
-                grid-row: 1;
-            }
-            .four {
-                grid-column: 3;
-                grid-row: 2;
-            }
-
         </style>
 
     </head>

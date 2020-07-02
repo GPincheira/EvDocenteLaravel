@@ -157,7 +157,7 @@
 						<td>{{ $evaluacion->p5 }}</td>
             <td>@if(($evaluacion->n5 >= 4.5) && ($evaluacion->n5 <= 5)) {{ $evaluacion->n5 }} @endif</td>
             <td>@if(($evaluacion->n5 >= 4.0) && ($evaluacion->n5 <= 4.4)) {{ $evaluacion->n5 }} @endif</td>
-            <td>@if(($evaluacion->n5 >= 3.5) && ($evaluacion->n5 <= 3.9)) {{ $evaluacion->n5 }} @endif</td>            
+            <td>@if(($evaluacion->n5 >= 3.5) && ($evaluacion->n5 <= 3.9)) {{ $evaluacion->n5 }} @endif</td>
             <td>@if(($evaluacion->n5 >= 2.7) && ($evaluacion->n5 <= 3.4)) {{ $evaluacion->n5 }} @endif</td>
             <td>@if(($evaluacion->n5 > 0) && ($evaluacion->n5 < 2.7)) {{ $evaluacion->n5 }} @endif</td>
             <td>{{ $evaluacion->n5 * ($evaluacion->p5/100) }}</td>
