@@ -31,6 +31,7 @@ class CreateComisionesTable extends Migration
           $table->string('Nombre2');
           $table->string('APaterno2');
           $table->string('AMaterno2');
+          $table->enum('Estado', ['Activo','Inactivo']);
           $table->foreign('CodigoFacultad')
                 ->references('id')
                 ->on('facultades')

@@ -55,6 +55,7 @@ class ComisionController extends Controller
         'Nombre2' => 'required',
         'APaterno2' => 'required',
         'AMaterno2' => 'required',
+        'Estado' => 'required',
       ]);
       $request['CodigoFacultad']=$facultad->id; //se le asignan varios campos de la facultad a la comision que se crea
       $request['NombreDecano']= $facultad->DecanoNombre;
@@ -65,9 +66,18 @@ class ComisionController extends Controller
       $request['APaternoSecFac']= @Auth::user()->ApellidoPaterno;
       $request['AMaternoSecFac']= @Auth::user()->ApellidoMaterno;
       Comision::create($request->all());
+      if ($request['Estado'] == "Activo"){
+        $comisiones = Comision::all();
+        foreach ($comisiones as $comisionant){
+          if($comisionant->año == $request['año']{
+              $comisionant->Estado = "Inactivo";
+          }
+        }
+      }
       return redirect()->route('comisiones.index')
         ->with('success','Comision creada exitosamente.');
     }
+
 
     /**
      * Display the specified resource.
@@ -111,6 +121,7 @@ class ComisionController extends Controller
         'Nombre2' => 'required',
         'AMaterno1' => 'required',
         'APaterno2' => 'required',
+        'Estado' => 'required',
       ]);
       $comision = comision::find($id);
       $comision->update($request->all());

@@ -87,6 +87,17 @@
                 <input type="text" name="AMaterno2" class="form-control" placeholder="Apellido Materno del segundo integrante extra">
           </div>
         </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+              <div class="form-group">
+                  <strong>Poner Como Comisión activa para este año:</strong>
+                  <select name="Estado" class="form-control">
+                    <option value="Activo">Si</option>
+                    <option value="Inactivo">No</option>
+                  </select>
+              </div>
+          </div>
+        </div>
 
       {{--Boton para terminar el proceso--}}
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -29,6 +29,7 @@ class ComisionesSeeder extends Seeder
         'Nombre2' => 'Juan Pablo',
         'APaterno2' => 'Rodriguez',
         'AMaterno2' => 'Fernandez',
+        'Estado' => 'Activo',
       ]);
 
       $comision = Comision::create([
@@ -48,6 +49,7 @@ class ComisionesSeeder extends Seeder
         'Nombre2' => 'Juan Pablo',
         'APaterno2' => 'Fuentes',
         'AMaterno2' => 'Fuentes',
+        'Estado' => 'Activo',
       ]);
     }
 }
