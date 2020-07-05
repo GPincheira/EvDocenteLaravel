@@ -13,7 +13,7 @@ class comision extends Model
   protected $fillable = [
       'Año','Fecha','CodigoFacultad','NombreDecano','APaternoDecano','AMaternoDecano','idSecFacultad',
       'NombreSecFac','APaternoSecFac','AMaternoSecFac','Nombre1','APaterno1','AMaterno1','Nombre2',
-      'APaterno2','AMaterno2'
+      'APaterno2','AMaterno2','Estado'
   ];
   protected $primaryKey ="id";
 

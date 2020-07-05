@@ -39,7 +39,7 @@
     @csrf
 
      <div class="row">
-        <div class="col-xs-4 col-sm-4 col-md-4">
+        <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
                 <strong>Año:</strong>
                 <input type="year" name="Año" class="form-control" placeholder="Ingrese el año">
@@ -49,6 +49,15 @@
             <div class="form-group">
                 <strong>Fecha de comision(yyyy-mm-dd):</strong>
                 <input type="timedate" name="Fecha" class="form-control" placeholder="Ingrese la fecha">
+            </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4">
+            <div class="form-group">
+                <strong>Poner Como Comisión activa para este año:</strong>
+                <select name="Estado" class="form-control">
+                  <option value="Activo">Si</option>
+                  <option value="Inactivo">No</option>
+                </select>
             </div>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4">
@@ -85,17 +94,6 @@
             <div class="form-group">
                 <strong>Apellido Materno del participante 2:</strong>
                 <input type="text" name="AMaterno2" class="form-control" placeholder="Apellido Materno del segundo integrante extra">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12">
-              <div class="form-group">
-                  <strong>Poner Como Comisión activa para este año:</strong>
-                  <select name="Estado" class="form-control">
-                    <option value="Activo">Si</option>
-                    <option value="Inactivo">No</option>
-                  </select>
-              </div>
           </div>
         </div>
 

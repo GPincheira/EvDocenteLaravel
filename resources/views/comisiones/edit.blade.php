@@ -51,6 +51,15 @@
            </div>
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
+                   <strong>Poner Como Comisión activa para este año:</strong>
+                   <select name="Estado" class="form-control">
+                     <option value="Activo" @if($comision->Estado=="Activo") selected @endif>Si</option>
+                     <option value="Inactivo" @if($comision->Estado=="Inactivo") selected @endif>No</option>
+                   </select>
+               </div>
+           </div>
+           <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="form-group">
                    <strong>Nombre del participante 1:</strong>
                    <input type="text" name="Nombre1" value="{{ $comision->Nombre1 }}" class="form-control" placeholder="Ingrese el nombre del primer integrante extra">
              </div>
@@ -61,18 +70,7 @@
                    <input type="text" name="Nombre2" value="{{ $comision->Nombre2 }}" class="form-control" placeholder="Ingrese el nombre del segundo integrante extra">
              </div>
            </div>
-           <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-12">
-                  <div class="form-group">
-                      <strong>Poner Como Comisión activa para este año:</strong>
-                      <select name="Estado" class="form-control">
-                        <option value="Activo" @if($comision->Estado=="Activo") selected @endif>Si</option>
-                        <option value="Inactivo" @if($comision->Estado=="Inactivo") selected @endif>No</option>
-                      </select>
-                  </div>
-              </div>
-           </div>
-           <div clas
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
               <button type="submit" class="btn btn-primary">Guardar</button>
             </div>

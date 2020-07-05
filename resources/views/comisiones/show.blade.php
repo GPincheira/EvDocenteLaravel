@@ -32,7 +32,7 @@
               </tr>
               <tr>
                 <th class="blue">Año que ejerce</th>
-                <td>{{ $comision->Año }}</td>
+                <td>{{ $comision->Año }} ({{ $comision->Estado }})</td>
               </tr>
               <tr>
                 <th class="blue">Fecha de revision</th>

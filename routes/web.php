@@ -63,6 +63,8 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:comisiones.destroy');
     Route::get('comisiones/{role}/edit', 'ComisionController@edit')->name('comisiones.edit')
                                                         ->middleware('permission:comisiones.edit');
+    Route::post('comisiones/{role}', 'ComisionController@activaunica')->name('comisiones.activaunica')
+                                                        ->middleware('permission:comisiones.activaunica');
 
     Route::post('departamentos/store', 'DepartamentoController@store')->name('departamentos.store')
                                                         ->middleware('permission:departamentos.create');

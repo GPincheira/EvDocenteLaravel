@@ -28,6 +28,7 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'comisiones.show']);
       Permission::create(['name' => 'comisiones.create']);
       Permission::create(['name' => 'comisiones.destroy']);
+      Permission::create(['name' => 'comisiones.activaunica']);
 
       Permission::create(['name' => 'departamentos.index']);
       Permission::create(['name' => 'departamentos.edit']);
@@ -116,6 +117,7 @@ class PermissionsTableSeeder extends Seeder
           'comisiones.index',
           'comisiones.show',
           'comisiones.create',
+          'comisiones.activaunica',
           'evaluaciones.index',
           'evaluaciones.edit',
           'evaluaciones.show',

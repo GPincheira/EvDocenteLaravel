@@ -40,6 +40,15 @@
         </div>
     @endif
 
+    @if(@Auth::user()->hasRole('SecFacultad'))
+      @if ($activa === null)
+      <div class="card text-center blue" style="margin-top: 8px">
+
+          <div class="card-header"><h4><i class="material-icons">warning</i> NO EXISTE UNA COMISION ACTIVA PARA ESTE AÑO</h4></div>
+      </div>
+      @endif
+    @endif
+
     <table class="table table-bordered" style="margin-top: 8px">
         <tr>
             <th>Id</th>
@@ -49,10 +58,11 @@
             <th>Secretario de Facultad</th>
             <th>Integrante 3</th>
             <th>Integrante 4</th>
+            <th>Estado</th>
         </tr>
         @if(@Auth::user()->hasRole('Administrador'))
           @foreach ($comisiones as $comision)
-            <tr>
+            <tr >
               <td>{{ $comision->id }}</td>
               <td>{{ $comision->Año }}</td>
               <td>{{ $comision->CodigoFacultad }} - {{ $comision->facultad->Nombre }}</td>
@@ -60,6 +70,7 @@
               <td>{{ $comision->NombreSecFac }} {{ $comision->APaternoSecFac }} {{ $comision->AMaternoSecFac }}</td>
               <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>
               <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
+              <td>{{ $comision->Estado }}</td>
               <td>
                   <form>
                       <a href="{{ route('comisiones.show',$comision->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
@@ -72,7 +83,7 @@
         @if(@Auth::user()->hasRole('SecFacultad'))
           @foreach ($comisiones as $comision)
             @if(@Auth::user()->id == $comision->idSecFacultad)
-              <tr>
+              <tr @if($activa == $comision) style="background-color:#FCFF55" @endif>
                 <td>{{ $comision->id }}</td>
                 <td>{{ $comision->Año }}</td>
                 <td>{{ $comision->CodigoFacultad }} - {{ $comision->facultad->Nombre }}</td>
@@ -80,6 +91,14 @@
                 <td>{{ $comision->NombreSecFac }} {{ $comision->APaternoSecFac }} {{ $comision->AMaternoSecFac }}</td>
                 <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>
                 <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
+                @if ($comision->Año == date("Y") && $comision->id != $activa->id)
+                  <td><form action="{{ route('comisiones.activaunica',$comision->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn btn-success">Activar</button>
+                  </form></td>
+                @else
+                  <td class="text-center">{{ $comision->Estado }}</td>
+                @endif
                 <td>
                     <form>
                         <a href="{{ route('comisiones.show',$comision->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>

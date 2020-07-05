@@ -20,7 +20,12 @@ class ComisionController extends Controller
     public function index()
     {
       $comisiones = Comision::latest()->paginate(10);
-      return view('comisiones.index',compact('comisiones'))
+      $activa = Comision::where('Estado', '=', 'Activo')
+                ->where('Año', '=', date("Y"))
+                ->where('CodigoFacultad', '=', @Auth::user()
+                ->secFacultad->CodigoFacultad)
+                ->first();
+      return view('comisiones.index',compact('comisiones'),['activa' => $activa])
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
@@ -65,15 +70,16 @@ class ComisionController extends Controller
       $request['NombreSecFac']= @Auth::user()->Nombre;
       $request['APaternoSecFac']= @Auth::user()->ApellidoPaterno;
       $request['AMaternoSecFac']= @Auth::user()->ApellidoMaterno;
-      Comision::create($request->all());
       if ($request['Estado'] == "Activo"){
         $comisiones = Comision::all();
-        foreach ($comisiones as $comisionant){
-          if($comisionant->año == $request['año']{
-              $comisionant->Estado = "Inactivo";
+        foreach ($comisiones as $comision){
+          if($comision->Año == $request['Año'] && $comision->CodigoFacultad == @Auth::user()->SecFacultad->CodigoFacultad){
+              $comision->Estado = "Inactivo";
+              $comision->save();
           }
         }
       }
+      Comision::create($request->all());
       return redirect()->route('comisiones.index')
         ->with('success','Comision creada exitosamente.');
     }
@@ -123,10 +129,35 @@ class ComisionController extends Controller
         'APaterno2' => 'required',
         'Estado' => 'required',
       ]);
+      if ($request['Estado'] == "Activo"){
+        $comisiones = Comision::all();
+        foreach ($comisiones as $comision){
+          if($comision->Año == $request['Año'] && $comision->CodigoFacultad == @Auth::user()->SecFacultad->CodigoFacultad){
+              $comision->Estado = "Inactivo";
+              $comision->save();
+          }
+        }
+      }
       $comision = comision::find($id);
       $comision->update($request->all());
       return redirect()->route('comisiones.index')
         ->with('success','Comision Actualizada Exitosamente');
+    }
+
+    public function activaunica($id)
+    {
+      $nuevaact = comision::find($id);
+      $comisiones = Comision::all();
+      foreach ($comisiones as $comision){
+        if($comision->Año == $nuevaact->Año && $comision->CodigoFacultad == @Auth::user()->SecFacultad->CodigoFacultad){
+            $comision->Estado = "Inactivo";
+            $comision->save();
+        }
+      }
+      $nuevaact->Estado = "Activo";
+      $nuevaact->save();
+      return redirect()->route('comisiones.index')
+        ->with('success','Comision Activada Exitosamente');
     }
 
     /**
