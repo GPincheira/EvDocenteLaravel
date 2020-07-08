@@ -19,13 +19,21 @@ class ComisionController extends Controller
 //En index se obtiene el listado completo de comisiones y se paginan de 10. Se va hacia la vista de blade
     public function index()
     {
-      $comisiones = Comision::latest()->paginate(10);
-      $activa = Comision::where('Estado', '=', 'Activo')
-                ->where('Año', '=', date("Y"))
-                ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
-                ->first();
-      return view('comisiones.index',compact('comisiones'),['activa' => $activa])
-        ->with('i',(request()->input('page',1)-1)*5);
+      if(@Auth::user()->hasRole('SecFacultad')){
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $comisiones = Comision::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+        $activa = Comision::where('Estado', '=', 'Activo')
+                  ->where('Año', '=', date("Y"))
+                  ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
+                  ->first();
+        return view('comisiones.index',compact('comisiones'),['activa' => $activa])
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+      else{
+        $comisiones = Comision::latest()->paginate(10);
+        return view('comisiones.index',compact('comisiones'))
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
     }
 
     /**

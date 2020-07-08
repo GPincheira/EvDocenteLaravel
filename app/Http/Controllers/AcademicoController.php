@@ -36,7 +36,6 @@ class AcademicoController extends Controller
     //funcion indexelim que funciona igual que index, pero en este caso con onlyTrashed, para consultar solo academicos eliminados logicamente
     public function indexelim()
     {
-
       if(@Auth::user()->hasRole('SecFacultad')){
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
         $academicos = Academico::where('CodigoFacultad',$CodigoFacultad)->onlyTrashed()->latest()->paginate(10);

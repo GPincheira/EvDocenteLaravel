@@ -76,7 +76,6 @@
         @if(@Auth::user()->hasRole('SecFacultad'))
           @foreach ($evaluaciones as $evaluacion)
             @foreach ($academicos as $academico)
-            {{ $academico->id }} - {{ $evaluacion->academico->id }}
               @if ($evaluacion->RUTAcademico == $academico->id)
                 <tr>
                   <td>{{ $evaluacion->id }}</td>
@@ -237,10 +236,12 @@
                     </td>
                   @else
                     <td width="60px">
-                      <form action="{{ route('evaluaciones.reactivar',$evaluacion->id) }}" method="POST">
-                          @csrf
-                          <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
-                      </form>
+                      @if ($evaluacion->RUTAcademico == $academico->id && $academico->deleted_at==NULL)
+                        <form action="{{ route('evaluaciones.reactivar',$evaluacion->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
+                        </form>
+                      @endif
                     </td>
                   @endif
 

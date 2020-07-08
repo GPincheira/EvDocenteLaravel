@@ -38,8 +38,8 @@ class EvaluacionController extends Controller
       $evaluaciones = Evaluacion::onlyTrashed()->latest()->paginate(10);
       if(@Auth::user()->hasRole('SecFacultad')){
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $comisiones = Facultad::find($CodigoFacultad)->comisiones;
-        return view('evaluaciones.index',compact('evaluaciones'),['comisiones' => $comisiones])
+        $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
+        return view('evaluaciones.index',compact('evaluaciones','academicos'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
