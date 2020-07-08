@@ -13,11 +13,11 @@ class academico extends Model
 
   protected $fillable = [
       'id','verificador','Nombre','ApellidoPaterno','ApellidoMaterno','TituloProfesional',
-      'GradoAcademico','CodigoDpto','Categoria','HorasContrato','TipoPlanta','Estado'
+      'GradoAcademico','CodigoDpto','CodigoFacultad','Categoria','HorasContrato','TipoPlanta','Estado'
   ];
   protected $dates = ['deleted_at'];
   //dato que se utiliza la el soft delete
-
+  protected $softCascade = ['evaluaciones'];
 
   protected $primaryKey ="id";
 
@@ -25,6 +25,11 @@ class academico extends Model
   public function departamento()
   {
     return $this->belongsTo('App\departamento','CodigoDpto','id');
+  }
+
+  public function facultad()
+  {
+    return $this->belongsTo('App\facultad','CodigoFacultad','id');
   }
 
   //relaciones de la tabla, donde el academico puede tener muchas evaluaciones

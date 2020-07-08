@@ -18,7 +18,7 @@ class facultad extends Model
   protected $dates = ['deleted_at'];
 
 //al eliminarse, eliminara en cascada a departamentos
-  protected $softCascade = ['departamentos'];
+  protected $softCascade = ['departamentos','academicos'];
 
   protected $primaryKey ="id";
 
@@ -26,6 +26,11 @@ class facultad extends Model
   public function departamentos()
   {
       return $this->hasMany('App\departamento','CodigoFacultad');
+  }
+
+  public function academicos()
+  {
+    return $this->hasMany('App\academico', 'CodigoFacultad');
   }
 
 //relaciones de la tabla, donde una facultad puede tener solo un secretario de facultad
@@ -40,11 +45,6 @@ class facultad extends Model
       return $this->hasMany('App\comision','CodigoFacultad');
   }
 
-//relaciones en cadena, donde por el intermedio de departamentos, se declara que una facultad tiene muchos academico
-  public function academicos()
-  {
-    return $this->hasManyThrough('App\academico', 'App\departamento', 'CodigoFacultad',
-                                'CodigoDpto', 'id', 'id');
-  }
+
 
 }

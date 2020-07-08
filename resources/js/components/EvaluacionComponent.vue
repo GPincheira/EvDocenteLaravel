@@ -22,11 +22,6 @@
                 {{ datito }}
             </div>
 
-
-            <div class="col-md-12 margin-tb container">
-                    <label for="RUTAcademico">RUT Academico (sin verificador)</label>
-                    <input v-model="RUTAcademico" type="number" class="form-control" style="background-color:white">
-            </div>
             <div class="col-md-12 margin-tb container">
                     <label for="CodigoComision">Codigo Comision</label>
                     <input v-model="CodigoComision" type="number" class="form-control" style="background-color:white">
@@ -285,9 +280,6 @@
         methods:{
         checkForm: function (e) {
           this.errors = [];
-          if (!this.RUTAcademico){
-            this.errors.push('El RUT es obligatorio');
-          }
           if (!this.CodigoComision){
             this.errors.push('Comision es obligatoria');
           }
@@ -331,7 +323,7 @@
             let me =this;
             let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
             axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
-                'RUTAcademico':this.RUTAcademico,
+                'RUTAcademico':props['datito'],
                 'CodigoComision':this.CodigoComision,
                 'Argumento':this.Argumento,
                 'NotaFinal':this.NotaFinal,

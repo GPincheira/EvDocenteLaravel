@@ -20,14 +20,14 @@ class AcademicoController extends Controller
      //En index se obtiene el listado completo de academicos y se paginan de 10. Se va hacia la vista de blade, de manera diferente dependiendo del rol de usuario
      public function index()
      {
-       $academicos = Academico::latest()->paginate(10);
        if(@Auth::user()->hasRole('SecFacultad')){    //si es un secretario de Facultad, se pasan tambien los dptos que coinciden con la facultad del usuario actual
          $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-         $departamentos = Facultad::find($CodigoFacultad)->departamentos;
-         return view('academicos.index',compact('academicos'),['departamentos' => $departamentos])
-           ->with('i',(request()->input('page',1)-1)*5);
+         $academicos = Academico::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+         return view('academicos.index',compact('academicos'))
+            ->with('i',(request()->input('page',1)-1)*5);
        }
        else{   //sino, no es necesario pasar mas parametros
+         $academicos = Academico::latest()->paginate(10);
          return view('academicos.index',compact('academicos'))
            ->with('i',(request()->input('page',1)-1)*5);
        }
@@ -36,14 +36,16 @@ class AcademicoController extends Controller
     //funcion indexelim que funciona igual que index, pero en este caso con onlyTrashed, para consultar solo academicos eliminados logicamente
     public function indexelim()
     {
-      $academicos = Academico::onlyTrashed()->latest()->paginate(10);
+
       if(@Auth::user()->hasRole('SecFacultad')){
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $academicos = Academico::where('CodigoFacultad',$CodigoFacultad)->onlyTrashed()->latest()->paginate(10);
         $departamentos = Facultad::find($CodigoFacultad)->departamentos;
         return view('academicos.index',compact('academicos'),['departamentos' => $departamentos])
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
+        $academicos = Academico::onlyTrashed()->latest()->paginate(10);
         return view('academicos.index',compact('academicos'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
@@ -85,15 +87,14 @@ class AcademicoController extends Controller
         'HorasContrato' => ['required','integer','min:0','max:44'],
         'TipoPlanta' => 'required',
       ]);
+      $departamento = departamento::find($request['CodigoDpto']);
+      $request['CodigoFacultad']=$departamento->CodigoFacultad;
       Academico::create($request->all());
       if ($request['deleted_at'] == "Inactivo"){
         Academico::destroy($request['id']);
       }
       return redirect()->route('academicos.index')
         ->with('success','Academico creado exitosamente.');
-
-
-
     }
 
     /**
@@ -141,7 +142,6 @@ class AcademicoController extends Controller
         'verificador' => ['required','max:1'],
         'Nombre' => 'required',
         'ApellidoPaterno' => 'required',
-        'ApellidoMaterno' => 'required',
         'TituloProfesional' => 'required',
         'GradoAcademico' => 'required',
         'CodigoDpto' => ['required','integer'],
@@ -161,6 +161,8 @@ class AcademicoController extends Controller
     public function update2(Request $request, $id)
     {
       $academico = academico::find($id);    //si todo es valido, se busca el registro a actualizar y se hacen los cambios
+      $departamento = departamento::find($request['CodigoDpto']);
+      $request['CodigoFacultad']=$departamento->CodigoFacultad;
       $academico->update($request->all());
       return redirect()->route('academicos.index')
         ->with('success','Academico Actualizado Exitosamente');

@@ -23,7 +23,8 @@ class AcademicosSeeder extends Seeder
         'Categoria' => 'Titular',
         'HorasContrato' => '35',
         'TipoPlanta' => 'Planta',
-        'CodigoDpto' => '582'
+        'CodigoDpto' => '582',
+        'CodigoFacultad' => '1916'
       ]);
 
       $academico = Academico::create([
@@ -37,7 +38,8 @@ class AcademicosSeeder extends Seeder
         'Categoria' => 'Adjunto',
         'HorasContrato' => '25',
         'TipoPlanta' => 'Planta',
-        'CodigoDpto' => '284'
+        'CodigoDpto' => '284',
+        'CodigoFacultad' => '1836'
       ]);
 
       $academico = Academico::create([
@@ -51,7 +53,8 @@ class AcademicosSeeder extends Seeder
         'Categoria' => 'Titular',
         'HorasContrato' => '24',
         'TipoPlanta' => 'Planta',
-        'CodigoDpto' => '274'
+        'CodigoDpto' => '274',
+        'CodigoFacultad' => '8492'
       ]);
 
       $academico = Academico::create([
@@ -65,7 +68,8 @@ class AcademicosSeeder extends Seeder
         'Categoria' => 'Adjunto',
         'HorasContrato' => '20',
         'TipoPlanta' => 'Planta',
-        'CodigoDpto' => '274'
+        'CodigoDpto' => '274',
+        'CodigoFacultad' => '8492'
       ]);
 
       $academico = Academico::create([
@@ -79,7 +83,8 @@ class AcademicosSeeder extends Seeder
         'Categoria' => 'Instructor',
         'HorasContrato' => '40',
         'TipoPlanta' => 'Planta',
-        'CodigoDpto' => '101'
+        'CodigoDpto' => '101',
+        'CodigoFacultad' => '8492'
       ]);
     }
 }

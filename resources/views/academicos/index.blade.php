@@ -59,8 +59,7 @@
 {{--Si el usuario actual es sec de facultad, se enlistan solo academicos de su facultad --}}
     @if(@Auth::user()->hasRole('SecFacultad'))
       @foreach ($academicos as $academico)
-        @foreach ($departamentos as $departamento)
-         @if ($academico->CodigoDpto == $departamento->id)
+
           <tr>
             <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
             <td>{{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
@@ -80,8 +79,7 @@
                 </form>
               </td>
           </tr>
-         @endif
-        @endforeach
+
       @endforeach
 
 {{--Si el usuario actual es administrador, se le muestran todos los academicos, sin boton de eliminar --}}
@@ -196,6 +194,8 @@
 
 @endif
 
-{!! $academicos->links() !!}
+
+  {!! $academicos->links() !!}
+
 
 @endsection

@@ -75,8 +75,9 @@
         </tr>
         @if(@Auth::user()->hasRole('SecFacultad'))
           @foreach ($evaluaciones as $evaluacion)
-            @foreach ($comisiones as $comision)
-              @if ($evaluacion->CodigoComision == $comision->id)
+            @foreach ($academicos as $academico)
+            {{ $academico->id }} - {{ $evaluacion->academico->id }}
+              @if ($evaluacion->RUTAcademico == $academico->id)
                 <tr>
                   <td>{{ $evaluacion->id }}</td>
                   <td>{{ $evaluacion->CodigoComision }}</td>
@@ -173,10 +174,8 @@
             <div class="pull-left">
               @if(@Auth::user()->hasRole('Administrador'))
                   <h2>Evaluaciones @if(Request::is('evaluacioneselim')) Eliminadas @endif UCM</h2>
-              @elseif(@Auth::user()->hasRole('SecFacultad'))
-                  <h2>Evaluaciones @if(Request::is('evaluacioneselim')) Eliminadas @endif {{ @Auth::user()->SecFacultad->facultad->Nombre }} UCM</h2>
               @else
-                  <h2>Evaluaciones año {{ date("Y") }} UCM</h2>
+                  <h2>Evaluaciones @if(Request::is('evaluacioneselim')) Eliminadas @endif {{ @Auth::user()->SecFacultad->facultad->Nombre }} UCM</h2>
               @endif
             </div>
             @if (Request::is('evaluaciones'))
@@ -208,23 +207,21 @@
         <tr>
             <th>Id</th>
             <th>Codigo Comision</th>
-            <th>Nombre Academico</th>
-            @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
+            <th>Academico</th>
+            @if(@Auth::user()->hasRole('Administrador'))
               <th>Facultad</th>
             @endif
-            <th>Departamento</th>
             <th>Nota Final</th>
             <th>Estado</th>
         </tr>
         @if(@Auth::user()->hasRole('SecFacultad'))
           @foreach ($evaluaciones as $evaluacion)
-            @foreach ($comisiones as $comision)
-              @if ($evaluacion->CodigoComision == $comision->id)
+            @foreach ($academicos as $academico)
+              @if ($evaluacion->RUTAcademico == $academico->id)
                 <tr>
                   <td>{{ $evaluacion->id }}</td>
                   <td>{{ $evaluacion->CodigoComision }}</td>
-                  <td>{{ $evaluacion->academico->Nombre}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
-                  <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
+                  <td>{{ $evaluacion->RUTAcademico}}</td>
                   <td>{{ $evaluacion->NotaFinal }}</td>
                   <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
                   @if (Request::is('evaluaciones'))
@@ -256,9 +253,8 @@
             <tr>
               <td>{{ $evaluacion->id }}</td>
               <td>{{ $evaluacion->CodigoComision }}</td>
-              <td>{{ $evaluacion->academico->Nombre}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
-              <td>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
-              <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
+              <td>{{ $evaluacion->RUTAcademico}}</td>
+              <td>{{ $evaluacion->Comision->facultad->id }} - {{ $evaluacion->Comision->facultad->Nombre }}</td>
               <td>{{ $evaluacion->NotaFinal }}</td>
               <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
               @if (Request::is('evaluaciones'))
@@ -270,28 +266,6 @@
                 </td>
               @endif
             </tr>
-            @endforeach
-        @else
-            @foreach ($evaluaciones as $evaluacion)
-              @if ($evaluacion->año == date("Y"))
-                <tr>
-                  <td>{{ $evaluacion->id }}</td>
-                  <td>{{ $evaluacion->CodigoComision }}</td>
-                  <td>{{ $evaluacion->academico->Nombre}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
-                  <td>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
-                  <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
-                  <td>{{ $evaluacion->NotaFinal }}</td>
-                  <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
-                  @if (Request::is('evaluaciones'))
-                    <td width="115px">
-                      <form>
-                          <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
-                          <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
-                      </form>
-                    </td>
-                  @endif
-                </tr>
-                @endif
             @endforeach
           @endif
     </table>

@@ -22,8 +22,7 @@ class ComisionController extends Controller
       $comisiones = Comision::latest()->paginate(10);
       $activa = Comision::where('Estado', '=', 'Activo')
                 ->where('Año', '=', date("Y"))
-                ->where('CodigoFacultad', '=', @Auth::user()
-                ->secFacultad->CodigoFacultad)
+                ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
                 ->first();
       return view('comisiones.index',compact('comisiones'),['activa' => $activa])
         ->with('i',(request()->input('page',1)-1)*5);

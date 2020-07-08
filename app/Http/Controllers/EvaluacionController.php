@@ -22,8 +22,8 @@ class EvaluacionController extends Controller
       $evaluaciones = Evaluacion::latest()->paginate(10);
       if(@Auth::user()->hasRole('SecFacultad')){
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $comisiones = Facultad::find($CodigoFacultad)->comisiones;
-        return view('evaluaciones.index',compact('evaluaciones'),['comisiones' => $comisiones])
+        $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
+        return view('evaluaciones.index',compact('evaluaciones','academicos'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
@@ -313,7 +313,24 @@ public function reactivar($id)
     public function evaluar(){
       $proceso = Proceso::first();
       $academico = Academico::first();
-      return view('evaluaciones.evaluar',compact('proceso','academico'));
+      $comision = Comision::where('Estado', '=', 'Activo')
+                ->where('Año', '=', date("Y"))
+                ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
+                ->first();
+      if ($proceso->fin >= date('Y-m-d')){
+        if ($comision != null){
+          return view('evaluaciones.evaluar',compact('proceso','academico'));
+        }
+        else{
+            return Redirect()->back()->with(['message' => 'Ya existe una evaluacion en este año para este academico']);
+        }
+      }
+      else{
+        return Redirect()->back()->with(['message' => 'Ya existe una evaluacion en este año para este academico']);
+//        return Redirect()->back()->with(['message' => 'La suma de los porcentajes debe ser 100']);
+      }
+
+
     }
 
 }

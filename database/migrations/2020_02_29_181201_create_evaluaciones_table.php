@@ -30,14 +30,14 @@ class CreateEvaluacionesTable extends Migration
           $table->integer('p4')->nullable();
           $table->integer('p5')->nullable();
           $table->float('NotaFinal',3,2);
-          $table->foreign('CodigoComision')
-                ->references('id')
-                ->on('comisiones');
           $table->foreign('RUTAcademico')
                 ->references('id')
                 ->on('academicos')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+          $table->foreign('CodigoComision')
+                ->references('id')
+                ->on('comisiones');
           $table->softDeletes();
           $table->timestamps();
         });

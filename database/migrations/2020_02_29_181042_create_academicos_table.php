@@ -22,6 +22,7 @@ class CreateAcademicosTable extends Migration
           $table->string('TituloProfesional');
           $table->string('GradoAcademico');
           $table->integer('CodigoDpto');
+          $table->integer('CodigoFacultad');
           $table->enum('Categoria', ['Instructor','Auxiliar','Adjunto','Titular']);
           $table->integer('HorasContrato');
           $table->string('TipoPlanta');
@@ -29,6 +30,11 @@ class CreateAcademicosTable extends Migration
           $table->foreign('CodigoDpto')
                 ->references('id')
                 ->on('departamentos')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+          $table->foreign('CodigoFacultad')
+                ->references('id')
+                ->on('facultades')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
           $table->softDeletes();
