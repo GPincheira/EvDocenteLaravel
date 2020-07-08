@@ -19,42 +19,42 @@ class UserController extends Controller
 //En el controlador de usuario existen varios index, uno para cada tipo de usuario, y cada uno con un index para eliminados
     public function index()
     {
-      $users = User::latest()->paginate(10);
+      $users = User::where('Rol','Administrador')->latest()->paginate(10);
       return view('users.index',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function indexelim()
     {
-      $users = User::onlyTrashed()->latest()->paginate(10);
+      $users = User::where('Rol','Administrador')->onlyTrashed()->latest()->paginate(10);
       return view('users.index',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function index2()
     {
-      $users = User::latest()->paginate(10);
+      $users = User::where('Rol','SecFacultad')->latest()->paginate(10);
       return view('users.index2',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function index2elim()
     {
-      $users = User::onlyTrashed()->latest()->paginate(10);
+      $users = User::where('Rol','SecFacultad')->onlyTrashed()->latest()->paginate(10);
       return view('users.index2',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function index3()
     {
-      $users = User::latest()->paginate(10);
+      $users = User::where('Rol','Secretaria')->latest()->paginate(10);
       return view('users.index3',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function index3elim()
     {
-      $users = User::onlyTrashed()->latest()->paginate(10);
+      $users = User::where('Rol','Secretaria')->onlyTrashed()->latest()->paginate(10);
       return view('users.index3',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
@@ -102,6 +102,7 @@ class UserController extends Controller
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
+      $request['Rol']= 'Administrador';
       $user = User::create($request->all());
       $user->assignRole('Administrador');
       if ($request['deleted_at'] == "Inactivo"){
@@ -124,6 +125,7 @@ class UserController extends Controller
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
+      $request['Rol']= 'SecFacultad';
       $user = User::create($request->all());
       $user->assignRole('SecFacultad');
       secFacultad::create(['id' => $request['id'], 'CodigoFacultad' => $request['CodigoFacultad']]);
@@ -147,6 +149,7 @@ class UserController extends Controller
       ]);
       $password=bcrypt($request['password']);
       $request['password']= $password;
+      $request['Rol']= 'Secretaria';
       $user = User::create($request->all());
       if ($request['deleted_at'] == "Inactivo"){
         User::destroy($request['id']);

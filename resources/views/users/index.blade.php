@@ -67,7 +67,7 @@
                       @method('DELETE')
                       <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
                     </form>
-                  <td>
+                  </td>
                 @else
                   <td width="167px">
                     <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>

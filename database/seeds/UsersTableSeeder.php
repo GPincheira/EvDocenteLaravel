@@ -21,7 +21,8 @@ class UsersTableSeeder extends Seeder
           'password' => bcrypt('12345678'),
           'Nombre' => 'German',
           'ApellidoPaterno' => 'Pincheira',
-          'ApellidoMaterno' => 'Leiva'
+          'ApellidoMaterno' => 'Leiva',
+          'Rol' => 'Administrador'
         ]);
         $user->assignRole('Administrador');
 
@@ -32,7 +33,8 @@ class UsersTableSeeder extends Seeder
           'password' => bcrypt('12345678'),
           'Nombre' => 'Fabiola',
           'ApellidoPaterno' => 'Leiva',
-          'ApellidoMaterno' => 'Caceres'
+          'ApellidoMaterno' => 'Caceres',
+          'Rol' => 'Administrador'
         ]);
         $user->assignRole('Administrador');
 
@@ -43,7 +45,8 @@ class UsersTableSeeder extends Seeder
           'password' => bcrypt('12345678'),
           'Nombre' => 'Carolina Alejandra',
           'ApellidoPaterno' => 'Contreras',
-          'ApellidoMaterno' => 'Jara'
+          'ApellidoMaterno' => 'Jara',
+          'Rol' => 'SecFacultad'
         ]);
         $user->assignRole('SecFacultad');
 
@@ -54,7 +57,8 @@ class UsersTableSeeder extends Seeder
           'password' => bcrypt('12345678'),
           'Nombre' => 'Prueba',
           'ApellidoPaterno' => 'Secretaria',
-          'ApellidoMaterno' => ''
+          'ApellidoMaterno' => '',
+          'Rol' => 'Secretaria'
         ]);
         $user->assignRole('Secretario');
     }

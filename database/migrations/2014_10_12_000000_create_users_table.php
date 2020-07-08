@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('Nombre');
             $table->string('ApellidoPaterno');
             $table->string('ApellidoMaterno')->nullable();
+            $table->enum('Rol', ['Administrador','SecFacultad','Secretaria']);
             $table->primary('id');
             $table->softDeletes();
             $table->rememberToken();

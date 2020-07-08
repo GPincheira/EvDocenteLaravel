@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @if ($user->roles()->first()->name=='Administrador')
-  <title>Administrador {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+  <title>Administrador {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</title>
 @elseif ($user->roles()->first()->name=='SecFacultad')
-  <title>Sec Facultad {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+  <title>Sec Facultad {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</title>
 @else
-  <title>Secretaria {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+  <title>Secretaria {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</title>
 @endif
 
 @section('content')
@@ -15,13 +15,13 @@
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
       @if ($user->roles()->first()->name=='Administrador')
         <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Administradores</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Administrador: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item active" aria-current="page">Administrador: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</li>
       @elseif ($user->roles()->first()->name=='SecFacultad')
         <li class="breadcrumb-item"><a href="{{ route('users.index2') }}">Secretarios de Facultad</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Secretario de Facultad: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item active" aria-current="page">Secretario de Facultad: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</li>
       @else
         <li class="breadcrumb-item"><a href="{{ route('users.index3') }}">Secretarias</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Secretaria: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item active" aria-current="page">Secretaria: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</li>
       @endif
   </ol>
 </nav>
@@ -34,7 +34,7 @@
                           @elseif($user->roles()->first()->name=='SecFacultad') Secretario de Facultad
                           @else Secretaria
                           @endif
-                : {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</h1>
+                : {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</h1>
           </div>
             <div class="pull-right">
               @if ($user->roles()->first()->name=='Administrador')

@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @if ($user->roles()->first()->name=='Administrador')
-  <title>Editar Administrador {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+  <title>Editar Administrador {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</title>
 @endif
 @if ($user->roles()->first()->name=='SecFacultad')
-  <title>Editar Sec Facultad {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+  <title>Editar Sec Facultad {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</title>
 @endif
 @if ($user->roles()->first()->name=='Secretario')
-  <title>Editar Secretario {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</title>
+  <title>Editar Secretario {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</title>
 @endif
 
 @section('content')
@@ -17,15 +17,15 @@
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
       @if ($user->roles()->first()->name=='Administrador')
         <li class="breadcrumb-item"><a href="{{ route('users.index') }}">Administradores</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Administrador: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Administrador: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</li>
       @endif
       @if ($user->roles()->first()->name=='SecFacultad')
         <li class="breadcrumb-item"><a href="{{ route('users.index2') }}">Secretarios de Facultad</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Secretario de Facultad: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Secretario de Facultad: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</li>
       @endif
       @if ($user->roles()->first()->name=='Secretario')
         <li class="breadcrumb-item"><a href="{{ route('users.index3') }}">Secretarios</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Editar Secretario: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno[0] }}.</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar Secretario: {{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</li>
       @endif
   </ol>
 </nav>
