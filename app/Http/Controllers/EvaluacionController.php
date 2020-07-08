@@ -19,14 +19,19 @@ class EvaluacionController extends Controller
 
     public function index()
     {
-      $evaluaciones = Evaluacion::latest()->paginate(10);
-      if(@Auth::user()->hasRole('SecFacultad')){
+      if(@Auth::user()->hasRole('Administrador')){
+        $evaluaciones = Evaluacion::latest()->paginate(10);
+        return view('evaluaciones.index',compact('evaluaciones'))
+          ->with('i',(request()->input('page',1)-1)*5);
+      }
+      else if(@Auth::user()->hasRole('SecFacultad')){
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
-        return view('evaluaciones.index',compact('evaluaciones','academicos'))
+        $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+        return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
+        $evaluaciones = Evaluacion::where('Año',date("Y"))->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
@@ -35,14 +40,14 @@ class EvaluacionController extends Controller
 //index para los elementos eliminados
     public function indexelim()
     {
-      $evaluaciones = Evaluacion::onlyTrashed()->latest()->paginate(10);
-      if(@Auth::user()->hasRole('SecFacultad')){
-        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
-        return view('evaluaciones.index',compact('evaluaciones','academicos'))
+      if (@Auth::user()->hasRole('Administrador')){
+        $evaluaciones = Evaluacion::onlyTrashed()->latest()->paginate(10);
+        return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
+        $CodigoFacultad = @Auth::onlyTrashed()->secFacultad->CodigoFacultad;
+        $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
@@ -51,10 +56,11 @@ class EvaluacionController extends Controller
 //funcion index2, para utilizarse como vista para el usuario secretario
     public function index2()
     {
-      $evaluaciones = Evaluacion::latest()->paginate(10);
+      $evaluaciones = Evaluacion::where('NotaFinal','>=','4.5')->latest()->paginate(10);
       return view('evaluaciones.index2',compact('evaluaciones'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -213,6 +219,7 @@ public function reactivar($id)
           $evaluacion = new Evaluacion();
           $evaluacion->RUTAcademico = $request->RUTAcademico;
           $evaluacion->CodigoComision = $request->CodigoComision;
+          $evaluacion->CodigoFacultad = $request->CodigoFacultad; //arreglar
           $evaluacion->año = $request->año;
           $evaluacion->p1 = $request->p1;
           $evaluacion->n1 = $request->n1;

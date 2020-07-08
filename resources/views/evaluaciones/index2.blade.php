@@ -33,7 +33,6 @@
             <th>Nota Final</th>
         </tr>
         @foreach ($evaluaciones as $evaluacion)
-          @if ($evaluacion->NotaFinal >= 4.5)
           <tr>
             <td>{{ $evaluacion->id }}</td>
             <td>{{ $evaluacion->CodigoComision }}</td>
@@ -42,7 +41,6 @@
             <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
             <td>{{ $evaluacion->NotaFinal }}</td>
           </tr>
-          @endif
         @endforeach
     </table>
 

@@ -17,6 +17,7 @@ class CreateEvaluacionesTable extends Migration
           $table->increments('id');
           $table->integer('RUTAcademico');
           $table->unsignedInteger('CodigoComision');
+          $table->integer('CodigoFacultad');
           $table->year('año');
           $table->string('Argumento',100)->nullable();
           $table->float('n1',2,1)->nullable();
@@ -38,6 +39,11 @@ class CreateEvaluacionesTable extends Migration
           $table->foreign('CodigoComision')
                 ->references('id')
                 ->on('comisiones');
+          $table->foreign('CodigoFacultad')
+                ->references('id')
+                ->on('facultades')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
           $table->softDeletes();
           $table->timestamps();
         });

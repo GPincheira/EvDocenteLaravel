@@ -23,8 +23,16 @@
             </div>
 
             <div class="col-md-12 margin-tb container">
+                    <label for="RUTAcademico">RUT</label>
+                    <input v-model="RUTAcademico" type="number" class="form-control" style="background-color:white">
+            </div>
+            <div class="col-md-12 margin-tb container">
                     <label for="CodigoComision">Codigo Comision</label>
                     <input v-model="CodigoComision" type="number" class="form-control" style="background-color:white">
+            </div>
+            <div class="col-md-12 margin-tb container">
+                    <label for="CodigoFacultad">Codigo Facultad</label>
+                    <input v-model="CodigoFacultad" type="number" class="form-control" style="background-color:white">
             </div>
             <div class="col-md-12 margin-tb container">
                     <label for="año">Año</label>
@@ -248,6 +256,7 @@
             return{
                 RUTAcademico:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
                 CodigoComision:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
+                CodigoFacultad:"",
                 año:"",
                 NotaFinal:0,
                 Argumento:"",
@@ -323,8 +332,9 @@
             let me =this;
             let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
             axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
-                'RUTAcademico':props['datito'],
+                'RUTAcademico': this.RUTAcademico,
                 'CodigoComision':this.CodigoComision,
+                'CodigoFacultad':this.CodigoFacultad,
                 'Argumento':this.Argumento,
                 'NotaFinal':this.NotaFinal,
                 'año':this.año,
@@ -349,6 +359,7 @@
         clearFields(){/*Limpia los campos e inicializa la variable update a 0*/
                 this.RUTAcademico = "";
                 this.CodigoComision = "";
+                this.CodigoFacultad = "";
                 this.año = "";
                 this.p1 = "";
                 this.n1 = "";

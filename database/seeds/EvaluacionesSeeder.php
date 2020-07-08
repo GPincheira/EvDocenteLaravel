@@ -15,6 +15,7 @@ class EvaluacionesSeeder extends Seeder
       $evaluacion = Evaluacion::create([
         'RUTAcademico' => '10752674',
         'CodigoComision' => '1',
+        'CodigoFacultad' => '8492',
         'año' => '2018',
         'Argumento' => 'Excelente rendimiento en lineas generales',
         'n1' => '5',
@@ -33,6 +34,7 @@ class EvaluacionesSeeder extends Seeder
       $evaluacion = Evaluacion::create([
         'RUTAcademico' => '10752674',
         'CodigoComision' => '2',
+        'CodigoFacultad' => '8492',
         'año' => '2019',
         'Argumento' => 'Rendimiento mas bajo que el año anterior',
         'n1' => '3',

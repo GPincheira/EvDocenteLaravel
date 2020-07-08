@@ -75,8 +75,6 @@
         </tr>
         @if(@Auth::user()->hasRole('SecFacultad'))
           @foreach ($evaluaciones as $evaluacion)
-            @foreach ($academicos as $academico)
-              @if ($evaluacion->RUTAcademico == $academico->id)
                 <tr>
                   <td>{{ $evaluacion->id }}</td>
                   <td>{{ $evaluacion->CodigoComision }}</td>
@@ -103,10 +101,7 @@
                       </form>
                     </td>
                   @endif
-
                 </tr>
-              @endif
-            @endforeach
           @endforeach
         @elseif(@Auth::user()->hasRole('Administrador'))
             @foreach ($evaluaciones as $evaluacion)
@@ -130,7 +125,6 @@
             @endforeach
         @else
             @foreach ($evaluaciones as $evaluacion)
-              @if ($evaluacion->año == date("Y"))
                 <tr>
                   <td>{{ $evaluacion->id }}</td>
                   <td>{{ $evaluacion->CodigoComision }}</td>
@@ -148,7 +142,6 @@
                     </td>
                   @endif
                 </tr>
-                @endif
             @endforeach
           @endif
     </table>
@@ -215,8 +208,6 @@
         </tr>
         @if(@Auth::user()->hasRole('SecFacultad'))
           @foreach ($evaluaciones as $evaluacion)
-            @foreach ($academicos as $academico)
-              @if ($evaluacion->RUTAcademico == $academico->id)
                 <tr>
                   <td>{{ $evaluacion->id }}</td>
                   <td>{{ $evaluacion->CodigoComision }}</td>
@@ -244,10 +235,7 @@
                       @endif
                     </td>
                   @endif
-
                 </tr>
-              @endif
-            @endforeach
           @endforeach
         @elseif(@Auth::user()->hasRole('Administrador'))
             @foreach ($evaluaciones as $evaluacion)

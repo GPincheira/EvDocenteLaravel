@@ -18,7 +18,7 @@ class facultad extends Model
   protected $dates = ['deleted_at'];
 
 //al eliminarse, eliminara en cascada a departamentos
-  protected $softCascade = ['departamentos','academicos'];
+  protected $softCascade = ['departamentos','academicos','evaluaciones'];
 
   protected $primaryKey ="id";
 
@@ -45,6 +45,9 @@ class facultad extends Model
       return $this->hasMany('App\comision','CodigoFacultad');
   }
 
-
+  public function evaluaciones()
+  {
+    return $this->hasMany('App\evaluacion', 'CodigoFacultad');
+  }
 
 }
