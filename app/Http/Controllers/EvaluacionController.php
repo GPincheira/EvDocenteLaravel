@@ -135,14 +135,13 @@ class EvaluacionController extends Controller
   }
 }
 
-
 public function show(Evaluacion $evaluacion)
 {
-  $evs = Evaluacion::all();
-  return view('evaluaciones.show',compact('evaluacion'),['evs'=>$evs]);
-
-
-//  $departamentos = Facultad::find($CodigoFacultad)->departamentos;
+  $ultima = Evaluacion::orderBy('año', 'DESC')
+            ->where('RUTAcademico', $evaluacion->RUTAcademico)
+            ->where('año', '<', $evaluacion->año)
+            ->first();
+  return view('evaluaciones.show',compact('evaluacion','ultima'));
 }
 
 public function edit($id)
@@ -307,10 +306,14 @@ public function reactivar($id)
     public function pdf($id)
     {
         $evaluacion = evaluacion::find($id);
-        $evs = Evaluacion::all();
-        $pdf = PDF::loadView('pdf.evaluaciones',compact('evaluacion'),['evs'=>$evs]);
+        $ultima = Evaluacion::orderBy('año', 'DESC')
+                  ->where('RUTAcademico', $evaluacion->RUTAcademico)
+                  ->where('año', '<', $evaluacion->año)
+                  ->first();
+        $pdf = PDF::loadView('pdf.evaluaciones',compact('evaluacion','ultima'));
         return $pdf->download('evaluacion.pdf');
     }
+
 
     public function json()
     {

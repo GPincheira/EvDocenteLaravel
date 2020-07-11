@@ -59,13 +59,7 @@
 						<td>Grado Académico</td>
 					</tr>
           <tr>
-            <td>
-              @foreach ($evs as $ev)
-                @if ( $ev->RUTAcademico == $evaluacion->RUTAcademico && $ev->año < $evaluacion->año)
-                  {{ $ev->NotaFinal }}
-                @endif
-              @endforeach
-            </td>
+            <td>@if ($ultima) {{ $ultima->NotaFinal }} @endif</td>
 						<td>{{ $evaluacion->academico->TipoPlanta }}</td>
 					</tr>
           <tr style="background-color:rgba(200,200,200)">

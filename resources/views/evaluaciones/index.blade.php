@@ -59,6 +59,7 @@
     <tr>
       <th>Id</th>
       <th>Codigo Comision</th>
+      <th>Año</th>
       <th>Nombre Academico</th>
       @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
         <th>Facultad</th>
@@ -71,6 +72,7 @@
         <tr>
           <td>{{ $evaluacion->id }}</td>
           <td>{{ $evaluacion->CodigoComision }}</td>
+          <td>{{ $evaluacion->año }}</td>
           <td>{{ $evaluacion->academico->Nombre}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
           <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
           @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
@@ -139,6 +141,7 @@
     <tr>
       <th>Id</th>
       <th>Codigo Comision</th>
+      <th>Año</th>
       <th>Academico</th>
       <th>Nota Final</th>
       <th>Estado</th>
@@ -147,6 +150,7 @@
       <tr>
         <td>{{ $evaluacion->id }}</td>
         <td>{{ $evaluacion->CodigoComision }}</td>
+        <td>{{ $evaluacion->año }}</td>
         <td>{{ $evaluacion->RUTAcademico}}</td>
         <td>{{ $evaluacion->NotaFinal }}</td>
         <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
