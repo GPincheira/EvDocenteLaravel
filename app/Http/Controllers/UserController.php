@@ -41,7 +41,8 @@ class UserController extends Controller
     public function index2elim()
     {
       $users = User::where('Rol','SecFacultad')->onlyTrashed()->latest()->paginate(10);
-      return view('users.index2',compact('users'))
+      $secFacultad = secFacultad::onlyTrashed()->latest()->paginate(10);
+      return view('users.index2',compact('users'),['secFacultad'=>$secFacultad])
         ->with('i',(request()->input('page',1)-1)*5);
     }
 

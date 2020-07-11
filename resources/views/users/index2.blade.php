@@ -76,13 +76,16 @@
         </td>
       @else
 
-          <td width="60px">
-            <form action="{{ route('users.reactivar',$user->id) }}" method="POST">
-              @csrf
-              <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
-            </form>
-          </td>
-        
+        @foreach ($secFacultad as $sec)
+          @if ($user->id == $sec->id && $sec->facultad)
+            <td width="60px">
+              <form action="{{ route('users.reactivar',$user->id) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
+              </form>
+            </td>
+          @endif
+        @endforeach
       @endif
     </tr>
   @endforeach
