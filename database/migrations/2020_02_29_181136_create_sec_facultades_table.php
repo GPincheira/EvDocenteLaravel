@@ -20,6 +20,7 @@ class CreateSecFacultadesTable extends Migration
             $table->foreign('id')
                   ->references('id')
                   ->on('users')
+                  ->onUpdate('cascade')
                   ->onDelete('cascade');
             $table->foreign('CodigoFacultad')
                   ->references('id')

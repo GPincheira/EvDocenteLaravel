@@ -46,8 +46,8 @@ class EvaluacionController extends Controller
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
-        $CodigoFacultad = @Auth::onlyTrashed()->secFacultad->CodigoFacultad;
-        $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+        $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $evaluaciones = Evaluacion::onlyTrashed()->where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }

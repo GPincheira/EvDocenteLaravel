@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\secFacultad;
+use App\User;
 use Illuminate\Http\Request;
 
 class SecFacultadController extends Controller

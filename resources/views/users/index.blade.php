@@ -53,7 +53,6 @@
     <th>Estado</th>
   </tr>
   @foreach ($users as $user)
-    @if ($user->roles()->first()->name=='Administrador')
     <tr>
       <td>{{ $user->id }}-{{ $user->verificador }}</td>
       <td>{{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</td>
@@ -85,7 +84,6 @@
         </td>
       @endif
     </tr>
-    @endif
   @endforeach
 </table>
 

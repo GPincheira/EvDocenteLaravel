@@ -35,11 +35,13 @@ class CreateComisionesTable extends Migration
           $table->foreign('CodigoFacultad')
                 ->references('id')
                 ->on('facultades')
-                ->onUpdate('cascade');
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
           $table->foreign('idSecFacultad')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade');
+          $table->softDeletes();
           $table->timestamps();
         });
     }

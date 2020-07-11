@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\facultad;
 use App\departamento;
+use App\User;
+use App\secFacultad;
 use Illuminate\Http\Request;
 
 class FacultadController extends Controller
@@ -131,7 +133,12 @@ class FacultadController extends Controller
     public function destroy($id)
     {
       $facultad = facultad::find($id);
+      $userEliminar = secFacultad::where('CodigoFacultad', '=', $id)->first();
       $facultad->delete();
+      if($userEliminar != null){
+        $user = User::find($userEliminar->id);
+        $user->delete();
+      }
       return redirect()->route('facultades.index')
         ->with('success','Facultad Eliminada Exitosamente');
     }

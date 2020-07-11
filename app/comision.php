@@ -3,10 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 //modelo comision
 class comision extends Model
 {
+  use SoftDeletes;
   use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
   protected $table = 'comisiones';
@@ -16,6 +18,7 @@ class comision extends Model
       'APaterno2','AMaterno2','Estado'
   ];
   protected $primaryKey ="id";
+  protected $dates = ['deleted_at'];
 
   //relaciones de la tabla, donde una facultad puede tener muchas comisiones
   public function facultad()

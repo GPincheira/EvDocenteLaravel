@@ -18,7 +18,7 @@ class facultad extends Model
   protected $dates = ['deleted_at'];
 
 //al eliminarse, eliminara en cascada a departamentos
-  protected $softCascade = ['departamentos','academicos','evaluaciones'];
+  protected $softCascade = ['departamentos','academicos','evaluaciones','comisiones','secFacultad'];
 
   protected $primaryKey ="id";
 
