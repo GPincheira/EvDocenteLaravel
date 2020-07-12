@@ -215,11 +215,15 @@ public function reactivar($id)
 
       public function store2(Request $request)
       {
+          $comision = Comision::where('Estado', '=', 'Activo')
+                  ->where('Año', '=', date("Y"))
+                  ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
+                  ->first();
           $evaluacion = new Evaluacion();
           $evaluacion->RUTAcademico = $request->RUTAcademico;
-          $evaluacion->CodigoComision = $request->CodigoComision;
-          $evaluacion->CodigoFacultad = $request->CodigoFacultad; //arreglar
-          $evaluacion->año = $request->año;
+          $evaluacion->CodigoComision = $comision->id;
+          $evaluacion->CodigoFacultad = $comision->CodigoFacultad;
+          $evaluacion->año = date("Y");
           $evaluacion->p1 = $request->p1;
           $evaluacion->n1 = $request->n1;
           $evaluacion->p2 = $request->p2;
@@ -233,6 +237,8 @@ public function reactivar($id)
           $evaluacion->Argumento = $request->Argumento;
           $evaluacion->NotaFinal = $request->NotaFinal;
           $evaluacion->save();
+          return redirect()->route('evaluaciones.index')
+            ->with('success','Evaluacion creada exitosamente.');
           //Esta función guardará las tareas que enviaremos mediante vuejs
       }
 

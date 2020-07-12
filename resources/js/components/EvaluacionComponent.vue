@@ -26,18 +26,6 @@
                     <label for="RUTAcademico">RUT</label>
                     <input v-model="RUTAcademico" type="number" class="form-control" style="background-color:white">
             </div>
-            <div class="col-md-12 margin-tb container">
-                    <label for="CodigoComision">Codigo Comision</label>
-                    <input v-model="CodigoComision" type="number" class="form-control" style="background-color:white">
-            </div>
-            <div class="col-md-12 margin-tb container">
-                    <label for="CodigoFacultad">Codigo Facultad</label>
-                    <input v-model="CodigoFacultad" type="number" class="form-control" style="background-color:white">
-            </div>
-            <div class="col-md-12 margin-tb container">
-                    <label for="año">Año</label>
-                    <input v-model="año" type="number" class="form-control" style="background-color:white"><br>
-            </div>
 
             <div class="row container">
                 <h3>II. CALIFICACION ACADEMICA</h3>
@@ -255,9 +243,6 @@
         data(){
             return{
                 RUTAcademico:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
-                CodigoComision:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
-                CodigoFacultad:"",
-                año:"",
                 NotaFinal:0,
                 Argumento:"",
                 p1: 0,
@@ -289,12 +274,6 @@
         methods:{
         checkForm: function (e) {
           this.errors = [];
-          if (!this.CodigoComision){
-            this.errors.push('Comision es obligatoria');
-          }
-          if (!this.año){
-            this.errors.push('El año es obligatorio');
-          }
           if (parseFloat(this.p1)+parseFloat(this.p2)+parseFloat(this.p3)+parseFloat(this.p4)+parseFloat(this.p5) != 100){
             this.errors.push('Los procentajes deben sumar 100%');
           }
@@ -333,11 +312,8 @@
             let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
             axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
                 'RUTAcademico': this.RUTAcademico,
-                'CodigoComision':this.CodigoComision,
-                'CodigoFacultad':this.CodigoFacultad,
                 'Argumento':this.Argumento,
                 'NotaFinal':this.NotaFinal,
-                'año':this.año,
                 'p1':this.p1,
                 'p2':this.p2,
                 'p3':this.p3,
@@ -358,9 +334,6 @@
         },
         clearFields(){/*Limpia los campos e inicializa la variable update a 0*/
                 this.RUTAcademico = "";
-                this.CodigoComision = "";
-                this.CodigoFacultad = "";
-                this.año = "";
                 this.p1 = "";
                 this.n1 = "";
                 this.p2 = "";
