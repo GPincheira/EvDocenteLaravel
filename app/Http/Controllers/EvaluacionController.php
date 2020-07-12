@@ -332,11 +332,11 @@ public function reactivar($id)
           return view('evaluaciones.evaluar',compact('proceso','academico'));
         }
         else{
-            return Redirect()->back()->with(['message' => 'Ya existe una evaluacion en este año para este academico']);
+            return Redirect()->back()->with('comision','No existe una comision activa');
         }
       }
       else{
-        return Redirect()->back()->with(['message' => 'Ya existe una evaluacion en este año para este academico']);
+        return Redirect()->back()->with('proceso','Fuera de periodo de evaluacion');
 //        return Redirect()->back()->with(['message' => 'La suma de los porcentajes debe ser 100']);
       }
 

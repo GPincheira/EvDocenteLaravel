@@ -14,8 +14,8 @@ class ProcesoController extends Controller
      */
     public function index()
     {
-      $procesos = Proceso::latest()->paginate(10);
-      return view('procesos.index',compact('procesos'))
+      $proceso = Proceso::first();
+      return view('procesos.index',compact('proceso'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 

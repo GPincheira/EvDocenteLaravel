@@ -15,7 +15,6 @@
         </div>
     @endif
 
-        @foreach ($procesos as $proceso)
               @if ($proceso->fin <= date('Y-m-d'))
               <div class="container">
                   <div class="row justify-content-center text-center">
@@ -55,8 +54,5 @@
               </div>
           </div>
         @endif
-    @endforeach
-
-    {!! $procesos->links() !!}
 
 @endsection
