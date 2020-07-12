@@ -327,7 +327,7 @@ public function reactivar($id)
                 ->where('Año', '=', date("Y"))
                 ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
                 ->first();
-      if ($proceso->fin >= date('Y-m-d')){
+      if ($proceso->inicio<=date('Y-m-d') && $proceso->fin>=date('Y-m-d')){
         if ($comision != null){
           return view('evaluaciones.evaluar',compact('proceso','academico'));
         }
@@ -337,10 +337,7 @@ public function reactivar($id)
       }
       else{
         return Redirect()->back()->with('proceso','Fuera de periodo de evaluacion');
-//        return Redirect()->back()->with(['message' => 'La suma de los porcentajes debe ser 100']);
       }
-
-
     }
 
 }

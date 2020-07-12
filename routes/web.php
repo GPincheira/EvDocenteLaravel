@@ -163,9 +163,11 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:Users.reactivar');
 
     Route::get('procesos', 'ProcesoController@index')->name('procesos.index')
-                                                        ->middleware('permission:procesos.cerrar');
+                                                        ->middleware('permission:procesos.index');
     Route::post('procesosa/{role}', 'ProcesoController@abrir')->name('procesos.abrir')
-                                                        ->middleware('permission:procesos.cerrar');
+                                                        ->middleware('permission:procesos.abrir');
     Route::post('procesosc/{role}', 'ProcesoController@cerrar')->name('procesos.cerrar')
                                                         ->middleware('permission:procesos.cerrar');
+    Route::put('procesos/{role}', 'ProcesoController@update')->name('procesos.update')
+                                                        ->middleware('permission:procesos.index');
 });

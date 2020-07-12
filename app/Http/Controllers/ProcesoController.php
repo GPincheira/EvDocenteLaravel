@@ -15,8 +15,10 @@ class ProcesoController extends Controller
     public function index()
     {
       $proceso = Proceso::first();
-      return view('procesos.index',compact('proceso'))
-        ->with('i',(request()->input('page',1)-1)*5);
+      $fecha = date("Y-m-d");
+      $año = date("Y");
+      $fin = $año.'-12-31';
+      return view('procesos.index',compact('proceso','fecha','fin'));
     }
 
     /**
@@ -69,9 +71,16 @@ class ProcesoController extends Controller
      * @param  \App\Proceso  $proceso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Proceso $proceso)
+    public function update(Request $request, $id)
     {
-        //
+      $request->validate([
+        'inicio' => 'required',
+        'fin' => 'required|date|after:inicio',
+      ]);
+      $proceso = Proceso::find($id);
+      $proceso->update($request->all());
+      return redirect()->route('procesos.index')
+        ->with('success','Proceso de Evaluacion Actualizado Exitosamente');
     }
 
     /**
@@ -88,7 +97,9 @@ class ProcesoController extends Controller
     public function abrir($id)
     {
       $proceso = proceso::all()->find($id);
-      $proceso->fin='2030/12/31';
+      $añoActual = date("Y");
+      $proceso->inicio= date("Y-m-d");
+      $proceso->fin=$añoActual.'/12/31';
       $proceso->update();
       return redirect()->route('procesos.index')
         ->with('success','Proceso Abierto');
@@ -97,7 +108,10 @@ class ProcesoController extends Controller
     public function cerrar($id)
     {
       $proceso = proceso::all()->find($id);
-      $proceso->fin='2010/12/31';
+      $ant = date("d")-1;
+      $actual = date("Y-m");
+      $proceso->inicio=$actual.'-'.$ant;
+      $proceso->fin=$actual.'-'.$ant;
       $proceso->update();
       return redirect()->route('procesos.index')
         ->with('success','Proceso Cerrado');
