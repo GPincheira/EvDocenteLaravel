@@ -26,8 +26,9 @@ class EvaluacionController extends Controller
       }
       else if(@Auth::user()->hasRole('SecFacultad')){
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+        $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
         $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
-        return view('evaluaciones.index',compact('evaluaciones'))
+        return view('evaluaciones.index',compact('evaluaciones'),['academicos'=>$academicos])
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
@@ -326,9 +327,16 @@ public function reactivar($id)
         return Evaluacion::all();
     }
 
-    public function evaluar(){
+    public function evaluar($id){
+
+/*      $academicos = Academico::with('evaluaciones')->whereHas('evaluaciones', function($q){
+        $q->where('año', '!=', date("Y"));
+        })->ordoesntHave('evaluaciones')
+        ->where('academicos.CodigoFacultad',@Auth::user()->secFacultad->CodigoFacultad)
+        ->get(); */
+  //    $academico = Academico::find($id);
+      $academico = Academico::find($id);
       $proceso = Proceso::first();
-      $academico = Academico::first();
       $comision = Comision::where('Estado', '=', 'Activo')
                 ->where('Año', '=', date("Y"))
                 ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)

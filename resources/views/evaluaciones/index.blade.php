@@ -41,11 +41,6 @@
             <a class="btn btn-secondary" style="margin-left: 12px" href="{{ route('evaluaciones.indexelim') }}"> Ver Inactivas</a>
         </div>
       @endif
-      @if(@Auth::user()->hasRole('SecFacultad'))
-        <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('evaluaciones.evaluar') }}"> Realizar Nueva Evaluacion</a>
-        </div>
-      @endif
     </div>
   </div>
 
@@ -59,6 +54,26 @@
     <div class="alert alert-danger" role="alert">
       <p>{{ $message }}</p>
     </div>
+  @endif
+
+  @if(@Auth::user()->hasRole('SecFacultad'))
+  <table class="table table-bordered" style="margin-top: 8px">
+    <tr>
+      <th width="120px">RUT</th>
+      <th>Nombre Completo</th>
+      <th>Departamento</th>
+    </tr>
+    @foreach ($academicos as $academico)
+      <tr>
+        <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
+        <td>{{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+        <td>{{ $academico->departamento->id }} - {{ $academico->departamento->Nombre}}</td>
+        <td width="167px">
+            <a href="{{ route('evaluaciones.evaluar',$academico->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+        </td>
+      </tr>
+    @endforeach
+  </table>
   @endif
 
   <table class="table table-bordered"  style="margin-top: 8px">

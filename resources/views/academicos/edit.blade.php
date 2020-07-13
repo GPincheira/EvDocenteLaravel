@@ -34,7 +34,7 @@
 
 {{--Funcionamiento similar al create, pero estos datos son pasados a update para validar --}}
   @if(@Auth::user()->hasRole('SecFacultad'))
-    <form action="{{ route('academicos.update',$academico->id) }}" method="POST">
+    <form action="{{ route('academicos.update',$academico) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row">

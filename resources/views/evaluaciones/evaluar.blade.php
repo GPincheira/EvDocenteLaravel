@@ -39,6 +39,7 @@
 
   <div class="row">
     <div class="col-lg-12 margin-tb">
+        {{ $academico->id }} {{ $academico->Nombre }}
         <evaluacion-component datito="{{ $academico->id }}" ></evaluacion-component>
       </div>
   </div>

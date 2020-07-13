@@ -19,12 +19,6 @@
 
             <div class="row container">
                 <h3>I. IDENTIFICACION</h3>
-                {{ datito }}
-            </div>
-
-            <div class="col-md-12 margin-tb container">
-                    <label for="RUTAcademico">RUT</label>
-                    <input v-model="RUTAcademico" type="number" class="form-control" style="background-color:white">
             </div>
 
             <div class="row container">
@@ -242,7 +236,6 @@
         props:['datito'],
         data(){
             return{
-                RUTAcademico:"", //Esta variable, mediante v-model esta relacionada con el input del formulario
                 NotaFinal:0,
                 Argumento:"",
                 p1: 0,
@@ -311,7 +304,7 @@
             let me =this;
             let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
             axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
-                'RUTAcademico': this.RUTAcademico,
+                'RUTAcademico': this.datito,
                 'Argumento':this.Argumento,
                 'NotaFinal':this.NotaFinal,
                 'p1':this.p1,
@@ -333,7 +326,6 @@
             });
         },
         clearFields(){/*Limpia los campos e inicializa la variable update a 0*/
-                this.RUTAcademico = "";
                 this.p1 = "";
                 this.n1 = "";
                 this.p2 = "";
