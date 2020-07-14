@@ -25,6 +25,37 @@
     </ol>
   </nav>
 
+  <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div id="card-201706">
+				<div class="card">
+					<div class="card-header">
+						 <a class="card-link" data-toggle="collapse" data-parent="#card-201706" href="#card-element-459070">Collapsible Group Item #1</a>
+					</div>
+					<div id="card-element-459070" class="collapse show">
+						<div class="card-body">
+							Anim pariatur cliche...
+						</div>
+					</div>
+				</div>
+				<div class="card">
+					<div class="card-header">
+						 <a class="card-link" data-toggle="collapse" data-parent="#card-201706" href="#card-element-739932">Collapsible Group Item #2</a>
+					</div>
+					<div id="card-element-739932" class="collapse show">
+						<div class="card-body">
+							Anim pariatur cliche...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
   <div class="row">
     <div class="col-lg-12 margin-tb">
       <div class="pull-left">

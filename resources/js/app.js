@@ -35,3 +35,5 @@ Vue.component('editarev-component', require('./components/EditarEvComponent.vue'
          });
      }
  };
+
+ 
