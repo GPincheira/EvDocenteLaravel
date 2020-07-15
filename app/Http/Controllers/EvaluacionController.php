@@ -238,9 +238,12 @@ public function reactivar($id)
           $evaluacion->Argumento = $request->Argumento;
           $evaluacion->NotaFinal = $request->NotaFinal;
           $evaluacion->save();
-          return redirect()->route('evaluaciones.index')
-            ->with('success','Evaluacion creada exitosamente.');
-          //Esta función guardará las tareas que enviaremos mediante vuejs
+
+          $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+          $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
+          $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+          return view('evaluaciones.index',compact('evaluaciones'),['academicos'=>$academicos])
+            ->with('i',(request()->input('page',1)-1)*5);
       }
 
     /**
@@ -336,22 +339,43 @@ public function reactivar($id)
         ->get(); */
   //    $academico = Academico::find($id);
       $academico = Academico::find($id);
+      $ultima = Evaluacion::orderBy('año', 'DESC')
+                ->where('RUTAcademico', $id)
+                ->where('año', '<', date("Y"))
+                ->first();
+      $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+      $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
+      $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+      $academico = Academico::find($id);
       $proceso = Proceso::first();
       $comision = Comision::where('Estado', '=', 'Activo')
                 ->where('Año', '=', date("Y"))
                 ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
                 ->first();
+      $evaluado = Evaluacion::where('RUTAcademico',$id)->where('Año', date("Y"))->first();
       if ($proceso->inicio<=date('Y-m-d') && $proceso->fin>=date('Y-m-d')){
         if ($comision != null){
-          return view('evaluaciones.evaluar',compact('proceso','academico'));
+          if ($evaluado != null) {
+            return Redirect()->back()->with('error','Academico ya fue evaluado en este periodo');
+          }
+          else{
+            return view('evaluaciones.evaluar',compact('proceso','academico','ultima'));
+          }
         }
         else{
-            return Redirect()->back()->with('comision','No existe una comision activa');
+            return Redirect()->back()->with('error','No existe una comision activa');
         }
       }
       else{
-        return Redirect()->back()->with('proceso','Fuera de periodo de evaluacion');
+        return Redirect()->back()->with('error','Fuera de periodo de evaluacion');
       }
     }
+
+
+
+
+
+
+
 
 }

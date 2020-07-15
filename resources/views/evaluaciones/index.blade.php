@@ -10,7 +10,7 @@
 
 @section('content')
 
-@if(Request::is('evaluaciones'))
+@if(!Request::is('evaluacioneselim'))
 
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -75,14 +75,14 @@
     </div>
   </div>
 
-  @if ($message = Session::get('comision'))
+  @if ($message = Session::get('error'))
     <div class="alert alert-danger" role="alert">
       <p>{{ $message }}</p>
     </div>
   @endif
 
-  @if ($message = Session::get('proceso'))
-    <div class="alert alert-danger" role="alert">
+  @if ($message = Session::get('success'))
+    <div class="alert alert-success">
       <p>{{ $message }}</p>
     </div>
   @endif

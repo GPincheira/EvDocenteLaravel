@@ -4,15 +4,6 @@
   <div class="contenedor">
       <div class="row">
           <div class="col-md-12">
-            <div class="row content">
-              <div class="col-lg-12 margin-tb">
-                <h1>PAUTA RESUMEN</h1>
-              </div>
-            </div>
-
-            <div class="row container">
-                <h3>I. IDENTIFICACION</h3>
-            </div>
 
             <div class="row container">
                 <h3>II. CALIFICACION ACADEMICA</h3>
@@ -222,6 +213,9 @@
                     <p class="error">Los porcentajes deben sumar 100%</p>
                   </div>
                 </div>
+
+                <button @click="goCNN()">Go to CNN</button>
+
               </div>
             </div>
         </div>
@@ -236,6 +230,7 @@
 </template>
 
 <script>
+
     export default {
         props:['datito'],
         data(){
@@ -280,6 +275,9 @@
           if(p==0) fila = 0
           return fila
         },
+        goCNN(){
+          router.replace("http://www.cnn.com/");
+        },
         saveEvaluacions(){
               let me =this;
               let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
@@ -298,11 +296,11 @@
                   'n4':this.n4,
                   'n5':this.n5,
             }).then(function (response) {
-//huggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
             })
             .catch(function (error) {
                 console.log(error);
             });
+
         },
     }
 }
