@@ -213,9 +213,6 @@
                     <p class="error">Los porcentajes deben sumar 100%</p>
                   </div>
                 </div>
-
-                <button @click="goCNN()">Go to CNN</button>
-
               </div>
             </div>
         </div>
@@ -224,8 +221,6 @@
         </div>
 
 </form>
-
-
 
 </template>
 
@@ -275,9 +270,6 @@
           if(p==0) fila = 0
           return fila
         },
-        goCNN(){
-          router.replace("http://www.cnn.com/");
-        },
         saveEvaluacions(){
               let me =this;
               let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
@@ -300,7 +292,6 @@
             .catch(function (error) {
                 console.log(error);
             });
-
         },
     }
 }

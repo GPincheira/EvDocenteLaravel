@@ -148,7 +148,11 @@ public function show(Evaluacion $evaluacion)
 public function edit($id)
 {
   $evaluacion = evaluacion::find($id);
-  return view('evaluaciones.edit',compact('evaluacion'));
+  $ultima = Evaluacion::orderBy('año', 'DESC')
+            ->where('RUTAcademico', $id)
+            ->where('año', '<', date("Y"))
+            ->first();
+  return view('evaluaciones.edit',compact('evaluacion','ultima'));
 }
 
 /**
@@ -238,12 +242,6 @@ public function reactivar($id)
           $evaluacion->Argumento = $request->Argumento;
           $evaluacion->NotaFinal = $request->NotaFinal;
           $evaluacion->save();
-
-          $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-          $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
-          $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
-          return view('evaluaciones.index',compact('evaluaciones'),['academicos'=>$academicos])
-            ->with('i',(request()->input('page',1)-1)*5);
       }
 
     /**
@@ -291,7 +289,8 @@ public function reactivar($id)
       $evaluacion->Argumento = $request->Argumento;
       $evaluacion->NotaFinal = $request->NotaFinal;
       $evaluacion->save();
-      return $evaluacion;
+      return redirect()->route('evaluaciones.index')
+        ->with('success','Evaluacion editada.');
     }
 
     /**
@@ -356,7 +355,8 @@ public function reactivar($id)
       if ($proceso->inicio<=date('Y-m-d') && $proceso->fin>=date('Y-m-d')){
         if ($comision != null){
           if ($evaluado != null) {
-            return Redirect()->back()->with('error','Academico ya fue evaluado en este periodo');
+            return redirect()->route('evaluaciones.index')
+              ->with('success','Academico evaluado');
           }
           else{
             return view('evaluaciones.evaluar',compact('proceso','academico','ultima'));

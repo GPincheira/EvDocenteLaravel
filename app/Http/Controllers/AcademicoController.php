@@ -117,9 +117,8 @@ class AcademicoController extends Controller
      */
 
      //funcion editar, que luego lleva a la vista para recibir los datos
-    public function edit($id)
+    public function edit(Academico $academico)
     {
-      $academico = academico::find($id);
       $departamentos = Departamento::all();
       $secFacultades = SecFacultad::all();
       return view('academicos.edit',compact('academico'),['departamentos' => $departamentos,'secFacultades' => $secFacultades]);

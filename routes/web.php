@@ -24,6 +24,7 @@ Route::get('/evsjson', 'EvaluacionController@json');
 Route::put('/evsjson/actualizar', 'EvaluacionController@update2');
 Route::delete('/evsjson/borrar/{id}', 'EvaluacionController@destroy2');
 Route::post('/evsjson/guardar', 'EvaluacionController@store2');
+Route::get('/evsjson/buscar', 'EvaluacionController@show2');
 Route::get('evsjson/evaluar/{role}/ev', 'EvaluacionController@evaluar')->name('evaluaciones.evaluar');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
@@ -44,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:academicos.show');
     Route::delete('academicos/{role}', 'AcademicoController@destroy')->name('academicos.destroy')
                                                         ->middleware('permission:academicos.destroy');
-    Route::get('academicos/{role}/edit', 'AcademicoController@edit')->name('academicos.edit')
+    Route::get('academicos/{academico}/edit', 'AcademicoController@edit')->name('academicos.edit')
                                                         ->middleware('permission:academicos.edit');
     Route::post('academicos/{role}', 'AcademicoController@reactivar')->name('academicos.reactivar')
                                                         ->middleware('permission:academicos.reactivar');
