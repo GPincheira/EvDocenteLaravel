@@ -308,7 +308,12 @@ public function reactivar($id)
 //funcion para generar un archivo excel, llamado "evaluacion"
     public function export()
     {
-      return Excel::download(new EvaluacionesExport, 'evaluacion.xlsx');
+      return Excel::download(new EvaluacionesExport, 'Evaluaciones.xlsx');
+    }
+
+    public function exportAcademico()
+    {
+      return Excel::download(new EvaluacionesExport2, 'evaluacion.xlsx');
     }
 
 //funcion para generar un archivo pdf para cada evaluacion que se realiza
@@ -320,7 +325,7 @@ public function reactivar($id)
                   ->where('año', '<', $evaluacion->año)
                   ->first();
         $pdf = PDF::loadView('pdf.evaluaciones',compact('evaluacion','ultima'));
-        return $pdf->download('evaluacion.pdf');
+        return $pdf->download('Evaluacion_'.$evaluacion->año.'-'.$evaluacion->RUTAcademico.'.pdf');
     }
 
 
