@@ -118,7 +118,6 @@
       @endif
       <th>Departamento</th>
       <th>Nota Final</th>
-      <th>Estado</th>
     </tr>
       @foreach ($evaluaciones as $evaluacion)
         <tr>
@@ -131,7 +130,6 @@
             <td>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
           @endif
           <td>{{ $evaluacion->NotaFinal }}</td>
-          <td>@if (Request::is('evaluaciones'))Activo @else Inactivo @endif</td>
           @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
             <td width="115px">
               <form>
@@ -140,11 +138,12 @@
               </form>
             </td>
           @else
-            <td width="220px">
+            <td width="255px">
               <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
                 <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                 <a href="{{ route('evaluaciones.edit',$evaluacion->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
                 <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
+                <a href="{{ route('exportaracademico',$evaluacion->id) }}"><img src="{{ asset('/images/excel.png') }}" class="logo" width="40" height="35"></a>
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>

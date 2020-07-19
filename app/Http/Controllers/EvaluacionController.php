@@ -10,6 +10,7 @@ use App\Proceso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\EvaluacionesExport;
+use App\Exports\HistorialExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Redirect;
@@ -311,10 +312,13 @@ public function reactivar($id)
       return Excel::download(new EvaluacionesExport, 'Evaluaciones.xlsx');
     }
 
-    public function exportAcademico()
+    public function exportAcademico($id)
     {
-      return Excel::download(new EvaluacionesExport2, 'evaluacion.xlsx');
+      $evaluacion = Evaluacion::find($id);
+      $evs = Evaluacion::all()->where('RUTAcademico', $evaluacion->RUTAcademico);
+      return Excel::download(new HistorialExport($evs), 'evaluacion.xlsx');
     }
+
 
 //funcion para generar un archivo pdf para cada evaluacion que se realiza
     public function pdf($id)

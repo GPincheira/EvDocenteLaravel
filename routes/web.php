@@ -20,6 +20,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
 Route::get('/exportar', 'EvaluacionController@export')->name('exportar');
+Route::get('/exportar/{role}', 'EvaluacionController@exportAcademico')->name('exportaracademico');
 Route::get('/evsjson', 'EvaluacionController@json');
 Route::put('/evsjson/actualizar', 'EvaluacionController@update2');
 Route::delete('/evsjson/borrar/{id}', 'EvaluacionController@destroy2');
