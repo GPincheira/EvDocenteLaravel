@@ -5,8 +5,11 @@ namespace App\Exports;
 use App\evaluacion;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class HistorialExport implements FromCollection
+class HistorialExport implements FromCollection,WithHeadings,ShouldAutoSize,WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -39,6 +42,16 @@ class HistorialExport implements FromCollection
             '%',
             'Nota 5',
             'NotaFinal'
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $cellRange = 'A1:W1'; // All headers
+                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(20);
+            },
         ];
     }
 
