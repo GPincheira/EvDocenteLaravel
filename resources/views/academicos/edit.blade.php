@@ -1,19 +1,19 @@
 @extends('layouts.app')
-<title>Editar Academico {{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</title>
+<title>Editar Academico {{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</title>
 @section('content')
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
     <li class="breadcrumb-item"><a href="{{ route('academicos.index') }}">Academicos</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Editar Academico: {{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</li>
+    <li class="breadcrumb-item active" aria-current="page">Editar Academico: {{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</li>
   </ol>
 </nav>
 
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Editar Academico {{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</h2>
+                <h2>Editar Academico {{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</h2>
             </div>
             <div class="pull-right">
                 <a href="{{ route('academicos.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
@@ -54,7 +54,7 @@
            <div class="col-xs-4 col-sm-4 col-md-4">
                <div class="form-group">
                    <strong>Nombre Completo:</strong>
-                   <input type="text" name="Nombre" value="{{ $academico->Nombre }}" class="form-control" placeholder="Ingrese el nombre del Academico">
+                   <input type="text" name="Nombres" value="{{ $academico->Nombres }}" class="form-control" placeholder="Ingrese el nombre del Academico">
                </div>
            </div>
            <div class="col-xs-4 col-sm-4 col-md-4">

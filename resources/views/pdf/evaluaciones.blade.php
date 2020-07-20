@@ -27,7 +27,7 @@
 			<table style="width:100%">
 				<tbody>
 					<tr>
-						<td>{{ $evaluacion->academico->Nombre }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
+						<td>{{ $evaluacion->academico->Nombres }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
 						<td>{{ $evaluacion->academico->departamento->Nombre }}</td>
 					</tr>
           <tr style="background-color:rgba(200,200,200)">

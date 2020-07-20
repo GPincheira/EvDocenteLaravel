@@ -40,9 +40,6 @@
     @csrf
 
   <div class="row">
-
-
-
     <div class="col-xs-12 col-sm-12 col-md-12">
       <div class="form-group">
         <strong>Profesor a evaluar:</strong>
@@ -50,7 +47,7 @@
         @foreach ($departamentos as $departamento)
           @foreach($academicos as $academico)
             @if($academico->CodigoDpto == $departamento->id)
-              <option value='{{$academico->id}}'>{{$academico->id}}-{{$academico->verificador}} {{$academico->Nombre}} {{$academico->ApellidoPaterno}} {{$academico->ApellidoMaterno}}</option>
+              <option value='{{$academico->id}}'>{{$academico->id}}-{{$academico->verificador}} {{$academico->Nombres}} {{$academico->ApellidoPaterno}} {{$academico->ApellidoMaterno}}</option>
             @endif
           @endforeach
         @endforeach

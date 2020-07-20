@@ -50,7 +50,7 @@
   <table class="table table-bordered content">
     <tbody>
       <tr>
-        <td height=40>{{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+        <td height=40>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
         <td>{{ $academico->departamento->id }} - {{ $academico->departamento->Nombre }}</td>
       </tr>
       <tr class="table-active">

@@ -54,7 +54,7 @@
         <div class="col-xs-4 col-sm-4 col-md-4">
             <div class="form-group">
                 <strong>Nombre:</strong>
-                <input type="text" name="Nombre" class="form-control" placeholder="Ingrese el nombre del Academico">
+                <input type="text" name="Nombres" class="form-control" placeholder="Ingrese el nombre del Academico">
             </div>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4">

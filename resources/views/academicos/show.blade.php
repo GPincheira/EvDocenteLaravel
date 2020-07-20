@@ -1,12 +1,12 @@
 @extends('layouts.app')
-<title>Academico {{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</title>
+<title>Academico {{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</title>
 @section('content')
 
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
     <li class="breadcrumb-item"><a href="{{ route('academicos.index') }}">Academicos @if(@Auth::user()->hasRole('SecFacultad')) {{ @Auth::user()->secFacultad->facultad->Nombre }} @endif</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Academico: {{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</li>
+    <li class="breadcrumb-item active" aria-current="page">Academico: {{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</li>
   </ol>
 </nav>
 
@@ -14,7 +14,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h1>Académico : {{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</h1>
+            <h1>Académico : {{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</h1>
         </div>
         <div class="pull-right">
             <a href="{{ route('academicos.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
@@ -28,12 +28,12 @@
       <table class="table table-bordered container" style="margin-left: 100px">
         <tbody>
           <tr >
-            <th class="blue">Nombre Completo</th>
+            <th class="blue">RUT</th>
             <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
           </tr>
           <tr >
             <th class="blue">Nombre Completo</th>
-            <td>{{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+            <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
           </tr>
           <tr>
             <th class="blue">Titulo Profesional</th>
@@ -45,11 +45,11 @@
           </tr>
           <tr>
             <th class="blue">Facultad</th>
-            <td>{{ $academico->departamento->facultad->id }}  - {{ $academico->departamento->facultad->Nombre }}</td>
+            <td>{{ $academico->departamento->facultad->id }} - {{ $academico->departamento->facultad->Nombre }}</td>
           </tr>
           <tr>
             <th class="blue">Departamento</th>
-            <td>{{ $academico->CodigoDpto }}  - {{ $academico->departamento->Nombre }}</td>
+            <td>{{ $academico->CodigoDpto }} - {{ $academico->departamento->Nombre }}</td>
           </tr>
           <tr>
             <th class="blue">Categoria</th>

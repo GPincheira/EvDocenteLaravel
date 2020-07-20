@@ -15,7 +15,7 @@ class AcademicosSeeder extends Seeder
       $academico = Academico::create([
         'id' => '13757443',
         'verificador' => '2',
-        'Nombre' => 'Leonor',
+        'Nombres' => 'Leonor',
         'ApellidoPaterno' => 'Cerda',
         'ApellidoMaterno' => 'Diaz',
         'TituloProfesional' => 'Pedagogia en Ciencias',
@@ -30,7 +30,7 @@ class AcademicosSeeder extends Seeder
       $academico = Academico::create([
         'id' => '17888251',
         'verificador' => '5',
-        'Nombre' => 'Veronica',
+        'Nombres' => 'Veronica',
         'ApellidoPaterno' => 'Guerra',
         'ApellidoMaterno' => 'Guerrero',
         'TituloProfesional' => 'Enfermera',
@@ -45,7 +45,7 @@ class AcademicosSeeder extends Seeder
       $academico = Academico::create([
         'id' => '9657251',
         'verificador' => '1',
-        'Nombre' => 'Carlos',
+        'Nombres' => 'Carlos',
         'ApellidoPaterno' => 'Rojas',
         'ApellidoMaterno' => 'Palacios',
         'TituloProfesional' => 'Gestion de Operaciones',
@@ -60,7 +60,7 @@ class AcademicosSeeder extends Seeder
       $academico = Academico::create([
         'id' => '10752674',
         'verificador' => '9',
-        'Nombre' => 'Christian',
+        'Nombres' => 'Christian',
         'ApellidoPaterno' => 'Correa',
         'ApellidoMaterno' => '',
         'TituloProfesional' => 'Ingenieria Civil',
@@ -75,7 +75,7 @@ class AcademicosSeeder extends Seeder
       $academico = Academico::create([
         'id' => '12764362',
         'verificador' => '6',
-        'Nombre' => 'Mary Carmen',
+        'Nombres' => 'Mary Carmen',
         'ApellidoPaterno' => 'Jarur',
         'ApellidoMaterno' => 'Muñoz',
         'TituloProfesional' => 'Ciencias de la Computacion',

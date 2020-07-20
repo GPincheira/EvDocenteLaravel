@@ -77,7 +77,7 @@ class AcademicoController extends Controller
       $request->validate([
         'id' => ['required','integer','min:1000000','max:25000000','unique:academicos'],
         'verificador' => ['required','max:1'],
-        'Nombre' => 'required',
+        'Nombres' => 'required',
         'ApellidoPaterno' => 'required',
         'TituloProfesional' => 'required',
         'GradoAcademico' => 'required',
@@ -138,7 +138,7 @@ class AcademicoController extends Controller
       $request->validate([
         'id' => ['required','integer','min:1000000','max:25000000'],
         'verificador' => ['required','max:1'],
-        'Nombre' => 'required',
+        'Nombres' => 'required',
         'ApellidoPaterno' => 'required',
         'TituloProfesional' => 'required',
         'GradoAcademico' => 'required',

@@ -97,7 +97,7 @@
     @foreach ($academicos as $academico)
       <tr>
         <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
-        <td>{{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+        <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
         <td>{{ $academico->departamento->id }} - {{ $academico->departamento->Nombre}}</td>
         <td width="167px">
             <a href="{{ route('evaluaciones.evaluar',$academico->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
@@ -124,7 +124,7 @@
           <td>{{ $evaluacion->id }}</td>
           <td>{{ $evaluacion->CodigoComision }}</td>
           <td>{{ $evaluacion->año }}</td>
-          <td>{{ $evaluacion->academico->Nombre}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
+          <td>{{ $evaluacion->academico->Nombres}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
           <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
           @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
             <td>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>

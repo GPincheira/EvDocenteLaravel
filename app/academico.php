@@ -12,7 +12,7 @@ class academico extends Model
   use \Askedio\SoftCascade\Traits\SoftCascadeTrait;
 
   protected $fillable = [
-      'id','verificador','Nombre','ApellidoPaterno','ApellidoMaterno','TituloProfesional',
+      'id','verificador','Nombres','ApellidoPaterno','ApellidoMaterno','TituloProfesional',
       'GradoAcademico','CodigoDpto','CodigoFacultad','Categoria','HorasContrato','TipoPlanta','Estado'
   ];
   protected $dates = ['deleted_at'];

@@ -37,7 +37,7 @@
             <td>{{ $evaluacion->id }}</td>
             <td>{{ $evaluacion->CodigoComision }}</td>
             <td>{{ $evaluacion->RUTAcademico }}-{{ $evaluacion->academico->verificador }}</td>
-            <td>{{ $evaluacion->academico->Nombre }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
+            <td>{{ $evaluacion->academico->Nombres }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
             <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
             <td>{{ $evaluacion->NotaFinal }}</td>
           </tr>

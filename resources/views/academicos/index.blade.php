@@ -58,7 +58,7 @@
     @foreach ($academicos as $academico)
       <tr>
         <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
-        <td>{{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+        <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
         <td>{{ $academico->TituloProfesional }}</td>
         <td>{{ $academico->GradoAcademico }}</td>
         @if(@Auth::user()->hasRole('Administrador'))
@@ -128,7 +128,7 @@
   @foreach ($academicos as $academico)
     <tr>
       <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
-      <td>{{ $academico->Nombre }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+      <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
       <td>{{ $academico->TituloProfesional }}</td>
       <td>{{ $academico->GradoAcademico }}</td>
       <td>{{ $academico->CodigoDpto }}</td>
