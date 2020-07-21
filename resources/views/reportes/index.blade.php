@@ -27,7 +27,7 @@
     <tr>
       <td>{{ $año }}</td>
       <td><a href="{{ route('exportarreporte',$año) }}"><img src="{{ asset('/images/excel.png') }}" class="logo" width="40" height="35"></a></td>
-      <td><a href="{{ route('home') }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a></td>
+      <td><a href="{{ route('reporte.pdf',$año) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a></td>
     </tr>
   @endfor
 </table>

@@ -20,6 +20,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
 Route::get('/reporteaño/{role}', 'ReporteController@exportEvaluaciones')->name('exportarreporte');
+Route::get('/reportepdf/{role}', 'ReporteController@pdf')->name('reporte.pdf');
 Route::get('/exportar/{role}', 'EvaluacionController@exportAcademico')->name('exportaracademico');
 Route::get('/evsjson', 'EvaluacionController@json');
 Route::put('/evsjson/actualizar', 'EvaluacionController@update2');
@@ -28,6 +29,7 @@ Route::post('/evsjson/guardar', 'EvaluacionController@store2');
 Route::get('/evsjson/buscar', 'EvaluacionController@show2');
 Route::get('evsjson/evaluar/{role}/ev', 'EvaluacionController@evaluar')->name('evaluaciones.evaluar');
 Route::get('reportes', 'ReporteController@index')->name('reportes.index');
+
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {

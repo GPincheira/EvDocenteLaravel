@@ -41,4 +41,31 @@ class ReporteController extends Controller
     }
   }
 
+  public function pdf($año)
+  {
+    if(@Auth::user()->hasRole('SecFacultad')){
+      $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
+      $evs = Evaluacion::join('facultades','evaluaciones.CodigoFacultad','=','facultades.id')
+                ->join('academicos','evaluaciones.RUTAcademico','=','academicos.id')
+                ->where('año',$año)
+                ->where('academicos.CodigoFacultad',$CodigoFacultad)
+                ->get(['facultades.Nombre','academicos.Categoria','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
+                       'p1','n1','p2','n2','p3','n3','p4','n4','p5','n5','NotaFinal']);
+      $pdf = PDF::loadView('pdf.reporte',compact('evs','año'))->setPaper('a4', 'landscape');;
+      return $pdf->download('Reporte_'.$año.'-Fac'.$CodigoFacultad.'.pdf');
+    }
+    else{
+      $evs = Evaluacion::join('facultades','evaluaciones.CodigoFacultad','=','facultades.id')
+                ->join('academicos','evaluaciones.RUTAcademico','=','academicos.id')
+                ->where('año',$año)
+                ->get(['facultades.Nombre','academicos.Categoria','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
+                       'p1','n1','p2','n2','p3','n3','p4','n4','p5','n5','NotaFinal']);
+      $pdf = PDF::loadView('pdf.reporte',compact('evs','año'))->setPaper('a4', 'landscape');;
+      return $pdf->download('Reporte_'.$año.'.pdf');
+    }
+
+
+
+  }
+
 }
