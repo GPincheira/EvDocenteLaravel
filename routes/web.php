@@ -19,7 +19,7 @@ Route::resource('roles','RoleController');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
-Route::get('/exportar', 'EvaluacionController@exportEvaluaciones')->name('exportar');
+Route::get('/reporteaño/{role}', 'ReporteController@exportEvaluaciones')->name('exportarreporte');
 Route::get('/exportar/{role}', 'EvaluacionController@exportAcademico')->name('exportaracademico');
 Route::get('/evsjson', 'EvaluacionController@json');
 Route::put('/evsjson/actualizar', 'EvaluacionController@update2');

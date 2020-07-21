@@ -321,16 +321,6 @@ public function reactivar($id)
       return $evaluacion;
     }
 
-//funcion para generar un archivo excel, llamado "evaluacion"
-    public function exportEvaluaciones()
-    {
-      $evs = Evaluacion::join('facultades','evaluaciones.CodigoFacultad','=','facultades.id')
-                ->join('academicos','evaluaciones.RUTAcademico','=','academicos.id')
-                ->get(['facultades.Nombre','academicos.Categoria','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
-                       'p1','n1','p2','n2','p3','n3','p4','n4','p5','n5','NotaFinal']);
-      return Excel::download(new EvaluacionesExport($evs), 'Evaluaciones.xlsx');
-    }
-
     public function exportAcademico($id)
     {
       $evaluacion = Evaluacion::find($id);

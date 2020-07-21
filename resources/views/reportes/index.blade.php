@@ -9,21 +9,27 @@
   </ol>
 </nav>
 
-<table class="table table-bordered" style="margin-top: 8px">
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+    <div class="pull-left">
+        <h2>Generar Reportes por Año</h2>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover" style="margin-top: 8px">
   <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Año</th>
+    <th>Excel</th>
+    <th>PDF</th>
   </tr>
-  @foreach ( as )
+  @for ($año = $añoin; $año <= date("Y"); $año++)
     <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{ $año }}</td>
+      <td><a href="{{ route('exportarreporte',$año) }}"><img src="{{ asset('/images/excel.png') }}" class="logo" width="40" height="35"></a></td>
+      <td><a href="{{ route('home') }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a></td>
     </tr>
-  @endforeach
+  @endfor
 </table>
 
 @endsection
