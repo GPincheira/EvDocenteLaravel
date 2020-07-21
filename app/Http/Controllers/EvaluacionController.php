@@ -7,6 +7,7 @@ use App\academico;
 use App\facultad;
 use App\comision;
 use App\Proceso;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Exports\EvaluacionesExport;
@@ -26,8 +27,22 @@ class EvaluacionController extends Controller
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else if(@Auth::user()->hasRole('SecFacultad')){
+        $academicos = DB::table('academicos')
+            	       ->select('academicos.id','academicos.verificador','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
+                              'departamentos.Nombre','academicos.TituloProfesional')
+                      ->leftJoin('departamentos', function($join){
+                           $join->on('academicos.CodigoDpto', '=', 'departamentos.id');
+                            })
+                      ->leftJoin('evaluaciones', function($join){
+                           $join->on('academicos.id', '=', 'evaluaciones.RUTAcademico')
+                           ->where('evaluaciones.año', '=', date("Y"))
+                           ->where('evaluaciones.deleted_at', NULL);
+                            })
+                      ->whereNull('evaluaciones.RUTAcademico')
+                      ->where('academicos.CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
+                      ->orderBy('academicos.ApellidoPaterno')
+                      ->get();
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
         $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'),['academicos'=>$academicos])
           ->with('i',(request()->input('page',1)-1)*5);

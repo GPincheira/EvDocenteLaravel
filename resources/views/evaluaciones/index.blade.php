@@ -25,36 +25,48 @@
     </ol>
   </nav>
 
-  <div class="container-fluid">
-	<div class="row">
-		<div class="col-md-12">
-			<div id="card-201706">
-				<div class="card">
-					<div class="card-header">
-						 <a class="card-link" data-toggle="collapse" data-parent="#card-201706" href="#card-element-459070">Collapsible Group Item #1</a>
-					</div>
-					<div id="card-element-459070" class="collapse show">
-						<div class="card-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
-				<div class="card">
-					<div class="card-header">
-						 <a class="card-link" data-toggle="collapse" data-parent="#card-201706" href="#card-element-739932">Collapsible Group Item #2</a>
-					</div>
-					<div id="card-element-739932" class="collapse show">
-						<div class="card-body">
-							Anim pariatur cliche...
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+  @if ($message = Session::get('error'))
+    <div class="alert alert-danger" role="alert">
+      <p>{{ $message }}</p>
+    </div>
+  @endif
+
+  @if ($message = Session::get('success'))
+    <div class="alert alert-success">
+      <p>{{ $message }}</p>
+    </div>
+  @endif
 
 
+  @if(@Auth::user()->hasRole('SecFacultad'))
+  <div class="row">
+    <div class="col-lg-12 margin-tb">
+      <div class="pull-left">
+        <h2>Realizar Evaluación</h2>
+      </div>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-sm" style="margin-top: 8px">
+    <tr>
+      <th>RUT</th>
+      <th>Académico</th>
+      <th>Título Profesional</th>
+      <th>Departamento</th>
+    </tr>
+    @foreach ($academicos as $academico)
+      <tr>
+        <td>{{ $academico->id }} - {{ $academico->verificador }}</td>
+        <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+        <td>{{ $academico->TituloProfesional }}</td>
+        <td>{{ $academico->Nombre }}</td>
+        <td width="100px">
+            <a href="{{ route('evaluaciones.evaluar',$academico->id) }}" class="btn btn-success">Evaluar</a>
+        </td>
+      </tr>
+    @endforeach
+  </table>
+  @endif
 
   <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -74,38 +86,6 @@
       @endif
     </div>
   </div>
-
-  @if ($message = Session::get('error'))
-    <div class="alert alert-danger" role="alert">
-      <p>{{ $message }}</p>
-    </div>
-  @endif
-
-  @if ($message = Session::get('success'))
-    <div class="alert alert-success">
-      <p>{{ $message }}</p>
-    </div>
-  @endif
-
-  @if(@Auth::user()->hasRole('SecFacultad'))
-  <table class="table table-bordered" style="margin-top: 8px">
-    <tr>
-      <th width="120px">RUT</th>
-      <th>Nombre Completo</th>
-      <th>Departamento</th>
-    </tr>
-    @foreach ($academicos as $academico)
-      <tr>
-        <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
-        <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
-        <td>{{ $academico->departamento->id }} - {{ $academico->departamento->Nombre}}</td>
-        <td width="167px">
-            <a href="{{ route('evaluaciones.evaluar',$academico->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
-        </td>
-      </tr>
-    @endforeach
-  </table>
-  @endif
 
   <table class="table table-bordered"  style="margin-top: 8px">
     <tr>

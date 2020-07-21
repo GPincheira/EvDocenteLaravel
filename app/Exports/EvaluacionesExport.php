@@ -3,7 +3,6 @@
 namespace App\Exports;
 
 use App\evaluacion;
-use DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -71,7 +70,7 @@ class EvaluacionesExport implements FromCollection,WithHeadings,ShouldAutoSize,W
         return [
             AfterSheet::class    => function(AfterSheet $event) {
                 $cellRange = 'A1:W2'; // All headers
-                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(13);
+                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(11)->setBold(true);
                 $event->sheet->mergeCells('A1:A2')->mergeCells('B1:B2')->mergeCells('C1:E2')->mergeCells('D1:D2')->mergeCells('P1:P2')
                              ->mergeCells('F1:G1')->mergeCells('H1:I1')->mergeCells('J1:K1')->mergeCells('L1:M1')->mergeCells('N1:O1');
             },
