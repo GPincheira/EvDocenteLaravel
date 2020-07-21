@@ -27,6 +27,7 @@ Route::delete('/evsjson/borrar/{id}', 'EvaluacionController@destroy2');
 Route::post('/evsjson/guardar', 'EvaluacionController@store2');
 Route::get('/evsjson/buscar', 'EvaluacionController@show2');
 Route::get('evsjson/evaluar/{role}/ev', 'EvaluacionController@evaluar')->name('evaluaciones.evaluar');
+Route::get('reportes', 'ReporteController@index')->name('reportes.index');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {
