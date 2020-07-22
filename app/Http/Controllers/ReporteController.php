@@ -29,7 +29,7 @@ class ReporteController extends Controller
                 ->where('academicos.CodigoFacultad',$CodigoFacultad)
                 ->get(['facultades.Nombre','academicos.Categoria','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
                        'p1','n1','p2','n2','p3','n3','p4','n4','p5','n5','NotaFinal']);
-      return Excel::download(new EvaluacionesExport($evs), 'Reporte_'.$año.'-Fac'.$CodigoFacultad.'.xlsx');
+      return Excel::download(new EvaluacionesExport($evs,$año), 'Reporte_'.$año.'-Fac'.$CodigoFacultad.'.xlsx');
     }
     else{
       $evs = Evaluacion::join('facultades','evaluaciones.CodigoFacultad','=','facultades.id')
@@ -37,7 +37,7 @@ class ReporteController extends Controller
                 ->where('año',$año)
                 ->get(['facultades.Nombre','academicos.Categoria','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
                        'p1','n1','p2','n2','p3','n3','p4','n4','p5','n5','NotaFinal']);
-      return Excel::download(new EvaluacionesExport($evs), 'Reporte_'.$año.'.xlsx');
+      return Excel::download(new EvaluacionesExport($evs,$año), 'Reporte_'.$año.'.xlsx');
     }
   }
 
@@ -51,7 +51,7 @@ class ReporteController extends Controller
                 ->where('academicos.CodigoFacultad',$CodigoFacultad)
                 ->get(['facultades.Nombre','academicos.Categoria','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
                        'p1','n1','p2','n2','p3','n3','p4','n4','p5','n5','NotaFinal']);
-      $pdf = PDF::loadView('pdf.reporte',compact('evs','año'))->setPaper('a4', 'landscape');;
+      $pdf = PDF::loadView('pdf.reporte',compact('evs','año'))->setPaper('a4', 'landscape');
       return $pdf->download('Reporte_'.$año.'-Fac'.$CodigoFacultad.'.pdf');
     }
     else{
@@ -60,7 +60,7 @@ class ReporteController extends Controller
                 ->where('año',$año)
                 ->get(['facultades.Nombre','academicos.Categoria','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
                        'p1','n1','p2','n2','p3','n3','p4','n4','p5','n5','NotaFinal']);
-      $pdf = PDF::loadView('pdf.reporte',compact('evs','año'))->setPaper('a4', 'landscape');;
+      $pdf = PDF::loadView('pdf.reporte',compact('evs','año'))->setPaper('a4', 'landscape');
       return $pdf->download('Reporte_'.$año.'.pdf');
     }
 

@@ -37,15 +37,15 @@
             <th rowspan="2" width="9%">Nota Final</th>
 					</tr>
           <tr style="background-color:rgba(200,200,200)">
-  					<th width="4%">Tiempo</th>
+  					<th width="4%">Tiempo asig(%)</th>
             <th width="5%">Nota</th>
-            <th width="4%">Tiempo</th>
+            <th width="4%">Tiempo asig(%)</th>
             <th width="5%">Nota</th>
-            <th width="4%">Tiempo</th>
+            <th width="4%">Tiempo asig(%)</th>
             <th width="5%">Nota</th>
-            <th width="4%">Tiempo</th>
+            <th width="4%">Tiempo asig(%)</th>
             <th width="5%">Nota</th>
-            <th width="4%">Tiempo</th>
+            <th width="4%">Tiempo asig(%)</th>
             <th width="5%">Nota</th>
   			  </tr>
           @foreach ($evs as $ev)

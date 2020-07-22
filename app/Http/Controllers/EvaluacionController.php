@@ -324,10 +324,10 @@ public function reactivar($id)
     public function exportAcademico($id)
     {
       $evaluacion = Evaluacion::find($id);
-      $evs = Evaluacion::where('RUTAcademico', $evaluacion->RUTAcademico)->get(['id','NotaFinal']);
-      return Excel::download(new HistorialExport($evs), 'Historial_'.$evaluacion->RUTAcademico.'.xlsx');
+      $evs = Evaluacion::where('RUTAcademico', $evaluacion->RUTAcademico)->get(['año','p1','n1','p2','n2','p3','n3','p4','n4','p5','n5','NotaFinal','Argumento']);
+      return Excel::download(new HistorialExport($evs, $evaluacion->academico->Nombres, $evaluacion->academico->ApellidoPaterno, $evaluacion->academico->ApellidoMaterno),
+          'Historial_'.$evaluacion->RUTAcademico.'.xlsx');
     }
-
 
 //funcion para generar un archivo pdf para cada evaluacion que se realiza
     public function pdf($id)
