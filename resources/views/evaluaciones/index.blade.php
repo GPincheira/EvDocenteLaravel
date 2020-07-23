@@ -37,102 +37,120 @@
     </div>
   @endif
 
-
+<div id="accordion">
   @if(@Auth::user()->hasRole('SecFacultad'))
-  <div class="row">
-    <div class="col-lg-12 margin-tb">
-      <div class="pull-left">
-        <h2>Realizar Evaluación</h2>
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" style="color:black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            <h3>Evaluaciones Pendientes</h3>
+          </button>
+        </h5>
       </div>
-    </div>
-  </div>
-
-  <table class="table table-bordered table-sm" style="margin-top: 8px">
-    <tr>
-      <th>RUT</th>
-      <th>Académico</th>
-      <th>Título Profesional</th>
-      <th>Departamento</th>
-    </tr>
-    @foreach ($academicos as $academico)
-      <tr>
-        <td>{{ $academico->id }} - {{ $academico->verificador }}</td>
-        <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
-        <td>{{ $academico->TituloProfesional }}</td>
-        <td>{{ $academico->Nombre }}</td>
-        <td width="100px">
-            <a href="{{ route('evaluaciones.evaluar',$academico->id) }}" class="btn btn-success">Evaluar</a>
-        </td>
-      </tr>
-    @endforeach
-  </table>
-  @endif
-
-  <div class="row">
-    <div class="col-lg-12 margin-tb">
-      <div class="pull-left">
-        @if(@Auth::user()->hasRole('Administrador'))
-            <h2>Evaluaciones UCM</h2>
-        @elseif(@Auth::user()->hasRole('SecFacultad'))
-            <h2>Evaluaciones {{ @Auth::user()->SecFacultad->facultad->Nombre }} UCM</h2>
-        @else
-            <h2>Evaluaciones año {{ date("Y") }} UCM</h2>
-        @endif
-      </div>
-      @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('SecFacultad'))
-        <div class="pull-left">
-            <a class="btn btn-secondary" style="margin-left: 12px" href="{{ route('evaluaciones.indexelim') }}"> Ver Inactivas</a>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-bordered table-sm" style="margin-top: 8px">
+            <tr>
+              <th>RUT</th>
+              <th>Académico</th>
+              <th>Título Profesional</th>
+              <th>Departamento</th>
+            </tr>
+            @foreach ($academicos as $academico)
+              <tr>
+                <td>{{ $academico->id }} - {{ $academico->verificador }}</td>
+                <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+                <td>{{ $academico->TituloProfesional }}</td>
+                <td>{{ $academico->Nombre }}</td>
+                <td width="100px">
+                    <a href="{{ route('evaluaciones.evaluar',$academico->id) }}" class="btn btn-success">Evaluar</a>
+                </td>
+              </tr>
+            @endforeach
+          </table>
         </div>
-      @endif
+      </div>
     </div>
-  </div>
+  @endif
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 
-  <table class="table table-bordered"  style="margin-top: 8px">
-    <tr>
-      <th>Id</th>
-      <th>Codigo Comision</th>
-      <th>Año</th>
-      <th>Nombre Academico</th>
-      @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
-        <th>Facultad</th>
-      @endif
-      <th>Departamento</th>
-      <th>Nota Final</th>
-    </tr>
-      @foreach ($evaluaciones as $evaluacion)
-        <tr>
-          <td>{{ $evaluacion->id }}</td>
-          <td>{{ $evaluacion->CodigoComision }}</td>
-          <td>{{ $evaluacion->año }}</td>
-          <td>{{ $evaluacion->academico->Nombres}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
-          <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
-          @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
-            <td>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
-          @endif
-          <td>{{ $evaluacion->NotaFinal }}</td>
-          @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
-            <td width="115px">
-              <form>
-                <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
-                <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
-              </form>
-            </td>
-          @else
-            <td width="255px">
-              <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
-                <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
-                <a href="{{ route('evaluaciones.edit',$evaluacion->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
-                <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
-                <a href="{{ route('exportaracademico',$evaluacion->id) }}"><img src="{{ asset('/images/excel.png') }}" class="logo" width="40" height="35"></a>
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
-              </form>
-            </td>
-          @endif
-        </tr>
-      @endforeach
-  </table>
+            <div class="row">
+              <div class="col-lg-12 margin-tb">
+                <div class="pull-left">
+                  @if(@Auth::user()->hasRole('Administrador'))
+                      <h3>Evaluaciones UCM</h3>
+                  @elseif(@Auth::user()->hasRole('SecFacultad'))
+                      <h3>Evaluaciones Realizadas</h3>
+                  @else
+                      <h3>Evaluaciones año {{ date("Y") }} UCM</h3>
+                  @endif
+                </div>
+                @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('SecFacultad'))
+                  <div class="pull-left">
+                      <a class="btn btn-secondary" style="margin-left: 12px" href="{{ route('evaluaciones.indexelim') }}"> Ver Inactivas</a>
+                  </div>
+                @endif
+              </div>
+            </div>
+
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          <table class="table table-bordered"  style="margin-top: 8px">
+            <tr>
+              <th>Id</th>
+              <th>Codigo Comision</th>
+              <th>Año</th>
+              <th>Nombre Academico</th>
+              @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
+                <th>Facultad</th>
+              @endif
+              <th>Departamento</th>
+              <th>Nota Final</th>
+            </tr>
+              @foreach ($evaluaciones as $evaluacion)
+                <tr>
+                  <td>{{ $evaluacion->id }}</td>
+                  <td>{{ $evaluacion->CodigoComision }}</td>
+                  <td>{{ $evaluacion->año }}</td>
+                  <td>{{ $evaluacion->academico->Nombres}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
+                  <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
+                  @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
+                    <td>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
+                  @endif
+                  <td>{{ $evaluacion->NotaFinal }}</td>
+                  @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
+                    <td width="115px">
+                      <form>
+                        <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                        <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
+                      </form>
+                    </td>
+                  @else
+                    <td width="255px">
+                      <form action="{{ route('evaluaciones.destroy',$evaluacion->id) }}" method="POST">
+                        <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
+                        <a href="{{ route('evaluaciones.edit',$evaluacion->id) }}" class="btn btn-warning btn-sm"><i class="material-icons">create</i></a>
+                        <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
+                        <a href="{{ route('exportaracademico',$evaluacion->id) }}"><img src="{{ asset('/images/excel.png') }}" class="logo" width="40" height="35"></a>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm"><i class="material-icons" >remove_circle_outline</i></button>
+                      </form>
+                    </td>
+                  @endif
+                </tr>
+              @endforeach
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
 
 @else
 

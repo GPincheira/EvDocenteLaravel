@@ -225,7 +225,6 @@
 </template>
 
 <script>
-
     export default {
         props:['datito'],
         data(){
