@@ -29,7 +29,7 @@ Route::post('/evsjson/guardar', 'EvaluacionController@store2');
 Route::get('/evsjson/buscar', 'EvaluacionController@show2');
 Route::get('evsjson/evaluar/{role}/ev', 'EvaluacionController@evaluar')->name('evaluaciones.evaluar');
 Route::get('reportes', 'ReporteController@index')->name('reportes.index');
-
+Route::get('/graficos', 'GraficoController@principal')->name('graficos.principal');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {

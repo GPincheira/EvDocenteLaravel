@@ -191,7 +191,7 @@
                   </div>
             </div>
 
-            <div class="col-md-12 margin-tb container">
+            <div class="row container">
                 <h3>IV. ARGUMENTOS DE LA CALIFICACION FINAL</h3>
                 <div class="col-md-12 margin-tb container">
                         <input v-model="Argumento" type="string" class="form-control" style="background-color:white">

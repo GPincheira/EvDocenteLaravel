@@ -47,8 +47,8 @@
         </div>
         <div class="col-xs-5 col-sm-5 col-md-5">
             <div class="form-group">
-                <strong>Fecha de comision(yyyy-mm-dd):</strong>
-                <input type="timedate" name="Fecha" class="form-control" placeholder="Ingrese la fecha">
+                <strong>Fecha de comision:</strong>
+                <input type="date" name="Fecha" class="form-control" placeholder="Ingrese la fecha">
             </div>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4">

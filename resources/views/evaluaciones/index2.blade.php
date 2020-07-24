@@ -26,7 +26,6 @@
     <table class="table table-bordered">
         <tr>
             <th>Id</th>
-            <th>Id Comision</th>
             <th>RUT del Academico</th>
             <th>Nombre Academico</th>
             <th>Departamento</th>
@@ -35,7 +34,6 @@
         @foreach ($evaluaciones as $evaluacion)
           <tr>
             <td>{{ $evaluacion->id }}</td>
-            <td>{{ $evaluacion->CodigoComision }}</td>
             <td>{{ $evaluacion->RUTAcademico }}-{{ $evaluacion->academico->verificador }}</td>
             <td>{{ $evaluacion->academico->Nombres }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
             <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>

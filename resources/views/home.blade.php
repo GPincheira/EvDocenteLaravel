@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<title>Incio</title>
+<title>Inicio</title>
 @section('content')
 
     <div class="container">

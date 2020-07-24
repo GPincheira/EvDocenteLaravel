@@ -104,7 +104,6 @@
           <table class="table table-bordered"  style="margin-top: 8px">
             <tr>
               <th>Id</th>
-              <th>Codigo Comision</th>
               <th>Año</th>
               <th>Nombre Academico</th>
               @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
@@ -116,7 +115,6 @@
               @foreach ($evaluaciones as $evaluacion)
                 <tr>
                   <td>{{ $evaluacion->id }}</td>
-                  <td>{{ $evaluacion->CodigoComision }}</td>
                   <td>{{ $evaluacion->año }}</td>
                   <td>{{ $evaluacion->academico->Nombres}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
                   <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
@@ -189,7 +187,6 @@
   <table class="table table-bordered"  style="margin-top: 8px">
     <tr>
       <th>Id</th>
-      <th>Codigo Comision</th>
       <th>Año</th>
       <th>Academico</th>
       <th>Nota Final</th>
@@ -198,7 +195,6 @@
     @foreach ($evaluaciones as $evaluacion)
       <tr>
         <td>{{ $evaluacion->id }}</td>
-        <td>{{ $evaluacion->CodigoComision }}</td>
         <td>{{ $evaluacion->año }}</td>
         <td>{{ $evaluacion->RUTAcademico}}</td>
         <td>{{ $evaluacion->NotaFinal }}</td>

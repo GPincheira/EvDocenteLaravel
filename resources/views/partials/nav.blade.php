@@ -1,5 +1,5 @@
 <nav style="background-color: rgb(0, 85, 169)" class="navbar navbar-expand-lg navbar-dark ">
-  <a class="navbar-brand" href="{{ url('/') }}">Inicio</a>
+  <a class="navbar-brand" href="{{ url('/') }}"><i class="material-icons" >home</i></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
       <span class="navbar-toggler-icon"></span>
   </button>
@@ -51,6 +51,9 @@
                   <a class="nav-link" href="{{ route('evaluaciones.index')}}">Evaluaciones</a>
                 </li>
                 <li class="nav navbar-nav">
+                  <a class="nav-link">Graficos</a>
+                </li>
+                <li class="nav navbar-nav">
                   <a class="nav-link" href="{{ route('reportes.index')}}">Reportes</a>
                 </li>
               @endif
@@ -60,6 +63,9 @@
                 </li>
                 <li class="nav navbar-nav">
                   <a class="nav-link" href="{{ route('evaluaciones.index2')}}">Evaluaciones con Excelencia</a>
+                </li>
+                <li class="nav navbar-nav">
+                  <a class="nav-link">Graficos</a>
                 </li>
                 <li class="nav navbar-nav">
                   <a class="nav-link" href="{{ route('reportes.index')}}">Reportes</a>
