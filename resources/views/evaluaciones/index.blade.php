@@ -123,10 +123,11 @@
                   @endif
                   <td>{{ $evaluacion->NotaFinal }}</td>
                   @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
-                    <td width="115px">
+                    <td width="160px">
                       <form>
                         <a href="{{ route('evaluaciones.show',$evaluacion->id) }}" class="btn btn-primary btn-sm"><i class="material-icons">visibility</i></a>
                         <a href="{{ route('evaluaciones.pdf',$evaluacion->id) }}"><img src="{{ asset('/images/pdf.jpg') }}" class="logo" width="40" height="40"></a>
+                        <a href="{{ route('exportaracademico',$evaluacion->id) }}"><img src="{{ asset('/images/excel.png') }}" class="logo" width="40" height="35"></a>
                       </form>
                     </td>
                   @else

@@ -13,10 +13,18 @@ class ReporteController extends Controller
 {
   public function index()
   {
-    $evaluacion = Evaluacion::orderBy('año', 'ASC')
-              ->first();
-    $añoin = $evaluacion->año;
-    return view('reportes.index',compact('añoin'));
+    if(@Auth::user()->hasRole('SecFacultad')){
+      $evaluacion = Evaluacion::where('CodigoFacultad',@Auth::user()->secFacultad->CodigoFacultad)->orderBy('año', 'ASC')
+                ->first();
+    }
+    else{
+      $evaluacion = Evaluacion::orderBy('año', 'ASC')->first();
+    }
+    if($evaluacion){
+      $añoin = $evaluacion->año;
+      return view('reportes.index',compact('añoin'));
+    }
+    return view('reportes.index');
   }
 
   public function exportEvaluaciones($año)

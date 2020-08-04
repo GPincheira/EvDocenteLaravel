@@ -13,7 +13,21 @@ class ProcesosSeeder extends Seeder
     public function run()
     {
       $proceso = Proceso::create([
-        'fin' => '2010/12/31',
+        'año' => '2018',
+        'fin' => '2019/12/31',
+        'Estado' => 'Inactivo'
+      ]);
+
+      $proceso = Proceso::create([
+        'año' => '2019',
+        'fin' => '2019/12/31',
+        'Estado' => 'Inactivo'
+      ]);
+
+      $proceso = Proceso::create([
+        'año' => '2020',
+        'fin' => '2019/12/31',
+        'Estado' => 'Activo'
       ]);
 
     }

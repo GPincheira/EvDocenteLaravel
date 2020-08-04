@@ -14,9 +14,11 @@ class CreateProcesosTable extends Migration
     public function up()
     {
         Schema::create('procesos', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('año')->unique();
             $table->date('inicio')->nullable();
             $table->date('fin');
+            $table->enum('Estado', ['Activo','Inactivo']);
+            $table->primary('año');
             $table->timestamps();
         });
     }
