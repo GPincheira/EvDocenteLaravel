@@ -3,7 +3,7 @@
 @if(@Auth::user()->hasRole('Administrador'))
     <title>Evaluaciones @if(Request::is('evaluacioneselim')) Eliminadas @endif UCM</title>
 @elseif(@Auth::user()->hasRole('SecFacultad'))
-    <title>Evaluaciones @if(Request::is('evaluacioneselim')) Eliminadas @endif {{ @Auth::user()->SecFacultad->facultad->Nombre }} UCM</title>
+    <title>Evaluaciones @if(Request::is('evaluacioneselim')) Eliminadas @endif {{ @Auth::user()->SecFacultad->facultad->Nombre }} UCM {{ $año }}</title>
 @else
     <title>Evaluaciones año {{ date("Y") }} UCM</title>
 @endif
@@ -18,7 +18,7 @@
       @if(@Auth::user()->hasRole('Administrador'))
           <li class="breadcrumb-item active" aria-current="page">Evaluaciones</li>
       @elseif(@Auth::user()->hasRole('SecFacultad'))
-          <li class="breadcrumb-item active" aria-current="page">Evaluaciones {{ @Auth::user()->SecFacultad->facultad->Nombre }}</li>
+          <li class="breadcrumb-item active" aria-current="page">Evaluaciones {{ @Auth::user()->SecFacultad->facultad->Nombre }} {{ $año }}</li>
       @else
           <li class="breadcrumb-item active" aria-current="page">Evaluaciones año {{ date("Y") }}</li>
       @endif
@@ -43,7 +43,7 @@
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
           <button class="btn btn-link" style="color:black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            <h3>Evaluaciones Pendientes</h3>
+            <h3>Evaluaciones Pendientes {{ $año }}</h3>
           </button>
         </h5>
       </div>
@@ -83,7 +83,7 @@
                   @if(@Auth::user()->hasRole('Administrador'))
                       <h3>Evaluaciones UCM</h3>
                   @elseif(@Auth::user()->hasRole('SecFacultad'))
-                      <h3>Evaluaciones Realizadas</h3>
+                      <h3>Evaluaciones Realizadas {{ $año }}</h3>
                   @else
                       <h3>Evaluaciones año {{ date("Y") }} UCM</h3>
                   @endif

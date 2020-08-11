@@ -27,6 +27,7 @@ class EvaluacionController extends Controller
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else if(@Auth::user()->hasRole('SecFacultad')){
+        $proceso = proceso::where('Estado', 'Activo')->first();
         $academicos = DB::table('academicos')
             	       ->select('academicos.id','academicos.verificador','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
                               'departamentos.Nombre','academicos.TituloProfesional')
@@ -34,8 +35,9 @@ class EvaluacionController extends Controller
                            $join->on('academicos.CodigoDpto', '=', 'departamentos.id');
                             })
                       ->leftJoin('evaluaciones', function($join){
+                           $Periodoactivo = Proceso::select('año')->where('Estado', 'Activo')->first();
                            $join->on('academicos.id', '=', 'evaluaciones.RUTAcademico')
-                           ->where('evaluaciones.año', '=', date("Y"))
+                           ->where('evaluaciones.año', '=', $Periodoactivo->año)
                            ->where('evaluaciones.deleted_at', NULL);
                             })
                       ->whereNull('evaluaciones.RUTAcademico')
@@ -43,8 +45,9 @@ class EvaluacionController extends Controller
                       ->orderBy('academicos.ApellidoPaterno')
                       ->get();
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
-        return view('evaluaciones.index',compact('evaluaciones'),['academicos'=>$academicos])
+        $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)
+                      ->where('año', $proceso->año)->latest()->paginate(10);
+        return view('evaluaciones.index',compact('evaluaciones'),['academicos'=>$academicos, 'año'=>$proceso->año])
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
@@ -57,6 +60,7 @@ class EvaluacionController extends Controller
 //index para los elementos eliminados
     public function indexelim()
     {
+      $proceso = proceso::where('Estado', 'Activo')->first();
       if (@Auth::user()->hasRole('Administrador')){
         $evaluaciones = Evaluacion::onlyTrashed()->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'))
@@ -64,7 +68,10 @@ class EvaluacionController extends Controller
       }
       else{
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $evaluaciones = Evaluacion::onlyTrashed()->where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+        $evaluaciones = Evaluacion::onlyTrashed()
+                    ->where('CodigoFacultad',$CodigoFacultad)
+                    ->where('evaluaciones.año', '=', $proceso->año)
+                    ->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
@@ -236,15 +243,16 @@ public function reactivar($id)
 
       public function store2(Request $request)
       {
+          $proceso = proceso::where('Estado', 'Activo')->first();
           $comision = Comision::where('Estado', '=', 'Activo')
-                  ->where('Año', '=', date("Y"))
+                  ->where('Año', '=', $proceso->año)
                   ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
                   ->first();
           $evaluacion = new Evaluacion();
           $evaluacion->RUTAcademico = $request->RUTAcademico;
           $evaluacion->CodigoComision = $comision->id;
           $evaluacion->CodigoFacultad = $comision->CodigoFacultad;
-          $evaluacion->año = date("Y");
+          $evaluacion->año = $proceso->año;
           $evaluacion->p1 = $request->p1;
           $evaluacion->n1 = $request->n1;
           $evaluacion->p2 = $request->p2;
@@ -348,28 +356,22 @@ public function reactivar($id)
     }
 
     public function evaluar($id){
-
-/*      $academicos = Academico::with('evaluaciones')->whereHas('evaluaciones', function($q){
-        $q->where('año', '!=', date("Y"));
-        })->ordoesntHave('evaluaciones')
-        ->where('academicos.CodigoFacultad',@Auth::user()->secFacultad->CodigoFacultad)
-        ->get(); */
-  //    $academico = Academico::find($id);
+      $proceso = proceso::where('Estado', 'Activo')->first();
+      $año = $proceso->año;
       $academico = Academico::find($id);
       $ultima = Evaluacion::orderBy('año', 'DESC')
                 ->where('RUTAcademico', $id)
-                ->where('año', '<', date("Y"))
+                ->where('año', '<', $proceso->año)
                 ->first();
       $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
       $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
-      $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+      $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->where('año', '=', $proceso->año)->latest()->paginate(10);
       $academico = Academico::find($id);
-      $proceso = Proceso::first();
       $comision = Comision::where('Estado', '=', 'Activo')
-                ->where('Año', '=', date("Y"))
+                ->where('Año', '=', $proceso->año)
                 ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
                 ->first();
-      $evaluado = Evaluacion::where('RUTAcademico',$id)->where('Año', date("Y"))->first();
+      $evaluado = Evaluacion::where('RUTAcademico',$id)->where('Año', $proceso->año)->first();
       if ($proceso->inicio<=date('Y-m-d') && $proceso->fin>=date('Y-m-d')){
         if ($comision != null){
           if ($evaluado != null) {
@@ -377,7 +379,7 @@ public function reactivar($id)
               ->with('success','Academico evaluado');
           }
           else{
-            return view('evaluaciones.evaluar',compact('proceso','academico','ultima'));
+            return view('evaluaciones.evaluar',compact('proceso','academico','ultima','año'));
           }
         }
         else{

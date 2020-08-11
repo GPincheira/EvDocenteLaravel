@@ -59,7 +59,7 @@
       </tr>
       <tr high="20px">
         <td height=40>{{ $academico->departamento->facultad->id }} - {{ $academico->departamento->facultad->Nombre }}</td>
-        <td>{{ date("Y") }}</td>
+        <td>{{ $año }}</td>
       </tr>
       <tr class="table-active" height="4%">
         <td>Facultad o Instituto al que pertenece</td>
