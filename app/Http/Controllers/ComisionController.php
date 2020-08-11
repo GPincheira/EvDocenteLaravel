@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\comision;
 use App\facultad;
 use App\secFacultad;
+use App\Proceso;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -20,13 +21,14 @@ class ComisionController extends Controller
     public function index()
     {
       if(@Auth::user()->hasRole('SecFacultad')){
+        $proceso = proceso::where('Estado', 'Activo')->first();
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
         $comisiones = Comision::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
         $activa = Comision::where('Estado', '=', 'Activo')
-                  ->where('Año', '=', date("Y"))
+                  ->where('Año', '=', $proceso->año)
                   ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
                   ->first();
-        return view('comisiones.index',compact('comisiones'),['activa' => $activa])
+        return view('comisiones.index',compact('comisiones'),['activa' => $activa, 'proceso' => $proceso])
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{

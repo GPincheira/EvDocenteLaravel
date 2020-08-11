@@ -9,9 +9,9 @@ class Proceso extends Model
     //
     protected $table = 'procesos';
     protected $fillable = [
-        'inicio','fin'
+        'año','inicio','fin','Estado'
     ];
 
 
-    protected $primaryKey ="id";
+    protected $primaryKey ="año";
 }

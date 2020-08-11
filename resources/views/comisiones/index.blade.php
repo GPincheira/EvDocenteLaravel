@@ -86,7 +86,7 @@
         <td>{{ $comision->NombreSecFac }} {{ $comision->APaternoSecFac }} {{ $comision->AMaternoSecFac }}</td>
         <td>{{ $comision->Nombre1 }} {{ $comision->APaterno1 }} {{ $comision->AMaterno1 }}</td>
         <td>{{ $comision->Nombre2 }} {{ $comision->APaterno2 }} {{ $comision->AMaterno2 }}</td>
-        @if ($comision->Año == date("Y") && $comision->id != $activa->id)
+        @if ($comision->Año == $proceso->año && $comision->id != $activa->id)
           <td><form action="{{ route('comisiones.activaunica',$comision->id) }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-success">Activar</button>

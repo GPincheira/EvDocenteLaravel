@@ -14,11 +14,12 @@ class ProcesoController extends Controller
      */
     public function index()
     {
-      $proceso = Proceso::first();
+      $procesos = Proceso::all();
+      $activo = Proceso::where('Estado', '=', 'Activo')->first();
       $fecha = date("Y-m-d");
       $año = date("Y");
       $fin = $año.'-12-31';
-      return view('procesos.index',compact('proceso','fecha','fin'));
+      return view('procesos.index',compact('procesos','activo','fecha','fin'));
     }
 
     /**
@@ -71,13 +72,13 @@ class ProcesoController extends Controller
      * @param  \App\Proceso  $proceso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $año)
     {
       $request->validate([
         'inicio' => 'required',
         'fin' => 'required|date|after:inicio',
       ]);
-      $proceso = Proceso::find($id);
+      $proceso = Proceso::find($año);
       $proceso->update($request->all());
       return redirect()->route('procesos.index')
         ->with('success','Proceso de Evaluacion Actualizado Exitosamente');
@@ -94,9 +95,9 @@ class ProcesoController extends Controller
         //
     }
 
-    public function abrir($id)
+    public function abrir($año)
     {
-      $proceso = proceso::all()->find($id);
+      $proceso = proceso::all()->find($año);
       $añoActual = date("Y");
       $proceso->inicio= date("Y-m-d");
       $proceso->fin=$añoActual.'/12/31';
@@ -105,9 +106,9 @@ class ProcesoController extends Controller
         ->with('success','Proceso Abierto');
     }
 
-    public function cerrar($id)
+    public function cerrar($año)
     {
-      $proceso = proceso::all()->find($id);
+      $proceso = proceso::all()->find($año);
       $ant = date("d")-1;
       $actual = date("Y-m");
       $proceso->inicio=$actual.'-'.$ant;
@@ -115,5 +116,23 @@ class ProcesoController extends Controller
       $proceso->update();
       return redirect()->route('procesos.index')
         ->with('success','Proceso Cerrado');
+    }
+
+    public function cambiar(Request $request)
+    {
+      $elegido = proceso::find($request['año']);
+      if ($elegido->Estado == "Inactivo"){
+        $procesos = proceso::all();
+        foreach ($procesos as $proceso){
+          if($proceso->Estado == 'Activo'){
+              $proceso->Estado = "Inactivo";
+              $proceso->save();
+          }
+        }
+        $elegido->Estado = "Activo";
+        $elegido->save();
+      }
+      return redirect()->route('procesos.index')
+        ->with('success','Proceso activado');
     }
 }
