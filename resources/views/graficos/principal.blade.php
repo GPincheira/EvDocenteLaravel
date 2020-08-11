@@ -41,15 +41,53 @@
             <select name="departamento" class="form-control">
               <option value="">TODOS LOS DEPARTAMENTOS</option>
               @foreach($departamentos as $departamento)
-                 <option value='{{$departamento->id}}' @if($departamento->id==$dpto) selected @endif>{{$departamento->Nombre}}</option>
+                 <option value='{{$departamento->id}}' @if(($dpto ?? '') && ($departamento==$dpto)) selected @endif>{{$departamento->Nombre}}</option>
               @endforeach
             </select>
           </div>
           <div class="col-xs-1 col-sm-1 col-md-1">
-              <br><button type="submit" class="btn btn-primary">Graficar</button>
+              <br><button type="submit" class="btn btn-primary">Filtrar</button>
           </div>
         </form>
       </div>
+  </div>
+
+@if ($dpto ?? '')
+  {{ $dpto->Nombre }} {{ $año }}
+@else
+  {{ $facultad->Nombre }} {{ $año }}
+@endif
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <button class="btn btn-link" style="color:black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        <h5>Académicos @if ($dpto ?? '') {{ $dpto->Nombre }} @else {{ $facultad->Nombre }} @endif</h5>
+      </button>
+    </div>
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <table class="table table-bordered table-sm" style="margin-top: 8px">
+          <tr>
+            <th>RUT</th>
+            <th>Académico</th>
+            <th>Título Profesional</th>
+            <th>Departamento</th>
+          </tr>
+          @foreach ($academicos as $academico)
+            <tr>
+              <td>{{ $academico->id }} - {{ $academico->verificador }}</td>
+              <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+              <td>{{ $academico->TituloProfesional }}</td>
+              <td>{{ $academico->departamento->Nombre }}</td>
+              <td width="100px">
+                  <a href="{{ route('graficos.academico',$academico->id) }}" class="btn btn-success">Seleccionar</a>
+              </td>
+            </tr>
+          @endforeach
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 

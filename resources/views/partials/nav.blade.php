@@ -51,7 +51,7 @@
                   <a class="nav-link" href="{{ route('evaluaciones.index')}}">Evaluaciones</a>
                 </li>
                 <li class="nav navbar-nav">
-                  <a class="nav-link">Graficos</a>
+                  <a class="nav-link" href="{{ route('graficos.principal')}}">Graficos</a>
                 </li>
                 <li class="nav navbar-nav">
                   <a class="nav-link" href="{{ route('reportes.index')}}">Reportes</a>

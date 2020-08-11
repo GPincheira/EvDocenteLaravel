@@ -76,7 +76,6 @@
       <div class="card-header" id="headingTwo">
         <h5 class="mb-0">
           <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-
             <div class="row">
               <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
@@ -95,7 +94,6 @@
                 @endif
               </div>
             </div>
-
           </button>
         </h5>
       </div>
