@@ -81,7 +81,7 @@
               <td>{{ $academico->TituloProfesional }}</td>
               <td>{{ $academico->departamento->Nombre }}</td>
               <td width="100px">
-                  <a href="{{ route('graficos.academico',$academico->id) }}" class="btn btn-success">Seleccionar</a>
+                  <a href="{{ route('graficos.academico', $academico->id) }}" class="btn btn-success">Seleccionar</a>
               </td>
             </tr>
           @endforeach
