@@ -23,7 +23,7 @@ class ComisionController extends Controller
       if(@Auth::user()->hasRole('SecFacultad')){
         $proceso = proceso::where('Estado', 'Activo')->first();
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $comisiones = Comision::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+        $comisiones = Comision::orderBy('Año', 'DESC')->where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
         $activa = Comision::where('Estado', '=', 'Activo')
                   ->where('Año', '=', $proceso->año)
                   ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
@@ -32,7 +32,7 @@ class ComisionController extends Controller
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
-        $comisiones = Comision::latest()->paginate(10);
+        $comisiones = Comision::orderBy('Año', 'DESC')->latest()->paginate(10);
         return view('comisiones.index',compact('comisiones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }

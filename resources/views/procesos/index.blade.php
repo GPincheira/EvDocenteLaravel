@@ -52,8 +52,16 @@
                    </div>
                </div><hr>
 
+               @if ($activo->inicio<=date('Y-m-d') && $activo->fin>=date('Y-m-d'))
+               <div class="alert alert-success">
+                   <h3>El proceso actualmente se encuentra ABIERTO </h3>
+               </div>
+               @else
+                 <div class="alert alert-danger">
+                     <h3>El proceso actualmente se encuentra CERRADO </h3>
+                 </div>
+               @endif
 
-          <h3>El proceso actualmente se encuentra @if ($activo->inicio<=date('Y-m-d') && $activo->fin>=date('Y-m-d')) ABIERTO @else CERRADO @endif</h3><br>
           <div class="col-md-6">
               <h4>Proceso Manual</h4><br>
               @if ($activo->inicio<=date('Y-m-d') && $activo->fin>=date('Y-m-d'))

@@ -47,25 +47,27 @@
     <tr>
       <th width="120px">RUT</th>
       <th>Nombre Completo</th>
-      <th>Titulo Profesional</th>
-      <th>Grado Academico</th>
+      @if(@Auth::user()->hasRole('SecFacultad'))
+        <th>Titulo Profesional</th>
+        <th>Grado Academico</th>
+      @endif
       @if(@Auth::user()->hasRole('Administrador'))
         <th>Facultad</th>
       @endif
       <th>Departamento</th>
-      <th>Estado</th>
     </tr>
     @foreach ($academicos as $academico)
       <tr>
         <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
         <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
-        <td>{{ $academico->TituloProfesional }}</td>
-        <td>{{ $academico->GradoAcademico }}</td>
+        @if(@Auth::user()->hasRole('SecFacultad'))
+          <td>{{ $academico->TituloProfesional }}</td>
+          <td>{{ $academico->GradoAcademico }}</td>
+        @endif
         @if(@Auth::user()->hasRole('Administrador'))
           <td>{{ $academico->departamento->facultad->id }}  - {{ $academico->departamento->facultad->Nombre }}</td>
         @endif
         <td>{{ $academico->departamento->id }} - {{ $academico->departamento->Nombre}}</td>
-        <td>@if (Request::is('academicos'))Activo @else Inactivo @endif</td>
         @if(@Auth::user()->hasRole('SecFacultad'))
           <td width="167px">
             <form action="{{ route('academicos.destroy',$academico->id) }}" method="POST">
@@ -123,7 +125,6 @@
     <th>Titulo Profesional</th>
     <th>Grado Academico</th>
     <th>Departamento</th>
-    <th>Estado</th>
   </tr>
   @foreach ($academicos as $academico)
     <tr>
@@ -132,7 +133,6 @@
       <td>{{ $academico->TituloProfesional }}</td>
       <td>{{ $academico->GradoAcademico }}</td>
       <td>{{ $academico->CodigoDpto }}</td>
-      <td>@if (Request::is('academicos'))Activo @else Inactivo @endif</td>
       @if(@Auth::user()->hasRole('SecFacultad'))
         @foreach ($departamentos as $departamento)
           @if ($academico->CodigoDpto == $departamento->id && $departamento->deleted_at==NULL)

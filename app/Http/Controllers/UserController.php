@@ -19,28 +19,28 @@ class UserController extends Controller
 //En el controlador de usuario existen varios index, uno para cada tipo de usuario, y cada uno con un index para eliminados
     public function index()
     {
-      $users = User::where('Rol','Administrador')->latest()->paginate(10);
+      $users = User::orderBy('ApellidoPaterno')->where('Rol','Administrador')->latest()->paginate(10);
       return view('users.index',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function indexelim()
     {
-      $users = User::where('Rol','Administrador')->onlyTrashed()->latest()->paginate(10);
+      $users = User::orderBy('ApellidoPaterno')->where('Rol','Administrador')->onlyTrashed()->latest()->paginate(10);
       return view('users.index',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function index2()
     {
-      $users = User::where('Rol','SecFacultad')->latest()->paginate(10);
+      $users = User::orderBy('ApellidoPaterno')->where('Rol','SecFacultad')->latest()->paginate(10);
       return view('users.index2',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function index2elim()
     {
-      $users = User::where('Rol','SecFacultad')->onlyTrashed()->latest()->paginate(10);
+      $users = User::orderBy('ApellidoPaterno')->where('Rol','SecFacultad')->onlyTrashed()->latest()->paginate(10);
       $secFacultad = secFacultad::onlyTrashed()->latest()->paginate(10);
       return view('users.index2',compact('users'),['secFacultad'=>$secFacultad])
         ->with('i',(request()->input('page',1)-1)*5);
@@ -48,14 +48,14 @@ class UserController extends Controller
 
     public function index3()
     {
-      $users = User::where('Rol','Secretaria')->latest()->paginate(10);
+      $users = User::orderBy('ApellidoPaterno')->where('Rol','Secretaria')->latest()->paginate(10);
       return view('users.index3',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
     public function index3elim()
     {
-      $users = User::where('Rol','Secretaria')->onlyTrashed()->latest()->paginate(10);
+      $users = User::orderBy('ApellidoPaterno')->where('Rol','Secretaria')->onlyTrashed()->latest()->paginate(10);
       return view('users.index3',compact('users'))
         ->with('i',(request()->input('page',1)-1)*5);
     }

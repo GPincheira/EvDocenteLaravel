@@ -50,14 +50,12 @@
     <th width="120px">RUT</th>
     <th>Nombre Completo</th>
     <th>E-mail</th>
-    <th>Estado</th>
   </tr>
   @foreach ($users as $user)
     <tr>
       <td>{{ $user->id }}-{{ $user->verificador }}</td>
       <td>{{ $user->Nombre }} {{ $user->ApellidoPaterno }} {{ $user->ApellidoMaterno }}</td>
       <td>{{ $user->email }}</td>
-      <td>@if (Request::is('users3'))Activo @else Inactivo @endif</td>
       @if (Request::is('users3'))
         <td width="167px">
           <form action="{{ route('users.destroy',$user->id) }}" method="POST">

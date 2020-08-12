@@ -22,7 +22,7 @@ class EvaluacionController extends Controller
     public function index()
     {
       if(@Auth::user()->hasRole('Administrador')){
-        $evaluaciones = Evaluacion::latest()->paginate(10);
+        $evaluaciones = Evaluacion::orderBy('año','DESC')->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
@@ -30,7 +30,7 @@ class EvaluacionController extends Controller
         $proceso = proceso::where('Estado', 'Activo')->first();
         $academicos = DB::table('academicos')
             	       ->select('academicos.id','academicos.verificador','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
-                              'departamentos.Nombre','academicos.TituloProfesional')
+                              'departamentos.Nombre','academicos.TituloProfesional','academicos.CodigoDpto')
                       ->leftJoin('departamentos', function($join){
                            $join->on('academicos.CodigoDpto', '=', 'departamentos.id');
                             })
@@ -45,13 +45,13 @@ class EvaluacionController extends Controller
                       ->orderBy('academicos.ApellidoPaterno')
                       ->get();
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)
+        $evaluaciones = Evaluacion::orderBy('RUTAcademico')->where('CodigoFacultad',$CodigoFacultad)
                       ->where('año', $proceso->año)->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'),['academicos'=>$academicos, 'año'=>$proceso->año])
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
-        $evaluaciones = Evaluacion::where('Año',date("Y"))->latest()->paginate(10);
+        $evaluaciones = Evaluacion::orderBy('RUTAcademico')->where('Año',date("Y"))->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
@@ -62,13 +62,13 @@ class EvaluacionController extends Controller
     {
       $proceso = proceso::where('Estado', 'Activo')->first();
       if (@Auth::user()->hasRole('Administrador')){
-        $evaluaciones = Evaluacion::onlyTrashed()->latest()->paginate(10);
+        $evaluaciones = Evaluacion::orderBy('año')->onlyTrashed()->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'))
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $evaluaciones = Evaluacion::onlyTrashed()
+        $evaluaciones = Evaluacion::orderBy('RUTAcademico')->onlyTrashed()
                     ->where('CodigoFacultad',$CodigoFacultad)
                     ->where('evaluaciones.año', '=', $proceso->año)
                     ->latest()->paginate(10);
@@ -80,7 +80,7 @@ class EvaluacionController extends Controller
 //funcion index2, para utilizarse como vista para el usuario secretario
     public function index2()
     {
-      $evaluaciones = Evaluacion::where('NotaFinal','>=','4.5')->latest()->paginate(10);
+      $evaluaciones = Evaluacion::orderBy('año','DESC')->where('NotaFinal','>=','4.5')->latest()->paginate(10);
       return view('evaluaciones.index2',compact('evaluaciones'))
         ->with('i',(request()->input('page',1)-1)*5);
     }

@@ -48,11 +48,10 @@
 
 <table class="table table-bordered" style="margin-top: 8px">
   <tr>
-    <th>Id</th>
     <th>Año</th>
     <th>Facultad</th>
-    <th>Decano de Facultad</th>
-    <th>Secretario de Facultad</th>
+    <th>Decano</th>
+    <th>Secretario</th>
     <th>Integrante 3</th>
     <th>Integrante 4</th>
     <th>Estado</th>
@@ -60,7 +59,6 @@
   @if(@Auth::user()->hasRole('Administrador'))
     @foreach ($comisiones as $comision)
       <tr >
-        <td>{{ $comision->id }}</td>
         <td>{{ $comision->Año }}</td>
         <td>{{ $comision->CodigoFacultad }} - {{ $comision->facultad->Nombre }}</td>
         <td>{{ $comision->NombreDecano }} {{ $comision->APaternoDecano }} {{ $comision->AMaternoDecano }}</td>
@@ -79,7 +77,6 @@
   @else
     @foreach ($comisiones as $comision)
       <tr @if($activa == $comision) style="background-color:#FCFF55" @endif>
-        <td>{{ $comision->id }}</td>
         <td>{{ $comision->Año }}</td>
         <td>{{ $comision->CodigoFacultad }} - {{ $comision->facultad->Nombre }}</td>
         <td>{{ $comision->NombreDecano }} {{ $comision->APaternoDecano }} {{ $comision->AMaternoDecano }}</td>

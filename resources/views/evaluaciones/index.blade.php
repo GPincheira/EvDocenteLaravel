@@ -61,7 +61,7 @@
                 <td>{{ $academico->id }} - {{ $academico->verificador }}</td>
                 <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
                 <td>{{ $academico->TituloProfesional }}</td>
-                <td>{{ $academico->Nombre }}</td>
+                <td>{{ $academico->CodigoDpto }} - {{ $academico->Nombre }}</td>
                 <td width="100px">
                     <a href="{{ route('evaluaciones.evaluar',$academico->id) }}" class="btn btn-success">Evaluar</a>
                 </td>
@@ -101,7 +101,6 @@
         <div class="card-body">
           <table class="table table-bordered"  style="margin-top: 8px">
             <tr>
-              <th>Id</th>
               <th>Año</th>
               <th>Nombre Academico</th>
               @if(@Auth::user()->hasRole('Administrador') || @Auth::user()->hasRole('Secretario'))
@@ -112,7 +111,6 @@
             </tr>
               @foreach ($evaluaciones as $evaluacion)
                 <tr>
-                  <td>{{ $evaluacion->id }}</td>
                   <td>{{ $evaluacion->año }}</td>
                   <td>{{ $evaluacion->academico->Nombres}} {{ $evaluacion->academico->ApellidoPaterno}} {{ $evaluacion->academico->ApellidoMaterno}}</td>
                   <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
@@ -185,7 +183,6 @@
 
   <table class="table table-bordered"  style="margin-top: 8px">
     <tr>
-      <th>Id</th>
       <th>Año</th>
       <th>Academico</th>
       <th>Nota Final</th>
@@ -193,7 +190,6 @@
     </tr>
     @foreach ($evaluaciones as $evaluacion)
       <tr>
-        <td>{{ $evaluacion->id }}</td>
         <td>{{ $evaluacion->año }}</td>
         <td>{{ $evaluacion->RUTAcademico}}</td>
         <td>{{ $evaluacion->NotaFinal }}</td>

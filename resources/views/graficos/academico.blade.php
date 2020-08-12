@@ -33,7 +33,9 @@
   <div class="col-xs-12 col-sm-12 col-md-12">
       <form action="{{ route('graficos.academico',$academico->id) }}" method="GET">
         <div class="col-xs-3 col-sm-3 col-md-3">
-          <h5>Año a graficar :</h5>
+            <div class="pull-right" style="margin-top: 8px">
+              <h5>Año a graficar :</h5>
+            </div>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6">
           <select name="año" class="form-control">

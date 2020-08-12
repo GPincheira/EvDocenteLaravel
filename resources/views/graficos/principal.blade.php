@@ -45,7 +45,7 @@
               @endforeach
             </select>
           </div>
-          <div class="col-xs-1 col-sm-1 col-md-1">
+          <div class="col-xs-1 col-sm-1 col-md-1" style="margin-top: 5px">
               <br><button type="submit" class="btn btn-success">Filtrar</button>
           </div>
         </form>

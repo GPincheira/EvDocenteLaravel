@@ -65,9 +65,6 @@
                   <a class="nav-link" href="{{ route('evaluaciones.index2')}}">Evaluaciones con Excelencia</a>
                 </li>
                 <li class="nav navbar-nav">
-                  <a class="nav-link">Graficos</a>
-                </li>
-                <li class="nav navbar-nav">
                   <a class="nav-link" href="{{ route('reportes.index')}}">Reportes</a>
                 </li>
               @endif

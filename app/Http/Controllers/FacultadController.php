@@ -19,7 +19,7 @@ class FacultadController extends Controller
 //En index se obtiene el listado completo de facultades y se paginan de 10.
     public function index()
     {
-      $facultades = Facultad::latest()->paginate(10);
+      $facultades = Facultad::orderBy('id','ASC')->latest()->paginate(10);
       return view('facultades.index',compact('facultades'))
         ->with('i',(request()->input('page',1)-1)*5);
     }
@@ -27,7 +27,7 @@ class FacultadController extends Controller
 //Index para ver los eliminados, con onlyTrashed()
     public function indexelim()
     {
-      $facultades = Facultad::onlyTrashed()->latest()->paginate(10);
+      $facultades = Facultad::orderBy('id','ASC')->onlyTrashed()->latest()->paginate(10);
       return view('facultades.index',compact('facultades'))
         ->with('i',(request()->input('page',1)-1)*5);
     }

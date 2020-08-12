@@ -22,12 +22,12 @@ class AcademicoController extends Controller
      {
        if(@Auth::user()->hasRole('SecFacultad')){    //si es un secretario de Facultad, se pasan tambien los dptos que coinciden con la facultad del usuario actual
          $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-         $academicos = Academico::where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
+         $academicos = Academico::orderBy('ApellidoPaterno', 'ASC')->where('CodigoFacultad',$CodigoFacultad)->latest()->paginate(10);
          return view('academicos.index',compact('academicos'))
             ->with('i',(request()->input('page',1)-1)*5);
        }
        else{   //sino, no es necesario pasar mas parametros
-         $academicos = Academico::latest()->paginate(10);
+         $academicos = Academico::orderBy('ApellidoPaterno', 'ASC')->latest()->paginate(10);
          return view('academicos.index',compact('academicos'))
            ->with('i',(request()->input('page',1)-1)*5);
        }
@@ -38,13 +38,13 @@ class AcademicoController extends Controller
     {
       if(@Auth::user()->hasRole('SecFacultad')){
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $academicos = Academico::where('CodigoFacultad',$CodigoFacultad)->onlyTrashed()->latest()->paginate(10);
+        $academicos = Academico::orderBy('ApellidoPaterno', 'ASC')->where('CodigoFacultad',$CodigoFacultad)->onlyTrashed()->latest()->paginate(10);
         $departamentos = Facultad::find($CodigoFacultad)->departamentos;
         return view('academicos.index',compact('academicos'),['departamentos' => $departamentos])
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else{
-        $academicos = Academico::onlyTrashed()->latest()->paginate(10);
+        $academicos = Academico::orderBy('ApellidoPaterno', 'ASC')->onlyTrashed()->latest()->paginate(10);
         return view('academicos.index',compact('academicos'))
           ->with('i',(request()->input('page',1)-1)*5);
       }

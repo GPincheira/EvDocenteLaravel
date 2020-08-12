@@ -23,7 +23,7 @@ class DepartamentoController extends Controller
 
     public function index()
     {
-      $departamentos = Departamento::latest()->paginate(10);
+      $departamentos = Departamento::orderBy('id', 'ASC')->latest()->paginate(10);
       $facultades = Facultad::all();
       return view('departamentos.index',compact('departamentos'),['facultades' => $facultades])
         ->with('i',(request()->input('page',1)-1)*5);
@@ -31,7 +31,7 @@ class DepartamentoController extends Controller
 
     public function indexelim()
     {
-      $departamentos = Departamento::onlyTrashed()->latest()->paginate(10);
+      $departamentos = Departamento::orderBy('id', 'ASC')->onlyTrashed()->latest()->paginate(10);
       $facultades = Facultad::all();
       return view('departamentos.index',compact('departamentos'),['facultades' => $facultades])
         ->with('i',(request()->input('page',1)-1)*5);

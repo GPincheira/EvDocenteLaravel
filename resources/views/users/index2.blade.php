@@ -53,7 +53,6 @@
     @if (Request::is('users2'))
       <th>Facultad</th>
     @endif
-    <th>Estado</th>
   </tr>
   @foreach ($users as $user)
     <tr>
@@ -63,7 +62,6 @@
       @if (Request::is('users2'))
         <td>{{ $user->secFacultad->CodigoFacultad }} - {{ $user->secFacultad->facultad->Nombre }}</td>
       @endif
-      <td>@if (Request::is('users2'))Activo @else Inactivo @endif</td>
       @if (Request::is('users2'))
         <td width="167px">
           <form action="{{ route('users.destroy',$user->id) }}" method="POST">

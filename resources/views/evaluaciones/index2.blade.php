@@ -25,7 +25,7 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>Id</th>
+            <th>Año</th>
             <th>RUT del Academico</th>
             <th>Nombre Academico</th>
             <th>Departamento</th>
@@ -33,7 +33,7 @@
         </tr>
         @foreach ($evaluaciones as $evaluacion)
           <tr>
-            <td>{{ $evaluacion->id }}</td>
+            <td>{{ $evaluacion->año }}</td>
             <td>{{ $evaluacion->RUTAcademico }}-{{ $evaluacion->academico->verificador }}</td>
             <td>{{ $evaluacion->academico->Nombres }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
             <td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>

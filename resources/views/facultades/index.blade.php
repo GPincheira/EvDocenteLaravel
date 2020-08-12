@@ -54,14 +54,12 @@
     <th>Id</th>
     <th>Nombre</th>
     <th>Decano</th>
-    <th>Estado</th>
   </tr>
   @foreach ($facultades as $facultad)
     <tr>
       <td>{{ $facultad->id }}</td>
       <td>{{ $facultad->Nombre }}</td>
       <td>{{ $facultad->DecanoNombre }} {{ $facultad->DecanoAPaterno }} {{ $facultad->DecanoAMaterno }}</td>
-      <td>@if (Request::is('facultades'))Activo @else Inactivo @endif</td>
       @if (Request::is('facultades'))
         <td width="167px">
           <form action="{{ route('facultades.destroy',$facultad->id) }}" method="POST">
