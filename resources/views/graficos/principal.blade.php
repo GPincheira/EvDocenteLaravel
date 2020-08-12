@@ -7,14 +7,14 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Gráficos</li>
+    <li class="breadcrumb-item active" aria-current="page">Gráficos Facultad/Dpto</li>
   </ol>
 </nav>
 
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="pull-left">
-      <h2>Gráficos</h2>
+      <h2>Gráficos @if ($dpto ?? '') {{ $dpto->Nombre }} @else {{ $facultad->Nombre }} @endif </h2>
     </div>
   </div>
 </div>
@@ -46,7 +46,7 @@
             </select>
           </div>
           <div class="col-xs-1 col-sm-1 col-md-1">
-              <br><button type="submit" class="btn btn-primary">Filtrar</button>
+              <br><button type="submit" class="btn btn-success">Filtrar</button>
           </div>
         </form>
       </div>
@@ -68,20 +68,20 @@
           ['5.Otras Actividades Realizadas', {{$grafcircular->act5}}]
         ]);
         var options = {
-          title: 'Distribución de tiempo de los académicos de @if ($dpto ?? '') el {{ $dpto->Nombre }} @else la {{ $facultad->Nombre }} @endif hacia cada actividad durante el {{$año}}'
+          title: 'Distribución de tiempo de los académicos de @if ($dpto ?? '') el {{ $dpto->Nombre }} @else la {{ $facultad->Nombre }} @endif hacia cada actividad durante el {{$año}}',
         };
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }
     </script>
     <script type="text/javascript">
-        google.charts.load("current", {packages:['corechart']});
+        google.charts.load("current", {packages:['bar']});
         google.charts.setOnLoadCallback(drawChart2);
         function drawChart2() {
             var data = google.visualization.arrayToDataTable([
               ["Academico", "Nota Obtenida", { role: "style" } ],
               @foreach($evaluaciones as $evaluacion)
-                ["{{$evaluacion->Nombres}} {{$evaluacion->ApellidoPaterno}} {{$evaluacion->ApellidoMaterno}}", {{$evaluacion->NotaFinal}}, "skyblue"],
+                ["{{$evaluacion->Nombres}} {{$evaluacion->ApellidoPaterno}} {{$evaluacion->ApellidoMaterno}}", {{$evaluacion->NotaFinal}}, "blue"],
               @endforeach
               ]);
             var view = new google.visualization.DataView(data);
@@ -92,7 +92,7 @@
                          role: "annotation" },
                        2]);
           var options = {
-              title: "Notas Finales Históricas de los academicos de @if ($dpto ?? '') el {{ $dpto->Nombre }} @else la {{ $facultad->Nombre }} @endif",
+              title: "Notas Finales de los academicos de @if ($dpto ?? '') el {{ $dpto->Nombre }} @else la {{ $facultad->Nombre }} @endif durante el {{ $año }}",
               width: 550,
               height: 400,
               bar: {groupWidth: "95%"},
@@ -105,14 +105,20 @@
   </head>
   <body>
     <hr>
-  	<div class="row">
-  		<div class="col-md-6">
-        <div id="piechart" style="width: 550px; height: 400px;"></div>
-  		</div>
-  		<div class="col-md-6">
-        <div id="columnchart_values" style="width: 550px; height: 400px;"></div>
-  		</div>
-    </div>
+    @if ($evaluaciones[0] ?? '')
+      <div class="row">
+        <div class="col-md-6">
+          <div id="piechart" style="width: 550px; height: 400px;"></div>
+        </div>
+        <div class="col-md-6">
+          <div id="columnchart_values" style="width: 550px; height: 400px;"></div>
+        </div>
+      </div>
+    @else
+      <div class="alert alert-danger">
+        <h4>No existen evaluaciones para graficar</h4>
+      </div>
+    @endif
     <hr>
   </body>
 </html>

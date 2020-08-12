@@ -67,27 +67,23 @@ class GraficoController extends Controller
   {
     $procesos = proceso::all();
     $año = $request['año'];
-    $elegido = academico::find($id);
+    $academico = academico::find($id);
     $grafcircular = new \stdClass;
 		$grafcircular->act1=0;
 		$grafcircular->act2=0;
 		$grafcircular->act3=0;
 		$grafcircular->act4=0;
 		$grafcircular->act5=0;
-    $evaluaciones = Evaluacion::where('RUTAcademico', $id)->get(['p1','p2','p3','p4','p5']);
-    if ($año == ''){  //tampoco año
-      $evaluaciones = Evaluacion::where('RUTAcademico', $id)->get(['p1','p2','p3','p4','p5']);
-    }
-    else{
-      $evaluaciones = Evaluacion::where('RUTAcademico', $id)->where('año', $año)->get(['p1','p2','p3','p4','p5']);
-    }
+    $evaluaciones = Evaluacion::orderBy('año', 'ASC')->where('RUTAcademico', $id)->get(['año','p1','p2','p3','p4','p5','NotaFinal']);
     foreach($evaluaciones as $evaluacion){
-      $grafcircular->act1=$grafcircular->act1+$evaluacion->p1;
-      $grafcircular->act2=$grafcircular->act2+$evaluacion->p2;
-      $grafcircular->act3=$grafcircular->act3+$evaluacion->p3;
-      $grafcircular->act4=$grafcircular->act4+$evaluacion->p4;
-      $grafcircular->act5=$grafcircular->act5+$evaluacion->p5;
+      if (($año == '') || ($evaluacion->año == $año)){
+        $grafcircular->act1=$grafcircular->act1+$evaluacion->p1;
+        $grafcircular->act2=$grafcircular->act2+$evaluacion->p2;
+        $grafcircular->act3=$grafcircular->act3+$evaluacion->p3;
+        $grafcircular->act4=$grafcircular->act4+$evaluacion->p4;
+        $grafcircular->act5=$grafcircular->act5+$evaluacion->p5;
+      }
     }
-    return view('graficos.academico',compact('procesos', 'año', 'elegido'));
+    return view('graficos.academico',compact('procesos', 'año', 'academico', 'evaluaciones', 'grafcircular'));
   }
 }
