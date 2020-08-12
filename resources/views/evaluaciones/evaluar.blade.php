@@ -91,15 +91,13 @@
       </tr>
     </tbody>
   </table>
-
 </div>
 
-  <div class="row">
-    <div class="col-lg-12 margin-tb">
-        <evaluacion-component datito="{{ $academico->id }}" ></evaluacion-component>
-      </div>
-  </div>
-
+<div class="row">
+  <div class="col-lg-12 margin-tb">
+      <evaluacion-component datito="{{ $academico->id }}" ></evaluacion-component>
+    </div>
+</div>
 
 @if (Session::has('message'))
 <div class="alert alert-danger">{{Session::get('message')}}</div>

@@ -7,7 +7,6 @@
 
         <title>Pauta Evaluacion UCM</title>
 
-
         <style>
             table, th, td {
               border: 1px solid black;

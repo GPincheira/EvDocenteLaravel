@@ -73,7 +73,6 @@
           </form>
         </td>
       @else
-
         @foreach ($secFacultad as $sec)
           @if ($user->id == $sec->id && $sec->facultad)
             <td width="60px">

@@ -34,7 +34,6 @@
 
 <form action="{{ route('users.store2') }}" method="POST">
     @csrf
-
      <div class="row">
         <div class="col-xs-2 col-sm-2 col-md-2">
             <div class="form-group">
@@ -110,7 +109,6 @@
           <div class="col-xs-12 col-sm-12 col-md-12 text-center">
                   <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
-        </div>
-
+      </div>
 </form>
 @endsection

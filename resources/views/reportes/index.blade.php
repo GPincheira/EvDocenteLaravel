@@ -39,5 +39,4 @@
   @endif
 </table>
 
-
 @endsection

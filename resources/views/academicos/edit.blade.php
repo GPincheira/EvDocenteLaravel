@@ -10,30 +10,30 @@
   </ol>
 </nav>
 
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Editar Academico {{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</h2>
-            </div>
-            <div class="pull-right">
-                <a href="{{ route('academicos.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
-            </div>
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>Editar Academico {{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</h2>
+        </div>
+        <div class="pull-right">
+            <a href="{{ route('academicos.index') }}" class="btn btn-primary"><i class="material-icons">arrow_back</i><br>Atras</a>
         </div>
     </div>
+</div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 {{--Funcionamiento similar al create, pero estos datos son pasados a update para validar --}}
-  @if(@Auth::user()->hasRole('SecFacultad'))
+@if(@Auth::user()->hasRole('SecFacultad'))
     <form action="{{ route('academicos.update',$academico) }}" method="POST">
         @csrf
         @method('PUT')
@@ -135,27 +135,28 @@
             </div>
         </div>
     </form>
-  @else
-  <form action="{{ route('academicos.update2',$academico->id) }}" method="POST">
-      @csrf
-      @method('PUT')
-      <div class="row">
-           <div class="col-xs-12 col-sm-12 col-md-12">
-               <div class="form-group">
-                   <strong>Departamento al que pertenece:</strong>
-                   <select name="CodigoDpto" class="form-control">
-                     @foreach($departamentos as $departamento)
-                        <option value='{{$departamento->id}}' @if($academico->CodigoDpto==$departamento->id) selected @endif >{{$departamento->id}} - {{$departamento->Nombre}}</option>
-                     @endforeach
-                   </select>
-               </div>
-           </div>
-        </div>
-      <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-            <button type="submit" class="btn btn-primary">Guardar</button>
+@else
+    <form action="{{ route('academicos.update2',$academico->id) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="row">
+             <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="form-group">
+                     <strong>Departamento al que pertenece:</strong>
+                     <select name="CodigoDpto" class="form-control">
+                       @foreach($departamentos as $departamento)
+                          <option value='{{$departamento->id}}' @if($academico->CodigoDpto==$departamento->id) selected @endif >{{$departamento->id}} - {{$departamento->Nombre}}</option>
+                       @endforeach
+                     </select>
+                 </div>
+             </div>
           </div>
-      </div>
-  </form>
-  @endif
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </form>
+@endif
+
 @endsection

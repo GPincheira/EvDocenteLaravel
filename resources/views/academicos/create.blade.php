@@ -87,8 +87,6 @@
         </div>
       </div>
 
-
-
 {{--Se recorren los dptos para enlistar solo los que pertenezcan a la misma facultad que el secretario de facultad que está trabajando--}}
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">

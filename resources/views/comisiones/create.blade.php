@@ -37,7 +37,6 @@
 {{--Formulario que luego de ser completado se envía a store de comisiones para ser procesado--}}
 <form action="{{ route('comisiones.store') }}" method="POST">
     @csrf
-
      <div class="row">
         <div class="col-xs-3 col-sm-3 col-md-3">
             <div class="form-group">
@@ -102,6 +101,5 @@
                 <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </div>
-
 </form>
 @endsection

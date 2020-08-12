@@ -171,26 +171,26 @@
 </div>
 
 <div class="row container">
-        <div class="col-md-12 margin-tb container">
-            <div class="card card-active" style="background-color:rgba(200,200,200)">
-                <div class="card-body">
-                  <div class="col-md-3">
-                    ESCALA:
-                  </div>
-                  <div class="col-md-3">
-                    Excelente=4.5 a 5<br>
-                    Regular=2.7 a 3.4
-                  </div>
-                  <div class="col-md-3">
-                    Muy Bueno=4.0 a 4.4<br>
-                    Deficiente=menos de 2.7
-                  </div>
-                  <div class="col-md-3">
-                    Bueno=3.5 a 3.9
-                  </div>
-              </div>
-          </div>
-      </div>
+    <div class="col-md-12 margin-tb container">
+        <div class="card card-active" style="background-color:rgba(200,200,200)">
+            <div class="card-body">
+                <div class="col-md-3">
+                  ESCALA:
+                </div>
+                <div class="col-md-3">
+                  Excelente=4.5 a 5<br>
+                  Regular=2.7 a 3.4
+                </div>
+                <div class="col-md-3">
+                  Muy Bueno=4.0 a 4.4<br>
+                  Deficiente=menos de 2.7
+                </div>
+                <div class="col-md-3">
+                  Bueno=3.5 a 3.9
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row container">
@@ -205,60 +205,57 @@
   </div>
 
 <div class="col-md-12 container">
-      <h5 class="content">FIRMA COMISION:</h5>
+    <h5 class="content">FIRMA COMISION:</h5>
+</div>
+
+<div class="wrapper container">
+  <div class="one">
+    <table class="table table-bordered content">
+        <tr>
+          <td height=100>Integrante 1: {{ $evaluacion->comision->Nombre1 }} {{ $evaluacion->comision->APaterno1 }} {{ $evaluacion->comision->AMaterno1 }}</td>
+        </tr>
+        <tr class="table-active">
+          <td>Nombre y Firma</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
-  <div class="wrapper container">
-    <div class="one">
-      <table class="table table-bordered content">
-          <tr>
-            <td height=100>Integrante 1: {{ $evaluacion->comision->Nombre1 }} {{ $evaluacion->comision->APaterno1 }} {{ $evaluacion->comision->AMaterno1 }}</td>
-          </tr>
-          <tr class="table-active">
-            <td>Nombre y Firma</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="two">
-      <table class="table table-bordered content">
-          <tr>
-            <td height=100>Integrante 2: {{ $evaluacion->comision->Nombre2 }} {{ $evaluacion->comision->APaterno2 }} {{ $evaluacion->comision->AMaterno2 }}</td>
-          </tr>
-          <tr class="table-active">
-            <td>Nombre y Firma</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="three">
-      <table class="table table-bordered content">
-          <tr>
-            <td height=100>Secretario de Facultad:  {{ $evaluacion->comision->NombreSecFac }} {{ $evaluacion->comision->APaternoSecFac }} {{ $evaluacion->comision->AMaternoSecFac }}</td>
-          </tr>
-          <tr class="table-active">
-            <td>Nombre y Firma</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="four">
-      <table class="table table-bordered content">
-          <tr>
-            <td height=100>Decano: {{ $evaluacion->comision->NombreDecano }} {{ $evaluacion->comision->APaternoDecano }} {{ $evaluacion->comision->AMaternoDecano }}</td>
-          </tr>
-          <tr class="table-active">
-            <td>Nombre y Firma</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="fecha">
-      <br><br><br><br><h5>Fecha: {{ $evaluacion->comision->Fecha }}</h5>
-    </div>
+  <div class="two">
+    <table class="table table-bordered content">
+        <tr>
+          <td height=100>Integrante 2: {{ $evaluacion->comision->Nombre2 }} {{ $evaluacion->comision->APaterno2 }} {{ $evaluacion->comision->AMaterno2 }}</td>
+        </tr>
+        <tr class="table-active">
+          <td>Nombre y Firma</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
-
-
+  <div class="three">
+    <table class="table table-bordered content">
+        <tr>
+          <td height=100>Secretario de Facultad:  {{ $evaluacion->comision->NombreSecFac }} {{ $evaluacion->comision->APaternoSecFac }} {{ $evaluacion->comision->AMaternoSecFac }}</td>
+        </tr>
+        <tr class="table-active">
+          <td>Nombre y Firma</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="four">
+    <table class="table table-bordered content">
+        <tr>
+          <td height=100>Decano: {{ $evaluacion->comision->NombreDecano }} {{ $evaluacion->comision->APaternoDecano }} {{ $evaluacion->comision->AMaternoDecano }}</td>
+        </tr>
+        <tr class="table-active">
+          <td>Nombre y Firma</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="fecha">
+    <br><br><br><br><h5>Fecha: {{ $evaluacion->comision->Fecha }}</h5>
+  </div>
+</div>
 
 @endsection

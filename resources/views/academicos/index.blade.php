@@ -91,63 +91,63 @@
   </table>
 
 @else
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Academicos Eliminados @if(@Auth::user()->hasRole('SecFacultad')) {{ @Auth::user()->secFacultad->facultad->Nombre }} @endif</li>
-  </ol>
-</nav>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ url('/') }}">Inicio</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Academicos Eliminados @if(@Auth::user()->hasRole('SecFacultad')) {{ @Auth::user()->secFacultad->facultad->Nombre }} @endif</li>
+    </ol>
+  </nav>
 
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-        <h2>Academicos Eliminados @if(@Auth::user()->hasRole('SecFacultad')) {{ @Auth::user()->secFacultad->facultad->Nombre }} @endif UCM</h2>
-        </div>
+  <div class="row">
+      <div class="col-lg-12 margin-tb">
+          <div class="pull-left">
+          <h2>Academicos Eliminados @if(@Auth::user()->hasRole('SecFacultad')) {{ @Auth::user()->secFacultad->facultad->Nombre }} @endif UCM</h2>
+          </div>
 
-{{--Segun la pagina en la que se encuentra actualmente, se ofrecen alternativas de rutas--}}
-        <div>
-            <a class="btn btn-info" style="margin-left: 12px" href="{{ route('academicos.index') }}"> Ver Activos</a>
-        </div>
-    </div>
-</div>
+  {{--Segun la pagina en la que se encuentra actualmente, se ofrecen alternativas de rutas--}}
+          <div>
+              <a class="btn btn-info" style="margin-left: 12px" href="{{ route('academicos.index') }}"> Ver Activos</a>
+          </div>
+      </div>
+  </div>
 
-@if ($message = Session::get('success'))
-    <div class="alert alert-success">
-        <p>{{ $message }}</p>
-    </div>
-@endif
+  @if ($message = Session::get('success'))
+      <div class="alert alert-success">
+          <p>{{ $message }}</p>
+      </div>
+  @endif
 
-{{--Cabecera de la tabla --}}
-<table class="table table-bordered" style="margin-top: 8px">
-  <tr>
-    <th width="120px">RUT</th>
-    <th>Nombre Completo</th>
-    <th>Titulo Profesional</th>
-    <th>Grado Academico</th>
-    <th>Departamento</th>
-  </tr>
-  @foreach ($academicos as $academico)
+  {{--Cabecera de la tabla --}}
+  <table class="table table-bordered" style="margin-top: 8px">
     <tr>
-      <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
-      <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
-      <td>{{ $academico->TituloProfesional }}</td>
-      <td>{{ $academico->GradoAcademico }}</td>
-      <td>{{ $academico->CodigoDpto }}</td>
-      @if(@Auth::user()->hasRole('SecFacultad'))
-        @foreach ($departamentos as $departamento)
-          @if ($academico->CodigoDpto == $departamento->id && $departamento->deleted_at==NULL)
-            <td width="60px">
-              <form action="{{ route('academicos.reactivar',$academico->id) }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
-              </form>
-            </td>
-          @endif
-        @endforeach
-      @endif
+      <th width="120px">RUT</th>
+      <th>Nombre Completo</th>
+      <th>Titulo Profesional</th>
+      <th>Grado Academico</th>
+      <th>Departamento</th>
     </tr>
-  @endforeach
-</table>
+    @foreach ($academicos as $academico)
+      <tr>
+        <td>{{ $academico->id }}-{{ $academico->verificador }}</td>
+        <td>{{ $academico->Nombres }} {{ $academico->ApellidoPaterno }} {{ $academico->ApellidoMaterno }}</td>
+        <td>{{ $academico->TituloProfesional }}</td>
+        <td>{{ $academico->GradoAcademico }}</td>
+        <td>{{ $academico->CodigoDpto }}</td>
+        @if(@Auth::user()->hasRole('SecFacultad'))
+          @foreach ($departamentos as $departamento)
+            @if ($academico->CodigoDpto == $departamento->id && $departamento->deleted_at==NULL)
+              <td width="60px">
+                <form action="{{ route('academicos.reactivar',$academico->id) }}" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-success btn-sm"><i class="material-icons" >refresh</i></button>
+                </form>
+              </td>
+            @endif
+          @endforeach
+        @endif
+      </tr>
+    @endforeach
+  </table>
 
 @endif
 

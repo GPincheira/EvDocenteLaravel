@@ -26,7 +26,7 @@
 @endif
 
 <div class="form-row">
-  <div class="col-xs-12 col-sm-12 col-md-12">
+   <div class="col-xs-12 col-sm-12 col-md-12">
       <form action="{{ route('graficos.principal') }}" method="GET">
           <div class="col-xs-4 col-sm-4 col-md-4">
             <h5>Año</h5>
@@ -48,9 +48,9 @@
           <div class="col-xs-1 col-sm-1 col-md-1" style="margin-top: 5px">
               <br><button type="submit" class="btn btn-success">Filtrar</button>
           </div>
-        </form>
-      </div>
-  </div>
+      </form>
+    </div>
+</div>
 
 <html>
   <head>

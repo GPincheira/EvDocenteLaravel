@@ -34,7 +34,6 @@
 
 <form action="{{ route('users.store3') }}" method="POST">
     @csrf
-
      <div class="row">
         <div class="col-xs-2 col-sm-2 col-md-2">
             <div class="form-group">
