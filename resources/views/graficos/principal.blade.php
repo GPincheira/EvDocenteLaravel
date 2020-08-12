@@ -52,11 +52,70 @@
       </div>
   </div>
 
-@if ($dpto ?? '')
-  {{ $dpto->Nombre }} {{ $año }}
-@else
-  {{ $facultad->Nombre }} {{ $año }}
-@endif
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Porcentaje de tiempo'],
+          ['1.Actividades de Docencia', {{$grafcircular->act1}}],
+          ['2.Actividades de Investigación', {{$grafcircular->act2}}],
+          ['3.Extensión y Vinculación', {{$grafcircular->act3}}],
+          ['4.Administración Académica', {{$grafcircular->act4}}],
+          ['5.Otras Actividades Realizadas', {{$grafcircular->act5}}]
+        ]);
+        var options = {
+          title: 'Distribución de tiempo de los académicos de @if ($dpto ?? '') el {{ $dpto->Nombre }} @else la {{ $facultad->Nombre }} @endif hacia cada actividad durante el {{$año}}'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+    <script type="text/javascript">
+        google.charts.load("current", {packages:['corechart']});
+        google.charts.setOnLoadCallback(drawChart2);
+        function drawChart2() {
+            var data = google.visualization.arrayToDataTable([
+              ["Academico", "Nota Obtenida", { role: "style" } ],
+              @foreach($evaluaciones as $evaluacion)
+                ["{{$evaluacion->Nombres}} {{$evaluacion->ApellidoPaterno}} {{$evaluacion->ApellidoMaterno}}", {{$evaluacion->NotaFinal}}, "skyblue"],
+              @endforeach
+              ]);
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+          var options = {
+              title: "Notas Finales Históricas de los academicos de @if ($dpto ?? '') el {{ $dpto->Nombre }} @else la {{ $facultad->Nombre }} @endif",
+              width: 550,
+              height: 400,
+              bar: {groupWidth: "95%"},
+              legend: { position: "none" },
+          };
+            var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+            chart.draw(view, options);
+        }
+    </script>
+  </head>
+  <body>
+    <hr>
+  	<div class="row">
+  		<div class="col-md-6">
+        <div id="piechart" style="width: 550px; height: 400px;"></div>
+  		</div>
+  		<div class="col-md-6">
+        <div id="columnchart_values" style="width: 550px; height: 400px;"></div>
+  		</div>
+    </div>
+    <hr>
+  </body>
+</html>
 
 <div id="accordion">
   <div class="card">
