@@ -169,6 +169,15 @@
             <div class="col-md-12 margin-tb container">
               <div class="card card-active" style="background-color:rgba(200,200,200)">
                 <div class="card-body">
+                  <div class="col-md-12 content">
+                    <h5><strong>Calificacion Obtenida </strong>
+                      <strong v-if="NotaFinal >= 4.5 && NotaFinal <= 5">Excelente</strong>
+                      <strong v-if="NotaFinal >= 4.0 && NotaFinal < 4.5">Muy Bueno</strong>
+                      <strong v-if="NotaFinal >= 3.5 && NotaFinal < 4.0">Bueno</strong>
+                      <strong v-if="NotaFinal >= 2.7 && NotaFinal < 3.5">Regular</strong>
+                      <strong v-if="NotaFinal < 2.7">Deficiente</strong>
+                    </h5><hr>
+                  </div>
                   <div class="col-md-3">
                     ESCALA:
                   </div>

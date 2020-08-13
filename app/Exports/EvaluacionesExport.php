@@ -20,7 +20,6 @@ class EvaluacionesExport implements FromView,ShouldAutoSize,WithEvents
     {
         $this->evs = $evs;
         $this->año = $año;
-
     }
 
     public function view(): View
@@ -41,6 +40,5 @@ class EvaluacionesExport implements FromView,ShouldAutoSize,WithEvents
     public function collection()
     {
         return $this->evs ?: evaluacion::all();
-
     }
 }

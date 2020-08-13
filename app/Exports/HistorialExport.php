@@ -44,6 +44,5 @@ class HistorialExport implements FromView,ShouldAutoSize,WithEvents
     public function collection()
     {
         return $this->evs ?: evaluacion::all();
-
     }
 }

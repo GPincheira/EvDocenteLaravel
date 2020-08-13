@@ -146,7 +146,14 @@
             <td>{{ $evaluacion->n5 * ($evaluacion->p5/100) }}</td>
 					</tr>
           <tr>
-						<th class="izq" colspan="7">Nota Final</th>
+						<th class="izq" colspan="7">Nota Final
+              @if($evaluacion->NotaFinal >= 4.5) (Excelente)
+              @elseif ($evaluacion->NotaFinal >= 4.0) (Muy Bueno)
+              @elseif ($evaluacion->NotaFinal >= 3.5) (Bueno)
+              @elseif ($evaluacion->NotaFinal >= 2.7) (Regular)
+              @else (Deficiente)
+              @endif
+            </th>
 						<td>{{ $evaluacion->NotaFinal }}</td>
 					</tr>
 				</tbody>

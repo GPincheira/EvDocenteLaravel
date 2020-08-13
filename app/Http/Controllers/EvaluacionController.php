@@ -231,16 +231,6 @@ public function reactivar($id)
     ->with('success','Evaluacion Reactivada Exitosamente');
 }
 
-
-
-
-
-
-
-
-
-
-
       public function store2(Request $request)
       {
           $proceso = proceso::where('Estado', 'Activo')->first();
@@ -390,12 +380,4 @@ public function reactivar($id)
         return Redirect()->back()->with('error','Fuera de periodo de evaluacion');
       }
     }
-
-
-
-
-
-
-
-
 }

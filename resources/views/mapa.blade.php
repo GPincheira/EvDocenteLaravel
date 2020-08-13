@@ -64,15 +64,19 @@
                 <h3>Comisiones</h3>
                 <li><a href="{{ route('comisiones.index') }}">Listado Comisiones</a></li>
                 <li><a href="{{ route('comisiones.create') }}">Añadir Comision</a></li><hr>
-
+              </div>
+              <div class="col-md-6">
                 <h3>Evaluaciones</h3>
                 <li><a href="{{ route('evaluaciones.index') }}">Listado Evaluaciones</a></li>
                 <li><a href="{{ route('evaluaciones.indexelim') }}">Listado Evaluaciones Eliminadas</a></li>
-                <li><a href="{{ route('evaluaciones.create') }}">Realizar Evaluacion</a></li><hr>
+                <li><a href="{{ route('evaluaciones.index') }}">Realizar Evaluacion</a></li><hr>
+
+                <h3>Graficos</h3>
+                <li><a href="{{ route('graficos.principal') }}">Graficar por Facultad/Dpto</a></li><hr>
+
+                <h3>Reportes</h3>
+                <li><a href="{{ route('reportes.index') }}">Obtener Reportes Anuales</a></li><hr>
               </div>
-
-              <div class="col-md-6">
-
               </div>
             </div>
           @endif
@@ -81,9 +85,9 @@
             <div class="row">
               <div class="col-md-6">
                 <h3>Evaluaciones</h3>
-                <li><a href"{{ route('evaluaciones.index') }}">Listado Evaluaciones</a></li>
-                <li><a href="{{ route('evaluaciones.indexelim') }}">Listado Evaluaciones Eliminadas</a></li>
-                <li><a href="{{ route('evaluaciones.index2') }}">Listado Evaluaciones con Excelencia</a></li><hr>
+                <li><a href="{{ route('evaluaciones.index') }}">Evaluaciones año actual</a></li>
+                <li><a href="{{ route('evaluaciones.index2') }}">Evaluaciones con excelencia</a></li>
+                <li><a href="{{ route('reportes.index') }}">Reportes</a></li><hr>
               </div>
 
               <div class="col-md-6">
