@@ -86,5 +86,95 @@ class AcademicosSeeder extends Seeder
         'CodigoDpto' => '101',
         'CodigoFacultad' => '8492'
       ]);
+
+      $academico = Academico::create([
+        'id' => '8651890',
+        'verificador' => '2',
+        'Nombres' => 'Iván',
+        'ApellidoPaterno' => 'Merino',
+        'ApellidoMaterno' => 'Rodríguez',
+        'TituloProfesional' => 'Ciencia y Tecnología Nuclear',
+        'GradoAcademico' => 'Doctor',
+        'Categoria' => 'Instructor',
+        'HorasContrato' => '27',
+        'TipoPlanta' => 'Part-time',
+        'CodigoDpto' => '274',
+        'CodigoFacultad' => '8492'
+      ]);
+
+      $academico = Academico::create([
+        'id' => '18777620',
+        'verificador' => '7',
+        'Nombres' => 'Luis',
+        'ApellidoPaterno' => 'Laurens',
+        'ApellidoMaterno' => 'Arredondo',
+        'TituloProfesional' => 'Ingeniería Mecánica',
+        'GradoAcademico' => 'Magister',
+        'Categoria' => 'Titular',
+        'HorasContrato' => '40',
+        'TipoPlanta' => 'Planta',
+        'CodigoDpto' => '101',
+        'CodigoFacultad' => '8492'
+      ]);
+
+      $academico = Academico::create([
+        'id' => '15888219',
+        'verificador' => '2',
+        'Nombres' => 'Felipe',
+        'ApellidoPaterno' => 'Tirado',
+        'ApellidoMaterno' => 'Marabolí',
+        'TituloProfesional' => 'Ciencias de la Computacion',
+        'GradoAcademico' => 'Magister',
+        'Categoria' => 'Instructor',
+        'HorasContrato' => '33',
+        'TipoPlanta' => 'Planta',
+        'CodigoDpto' => '101',
+        'CodigoFacultad' => '8492'
+      ]);
+
+      $academico = Academico::create([
+        'id' => '11988601',
+        'verificador' => '1',
+        'Nombres' => 'Angélica',
+        'ApellidoPaterno' => 'Urrutia',
+        'ApellidoMaterno' => 'Sepúlveda',
+        'TituloProfesional' => 'Ciencias de la Ingenieria',
+        'GradoAcademico' => 'Doctor',
+        'Categoria' => 'Titular',
+        'HorasContrato' => '28',
+        'TipoPlanta' => 'Planta',
+        'CodigoDpto' => '101',
+        'CodigoFacultad' => '8492'
+      ]);
+
+      $academico = Academico::create([
+        'id' => '12734361',
+        'verificador' => '2',
+        'Nombres' => 'Hugo',
+        'ApellidoPaterno' => 'Valdes',
+        'ApellidoMaterno' => 'Riquelme',
+        'TituloProfesional' => 'Ingeniería de Procesos',
+        'GradoAcademico' => 'Doctor',
+        'Categoria' => 'Titular',
+        'HorasContrato' => '34',
+        'TipoPlanta' => 'Planta',
+        'CodigoDpto' => '101',
+        'CodigoFacultad' => '8492'
+      ]);
+
+      $academico = Academico::create([
+        'id' => '13761987',
+        'verificador' => '3',
+        'Nombres' => 'Ricardo',
+        'ApellidoPaterno' => 'Barrientos',
+        'ApellidoMaterno' => 'Rojel',
+        'TituloProfesional' => 'Ciencias de la Computacion',
+        'GradoAcademico' => 'Magister',
+        'Categoria' => 'Instructor',
+        'HorasContrato' => '44',
+        'TipoPlanta' => 'Planta',
+        'CodigoDpto' => '101',
+        'CodigoFacultad' => '8492'
+      ]);
     }
 }

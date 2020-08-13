@@ -8,19 +8,12 @@ Route::resource('roles','RoleController');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
-Route::get('/reporteaño/{role}', 'ReporteController@exportEvaluaciones')->name('exportarreporte');
-Route::get('/reportepdf/{role}', 'ReporteController@pdf')->name('reporte.pdf');
-Route::get('/exportar/{role}', 'EvaluacionController@exportAcademico')->name('exportaracademico');
 Route::get('/evsjson', 'EvaluacionController@json');
 Route::put('/evsjson/actualizar', 'EvaluacionController@update2');
 Route::delete('/evsjson/borrar/{id}', 'EvaluacionController@destroy2');
 Route::post('/evsjson/guardar', 'EvaluacionController@store2');
 Route::get('/evsjson/buscar', 'EvaluacionController@show2');
 Route::get('evsjson/evaluar/{role}/ev', 'EvaluacionController@evaluar')->name('evaluaciones.evaluar');
-Route::get('reportes', 'ReporteController@index')->name('reportes.index');
-Route::get('/graficos', 'GraficoController@principal')->name('graficos.principal');
-Route::get('/graficos/{academico}', 'GraficoController@academico')->name('graficos.academico');
-Route::get('procesosc', 'ProcesoController@cambiar')->name('procesos.cambiar');
 
 //rutas asociadas a los diferentes middlewares de permisos de acceso
 Route::middleware(['auth'])->group(function () {
@@ -166,4 +159,21 @@ Route::middleware(['auth'])->group(function () {
                                                         ->middleware('permission:procesos.cerrar');
     Route::put('procesos/{role}', 'ProcesoController@update')->name('procesos.update')
                                                         ->middleware('permission:procesos.index');
+    Route::get('procesosc', 'ProcesoController@cambiar')->name('procesos.cambiar')
+                                                        ->middleware('permission:procesos.cambiar');
+
+    Route::get('reportes', 'ReporteController@index')->name('reportes.index')
+                                                        ->middleware('permission:reportes.index');
+    Route::get('/reporteaño/{role}', 'ReporteController@exportEvaluaciones')->name('exportarreporte')
+                                                        ->middleware('permission:exportarreporte');
+    Route::get('/reportepdf/{role}', 'ReporteController@pdf')->name('reporte.pdf')
+                                                        ->middleware('permission:reporte.pdf');
+    Route::get('/exportar/{role}', 'EvaluacionController@exportAcademico')->name('exportaracademico')
+                                                        ->middleware('permission:exportaracademico');
+
+    Route::get('/graficos', 'GraficoController@principal')->name('graficos.principal')
+                                                        ->middleware('permission:graficos.principal');
+    Route::get('/graficos/{academico}', 'GraficoController@academico')->name('graficos.academico')
+                                                        ->middleware('permission:graficos.academico');
+
 });

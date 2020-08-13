@@ -31,7 +31,8 @@
                 <li><a href="{{ route('facultades.create') }}">Añadir Facultad</a></li><hr>
 
                 <h3>Proceso Evaluativo</h3>
-                <li><a href="{{ route('procesos.index') }}">Abrir o Cerrar Proceso</a></li><hr>
+                <li><a href="{{ route('procesos.index') }}">Abrir o Cerrar Proceso</a></li>
+                <li><a href="{{ route('reportes.index') }}">Obtener Reportes Anuales</a></li><hr>
 
               </div>
               <div class="col-md-6">

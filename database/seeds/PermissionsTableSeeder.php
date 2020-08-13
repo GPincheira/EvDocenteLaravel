@@ -67,6 +67,15 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'procesos.index']);
       Permission::create(['name' => 'procesos.abrir']);
       Permission::create(['name' => 'procesos.cerrar']);
+      Permission::create(['name' => 'procesos.cambiar']);
+
+      Permission::create(['name' => 'reportes.index']);
+      Permission::create(['name' => 'exportarreporte']);
+      Permission::create(['name' => 'reporte.pdf']);
+      Permission::create(['name' => 'exportaracademico']);
+
+      Permission::create(['name' => 'graficos.principal']);
+      Permission::create(['name' => 'graficos.academico']);
 
       //Creacion de los 3 tipos de roles, y se le asigna los permisos correspondientes a cada uno
       $Administrador = Role::create(['name' => 'Administrador']);
@@ -104,6 +113,11 @@ class PermissionsTableSeeder extends Seeder
           'procesos.index',
           'procesos.abrir',
           'procesos.cerrar',
+          'procesos.cambiar',
+          'reportes.index',
+          'exportarreporte',
+          'reporte.pdf',
+          'exportaracademico'
       ]);
 
       $SecFacultad = Role::create(['name' => 'SecFacultad']);
@@ -125,6 +139,12 @@ class PermissionsTableSeeder extends Seeder
           'evaluaciones.destroy',
           'evaluaciones.reactivar',
           'evaluaciones.pdf',
+          'reportes.index',
+          'exportarreporte',
+          'reporte.pdf',
+          'exportaracademico',
+          'graficos.principal',
+          'graficos.academico'
       ]);
 
       $Secretario = Role::create(['name' => 'Secretario']);
@@ -133,6 +153,10 @@ class PermissionsTableSeeder extends Seeder
           'evaluaciones.index2',
           'evaluaciones.show',
           'evaluaciones.pdf',
+          'reportes.index',
+          'exportarreporte',
+          'reporte.pdf',
+          'exportaracademico',
       ]);
     }
 }

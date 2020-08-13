@@ -29,15 +29,15 @@
                       <td class="izq">1. Actividades de Docencia</td>
                       <td><input type="number" v-model="p1"></td>
                       <td v-if="arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[0]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN1[0]"><div v-if="this.arrayN1[0]<4.5 || this.arrayN1[0]>5" class="error">Entre 4.5 y 5.0</div></td>
+                      <td v-else><input type="float" v-model="arrayN1[0]"><div v-if="this.arrayN1[0] != 0 && (this.arrayN1[0]<4.5 || this.arrayN1[0]>5)" class="error">Entre 4.5 y 5.0</div></td>
                       <td v-if="arrayN1[0]>0 || arrayN1[2]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[1]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN1[1]"><div v-if="this.arrayN1[1]<4.0 || this.arrayN1[1]>4.4" class="error">Entre 4.0 y 4.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN1[1]"><div v-if="this.arrayN1[1] != 0 && (this.arrayN1[1]<4.0 || this.arrayN1[1]>4.4)" class="error">Entre 4.0 y 4.4</div></td>
                       <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[3]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[2]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN1[2]"><div v-if="this.arrayN1[2]<3.5 || this.arrayN1[2]>3.9" class="error">Entre 3.5 y 3.9</div></td>
+                      <td v-else><input type="float" v-model="arrayN1[2]"><div v-if="this.arrayN1[2] != 0 && (this.arrayN1[2]<3.5 || this.arrayN1[2]>3.9)" class="error">Entre 3.5 y 3.9</div></td>
                       <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[4]>0"><input type="float" v-model="arrayN1[3]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN1[3]"><div v-if="this.arrayN1[3]<2.7 || this.arrayN1[3]>3.4" class="error">Entre 2.7 y 3.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN1[3]"><div v-if="this.arrayN1[3] != 0 && (this.arrayN1[3]<2.7 || this.arrayN1[3]>3.4)" class="error">Entre 2.7 y 3.4</div></td>
                       <td v-if="arrayN1[0]>0 || arrayN1[1]>0 || arrayN1[2]>0 || arrayN1[3]>0"><input type="float" v-model="arrayN1[4]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN1[4]"><div v-if="this.arrayN1[4]<0.1 || this.arrayN1[4]>2.6" class="error">Menor de 2.6</div></td>
+                      <td v-else><input type="float" v-model="arrayN1[4]"><div v-if="this.arrayN1[4]>2.6" class="error">Menor de 2.6</div></td>
                       <td>{{n1=suma(p1,arrayN1[0],arrayN1[1],arrayN1[2],arrayN1[3],arrayN1[4])}}<a>x</a>{{p1/100}}<a>=</a>{{x1=n1*p1/100}} </td>
                     </tr>
                     <tr v-else>
@@ -54,15 +54,15 @@
                       <td class="izq">2. Actividades de Investigación</td>
                       <td><input type="number" v-model="p2"></td>
                       <td v-if="arrayN2[1]>0 || arrayN2[2]>0 || arrayN2[3]>0 || arrayN2[4]>0"><input type="float" v-model="arrayN2[0]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN2[0]"><div v-if="this.arrayN2[0]<4.5 || this.arrayN2[0]>5" class="error">Entre 4.5 y 5.0</div></td>
+                      <td v-else><input type="float" v-model="arrayN2[0]"><div v-if="this.arrayN2[0] != 0 && (this.arrayN2[0]<4.5 || this.arrayN2[0]>5)" class="error">Entre 4.5 y 5.0</div></td>
                       <td v-if="arrayN2[0]>0 || arrayN2[2]>0 || arrayN2[3]>0 || arrayN2[4]>0"><input type="float" v-model="arrayN2[1]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN2[1]"><div v-if="this.arrayN2[1]<4.0 || this.arrayN2[1]>4.4" class="error">Entre 4.0 y 4.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN2[1]"><div v-if="this.arrayN2[1] != 0 && (this.arrayN2[1]<4.0 || this.arrayN2[1]>4.4)" class="error">Entre 4.0 y 4.4</div></td>
                       <td v-if="arrayN2[0]>0 || arrayN2[1]>0 || arrayN2[3]>0 || arrayN2[4]>0"><input type="float" v-model="arrayN2[2]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN2[2]"><div v-if="this.arrayN2[2]<3.5 || this.arrayN2[2]>3.9" class="error">Entre 3.5 y 3.9</div></td>
+                      <td v-else><input type="float" v-model="arrayN2[2]"><div v-if="this.arrayN2[2] != 0 && (this.arrayN2[2]<3.5 || this.arrayN2[2]>3.9)" class="error">Entre 3.5 y 3.9</div></td>
                       <td v-if="arrayN2[0]>0 || arrayN2[1]>0 || arrayN2[2]>0 || arrayN2[4]>0"><input type="float" v-model="arrayN2[3]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN2[3]"><div v-if="this.arrayN2[3]<2.7 || this.arrayN2[3]>3.4" class="error">Entre 2.7 y 3.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN2[3]"><div v-if="this.arrayN2[3] != 0 && (this.arrayN2[3]<2.7 || this.arrayN2[3]>3.4)" class="error">Entre 2.7 y 3.4</div></td>
                       <td v-if="arrayN2[0]>0 || arrayN2[1]>0 || arrayN2[2]>0 || arrayN2[3]>0"><input type="float" v-model="arrayN2[4]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN2[4]"><div v-if="this.arrayN2[4]<0.1 || this.arrayN2[4]>2.6" class="error">Menor de 2.6</div></td>
+                      <td v-else><input type="float" v-model="arrayN2[4]"><div v-if="this.arrayN2[4]>2.6" class="error">Menor de 2.6</div></td>
                       <td>{{n2=suma(p2,arrayN2[0],arrayN2[1],arrayN2[2],arrayN2[3],arrayN2[4])}}<a>x</a>{{p2/100}}<a>=</a>{{x2=n2*p2/100}} </td>
                     </tr>
                     <tr v-else>
@@ -79,15 +79,15 @@
                       <td class="izq">3. Extension y Vinculación</td>
                       <td><input type="number" v-model="p3"></td>
                       <td v-if="arrayN3[1]>0 || arrayN3[2]>0 || arrayN3[3]>0 || arrayN3[4]>0"><input type="float" v-model="arrayN3[0]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN3[0]"><div v-if="this.arrayN3[0]<4.5 || this.arrayN3[0]>5" class="error">Entre 4.5 y 5.0</div></td>
+                      <td v-else><input type="float" v-model="arrayN3[0]"><div v-if="this.arrayN3[0] != 0 && (this.arrayN3[0]<4.5 || this.arrayN3[0]>5)" class="error">Entre 4.5 y 5.0</div></td>
                       <td v-if="arrayN3[0]>0 || arrayN3[2]>0 || arrayN3[3]>0 || arrayN3[4]>0"><input type="float" v-model="arrayN3[1]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN3[1]"><div v-if="this.arrayN3[1]<4.0 || this.arrayN3[1]>4.4" class="error">Entre 4.0 y 4.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN3[1]"><div v-if="this.arrayN3[1] != 0 && (this.arrayN3[1]<4.0 || this.arrayN3[1]>4.4)" class="error">Entre 4.0 y 4.4</div></td>
                       <td v-if="arrayN3[0]>0 || arrayN3[1]>0 || arrayN3[3]>0 || arrayN3[4]>0"><input type="float" v-model="arrayN3[2]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN3[2]"><div v-if="this.arrayN3[2]<3.5 || this.arrayN3[2]>3.9" class="error">Entre 3.5 y 3.9</div></td>
+                      <td v-else><input type="float" v-model="arrayN3[2]"><div v-if="this.arrayN3[2] != 0 && (this.arrayN3[2]<3.5 || this.arrayN3[2]>3.9)" class="error">Entre 3.5 y 3.9</div></td>
                       <td v-if="arrayN3[0]>0 || arrayN3[1]>0 || arrayN3[2]>0 || arrayN3[4]>0"><input type="float" v-model="arrayN3[3]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN3[3]"><div v-if="this.arrayN3[3]<2.7 || this.arrayN3[3]>3.4" class="error">Entre 2.7 y 3.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN3[3]"><div v-if="this.arrayN3[3] != 0 && (this.arrayN3[3]<2.7 || this.arrayN3[3]>3.4)" class="error">Entre 2.7 y 3.4</div></td>
                       <td v-if="arrayN3[0]>0 || arrayN3[1]>0 || arrayN3[2]>0 || arrayN3[3]>0"><input type="float" v-model="arrayN3[4]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN3[4]"><div v-if="this.arrayN3[4]<0.1 || this.arrayN3[4]>2.6" class="error">Menor de 2.6</div></td>
+                      <td v-else><input type="float" v-model="arrayN3[4]"><div v-if="this.arrayN3[4]>2.6" class="error">Menor de 2.6</div></td>
                       <td>{{n3=suma(p3,arrayN3[0],arrayN3[1],arrayN3[2],arrayN3[3],arrayN3[4])}}<a>x</a>{{p3/100}}<a>=</a>{{x3=n3*p3/100}} </td>
                     </tr>
                     <tr v-else>
@@ -104,15 +104,15 @@
                       <td class="izq">4. Administración Académica</td>
                       <td><input type="number" v-model="p4"></td>
                       <td v-if="arrayN4[1]>0 || arrayN4[2]>0 || arrayN4[3]>0 || arrayN4[4]>0"><input type="float" v-model="arrayN4[0]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN4[0]"><div v-if="this.arrayN4[0]<4.5 || this.arrayN4[0]>5" class="error">Entre 4.5 y 5.0</div></td>
+                      <td v-else><input type="float" v-model="arrayN4[0]"><div v-if="this.arrayN4[0] != 0 && (this.arrayN4[0]<4.5 || this.arrayN4[0]>5)" class="error">Entre 4.5 y 5.0</div></td>
                       <td v-if="arrayN4[0]>0 || arrayN4[2]>0 || arrayN4[3]>0 || arrayN4[4]>0"><input type="float" v-model="arrayN4[1]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN4[1]"><div v-if="this.arrayN4[1]<4.0 || this.arrayN4[1]>4.4" class="error">Entre 4.0 y 4.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN4[1]"><div v-if="this.arrayN4[1] != 0 && (this.arrayN4[1]<4.0 || this.arrayN4[1]>4.4)" class="error">Entre 4.0 y 4.4</div></td>
                       <td v-if="arrayN4[0]>0 || arrayN4[1]>0 || arrayN4[3]>0 || arrayN4[4]>0"><input type="float" v-model="arrayN4[2]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN4[2]"><div v-if="this.arrayN4[2]<3.5 || this.arrayN4[2]>3.9" class="error">Entre 3.5 y 3.9</div></td>
+                      <td v-else><input type="float" v-model="arrayN4[2]"><div v-if="this.arrayN4[2] != 0 && (this.arrayN4[2]<3.5 || this.arrayN4[2]>3.9)" class="error">Entre 3.5 y 3.9</div></td>
                       <td v-if="arrayN4[0]>0 || arrayN4[1]>0 || arrayN4[2]>0 || arrayN4[4]>0"><input type="float" v-model="arrayN4[3]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN4[3]"><div v-if="this.arrayN4[3]<2.7 || this.arrayN4[3]>3.4" class="error">Entre 2.7 y 3.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN4[3]"><div v-if="this.arrayN4[3] != 0 && (this.arrayN4[3]<2.7 || this.arrayN4[3]>3.4)" class="error">Entre 2.7 y 3.4</div></td>
                       <td v-if="arrayN4[0]>0 || arrayN4[1]>0 || arrayN4[2]>0 || arrayN4[3]>0"><input type="float" v-model="arrayN4[4]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN4[4]"><div v-if="this.arrayN4[4]<0.1 || this.arrayN4[4]>2.6" class="error">Menor de 2.6</div></td>
+                      <td v-else><input type="float" v-model="arrayN4[4]"><div v-if="this.arrayN4[4]>2.6" class="error">Menor de 2.6</div></td>
                       <td>{{n4=suma(p4,arrayN4[0],arrayN4[1],arrayN4[2],arrayN4[3],arrayN4[4])}}<a>x</a>{{p4/100}}<a>=</a>{{x4=n4*p4/100}} </td>
                     </tr>
                     <tr v-else>
@@ -129,15 +129,15 @@
                       <td class="izq">5. Otras actividades realizadas</td>
                       <td><input type="number" v-model="p5"></td>
                       <td v-if="arrayN5[1]>0 || arrayN5[2]>0 || arrayN5[3]>0 || arrayN5[4]>0"><input type="float" v-model="arrayN5[0]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN5[0]"><div v-if="this.arrayN5[0]<4.5 || this.arrayN5[0]>5" class="error">Entre 4.5 y 5.0</div></td>
+                      <td v-else><input type="float" v-model="arrayN5[0]"><div v-if="this.arrayN5[0] != 0 && (this.arrayN5[0]<4.5 || this.arrayN5[0]>5)" class="error">Entre 4.5 y 5.0</div></td>
                       <td v-if="arrayN5[0]>0 || arrayN5[2]>0 || arrayN5[3]>0 || arrayN5[4]>0"><input type="float" v-model="arrayN5[1]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN5[1]"><div v-if="this.arrayN5[1]<4.0 || this.arrayN5[1]>4.4" class="error">Entre 4.0 y 4.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN5[1]"><div v-if="this.arrayN5[1] != 0 && (this.arrayN5[1]<4.0 || this.arrayN5[1]>4.4)" class="error">Entre 4.0 y 4.4</div></td>
                       <td v-if="arrayN5[0]>0 || arrayN5[1]>0 || arrayN5[3]>0 || arrayN5[4]>0"><input type="float" v-model="arrayN5[2]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN5[2]"><div v-if="this.arrayN5[2]<3.5 || this.arrayN5[2]>3.9" class="error">Entre 3.5 y 3.9</div></td>
+                      <td v-else><input type="float" v-model="arrayN5[2]"><div v-if="this.arrayN5[2] != 0 && (this.arrayN5[2]<3.5 || this.arrayN5[2]>3.9)" class="error">Entre 3.5 y 3.9</div></td>
                       <td v-if="arrayN5[0]>0 || arrayN5[1]>0 || arrayN5[2]>0 || arrayN5[4]>0"><input type="float" v-model="arrayN5[3]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN5[3]"><div v-if="this.arrayN5[3]<2.7 || this.arrayN5[3]>3.4" class="error">Entre 2.7 y 3.4</div></td>
+                      <td v-else><input type="float" v-model="arrayN5[3]"><div v-if="this.arrayN5[3] != 0 && (this.arrayN5[3]<2.7 || this.arrayN5[3]>3.4)" class="error">Entre 2.7 y 3.4</div></td>
                       <td v-if="arrayN5[0]>0 || arrayN5[1]>0 || arrayN5[2]>0 || arrayN5[3]>0"><input type="float" v-model="arrayN5[4]" disabled></td>
-                      <td v-else><input type="float" v-model="arrayN5[4]"><div v-if="this.arrayN5[4]<0.1 || this.arrayN5[4]>2.6" class="error">Menor de 2.6</div></td>
+                      <td v-else><input type="float" v-model="arrayN5[4]"><div v-if="this.arrayN5[4]>2.6" class="error">Menor de 2.6</div></td>
                       <td>{{n5=suma(p5,arrayN5[0],arrayN5[1],arrayN5[2],arrayN5[3],arrayN5[4])}}<a>x</a>{{p5/100}}<a>=</a>{{x5=n5*p5/100}} </td>
                     </tr>
                     <tr v-else>
@@ -211,10 +211,10 @@
               <div class="container-buttons">
                 <!-- Botón que añade los datos del formulario, solo se muestra si la variable update es igual a 0-->
                 <div v-if="parseFloat(this.p1)+parseFloat(this.p2)+parseFloat(this.p3)+parseFloat(this.p4)+parseFloat(this.p5) == 100 && this.n1<=5 && this.n2<=5 && this.n3<=5 && this.n4<=5 && this.n5<=5 && this.Argumento.length <= 100">
-                  <button @click="updateEvaluacions()" class="btn btn-success" style="margin:12px">Añadir</button>
+                  <button @click="updateEvaluacions()" class="btn btn-success" style="margin:12px">Guardar</button>
                 </div>
                 <div v-else>
-                  <button @click="updateEvaluacions()" class="btn btn-success" style="margin:12px" disabled>Añadir</button>
+                  <button @click="updateEvaluacions()" class="btn btn-success" style="margin:12px" disabled>Guardar</button>
                   <div v-if="parseFloat(this.p1)+parseFloat(this.p2)+parseFloat(this.p3)+parseFloat(this.p4)+parseFloat(this.p5) != 100">
                     <p class="error">Los porcentajes deben sumar 100%</p>
                   </div>
