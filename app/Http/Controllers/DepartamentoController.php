@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 class DepartamentoController extends Controller
 {
 
+//funcion que pone todos los dptos en un formato json
     public function json()
     {
         return Departamento::all();
@@ -23,6 +24,7 @@ class DepartamentoController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+//mismo caso anterior, pero esta vez para dptos ya eliminados
     public function indexelim()
     {
       $departamentos = Departamento::orderBy('id', 'ASC')->onlyTrashed()->latest()->paginate(10);
@@ -31,12 +33,14 @@ class DepartamentoController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+//funcion crear, que luego lleva a la vista para la creacion
     public function create()
     {
         $facultades = Facultad::all();
         return view('departamentos.create',['facultades' => $facultades]);
     }
 
+//funcion para validar los datos ingresados para la comision, y si esta todo en orden crea el registro
     public function store(Request $request)
     {
       $request->validate([
@@ -52,11 +56,13 @@ class DepartamentoController extends Controller
         ->with('success','Departamento creado exitosamente.');
     }
 
+//funcion para mostrar un registro en particular
     public function show(Departamento $departamento)
     {
       return view('departamentos.show',compact('departamento'));
     }
 
+//funcion editar, que envia a la vista donde estara el formulario
     public function edit($id)
     {
       $departamento = departamento::find($id);
@@ -64,6 +70,7 @@ class DepartamentoController extends Controller
       return view('departamentos.edit',compact('departamento'),['facultades' => $facultades]);
     }
 
+//funcion que valida los datos para editar, y si esta todo en orden, realiza los cambios    
     public function update(Request $request, $id)
     {
       $request->validate([

@@ -14,11 +14,13 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+//envia a la vista home, pantalla principal al ingresar
     public function index()
     {
         return view('home');
     }
 
+//funcion que lleva a la vista del mapa del sitio
     public function mapa()
     {
         return view('mapa');

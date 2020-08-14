@@ -27,12 +27,13 @@ class FacultadController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+//funcion crear, que luego lleva a la vista para la creacion
     public function create()
     {
         return view('facultades.create');
     }
 
-  //funcion para validar los datos que se ingresan en la blade de crear, se revisa que este todo en orden y se guarda el registro
+//funcion para validar los datos que se ingresan en la blade de crear, se revisa que este todo en orden y se guarda el registro
     public function store(Request $request)
     {
       $request->validate([
@@ -50,20 +51,20 @@ class FacultadController extends Controller
         ->with('success','Facultad creada exitosamente.');
     }
 
-  //funcion para mostrar cada registro, este eliminado o no
+//funcion para mostrar cada registro, este eliminado o no
     public function show(Facultad $facultad)
     {
         return view('facultades.show',compact('facultad'));
     }
 
-  //funcion para editar, que busca el $id que se quiere, y luego lleva a la vista donde se ingresan los datos
+//funcion para editar, que busca el $id que se quiere, y luego lleva a la vista donde se ingresan los datos
     public function edit($id)
     {
         $facultad = facultad::find($id);
         return view('facultades.edit',compact('facultad'));
     }
 
-  //se validan los datos de la edicion y se guarda si todo esta correcto
+//se validan los datos de la edicion y se guarda si todo esta correcto
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -82,7 +83,7 @@ class FacultadController extends Controller
         ->with('success','Facultad Actualizada Exitosamente');
     }
 
-  //funcion para eliminar (soft)
+//funcion para eliminar (soft)
     public function destroy($id)
     {
       $facultad = facultad::find($id);

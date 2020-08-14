@@ -8,13 +8,13 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
 
-//Controlador para los diferentes roles que existan en el sistema
+//Controlador para los diferentes roles que existan en el sistema, solo es utilizado por las semillas
 class RoleController extends Controller
 {
 
     function __construct()
     {
-      //asignacion de permisos segun el rol que se tenga
+//asignacion de permisos segun el rol que se tenga
          $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
          $this->middleware('permission:role-create', ['only' => ['create','store']]);
          $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
@@ -28,12 +28,14 @@ class RoleController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
+//funcion para crear un nuevo rol
     public function create()
     {
         $permission = Permission::get();
         return view('roles.create',compact('permission'));
     }
 
+//almacenar los resultados
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -46,6 +48,7 @@ class RoleController extends Controller
                         ->with('success','Role created successfully');
     }
 
+//funcion para mostrar un rol
     public function show($id)
     {
         $role = Role::find($id);
@@ -55,6 +58,7 @@ class RoleController extends Controller
         return view('roles.show',compact('role','rolePermissions'));
     }
 
+//edicion del rol
     public function edit($id)
     {
         $role = Role::find($id);
@@ -65,6 +69,7 @@ class RoleController extends Controller
         return view('roles.edit',compact('role','permission','rolePermissions'));
     }
 
+//actualiza un rol segun lo que entrega al formulario
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -79,6 +84,7 @@ class RoleController extends Controller
                         ->with('success','Role updated successfully');
     }
 
+//eliminar un rol
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();

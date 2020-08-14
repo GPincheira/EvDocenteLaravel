@@ -35,16 +35,17 @@ class ComisionController extends Controller
       }
     }
 
+//funcion crear, que luego lleva a la vista para la creacion
     public function create()
     {
         return view('comisiones.create');
     }
 
-  //funcion para validar los datos ingresados para la comision, y si esta todo en orden crea el registro
+//funcion para validar los datos ingresados para la comision, y si esta todo en orden crea el registro
     public function store(Request $request)
     {
       $secFacultad = secFacultad::find(@Auth::user()->id);
-      $facultad = facultad::find($secFacultad->CodigoFacultad);
+      $facultad = facultad::find($secFacultad->CodigoFacultad); //se busca la facultad para asignar datos de esta a la comision
       $request->validate([
         'Año' => ['required','integer','min:2000','max:2100'],
         'Fecha' => ['required'],
@@ -64,7 +65,7 @@ class ComisionController extends Controller
       $request['NombreSecFac']= @Auth::user()->Nombre;
       $request['APaternoSecFac']= @Auth::user()->ApellidoPaterno;
       $request['AMaternoSecFac']= @Auth::user()->ApellidoMaterno;
-      if ($request['Estado'] == "Activo"){
+      if ($request['Estado'] == "Activo"){  //si se pone activa, se eliminan las  otras activas para este año en esta facultad
         $comisiones = Comision::all();
         foreach ($comisiones as $comision){
           if($comision->Año == $request['Año'] && $comision->CodigoFacultad == @Auth::user()->SecFacultad->CodigoFacultad){
@@ -78,6 +79,7 @@ class ComisionController extends Controller
         ->with('success','Comision creada exitosamente.');
     }
 
+//funcion para mostrar un registro en particular
     public function show(Comision $comision)
     {
       $fecha = new Carbon($comision->Fecha);
@@ -85,13 +87,14 @@ class ComisionController extends Controller
       return view('comisiones.show',compact('comision'));
     }
 
+//funcion editar, que envia a la vista donde estara el formulario
     public function edit($id)
     {
       $comision = comision::find($id);
       return view('comisiones.edit',compact('comision'));
     }
 
-  //funcion que valida los datos para editar, y si esta todo en orden, realiza los cambios
+//funcion que valida los datos para editar, y si esta todo en orden, realiza los cambios
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -118,6 +121,7 @@ class ComisionController extends Controller
         ->with('success','Comision Actualizada Exitosamente');
     }
 
+//funcion que al activar una comision, elimina a las otras activas para el mismo año y facultad
     public function activaunica($id)
     {
       $nuevaact = comision::find($id);
@@ -134,7 +138,7 @@ class ComisionController extends Controller
         ->with('success','Comision Activada Exitosamente');
     }
 
-  //funcion que elimina un registro (soft)
+//funcion que elimina un registro (soft)
     public function destroy($id)
     {
       $comision = comision::find($id);

@@ -8,16 +8,18 @@ use Illuminate\Http\Request;
 class ProcesoController extends Controller
 {
 
+//funcion index, donde se seleccionara el proceso activo y las fechas de inicio y cierre
     public function index()
     {
       $procesos = Proceso::all();
-      $activo = Proceso::where('Estado', '=', 'Activo')->first();
+      $activo = Proceso::where('Estado', '=', 'Activo')->first(); //se busca el proceso activo y todos los demas
       $fecha = date("Y-m-d");
-      $año = date("Y");
+      $año = date("Y"); //año actual para ponerlo como limite para elegir fecha
       $fin = $año.'-12-31';
       return view('procesos.index',compact('procesos','activo','fecha','fin'));
     }
 
+//funcion que lleva a la vista para crear
     public function create()
     {
         return view('procesos.create');
@@ -38,6 +40,7 @@ class ProcesoController extends Controller
         //
     }
 
+//funcion que recibe informacion de lo que se editara y lo guarda si no hay error
     public function update(Request $request, $año)
     {
       $request->validate([
@@ -55,6 +58,7 @@ class ProcesoController extends Controller
         //
     }
 
+//funcion para abrir proceso, pone fecha inicio el dia actual y termino el ultimo dia del año
     public function abrir($año)
     {
       $proceso = proceso::all()->find($año);
@@ -66,6 +70,7 @@ class ProcesoController extends Controller
         ->with('success','Proceso Abierto');
     }
 
+//funcion para cerrar proceso, pone fecha  termino el dia anterior
     public function cerrar($año)
     {
       $proceso = proceso::all()->find($año);
@@ -78,6 +83,7 @@ class ProcesoController extends Controller
         ->with('success','Proceso Cerrado');
     }
 
+//funcion que cambia las fechas de inicio y cierre de un proceso por las ingresadas
     public function cambiar(Request $request)
     {
       $elegido = proceso::find($request['año']);

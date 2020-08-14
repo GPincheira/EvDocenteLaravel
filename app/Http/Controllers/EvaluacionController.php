@@ -20,11 +20,14 @@ use Carbon\Carbon;
 class EvaluacionController extends Controller
 {
 
+//funcion que pone todos los dptos en un formato json
     public function json()
     {
         return Evaluacion::all();
     }
 
+//En index se obtiene el listado completo de evaluaciones para el año activo si es sec de facultad o todas si es Administrador
+//y se paginan de 10. Al sec de facultad se le entrega tambien un listado de academicos aun no evaluados en el periodo activo
     public function index()
     {
       if(@Auth::user()->hasRole('Administrador')){
@@ -33,8 +36,8 @@ class EvaluacionController extends Controller
           ->with('i',(request()->input('page',1)-1)*5);
       }
       else if(@Auth::user()->hasRole('SecFacultad')){
-        $proceso = proceso::where('Estado', 'Activo')->first();
-        $academicos = DB::table('academicos')
+        $proceso = proceso::where('Estado', 'Activo')->first(); //periodo activo
+        $academicos = DB::table('academicos') //academicos que no presentan evaluacion en el año activo
             	       ->select('academicos.id','academicos.verificador','academicos.Nombres','academicos.ApellidoPaterno','academicos.ApellidoMaterno',
                               'departamentos.Nombre','academicos.TituloProfesional','academicos.CodigoDpto')
                       ->leftJoin('departamentos', function($join){
@@ -51,7 +54,7 @@ class EvaluacionController extends Controller
                       ->orderBy('academicos.ApellidoPaterno')
                       ->get();
         $CodigoFacultad = @Auth::user()->secFacultad->CodigoFacultad;
-        $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)
+        $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad) //listado de evaluaciones en el año activo
                       ->where('año', $proceso->año)->latest()->paginate(10);
         return view('evaluaciones.index',compact('evaluaciones'),['academicos'=>$academicos, 'año'=>$proceso->año])
           ->with('i',(request()->input('page',1)-1)*5);
@@ -63,7 +66,7 @@ class EvaluacionController extends Controller
       }
     }
 
-//index para los elementos eliminados
+//index para las que han sido eliminadas, solo del año activo si es sec de facultad
     public function indexelim()
     {
       $proceso = proceso::where('Estado', 'Activo')->first();
@@ -83,7 +86,7 @@ class EvaluacionController extends Controller
       }
     }
 
-//funcion index2, para utilizarse como vista para el usuario secretario
+//funcion index2, para utilizarse como vista para el usuario secretario con evaluaciones con excelencia
     public function index2()
     {
       $evaluaciones = Evaluacion::orderBy('año','DESC')->where('NotaFinal','>=','4.5')->latest()->paginate(10);
@@ -91,11 +94,12 @@ class EvaluacionController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
+//funcion para vista de evaluacion, recibe el periodo actual, datos sobre el academico y su ultima evaluacion
     public function evaluar($id){
       $proceso = proceso::where('Estado', 'Activo')->first();
       $año = $proceso->año;
       $academico = Academico::find($id);
-      $ultima = Evaluacion::orderBy('año', 'DESC')
+      $ultima = Evaluacion::orderBy('año', 'DESC')  //dato de la ultima evaluacion de este academico
                 ->where('RUTAcademico', $id)
                 ->where('año', '<', $proceso->año)
                 ->first();
@@ -103,22 +107,22 @@ class EvaluacionController extends Controller
       $academicos = Academico::all()->where('CodigoFacultad',$CodigoFacultad);
       $evaluaciones = Evaluacion::where('CodigoFacultad',$CodigoFacultad)->where('año', '=', $proceso->año)->latest()->paginate(10);
       $academico = Academico::find($id);
-      $comision = Comision::where('Estado', '=', 'Activo')
+      $comision = Comision::where('Estado', '=', 'Activo')  //datos de la comision activa
                 ->where('Año', '=', $proceso->año)
                 ->where('CodigoFacultad', '=', @Auth::user()->secFacultad->CodigoFacultad)
                 ->first();
-      $evaluado = Evaluacion::where('RUTAcademico',$id)->where('Año', $proceso->año)->first();
+      $evaluado = Evaluacion::where('RUTAcademico',$id)->where('Año', $proceso->año)->first();  //datos del academico
       if ($proceso->inicio<=date('Y-m-d') && $proceso->fin>=date('Y-m-d')){
         if ($comision != null){
-          if ($evaluado != null) {
+          if ($evaluado != null) {  //si ya hay evaluacion para este academico, se avisa con un mensaje
             return redirect()->route('evaluaciones.index')
               ->with('success','Academico evaluado');
           }
-          else{
+          else{   //se envia a la vista para evaluar
             return view('evaluaciones.evaluar',compact('proceso','academico','ultima','año'));
           }
         }
-        else{
+        else{ //si no hay una comision creada para el año, se envia mensaje de error
             return Redirect()->back()->with('error','No existe una comision activa');
         }
       }
@@ -127,6 +131,7 @@ class EvaluacionController extends Controller
       }
     }
 
+//funcion que almacena en la BD lo ingresado en el formulario, ademas del id del academico, comision y año
     public function store2(Request $request)
     {
         $proceso = proceso::where('Estado', 'Activo')->first();
@@ -154,17 +159,19 @@ class EvaluacionController extends Controller
         $evaluacion->save();
     }
 
+//funcion que muestra informacion de una evaluacion en especifico
     public function show(Evaluacion $evaluacion)
     {
-      $fecha = new Carbon($evaluacion->comision->Fecha);
+      $fecha = new Carbon($evaluacion->comision->Fecha);  //la fecha se pone en formato dd-mm-aaaa
       $evaluacion->comision->Fecha = $fecha->format('d-m-Y');
-      $ultima = Evaluacion::orderBy('año', 'DESC')
+      $ultima = Evaluacion::orderBy('año', 'DESC')    //se debe pasar la ultima evaluacion de este academico
                 ->where('RUTAcademico', $evaluacion->RUTAcademico)
                 ->where('año', '<', $evaluacion->año)
                 ->first();
       return view('evaluaciones.show',compact('evaluacion','ultima'));
     }
 
+//funcion que lleva a la vista para editar una evaluacion, se pasa su informacion
     public function edit($id)
     {
       $evaluacion = evaluacion::find($id);
@@ -175,7 +182,7 @@ class EvaluacionController extends Controller
       return view('evaluaciones.edit',compact('evaluacion','ultima'));
     }
 
-//funcion update valida los datos ingresados, y realiza los cambios si todo esta en orden
+//funcion update valida los datos ingresados para actualizar, y realiza los cambios si todo esta en orden
     public function update2(Request $request)
     {
       $evaluacion = Evaluacion::findOrFail($request->id);
@@ -196,13 +203,14 @@ class EvaluacionController extends Controller
         ->with('success','Evaluacion editada.');
     }
 
+//Funcion show que se utiliza para hacer busqueda dentro de vue
     public function show2(Request $request)
    {
        $evaluacion = Evaluacion::findOrFail($request->id);
        return $evaluacion;
-       //Esta función devolverá los datos de una tarea que hayamos seleccionado para cargar el formulario con sus datos
    }
 
+//funcion para eliminar evaluacion
     public function destroy($id)
     {
       $evaluacion = evaluacion::find($id);
@@ -211,7 +219,7 @@ class EvaluacionController extends Controller
         ->with('success','Evaluacion Eliminada Exitosamente');
     }
 
-    //funcion para reactivar un elemento ya eliminado
+//funcion para reactivar un elemento ya eliminado
     public function reactivar($id)
     {
       $evaluacion = evaluacion::onlyTrashed()->find($id);
@@ -220,6 +228,7 @@ class EvaluacionController extends Controller
         ->with('success','Evaluacion Reactivada Exitosamente');
     }
 
+//funcion para generar excel sobre una evaluacion
     public function exportAcademico($id)
     {
       $evaluacion = Evaluacion::find($id);
