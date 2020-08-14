@@ -8,19 +8,13 @@ use Illuminate\Http\Request;
 
 class DepartamentoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-//En index se obtiene el listado completo de departamentos y se paginan de 10. Se va hacia la vista de blade
 
     public function json()
     {
         return Departamento::all();
     }
 
+//En index se obtiene el listado completo de departamentos y se paginan de 10. Se va hacia la vista de blade
     public function index()
     {
       $departamentos = Departamento::orderBy('id', 'ASC')->latest()->paginate(10);
@@ -37,23 +31,12 @@ class DepartamentoController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $facultades = Facultad::all();
         return view('departamentos.create',['facultades' => $facultades]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
       $request->validate([
@@ -69,24 +52,11 @@ class DepartamentoController extends Controller
         ->with('success','Departamento creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\departamento  $departamento
-     * @return \Illuminate\Http\Response
-     */
-
     public function show(Departamento $departamento)
     {
       return view('departamentos.show',compact('departamento'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\departamento  $departamento
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
       $departamento = departamento::find($id);
@@ -94,13 +64,6 @@ class DepartamentoController extends Controller
       return view('departamentos.edit',compact('departamento'),['facultades' => $facultades]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\departamento  $departamento
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -116,13 +79,6 @@ class DepartamentoController extends Controller
       return redirect()->route('departamentos.index')
         ->with('success','Departamento Actualizado Exitosamente');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\departamento  $departamento
-     * @return \Illuminate\Http\Response
-     */
 
 //funcion para eliminar un registro conociendo su id
     public function destroy($id)

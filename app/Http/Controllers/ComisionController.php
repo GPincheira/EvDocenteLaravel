@@ -7,16 +7,13 @@ use App\facultad;
 use App\secFacultad;
 use App\Proceso;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
 class ComisionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
 //En index se obtiene el listado completo de comisiones y se paginan de 10. Se va hacia la vista de blade
     public function index()
     {
@@ -38,22 +35,10 @@ class ComisionController extends Controller
       }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('comisiones.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
   //funcion para validar los datos ingresados para la comision, y si esta todo en orden crea el registro
     public function store(Request $request)
@@ -93,38 +78,18 @@ class ComisionController extends Controller
         ->with('success','Comision creada exitosamente.');
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\comision  $comision
-     * @return \Illuminate\Http\Response
-     */
-
     public function show(Comision $comision)
     {
+      $fecha = new Carbon($comision->Fecha);
+      $comision->Fecha = $fecha->format('d-m-Y');
       return view('comisiones.show',compact('comision'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\comision  $comision
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
       $comision = comision::find($id);
       return view('comisiones.edit',compact('comision'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\comision  $comision
-     * @return \Illuminate\Http\Response
-     */
 
   //funcion que valida los datos para editar, y si esta todo en orden, realiza los cambios
     public function update(Request $request, $id)
@@ -168,13 +133,6 @@ class ComisionController extends Controller
       return redirect()->route('comisiones.index')
         ->with('success','Comision Activada Exitosamente');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\comision  $comision
-     * @return \Illuminate\Http\Response
-     */
 
   //funcion que elimina un registro (soft)
     public function destroy($id)

@@ -10,11 +10,6 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
 //En el controlador de usuario existen varios index, uno para cada tipo de usuario, y cada uno con un index para eliminados
     public function index()
@@ -60,12 +55,6 @@ class UserController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
@@ -85,12 +74,6 @@ class UserController extends Controller
         return view('users.create3',compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
       $request->validate([
@@ -160,24 +143,11 @@ class UserController extends Controller
         ->with('success','Usuario creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\user  $user
-     * @return \Illuminate\Http\Response
-     */
-
     public function show(User $user)
     {
         return view('users.show',compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\user  $user
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = user::find($id);
@@ -185,13 +155,6 @@ class UserController extends Controller
         return view('users.edit',compact('user'),['facultades' => $facultades]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\user  $user
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -208,12 +171,6 @@ class UserController extends Controller
         ->with('success','Usuario Actualizado Exitosamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\user  $user
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
       $user = user::find($id);

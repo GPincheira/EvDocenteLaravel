@@ -12,12 +12,12 @@
   </div>
 
 <div class="row container">
-  <div class="col-lg-12 margin-tb content">
+  <div class="col-md-12 content">
     <h3>PAUTA RESUMEN</h3>
   </div>
 </div>
 
-<br><div class="row container">
+<div class="row container">
     <h4>I. IDENTIFICACION</h4>
 </div>
 
@@ -72,7 +72,7 @@
 	</div>
 </div>
 
-<div class="row container">
+<div class="row container" style="margin-top: 8px">
     <h4>II. CALIFICACION ACADEMICA</h4>
 </div>
 
@@ -162,7 +162,7 @@
 	</div>
 </div>
 
-<div class="row container">
+<div class="row container" style="margin-top: 8px">
     <h4>III. ESCALA EVALUATIVA</h4>
 </div>
 
@@ -189,7 +189,7 @@
 	</div>
 </div>
 
-<div class="row container">
+<div class="row container" style="margin-top: 7px">
     <h4>IV. ARGUMENTOS DE LA CALIFICACION FINAL</h4>
     <p>{{ $evaluacion->Argumento }}</p>
 </div><br>

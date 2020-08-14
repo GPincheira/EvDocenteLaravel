@@ -151,9 +151,11 @@
             </tr>
           @endforeach
         </table>
+        {!! $academicos->links() !!}
       </div>
     </div>
   </div>
 </div>
+
 
 @endsection

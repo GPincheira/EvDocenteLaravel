@@ -44,64 +44,91 @@
   </div>
 </div>
 
-<div class="row container">
-    <h3>I. IDENTIFICACION</h3>
-</div>
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table table-bordered content">
-				<tbody>
-					<tr>
-						<td height=40>{{ $evaluacion->academico->Nombres }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
-						<td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
-					</tr>
-          <tr class="table-active">
-						<td width="50%">Académico</td>
-						<td width="50%">Departamento</td>
-					</tr>
-          <tr high="20px">
-						<td height=40>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
-						<td>{{ $evaluacion->año }}</td>
-					</tr>
-          <tr class="table-active" height="4%">
-						<td>Facultad o Instituto al que pertenece</td>
-						<td>Periodo que se evalua</td>
-					</tr>
-          <tr>
-						<td height=40>{{ $evaluacion->academico->TituloProfesional }}</td>
-						<td>{{ $evaluacion->academico->HorasContrato }}</td>
-					</tr>
-          <tr class="table-active">
-						<td>Título Profesional</td>
-						<td>Horas de Contrato</td>
-					</tr>
-          <tr>
-						<td height=40>{{ $evaluacion->academico->Categoria }}</td>
-						<td>{{ $evaluacion->academico->GradoAcademico }}</td>
-					</tr>
-          <tr class="table-active">
-						<td>Categoría</td>
-						<td>Grado Académico</td>
-					</tr>
-          <tr>
-						<td height=40>@if ($ultima) {{ $ultima->NotaFinal }} @endif</td>
-						<td>{{ $evaluacion->academico->TipoPlanta }}</td>
-					</tr>
-          <tr class="table-active">
-						<td>Calificación Anterior</td>
-						<td>Tipo de Planta</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-  <div class="col-lg-12 margin-tb">
-      <editarev-component datito="{{ $evaluacion->id }}" ></editarev-component>
+<div id="accordion">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" style="color:black" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+            <h3>Identificacion del Académico</h3>
+          </button>
+        </h5>
+      </div>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="card-body">
+          <div class="row container">
+              <h3>I. IDENTIFICACION</h3>
+          </div>
+          <div class="container">
+          	<div class="row">
+          		<div class="col-md-12">
+          			<table class="table table-bordered content">
+          				<tbody>
+          					<tr>
+          						<td height=40>{{ $evaluacion->academico->Nombres }} {{ $evaluacion->academico->ApellidoPaterno }} {{ $evaluacion->academico->ApellidoMaterno }}</td>
+          						<td>{{ $evaluacion->academico->departamento->id }} - {{ $evaluacion->academico->departamento->Nombre }}</td>
+          					</tr>
+                    <tr class="table-active">
+          						<td width="50%">Académico</td>
+          						<td width="50%">Departamento</td>
+          					</tr>
+                    <tr high="20px">
+          						<td height=40>{{ $evaluacion->academico->departamento->facultad->id }} - {{ $evaluacion->academico->departamento->facultad->Nombre }}</td>
+          						<td>{{ $evaluacion->año }}</td>
+          					</tr>
+                    <tr class="table-active" height="4%">
+          						<td>Facultad o Instituto al que pertenece</td>
+          						<td>Periodo que se evalua</td>
+          					</tr>
+                    <tr>
+          						<td height=40>{{ $evaluacion->academico->TituloProfesional }}</td>
+          						<td>{{ $evaluacion->academico->HorasContrato }}</td>
+          					</tr>
+                    <tr class="table-active">
+          						<td>Título Profesional</td>
+          						<td>Horas de Contrato</td>
+          					</tr>
+                    <tr>
+          						<td height=40>{{ $evaluacion->academico->Categoria }}</td>
+          						<td>{{ $evaluacion->academico->GradoAcademico }}</td>
+          					</tr>
+                    <tr class="table-active">
+          						<td>Categoría</td>
+          						<td>Grado Académico</td>
+          					</tr>
+                    <tr>
+          						<td height=40>@if ($ultima) {{ $ultima->NotaFinal }} @endif</td>
+          						<td>{{ $evaluacion->academico->TipoPlanta }}</td>
+          					</tr>
+                    <tr class="table-active">
+          						<td>Calificación Anterior</td>
+          						<td>Tipo de Planta</td>
+          					</tr>
+          				</tbody>
+          			</table>
+          		</div>
+          	</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" style="color:black" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <h3>Evaluacion</h3>
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-12 margin-tb">
+                <editarev-component dato="{{ $evaluacion->id }}" ></editarev-component>
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
 </div>
 

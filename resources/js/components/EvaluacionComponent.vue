@@ -228,7 +228,7 @@
 
 <script>
     export default {
-        props:['datito'],
+        props:['dato'],
         data(){
             return{
                 NotaFinal:0,
@@ -275,7 +275,7 @@
                 let me =this;
                 let url = '/evsjson/guardar' //Ruta que hemos creado para enviar una tarea y guardarla
                 axios.post(url,{ //estas variables son las que enviaremos para que crear la tarea
-                    'RUTAcademico': this.datito,
+                    'RUTAcademico': this.dato,
                     'Argumento':this.Argumento,
                     'NotaFinal':this.NotaFinal,
                     'p1':this.p1,

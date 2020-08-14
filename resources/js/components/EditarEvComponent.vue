@@ -230,7 +230,7 @@
 
 <script>
     export default {
-        props:['datito'],
+        props:['dato'],
         data(){
             return{
                 NotaFinal:"",
@@ -304,7 +304,7 @@
                 tarea que queremos modificar*/
             let me = this;
             axios.put('/evsjson/actualizar',{
-                'id':this.datito,
+                'id':this.dato,
                 'p1':this.p1,
                 'n1':this.n1,
                 'p2':this.p2,
@@ -376,7 +376,7 @@
     },
     mounted() {
         this.getEvaluacions();
-        this.loadFieldsUpdate(this.datito);
+        this.loadFieldsUpdate(this.dato);
     }
 }
 </script>

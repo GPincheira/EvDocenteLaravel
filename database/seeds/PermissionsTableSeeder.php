@@ -41,7 +41,6 @@ class PermissionsTableSeeder extends Seeder
       Permission::create(['name' => 'evaluaciones.index2']);
       Permission::create(['name' => 'evaluaciones.edit']);
       Permission::create(['name' => 'evaluaciones.show']);
-      Permission::create(['name' => 'evaluaciones.create']);
       Permission::create(['name' => 'evaluaciones.destroy']);
       Permission::create(['name' => 'evaluaciones.reactivar']);
       Permission::create(['name' => 'evaluaciones.pdf']);
@@ -135,7 +134,6 @@ class PermissionsTableSeeder extends Seeder
           'evaluaciones.index',
           'evaluaciones.edit',
           'evaluaciones.show',
-          'evaluaciones.create',
           'evaluaciones.destroy',
           'evaluaciones.reactivar',
           'evaluaciones.pdf',

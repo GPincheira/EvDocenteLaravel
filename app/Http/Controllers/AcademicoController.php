@@ -12,11 +12,7 @@ use Illuminate\Support\Facades\Auth;
 //Controlador para los academicos
 class AcademicoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
      //En index se obtiene el listado completo de academicos y se paginan de 10. Se va hacia la vista de blade, de manera diferente dependiendo del rol de usuario
      public function index()
      {
@@ -50,12 +46,6 @@ class AcademicoController extends Controller
       }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
   //funcion crear, que luego lleva a la vista para la creacion
     public function create()
     {
@@ -63,13 +53,6 @@ class AcademicoController extends Controller
         $secFacultades = SecFacultad::all();
         return view('academicos.create',['departamentos' => $departamentos],['secFacultades' => $secFacultades]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
   //funcion store, donde se validan los datos recibidos en el blade para crear, y si esta todo correcto se guarda el nuevo registro
     public function store(Request $request)
@@ -96,25 +79,11 @@ class AcademicoController extends Controller
         ->with('success','Academico creado exitosamente.');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\academico  $academico
-     * @return \Illuminate\Http\Response
-     */
-
      //funcion show, que muestra los datos de un registro en especifico
     public function show(Academico $academico)
     {
       return view('academicos.show',compact('academico'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\academico  $academico
-     * @return \Illuminate\Http\Response
-     */
 
      //funcion editar, que luego lleva a la vista para recibir los datos
     public function edit(Academico $academico)
@@ -123,14 +92,6 @@ class AcademicoController extends Controller
       $secFacultades = SecFacultad::all();
       return view('academicos.edit',compact('academico'),['departamentos' => $departamentos,'secFacultades' => $secFacultades]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\academico  $academico
-     * @return \Illuminate\Http\Response
-     */
 
   //los datos recibidos en academico.create son validados con la funcion store
     public function update(Request $request, $id)
@@ -165,14 +126,6 @@ class AcademicoController extends Controller
       return redirect()->route('academicos.index')
         ->with('success','Academico Actualizado Exitosamente');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\academico  $academico
-     * @return \Illuminate\Http\Response
-     */
-
 
      //funcion para eliminar, realiza la busqueda y luego hace eliminado logico (soft)
     public function destroy($id)

@@ -71,9 +71,6 @@ class ReporteController extends Controller
       $pdf = PDF::loadView('pdf.reporte',compact('evs','año'))->setPaper('a4', 'landscape');
       return $pdf->download('Reporte_'.$año.'.pdf');
     }
-
-
-
   }
 
 }

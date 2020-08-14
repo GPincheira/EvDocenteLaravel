@@ -10,7 +10,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/mapa', 'HomeController@mapa')->name('mapa');
 Route::get('/evsjson', 'EvaluacionController@json');
 Route::put('/evsjson/actualizar', 'EvaluacionController@update2');
-Route::delete('/evsjson/borrar/{id}', 'EvaluacionController@destroy2');
 Route::post('/evsjson/guardar', 'EvaluacionController@store2');
 Route::get('/evsjson/buscar', 'EvaluacionController@show2');
 Route::get('evsjson/evaluar/{role}/ev', 'EvaluacionController@evaluar')->name('evaluaciones.evaluar');
@@ -74,18 +73,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('departamentos/{role}', 'DepartamentoController@reactivar')->name('departamentos.reactivar')
                                                          ->middleware('permission:departamentos.reactivar');
 
-    Route::post('evaluaciones/store', 'EvaluacionController@store')->name('evaluaciones.store')
-                                                        ->middleware('permission:evaluaciones.create');
     Route::get('evaluaciones', 'EvaluacionController@index')->name('evaluaciones.index')
                                                         ->middleware('permission:evaluaciones.index');
     Route::get('evaluacioneselim', 'EvaluacionController@indexelim')->name('evaluaciones.indexelim')
                                                         ->middleware('permission:evaluaciones.index');
     Route::get('evaluaciones2', 'EvaluacionController@index2')->name('evaluaciones.index2')
                                                         ->middleware('permission:evaluaciones.index2');
-    Route::get('evaluaciones/create', 'EvaluacionController@create')->name('evaluaciones.create')
-                                                        ->middleware('permission:evaluaciones.create');
-    Route::put('evaluaciones/{role}', 'EvaluacionController@update')->name('evaluaciones.update')
-                                                        ->middleware('permission:evaluaciones.edit');
     Route::get('evaluaciones/{evaluacion}', 'EvaluacionController@show')->name('evaluaciones.show')
                                                        ->middleware('permission:evaluaciones.show');
     Route::delete('evaluaciones/{role}', 'EvaluacionController@destroy')->name('evaluaciones.destroy')

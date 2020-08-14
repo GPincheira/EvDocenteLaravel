@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class SecFacultadController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
 
     public function index()
     {
@@ -22,22 +16,10 @@ class SecFacultadController extends Controller
         ->with('i',(request()->input('page',1)-1)*5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('secFacultades.create');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
   //validacion de los datos para crear un nuevo sec de facultad
      public function store(Request $request)
@@ -51,37 +33,17 @@ class SecFacultadController extends Controller
          ->with('success','Secretario de Facultad creado exitosamente.');
      }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\secFacultad  $secFacultad
-     * @return \Illuminate\Http\Response
-     */
-
     public function show(SecFacultad $secFacultad)
     {
         return view('secFacultades.show',compact('secFacultad'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\secFacultad  $secFacultad
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
       $secFacultad = secFacultad::find($id);
       return view('secFacultades.edit',compact('secFacultad'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\secFacultad  $secFacultad
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
       $request->validate([
@@ -93,12 +55,6 @@ class SecFacultadController extends Controller
         ->with('success','Secretario de Facultadad Actualizado Exitosamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\secFacultad  $secFacultad
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
       $secFacultad = secFacultad::find($id);

@@ -31,7 +31,7 @@ class GraficoController extends Controller
         $año = date("Y");
       }
       $facultad = Facultad::find($CodigoFacultad);
-      $academicos = Academico::where('CodigoFacultad', $CodigoFacultad)->latest()->paginate(10);
+      $academicos = Academico::where('CodigoFacultad', $CodigoFacultad)->latest()->paginate(5);
       $evaluaciones = Evaluacion::join('academicos','evaluaciones.RUTAcademico','=','academicos.id')
                     ->where('evaluaciones.CodigoFacultad',$CodigoFacultad)
                     ->where('año', $año)
@@ -46,7 +46,7 @@ class GraficoController extends Controller
       return view('graficos.principal',compact('departamentos', 'procesos', 'año', 'facultad', 'academicos', 'grafcircular', 'evaluaciones'));
     }
     else{   //ambos estan
-      $academicos = Academico::where('CodigoDpto', $dpto->id)->latest()->paginate(10);
+      $academicos = Academico::where('CodigoDpto', $dpto->id)->latest()->paginate(5);
       $evaluaciones = Evaluacion::join('academicos','evaluaciones.RUTAcademico','=','academicos.id')
                     ->join('departamentos','academicos.CodigoDpto','=','departamentos.id')
                     ->where('año', $año)
